@@ -1,16 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { android, ios } from './styles';
+import { Platform, Text, View, Pressable } from 'react-native';
+import { android, ios } from './styles'; // Tämä rivi on Lauran testailuja - älä poista vielä
+import SplashScreen from './components/SplashScreen';
 
 export default function App() {
   return (
-    <View style={android.StyleSheet}>
-      <Text style={android.headings}>Heading 1</Text>
+
+    <View>
+      <SplashScreen></SplashScreen>
+    </View>
+
+      // Nämä alla olevat on Lauran testailuja tyylejä varten
+      // Älkää poistako vielä
+/*     <View style={android.StyleSheet}>
+      <Text h1 
+        style={android.h1Style}>Heading 1</Text>
       <Pressable
         style={android.button}>
         <Text
           style={android.buttonText}>Button</Text>
       </Pressable>
-    </View>
+    </View> */
   );
 };
