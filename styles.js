@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 
 // Style for Android
 export const android = StyleSheet.create({
@@ -18,7 +18,7 @@ export const android = StyleSheet.create({
     },
 
     h3Style: {
-        color: '#00353D',
+        color: '#00353D', 
         // fontSize:
     },
 

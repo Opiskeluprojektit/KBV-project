@@ -5,20 +5,20 @@ import SplashScreen from './components/SplashScreen';
 export default function App() {
   return (
 
-    <View>
+/*     <View>
       <SplashScreen></SplashScreen>
-    </View>
+    </View> */
 
       // Nämä alla olevat on Lauran testailuja tyylejä varten
       // Älkää poistako vielä
-/*     <View style={android.StyleSheet}>
+     <View styles={android.StyleSheet}>
       <Text h1 
-        style={android.h1Style}>Heading 1</Text>
+        styles={android.h1Style}>Heading 1</Text>
       <Pressable
-        style={android.button}>
+        styles={android.button}>
         <Text
-          style={android.buttonText}>Button</Text>
+          styles={android.buttonText}>Button</Text>
       </Pressable>
-    </View> */
+    </View>
   );
 };
