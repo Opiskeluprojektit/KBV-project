@@ -1,15 +1,22 @@
 import {StyleSheet} from 'react-native';
 
-// Style for Android
-export const android = StyleSheet.create({
+export const style = StyleSheet.create({
     StyleSheet: {
         backgroundColor: '#F9F9F9',
         marginTop: 100 // tämä rivi atm siksi, että näkee kunnolla näytöltä tekstit
-    }, 
+    },
 
     h1Style: {
         color: '#00353D',
-        fontSize: 32
+        fontSize: 32,
+    ...Platform.select({
+        ios: {
+            color: 'green',
+        },
+        android: {
+            color: 'black',
+        }
+    })
     },
 
     h2Style: {
@@ -43,43 +50,4 @@ export const android = StyleSheet.create({
     icons: {
         backgroundColor: '#EEE8A9'
     },
-
-
-});
-
-
-// Style for ios
-export const ios = StyleSheet.create({
-    StyleSheet: {
-        ...android.StyleSheet,
-    }, 
-
-    h1Style: {
-        ...android.StyleSheet,
-    },
-
-    h2Style: {
-        ...android.StyleSheet,
-    },
-
-    h3Style: {
-        ...android.StyleSheet,
-    },
-
-    text: {
-        ...android.StyleSheet,
-    },
-
-    button: {
-        ...android.StyleSheet,
-    },
-
-    buttonText: {
-        ...android.StyleSheet,
-    },
-
-    icons: {
-        ...android.StyleSheet,
-    },
-    
-});
+})
