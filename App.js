@@ -1,5 +1,5 @@
 import { Platform, Text, View, Pressable } from "react-native";
-import { style } from "./styles"; // Tämä rivi on Lauran testailuja - älä poista vielä
+import { style } from "./styles"; 
 import SplashScreen from "./components/SplashScreen";
 
 export default function App() {

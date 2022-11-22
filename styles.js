@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 
 export const style = StyleSheet.create({
     StyleSheet: {
@@ -25,7 +25,7 @@ export const style = StyleSheet.create({
     },
 
     h3Style: {
-        color: '#00353D',
+        color: '#00353D', 
         // fontSize:
     },
 
