@@ -1,24 +1,17 @@
-import { Platform, Text, View, Pressable } from 'react-native';
-import { android, ios } from './styles'; // Tämä rivi on Lauran testailuja - älä poista vielä
-import SplashScreen from './components/SplashScreen';
+import { Platform, Text, View, Pressable } from "react-native";
+import { style } from "./styles"; 
+import SplashScreen from "./components/SplashScreen";
 
 export default function App() {
   return (
-
-/*     <View>
-      <SplashScreen></SplashScreen>
-    </View> */
-
-      // Nämä alla olevat on Lauran testailuja tyylejä varten
-      // Älkää poistako vielä
-     <View styles={android.StyleSheet}>
-      <Text h1 
-        styles={android.h1Style}>Heading 1</Text>
-      <Pressable
-        styles={android.button}>
-        <Text
-          styles={android.buttonText}>Button</Text>
-      </Pressable>
+    <View style={style.StyleSheet}>
+      <View>
+        <SplashScreen></SplashScreen>
+      </View>
+        <Text h1 style={style.h1Style}>
+          Heading 1
+        </Text>
+        <Text style={style.buttonText}>Button</Text>
     </View>
   );
-};
+}
