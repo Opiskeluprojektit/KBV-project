@@ -6,9 +6,9 @@ export const style = StyleSheet.create({
         marginTop: 100 // tämä rivi atm siksi, että näkee kunnolla näytöltä tekstit
     },
 
-    h1Style: {
+    h2Style: {
         color: '#00353D',
-        fontSize: 32,
+        fontSize: 60,
     ...Platform.select({
         ios: {
             color: 'green',
@@ -19,18 +19,19 @@ export const style = StyleSheet.create({
     })
     },
 
-    h2Style: {
+    h4Style: {
         color: '#00353D',
-        // fontSize:
+        fontSize: 34
     },
 
-    h3Style: {
+    titles: {
         color: '#00353D', 
-        // fontSize:
+        fontSize: 20
     },
 
     text: {
-        color: '#1B1B1B'
+        color: '#1B1B1B',
+        fontSize: 16
     },
 
     button: {
