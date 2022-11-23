@@ -2,8 +2,9 @@ import { StyleSheet, Platform } from 'react-native';
 import Colors from './colors';
 
 export const style = StyleSheet.create({
-    StyleSheet: {
+    container: {
         backgroundColor: '#F9F9F9',
+        flex: 1,
         marginTop: 100 // tämä rivi atm siksi, että näkee kunnolla näytöltä tekstit
     },
 
@@ -12,7 +13,7 @@ export const style = StyleSheet.create({
         fontSize: 60,
     ...Platform.select({
         ios: {
-            color: 'green',
+            color: Colors.darkHeading,
         },
         android: {
             color: 'black',
@@ -37,8 +38,9 @@ export const style = StyleSheet.create({
 
     button: {
         backgroundColor: '#005C70',
+        //color: Colors.secondary, ei toimi
         width: 150,
-        borderRadius: 15,
+        borderRadius: 10,
         alignItems: 'center',
         alignSelf: 'center',
         padding: 10,
@@ -46,7 +48,8 @@ export const style = StyleSheet.create({
 
     buttonText: {
         color: '#FFFFFF',
-        fontWeight: '500'
+        fontWeight: '500',
+        fontSize: 20
     },
 
     icons: {
