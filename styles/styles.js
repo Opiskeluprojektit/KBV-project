@@ -1,4 +1,5 @@
-import {StyleSheet, Platform} from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+import Colors from './colors';
 
 export const style = StyleSheet.create({
     StyleSheet: {
