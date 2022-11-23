@@ -1,5 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
-import Colors from './colors';
+
 
 export const style = StyleSheet.create({
     StyleSheet: {
@@ -8,7 +8,7 @@ export const style = StyleSheet.create({
     },
 
     h2Style: {
-        color: '#00353D',
+        color: '#1B1B1B',
         fontSize: 60,
     },
 
