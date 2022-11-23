@@ -10,14 +10,6 @@ export const style = StyleSheet.create({
     h2Style: {
         color: '#00353D',
         fontSize: 60,
-    ...Platform.select({
-        ios: {
-            color: 'green',
-        },
-        android: {
-            color: 'black',
-        }
-    })
     },
 
     h4Style: {

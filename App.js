@@ -1,5 +1,5 @@
 import { Platform, Text, View, Pressable } from "react-native";
-import { style } from "./styles"; 
+import { style } from "./styles/styles"; 
 import SplashScreen from "./components/SplashScreen";
 import Home from "./components/Home";
 
