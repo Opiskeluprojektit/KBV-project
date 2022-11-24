@@ -16,12 +16,12 @@ function App() {
       <View>
         {/* <SplashScreen/> */}
       </View>
-        <Text h2 style={style.h2Style}>
+        {/* <Text h2 style={style.h2Style}>
           Heading 1
         </Text>
         <Pressable style={style.button}>
           <Text style={style.buttonText}>Button</Text>
-        </Pressable>
+        </Pressable> */}
         
     </View>
   );
