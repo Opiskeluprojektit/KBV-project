@@ -1,18 +1,30 @@
 import { Platform, Text, View, Pressable } from "react-native";
-import { style } from "./styles"; 
+import { style } from "./styles/styles.js"; 
 import SplashScreen from "./components/SplashScreen";
-import Enrolment from "./components/Enrolment";
+import Home from "./components/Home.jsx";
+import Points from "./components/Points.jsx";
+import { Provider as PaperProvider } from 'react-native-paper';
+//import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
+
+function App() {
   return (
-    <View style={style.StyleSheet}>
+    <View>
+      <Home></Home>
+      {/* <Points /> */}
       <View>
-        <Enrolment></Enrolment>
+        {/* <SplashScreen/> */}
       </View>
-        <Text h1 style={style.h1Style}>
+        {/* <Text h2 style={style.h2Style}>
           Heading 1
         </Text>
-        <Text style={style.buttonText}>Button</Text>
+        <Pressable style={style.button}>
+          <Text style={style.buttonText}>Button</Text>
+        </Pressable> */}
+        
     </View>
   );
 }
+
+export default App;
