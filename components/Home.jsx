@@ -16,22 +16,22 @@ export default function Home() {
           <Text style={style.h2Style}>Kokkola{'\n'}Beach{'\n'}Volley</Text>
         </View>
 
-        <View style={style.homeButtons}>
-          <Pressable style={style.signUpButton}>
+        <View style={style.homeButtonsContainer}>
+          <Pressable style={[style.homeButtons, style.signUpButton]}>
             <View style={[style.iconsEllipse, style.homeEllipse]}></View>
-            <Text style={style.signUpText}>Ilmoittaudu viikkokisaan</Text>
+            <Text style={[style.buttonText, style.bigButtonText]}>Ilmoittaudu viikkokisaan</Text>
           </Pressable>
-          <Pressable style={style.pointsButton}>
+          <Pressable style={[style.homeButtons, style.pointsButton]}>
             <View style={[style.iconsEllipse, style.homeEllipse]}></View>
-            <Text style={style.pointsText}>Pisteiden{'\n'}syöttö</Text>
+            <Text style={[style.buttonText, style.smallButtonText]}>Pisteiden{'\n'}syöttö</Text>
           </Pressable>
-          <Pressable style={style.rulesButton}>
+          <Pressable style={[style.homeButtons, style.rulesButton]}>
             <View style={[style.iconsEllipse, style.homeEllipse]}></View>
-            <Text style={style.rulesText}>ViikkoBiitsi säännöt</Text>
+            <Text style={[style.buttonText, style.smallButtonText]}>ViikkoBiitsi säännöt</Text>
           </Pressable>
-          <Pressable style={style.rankingButton}>
+          <Pressable style={[style.homeButtons, style.rankingButton]}>
             <View style={[style.iconsEllipse, style.homeEllipse]}></View>
-            <Text style={style.rankingText}>Ranking{'\n'}listat</Text>
+            <Text style={[style.buttonText, style.bigButtonText]}>Ranking{'\n'}listat</Text>
           </Pressable>
           
         </View>

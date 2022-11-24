@@ -1,5 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
-import Colors from './colors';
+import { Colors } from './colors';
 
 
 export const style = StyleSheet.create({
@@ -9,14 +9,15 @@ export const style = StyleSheet.create({
         height: "100%",
     },
     container: {
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 24,
         marginBottom: 24,
-        //marginRight: 24
+        marginRight: 24
     },
     header: {
         height: "10%",
-        width: "100%"
+        width: "100%",
+        backgroundColor: 'tomato' // poista myöhemmin
     },
 
     h4Style: {
@@ -46,7 +47,6 @@ export const style = StyleSheet.create({
 
     buttonText: {
         color: '#FFFFFF',
-        fontWeight: '500',
         fontSize: 20
     },
 
@@ -71,100 +71,51 @@ export const style = StyleSheet.create({
         textAlign: "left"
     },
 
-    homeButtons: {
+    homeButtonsContainer: {
         width: "100%",
         height: "60%"
     },
 
-    signUpButton: {
-        width: 165,
-        height: 210,
+    homeButtons: {
+        position: "absolute",
         borderRadius: 10,
         shadowOpacity: 0.25,
         shadowRadius: 4,
         backgroundColor: "#005C70"
     },
 
+    signUpButton: {
+        width: 165,
+        height: 210
+    },
+
     pointsButton: {
-        position: "absolute",
         width: 165,
         height: 165,
-        borderRadius: 10,
-        left: 180,
-        shadowRadius: 4,
-        backgroundColor: "#005C70",
-        shadowOpacity: 0.25
+        left: 180
     },
 
     rulesButton: {
-        position: "absolute",
         width: 165,
         height: 165,
-        borderRadius: 10,
-        shadowRadius: 4,
-        backgroundColor: "#005C70",
-        shadowOpacity: 0.25,
         top: 227
     },
 
     rankingButton: {
-        position: "absolute",
         width: 165,
         height: 210,
-        borderRadius: 10,
         left: 180,
-        top: 182,
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        backgroundColor: "#005C70"
+        top: 182
     },
 
-    signUpText: {
-        position: "absolute",
-        width: "auto",
-        height: "auto",
+    bigButtonText: {
         left: 12,
-        right: "auto",
-        top: 155,
-        bottom: "auto",
-        fontSize: 20,
-        color: "#FFFFFF"
+        top: 155
     },
 
-    pointsText: {
-        position: "absolute",
-        width: "auto",
-        height: "auto",
-        right: "auto",
+    smallButtonText: {
         top: 110,
-        left: 12,
-        bottom: "auto",
-        fontSize: 20,
-        color: "#FFFFFF",
-    },
-
-    rulesText: {
-        position: "absolute",
-        width: "auto",
-        height: "auto",
-        left: 12,
-        right: "auto",
-        top: 110,
-        bottom: "auto",
-        fontSize: 20,
-        color: "#FFFFFF"
-    },
-
-    rankingText: {
-        position: "absolute",
-        width: "auto",
-        height: "auto",
-        left: 12,
-        right: "auto",
-        top: 155,
-        bottom: "auto",
-        fontSize: 20,
-        color: "#FFFFFF"
+        left: 12
     },
 
     homeEllipse: {
