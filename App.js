@@ -1,12 +1,12 @@
 import { Platform, Text, View, Pressable } from "react-native";
 import { style } from "./styles/styles.js"; 
-import SplashScreen from "./components/SplashScreen.jsx";
+import SplashScreen from "./components/SplashScreen";
 import Home from "./components/Home.jsx";
 import Points from "./components/Points.jsx";
 
 export default function App() {
   return (
-    <View style={style.StyleSheet}>
+    <View style={style.container}>
       {/* <Points /> */}
       <View>
         {/* <SplashScreen/> */}

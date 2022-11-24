@@ -38,7 +38,7 @@ export const style = StyleSheet.create({
 
     button: {
         backgroundColor: '#005C70',
-        //color: Colors.secondary, ei toimi
+        //color: Colors.secondary,
         width: 150,
         borderRadius: 10,
         alignItems: 'center',
