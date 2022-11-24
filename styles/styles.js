@@ -96,17 +96,16 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
-        shadowOpacity: 0.5,
+        shadowOpacity: 0.25,
         shadowRadius: 4,
         flexDirection: "column",
-        width: 342,
+        width: 330,
         height: 76,
         marginBottom: 15
     },
 
     homeEllipse: {
-        left: 12,
-        top: 12
+        left: 305
     }
 
     // EnrolmentScreen styles
