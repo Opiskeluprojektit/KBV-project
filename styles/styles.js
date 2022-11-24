@@ -41,6 +41,7 @@ export const style = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         alignSelf: 'center',
+        justifyContent: 'center',
         padding: 10,
     },
 
@@ -84,44 +85,16 @@ export const style = StyleSheet.create({
 
     homeButtons: {
         backgroundColor: Colors.secondary,
-        position: "absolute",
         borderRadius: 10,
-        shadowOpacity: 0.25,
-        shadowRadius: 4
-    },
-
-    signUpButton: {
-        width: 165,
-        height: 210
-    },
-
-    pointsButton: {
-        width: 165,
-        height: 165,
-        left: 180
-    },
-
-    rulesButton: {
-        width: 165,
-        height: 165,
-        top: 227
-    },
-
-    rankingButton: {
-        width: 165,
-        height: 210,
-        left: 180,
-        top: 182
-    },
-
-    bigButtonText: {
-        left: 12,
-        top: 155
-    },
-
-    smallButtonText: {
-        top: 110,
-        left: 12
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+        flexDirection: "column",
+        width: 342,
+        height: 76,
+        marginBottom: 15
     },
 
     homeEllipse: {

@@ -17,21 +17,21 @@ export default function Home() {
         </View>
 
         <View style={style.homeButtonsContainer}>
-          <Pressable style={[style.homeButtons, style.signUpButton]}>
+          <Pressable style={style.homeButtons}>
+            <Text style={[style.buttonText, style.buttonText]}>Ilmoittaudu viikkokisaan</Text>
             <View style={[style.iconsEllipse, style.homeEllipse]}></View>
-            <Text style={[style.buttonText, style.bigButtonText]}>Ilmoittaudu viikkokisaan</Text>
           </Pressable>
-          <Pressable style={[style.homeButtons, style.pointsButton]}>
+          <Pressable style={style.homeButtons}>
+            <Text style={[style.buttonText, style.buttonText]}>Pisteiden syöttö</Text>
             <View style={[style.iconsEllipse, style.homeEllipse]}></View>
-            <Text style={[style.buttonText, style.smallButtonText]}>Pisteiden{'\n'}syöttö</Text>
           </Pressable>
-          <Pressable style={[style.homeButtons, style.rulesButton]}>
+          <Pressable style={style.homeButtons}>
+            <Text style={[style.buttonText, style.buttonText]}>ViikkoBiitsi säännöt</Text>
             <View style={[style.iconsEllipse, style.homeEllipse]}></View>
-            <Text style={[style.buttonText, style.smallButtonText]}>ViikkoBiitsi säännöt</Text>
           </Pressable>
-          <Pressable style={[style.homeButtons, style.rankingButton]}>
+          <Pressable style={style.homeButtons}>
+            <Text style={[style.buttonText, style.buttonText]}>Ranking listat</Text>
             <View style={[style.iconsEllipse, style.homeEllipse]}></View>
-            <Text style={[style.buttonText, style.bigButtonText]}>Ranking{'\n'}listat</Text>
           </Pressable>
           
         </View>
