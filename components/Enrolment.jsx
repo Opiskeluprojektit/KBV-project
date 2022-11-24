@@ -1,49 +1,33 @@
-import React, { useState }  from 'react';
-import { FlatList, View, SafeAreaView } from "react-native";
-import { Searchbar } from 'react-native-paper';
-import DropDown from "react-native-paper-dropdown";
+import { SafeAreaView, Text, View, Pressable, Button } from 'react-native'
+import React from 'react'
+import { style } from '../styles/styles';
+import * as Icon from "react-native-feather";
 
-
-
-export default function Enrolment() {
-  
-    // Searchbar-testailua
-    const [searchQuery, setSearchQuery] = React.useState('');
-  
-    const onChangeSearch = query => setSearchQuery(query);
-  
-    const [items, setItems] = useState([]);
-    const [selectedId, setSelectedId] = useState(null);
-
-    const select = (id) => {
-        setSelectedId(id);
-    }
-
-    const [search, setSearch] = useState('');
-
-
-    return (
-        <View>
-            <FlatList
-            data=""
-            keyExtractor={(item) => item.id}
-            extraData={selectedId}
-            renderItem = {({item}) => (
-                <Row person={item} selectedId={selectedId} select={select}></Row>
-            )}></FlatList>
-        
-
-            <Searchbar
-                placeholder="Search"
-                onChangeText={onChangeSearch}
-                value={searchQuery}
-            />
-
-            
+function Enrolment({ navigation: { goBack } }) {
+  return (
+    <SafeAreaView style={style.appContainer}>
+        <View style={style.container}>
+        <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse, style.homeEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+        <Text>Ilmoittaudu</Text>
         </View>
-    );
 
+        <View>
+            {/* Dropdown pelipäivän valinnalle */}
+            
 
-    
-};
+            {/* FlatList pelaajan valinnalle */}
+            
+            
+            {/* Päivitetään alla olevaan uusi tyyli iconille? */}
+            <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Plus style={[style.icons]}/></View> 
+            <Text>Lisää pelaaja</Text></Pressable>
 
+          <Pressable onPress={() => goBack()} style={[style.enrolButton]}>
+            <Text style={style.buttonText}>Ilmoittaudu</Text>
+          </Pressable>
+        </View>
+    </SafeAreaView>
+  )
+} 
+
+export default Enrolment

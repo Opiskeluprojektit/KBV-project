@@ -106,9 +106,23 @@ export const style = StyleSheet.create({
 
     homeEllipse: {
         left: 305
-    }
+    },
 
     // EnrolmentScreen styles
+
+    enrolButton: {
+        backgroundColor: Colors.secondary,
+        borderRadius: 10,
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        flexDirection: "column",
+        width: 230,
+        height: 53,
+        marginBottom: 15
+    },
 
     // PointsScreen styles
 
