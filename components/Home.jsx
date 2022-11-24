@@ -22,19 +22,19 @@ export default function Home({navigation}) {
         <View style={style.homeButtonsContainer}>
           <Pressable onPress={() => navigation.navigate('Enrolment')} style={[style.homeButtons, style.signUpButton]}>
             <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={[style.icons]}/></View>
-            <Text style={[style.buttonText, style.bigButtonText]}>Ilmoittaudu viikkokisaan</Text>
+            <Text style={style.buttonText}>Ilmoittaudu viikkokisaan</Text>
           </Pressable>
           <Pressable onPress={() => navigation.navigate('Points')} style={[style.homeButtons, style.pointsButton]}>
             <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Edit style={[style.icons]}/></View>
-            <Text style={[style.buttonText, style.smallButtonText]}>Pisteiden{'\n'}syöttö</Text>
+            <Text style={style.buttonText}>Pisteiden syöttö</Text>
           </Pressable>
           <Pressable  onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}} style={[style.homeButtons, style.rulesButton]}>
             <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Award style={[style.icons]}/></View>
-            <Text style={[style.buttonText, style.smallButtonText]}>ViikkoBiitsi säännöt</Text>
+            <Text style={style.buttonText}>ViikkoBiitsi säännöt</Text>
           </Pressable>
           <Pressable onPress={() => navigation.navigate('Ranking')} style={[style.homeButtons, style.rankingButton]}>
             <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={[style.icons]}/></View>
-            <Text style={[style.buttonText, style.bigButtonText]}>Ranking{'\n'}listat</Text>
+            <Text style={style.buttonText}>Ranking listat</Text>
           </Pressable>
         </View>
         
