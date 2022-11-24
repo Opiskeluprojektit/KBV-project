@@ -1,5 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
-import Colors from './colors';
+
 
 export const style = StyleSheet.create({
     container: {
@@ -9,16 +9,8 @@ export const style = StyleSheet.create({
     },
 
     h2Style: {
-        color: '#00353D',
+        color: '#1B1B1B',
         fontSize: 60,
-    ...Platform.select({
-        ios: {
-            color: Colors.darkHeading,
-        },
-        android: {
-            color: 'black',
-        }
-    })
     },
 
     h4Style: {

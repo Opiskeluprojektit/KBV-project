@@ -3,8 +3,12 @@ import { style } from "./styles/styles.js";
 import SplashScreen from "./components/SplashScreen";
 import Home from "./components/Home.jsx";
 import Points from "./components/Points.jsx";
+import { Provider as PaperProvider } from 'react-native-paper';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
+
+function App() {
   return (
     <View style={style.container}>
       {/* <Points /> */}
@@ -21,3 +25,5 @@ export default function App() {
     </View>
   );
 }
+
+export default App;
