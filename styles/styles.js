@@ -57,6 +57,13 @@ export const style = StyleSheet.create({
         borderRadius: 1000,
     },
 
+    icons: {
+        color: Colors.darkText,
+        position: "absolute",
+        left: 15,
+        top: 10,
+    },
+
     // SplashScreen styles
 
     // CodeScreen styles
