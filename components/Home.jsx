@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, View, SafeAreaView, Pressable } from 'react-native';
 import { style } from '../styles/styles';
+import * as Icon from "react-native-feather";
 
 export default function Home() {
 
@@ -18,20 +19,20 @@ export default function Home() {
 
         <View style={style.homeButtonsContainer}>
           <Pressable style={style.homeButtons}>
-            <Text style={[style.buttonText, style.buttonText]}>Ilmoittaudu viikkokisaan</Text>
-            <View style={[style.iconsEllipse, style.homeEllipse]}></View>
+            <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={[style.icons]}/></View>
+            <Text style={style.buttonText}>Ilmoittaudu viikkokisaan</Text>
           </Pressable>
           <Pressable style={style.homeButtons}>
-            <Text style={[style.buttonText, style.buttonText]}>Pisteiden syöttö</Text>
-            <View style={[style.iconsEllipse, style.homeEllipse]}></View>
+            <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Edit style={[style.icons]}/></View>
+            <Text style={style.buttonText}>Pisteiden syöttö</Text>
           </Pressable>
           <Pressable style={style.homeButtons}>
-            <Text style={[style.buttonText, style.buttonText]}>ViikkoBiitsi säännöt</Text>
-            <View style={[style.iconsEllipse, style.homeEllipse]}></View>
+            <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Award style={[style.icons]}/></View>
+            <Text style={style.buttonText}>ViikkoBiitsi säännöt</Text>
           </Pressable>
           <Pressable style={style.homeButtons}>
-            <Text style={[style.buttonText, style.buttonText]}>Ranking listat</Text>
-            <View style={[style.iconsEllipse, style.homeEllipse]}></View>
+            <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={[style.icons]}/></View>
+            <Text style={style.buttonText}>Ranking listat</Text>
           </Pressable>
           
         </View>
