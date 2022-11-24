@@ -1,10 +1,10 @@
 import { StyleSheet, Platform } from 'react-native';
-import { Colors } from './colors';
+import Colors from './colors';
 
 
 export const style = StyleSheet.create({
     appContainer: {
-        backgroundColor: '#F9F9F9',
+        backgroundColor: Colors.backgroundColor,
         //flex: 1,
         height: "100%",
     },
@@ -21,23 +21,22 @@ export const style = StyleSheet.create({
     },
 
     h4Style: {
-        color: '#00353D',
+        color: Colors.darkHeading,
         fontSize: 34
     },
 
     titles: {
-        color: '#00353D', 
+        color: Colors.darkText, 
         fontSize: 20
     },
 
     text: {
-        color: '#1B1B1B',
+        color: Colors.darkText,
         fontSize: 16
     },
 
     button: {
-        backgroundColor: '#005C70',
-        //color: Colors.secondary,
+        backgroundColor: Colors.secondary,
         width: 150,
         borderRadius: 10,
         alignItems: 'center',
@@ -46,42 +45,42 @@ export const style = StyleSheet.create({
     },
 
     buttonText: {
-        color: '#FFFFFF',
+        color: Colors.lightText,
         fontSize: 20
     },
 
     iconsEllipse: {
+        backgroundColor: Colors.iconsBackground,
         position: "absolute",
         width: 50,
         height: 50,
         borderRadius: 1000,
-        backgroundColor: "#EEE8A9"
     },
 
     // HomeScreen styles
 
     heading: {
-        //height: "30%",
+        height: "35%",
         width: "100%"
     },
 
     h2Style: {
-        color: '#00353D',
+        color: Colors.darkHeading,
         fontSize: 60,
         textAlign: "left"
     },
 
     homeButtonsContainer: {
         width: "100%",
-        height: "60%"
+        height: "55%"
     },
 
     homeButtons: {
+        backgroundColor: Colors.secondary,
         position: "absolute",
         borderRadius: 10,
         shadowOpacity: 0.25,
-        shadowRadius: 4,
-        backgroundColor: "#005C70"
+        shadowRadius: 4
     },
 
     signUpButton: {

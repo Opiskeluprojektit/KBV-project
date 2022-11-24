@@ -1,6 +1,6 @@
 const Colors = {
     backgroundColor: '#F9F9F9', //Vaalea taustaväri
-    darkText: '#1B1B1B', //Leipäteksti, Feather icons ja hamburgericon
+    darkText: '#1B1B1B', //Leipäteksti, titles, Feather icons ja hamburgericon
     lightText: '#FFFFFF', //Buttoneiden teksti
     inputColor: '#E6F4F1', //Vaalea tausta input-kentille
     iconsBackground: '#EEE8A9', //Keltainen tausta
