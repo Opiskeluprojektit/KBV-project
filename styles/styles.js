@@ -5,6 +5,7 @@ export const style = StyleSheet.create({
     container: {
         backgroundColor: '#F9F9F9',
         flex: 1,
+        margin: 24,
         marginTop: 100 // tämä rivi atm siksi, että näkee kunnolla näytöltä tekstit
     },
 

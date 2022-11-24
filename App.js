@@ -4,13 +4,14 @@ import SplashScreen from "./components/SplashScreen";
 import Home from "./components/Home.jsx";
 import Points from "./components/Points.jsx";
 import { Provider as PaperProvider } from 'react-native-paper';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+//import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//import { NavigationContainer } from '@react-navigation/native';
 
 
 function App() {
   return (
-    <View style={style.container}>
+    <View>
+      <Home></Home>
       {/* <Points /> */}
       <View>
         {/* <SplashScreen/> */}
