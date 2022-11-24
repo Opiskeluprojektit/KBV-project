@@ -71,7 +71,10 @@ export const style = StyleSheet.create({
     h2Style: {
         color: Colors.darkHeading,
         fontSize: 60,
-        textAlign: "left"
+        textAlign: "left",
+        lineHeight: 60,
+        marginTop: 30,
+        //fontWeight: 500
     },
 
     homeButtonsContainer: {
