@@ -57,6 +57,10 @@ export const style = StyleSheet.create({
         borderRadius: 1000,
     },
 
+    // SplashScreen styles
+
+    // CodeScreen styles
+
     // HomeScreen styles
 
     heading: {
@@ -121,4 +125,12 @@ export const style = StyleSheet.create({
         left: 12,
         top: 12
     }
+
+    // EnrolmentScreen styles
+
+    // PointsScreen styles
+
+    // RankingScreen styles
+
+    // Menu styles
 })
