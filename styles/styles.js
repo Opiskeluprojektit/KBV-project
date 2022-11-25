@@ -1,15 +1,17 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 import Colors from './colors';
 
 
 export const style = StyleSheet.create({
     container: {
         height: "100%",
+        //width: Dimensions.get("window").width,
         margin: 24
     },
     header: {
         height: "10%",
-        width: "100%"
+        width: "100%",
+        marginTop: 10
     },
 
     //Otsikko Menulle ja "kiitos ilmoittautumisesta"
