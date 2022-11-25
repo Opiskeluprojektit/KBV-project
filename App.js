@@ -1,4 +1,4 @@
-import { Platform, Text, View, Pressable } from "react-native";
+import { Platform, Text, View, Pressable} from "react-native";
 import { style } from "./styles/styles.js"; 
 import SplashScreen from "./components/SplashScreen";
 import Home from "./components/Home.jsx";
@@ -13,6 +13,7 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
+    
     <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen
@@ -23,8 +24,8 @@ function App() {
       <Stack.Screen name="Enrolment" component={Enrolment} options={{ headerShown: false }}/>
       <Stack.Screen name="Points" component={Points} options={{ headerShown: false }}/>
       <Stack.Screen name="Ranking" component={Ranking} options={{ headerShown: false }}/>
-      </Stack.Navigator>
-      </NavigationContainer>
+    </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

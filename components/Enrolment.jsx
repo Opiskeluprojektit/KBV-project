@@ -7,7 +7,7 @@ function Enrolment({ navigation: { goBack } }) {
   return (
     <SafeAreaView style={style.appContainer}>
         <View style={style.container}>
-        <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse, style.homeEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+        <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
         <Text>Ilmoittaudu</Text>
         </View>
 

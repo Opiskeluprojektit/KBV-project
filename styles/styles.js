@@ -3,24 +3,17 @@ import Colors from './colors';
 
 
 export const style = StyleSheet.create({
-    appContainer: {
-        backgroundColor: Colors.backgroundColor,
-        //flex: 1,
-        height: "100%",
-    },
     container: {
-        marginTop: 10,
-        marginLeft: 24,
-        marginBottom: 24,
-        marginRight: 24
+        height: "100%",
+        margin: 24
     },
     header: {
         height: "10%",
-        width: "100%",
-        backgroundColor: 'tomato' // poista myöhemmin
+        width: "100%"
     },
 
-    h4Style: {
+    //Otsikko Menulle ja "kiitos ilmoittautumisesta"
+    h4Style: { 
         color: Colors.darkHeading,
         fontSize: 34
     },
@@ -50,6 +43,7 @@ export const style = StyleSheet.create({
         fontSize: 20
     },
 
+    // Keltainen ympyrä vasemmassa reunassa
     iconsEllipse: {
         backgroundColor: Colors.iconsBackground,
         position: "absolute",
@@ -58,11 +52,15 @@ export const style = StyleSheet.create({
         borderRadius: 1000,
     },
 
+    // Feather icons
     icons: {
         color: Colors.darkText,
-        position: "absolute",
-        left: 15,
-        top: 10,
+        top: 12,
+        alignSelf: 'center'
+    },
+
+    backgroundImage: {
+       
     },
 
     // SplashScreen styles
@@ -72,16 +70,24 @@ export const style = StyleSheet.create({
     // HomeScreen styles
 
     heading: {
-        height: "35%",
-        width: "100%"
+        height: '30%',
+        width: '100%'
+    },
+
+    HomeScreenLogo: {
+        backgroundColor: Colors.primary,
+        position: "absolute",
+        width: 50,
+        height: 50,
+        borderRadius: 1000
     },
 
     h2Style: {
         color: Colors.darkHeading,
         fontSize: 60,
-        textAlign: "left",
+        textAlign: 'left',
         lineHeight: 60,
-        marginTop: 30,
+        marginTop: 20,
         //fontWeight: 500
     },
 
@@ -94,13 +100,13 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.secondary,
         borderRadius: 10,
         alignItems: 'center',
-        alignSelf: 'center',
+        alignSelf: 'start', // tai center
         justifyContent: 'center',
         shadowOpacity: 0.25,
         shadowRadius: 4,
         flexDirection: "column",
-        width: 330,
-        height: 76,
+        width: '90%',
+        height: 74,
         marginBottom: 15
     },
 
@@ -123,6 +129,7 @@ export const style = StyleSheet.create({
         height: 53,
         marginBottom: 15
     },
+
 
     // PointsScreen styles
 
