@@ -1,33 +1,69 @@
-import { SafeAreaView, Text, View, Pressable, Button } from 'react-native'
-import React from 'react'
+import { SafeAreaView, FlatList, Text, View, Pressable, Button, ImageBackground } from 'react-native';
+import React from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 
 function Enrolment({ navigation: { goBack } }) {
+
+  const backgroundImage = require('../assets/Volleyball1.jpg');
+
+  const DATA = [
+    {
+      id: '1',
+      name: 'First name',
+    },
+    {
+      id: '22',
+      name: 'Second name',
+    },
+    {
+      id: '333',
+      name: 'Third name',
+    },
+  ];
+  
+  const Item = ({ name }) => (
+    <View>
+      <Text>{name}</Text>
+    </View>
+  );
+  
+    const renderItem = ({ item }) => (
+      <Item name={item.name} />
+    );
+  
   return (
-    <SafeAreaView style={style.appContainer}>
-        <View style={style.container}>
-        <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
-        <Text>Ilmoittaudu</Text>
-        </View>
+    <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
+      <SafeAreaView>
+          <View style={style.container}>
+          <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+          </View>
 
-        <View>
-            {/* Dropdown pelipäivän valinnalle */}
-            
+          <View style={style.appContainer}>
+              {/* Dropdown pelipäivän valinnalle */}
+              
 
-            {/* FlatList pelaajan valinnalle */}
-            
-            
-            {/* Päivitetään alla olevaan uusi tyyli iconille? */}
-            <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Plus style={[style.icons]}/></View> 
-            <Text>Lisää pelaaja</Text></Pressable>
+              {/* FlatList pelaajan valinnalle */} 
+              <FlatList
+                data={DATA}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+              />
+              
+              
+              {/* Päivitetään alla olevaan uusi tyyli iconille? */}
+              <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Plus style={[style.icons]}/></View> 
+              <Text>Lisää pelaaja</Text></Pressable>
 
-          <Pressable onPress={() => goBack()} style={[style.enrolButton]}>
-            <Text style={style.buttonText}>Ilmoittaudu</Text>
-          </Pressable>
-        </View>
-    </SafeAreaView>
-  )
-} 
+              <Pressable onPress={() => goBack()} style={[style.enrolButton]}>
+                <Text style={style.buttonText}>Ilmoittaudu</Text>
+              </Pressable>
 
-export default Enrolment
+              <Text>Ennustettu lohko</Text>
+          </View>
+      </SafeAreaView>
+    </ImageBackground>
+  );
+}
+
+export default Enrolment; 

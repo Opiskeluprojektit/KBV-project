@@ -65,6 +65,13 @@ export const style = StyleSheet.create({
        
     },
 
+    appContainer: {
+        height: "80%",
+        backgroundColor: Colors.backgroundColor,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+    }, 
+
     // SplashScreen styles
 
     // CodeScreen styles
