@@ -65,8 +65,8 @@ export const style = StyleSheet.create({
        
     },
 
-    appContainer: {
-        height: "80%",
+    // Ilmoittautumisen, pisteiden syötön ja rankingin vaalea tausta
+    viewContainer: {
         backgroundColor: Colors.backgroundColor,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
@@ -138,6 +138,14 @@ export const style = StyleSheet.create({
         height: 53,
         marginBottom: 15
     },
+
+    predictedRanking: {
+        backgroundColor: Colors.inputColor,
+        width: "90%",
+        alignSelf: 'center',
+        justifyContent: 'center',
+    },
+
 
 
     // PointsScreen styles

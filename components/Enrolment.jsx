@@ -39,11 +39,12 @@ function Enrolment({ navigation: { goBack } }) {
           <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
           </View>
 
-          <View style={style.appContainer}>
+          <View style={style.viewContainer}>
               {/* Dropdown pelipäivän valinnalle */}
-              
+              <Text style={style.text}>Valitse peli</Text>
 
               {/* FlatList pelaajan valinnalle */} 
+              <Text style={style.text}>Valitse pelaaja</Text>
               <FlatList
                 data={DATA}
                 renderItem={renderItem}
@@ -59,7 +60,14 @@ function Enrolment({ navigation: { goBack } }) {
                 <Text style={style.buttonText}>Ilmoittaudu</Text>
               </Pressable>
 
-              <Text>Ennustettu lohko</Text>
+              <Text style={style.text}>Ennustettu lohko</Text>
+              <View style={style.predictedRanking}>
+                <Text style={style.text}>Pekka Pohjola</Text>
+                <Text>Pekka Pohjola</Text>
+                <Text>Pekka Pohjola</Text>
+                <Text>Pekka Pohjola</Text>
+                <Text>Pekka Pohjola</Text>
+              </View>
           </View>
       </SafeAreaView>
     </ImageBackground>
