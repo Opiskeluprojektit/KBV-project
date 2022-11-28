@@ -14,6 +14,14 @@ export const style = StyleSheet.create({
         marginTop: 10
     },
 
+    menuButton: {
+        position: "absolute",
+        color: Colors.darkText,
+        width: 30,
+        height: 16,
+        left: 320,
+    },
+
     //Otsikko Menulle ja "kiitos ilmoittautumisesta"
     h4Style: { 
         color: Colors.darkHeading,
@@ -91,6 +99,7 @@ export const style = StyleSheet.create({
         borderRadius: 1000
     },
 
+
     h2Style: {
         color: Colors.darkHeading,
         fontSize: 60,
@@ -109,7 +118,7 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.secondary,
         borderRadius: 10,
         alignItems: 'center',
-        alignSelf: 'start', // tai center
+        alignSelf: 'center', // tämä oli start ja aiheutti bugin androidin puolella
         justifyContent: 'center',
         shadowOpacity: 0.25,
         shadowRadius: 4,

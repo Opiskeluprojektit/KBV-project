@@ -5,7 +5,7 @@ import * as Icon from "react-native-feather";
 
 function Points({ navigation: { goBack } }) {
   return (
-    <SafeAreaView style={style.appContainer}>
+    <SafeAreaView style={style.container}>
     <View style={style.container}>
       <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
       <Text>Points</Text>

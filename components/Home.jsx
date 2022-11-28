@@ -13,6 +13,8 @@ export default function Home({navigation}) {
 
           <View style={style.header}>
             <View style={style.HomeScreenLogo}></View>
+            {/* <Pressable onPress={() => navigation.navigate('CustomMenu')}><View><Icon.Menu style={style.menuButton} /></View></Pressable> */}
+            <Pressable onPress={() => navigation.openDrawer()}><View><Icon.Menu style={style.menuButton} /></View></Pressable>
           </View>
           
           <View style={style.heading}>
