@@ -43,6 +43,10 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
         shadowOpacity: 0.25,
         shadowRadius: 4
     },
@@ -115,7 +119,7 @@ export const style = StyleSheet.create({
         position: "absolute",
         width: 50,
         height: 50,
-        borderRadius: 1000
+        borderRadius: 1000,
     },
 
 
@@ -136,7 +140,7 @@ export const style = StyleSheet.create({
     homeButtons: {
         flexDirection: "column",
         width: '90%',
-        height: 74,
+        height: 72,
         marginBottom: 15
     },
 
