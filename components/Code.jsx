@@ -24,7 +24,7 @@ function Code({navigation}) {
               <Pressable onPress={() => navigation.navigate('Home')}>
                 <Text style={style.buttonText}>Kirjaudu sisään</Text>
               </Pressable>
-              </View>
+            </View>
         </SafeAreaView>
         </ImageBackground>
 

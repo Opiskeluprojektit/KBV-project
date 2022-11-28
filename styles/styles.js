@@ -5,7 +5,6 @@ import Colors from './colors';
 export const style = StyleSheet.create({
     container: {
         height: "100%",
-        //width: Dimensions.get("window").width,
         margin: 24
     },
     header: {
@@ -60,6 +59,10 @@ export const style = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
         shadowOpacity: 0.25,
         shadowRadius: 4
     },
@@ -85,6 +88,20 @@ export const style = StyleSheet.create({
     // SplashScreen styles
 
     // CodeScreen styles
+
+    codeInputs: { // Näihin syötetään koodi, tarvii lisää määrittelyjä vielä
+        backgroundColor: Colors.inputColor,
+        position: "absolute",
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 4
+    },
 
     // HomeScreen styles
 
