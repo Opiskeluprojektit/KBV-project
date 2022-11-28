@@ -13,7 +13,7 @@ export default function Home({navigation}) {
 
           <View style={style.header}>
             <View style={style.HomeScreenLogo}></View>
-            <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} /></View></Pressable>
+            <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
           
           <View style={style.heading}>
@@ -29,13 +29,13 @@ export default function Home({navigation}) {
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Edit style={[style.icons]}/></View>
               <Text style={style.buttonText}>Pisteiden syöttö</Text>
             </Pressable>
-            <Pressable  onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}} style={[style.homeButtons, style.button]}>
-              <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Award style={[style.icons]}/></View>
-              <Text style={style.buttonText}>ViikkoBiitsi-säännöt</Text>
-            </Pressable>
             <Pressable onPress={() => navigation.navigate('Ranking')} style={[style.homeButtons, style.button]}>
-              <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={[style.icons]}/></View>
+              <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Award style={[style.icons]}/></View>
               <Text style={style.buttonText}>Ranking-listat</Text>
+            </Pressable>
+            <Pressable  onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}} style={[style.homeButtons, style.button]}>
+              <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={[style.icons]}/></View>
+              <Text style={style.buttonText}>ViikkoBiitsi-säännöt</Text>
             </Pressable>
           </View>
           

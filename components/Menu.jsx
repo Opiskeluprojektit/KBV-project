@@ -11,8 +11,8 @@ function CustomMenu({ navigation: { goBack } }) {
         <Text style={style.h4Style}>Ilmoittaudu viikkokisaan</Text>
         <Text style={style.h4Style}>Pisteiden syöttö</Text>
         <Text style={style.h4Style}>Ranking listat</Text>
-        <Text style={style.h4Style}>ViikkoBiitsi säännöt</Text>
-        <Text style={style.h4Style}>Yhteytiedot</Text>
+        <Text style={style.h4Style}>ViikkoBiitsi säännöt <Icon.ArrowUpRight style={style.icons} width={30} height={30}/></Text>
+        <Text style={style.h4Style}>Yhteytiedot <Icon.ArrowUpRight style={style.icons} width={30} height={30}/></Text>
         
     </View>
     </SafeAreaView>

@@ -9,16 +9,14 @@ export const style = StyleSheet.create({
     },
     header: {
         height: "10%",
-        width: "100%",
-        marginTop: 10
+        marginTop: 24
     },
 
     menuButton: {
         position: "absolute",
         color: Colors.darkText,
-        width: 30,
-        height: 30,
-        left: 330,
+        alignSelf: 'flex-end',
+        top: 2
     },
 
     //Otsikko Menulle ja "kiitos ilmoittautumisesta"
@@ -43,6 +41,10 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
         shadowOpacity: 0.25,
         shadowRadius: 4
     },
@@ -71,8 +73,11 @@ export const style = StyleSheet.create({
     icons: {
         color: Colors.darkText,
         top: 12,
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
+
+    
+
 
     backgroundImage: {
        
@@ -142,13 +147,14 @@ export const style = StyleSheet.create({
     homeButtons: {
         flexDirection: "column",
         width: '90%',
-        height: 74,
+        height: 72,
         marginBottom: 15
     },
 
     // Vain Home sivun keltaiset pallurat
     homeEllipse: {
-        left: 305
+        //left: 305,
+        alignSelf: 'flex-end'
     },
 
     // EnrolmentScreen styles
