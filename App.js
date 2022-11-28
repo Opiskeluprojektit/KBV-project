@@ -1,6 +1,7 @@
 import { Platform, Text, View, Pressable} from "react-native";
 import { style } from "./styles/styles.js"; 
 import SplashScreen from "./components/SplashScreen";
+import Code from "./components/Code.jsx";
 import Home from "./components/Home.jsx";
 import Points from "./components/Points.jsx";
 import Enrolment from "./components/Enrolment.jsx"
@@ -16,6 +17,7 @@ function App() {
     
     <NavigationContainer>
     <Stack.Navigator>
+      <Stack.Screen name="Code" component={Code} options={{ headerShown: false }}/>
       <Stack.Screen
         name="Home"
         component={Home}
