@@ -32,11 +32,11 @@ export default function Home({navigation}) {
             </Pressable>
             <Pressable  onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}} style={[style.homeButtons, style.rulesButton]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Award style={[style.icons]}/></View>
-              <Text style={style.buttonText}>ViikkoBiitsi säännöt</Text>
+              <Text style={style.buttonText}>ViikkoBiitsi-säännöt</Text>
             </Pressable>
             <Pressable onPress={() => navigation.navigate('Ranking')} style={style.homeButtons}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={[style.icons]}/></View>
-              <Text style={style.buttonText}>Ranking listat</Text>
+              <Text style={style.buttonText}>Ranking-listat</Text>
             </Pressable>
           </View>
           

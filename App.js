@@ -30,7 +30,7 @@ function App() {
   
     <NavigationContainer>
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={Root} options={{ headerShown: false }}/>
+      <Stack.Screen name="Code" component={Code} options={{ headerShown: false }}/>
       <Stack.Screen
         name="Home"
         component={Home}
