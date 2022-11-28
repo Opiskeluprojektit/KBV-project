@@ -5,7 +5,6 @@ import Colors from './colors';
 export const style = StyleSheet.create({
     container: {
         height: "100%",
-        //width: Dimensions.get("window").width,
         margin: 24
     },
     header: {
@@ -18,8 +17,8 @@ export const style = StyleSheet.create({
         position: "absolute",
         color: Colors.darkText,
         width: 30,
-        height: 16,
-        left: 320,
+        height: 30,
+        left: 330,
     },
 
     //Otsikko Menulle ja "kiitos ilmoittautumisesta"
@@ -40,12 +39,12 @@ export const style = StyleSheet.create({
 
     button: {
         backgroundColor: Colors.secondary,
-        width: 150,
         borderRadius: 10,
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
-        padding: 10,
+        shadowOpacity: 0.25,
+        shadowRadius: 4
     },
 
     buttonText: {
@@ -53,13 +52,19 @@ export const style = StyleSheet.create({
         fontSize: 20
     },
 
-    // Keltainen ympyrä vasemmassa reunassa
+    // Keltainen ympyrä iconin alla
     iconsEllipse: {
         backgroundColor: Colors.iconsBackground,
         position: "absolute",
         width: 50,
         height: 50,
         borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
     },
 
     // Feather icons
@@ -83,6 +88,20 @@ export const style = StyleSheet.create({
     // SplashScreen styles
 
     // CodeScreen styles
+
+    codeInputs: { // Näihin syötetään koodi, tarvii lisää määrittelyjä vielä
+        backgroundColor: Colors.inputColor,
+        position: "absolute",
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 4
+    },
 
     // HomeScreen styles
 
@@ -115,19 +134,13 @@ export const style = StyleSheet.create({
     },
 
     homeButtons: {
-        backgroundColor: Colors.secondary,
-        borderRadius: 10,
-        alignItems: 'center',
-        alignSelf: 'center', // tämä oli start ja aiheutti bugin androidin puolella
-        justifyContent: 'center',
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
         flexDirection: "column",
         width: '90%',
         height: 74,
         marginBottom: 15
     },
 
+    // Vain Home sivun keltaiset pallurat
     homeEllipse: {
         left: 305
     },
@@ -141,13 +154,6 @@ export const style = StyleSheet.create({
     }, 
 
     enrolButton: {
-        backgroundColor: Colors.secondary,
-        borderRadius: 10,
-        alignItems: 'center',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
         flexDirection: "column",
         width: 230,
         height: 53,

@@ -1,13 +1,22 @@
-import { View, Text } from 'react-native'
+import { SafeAreaView, Text, View, Pressable, Button } from 'react-native'
 import React from 'react'
-import { DrawerContentScrollView,DrawerItemList } from '@react-navigation/drawer'
+import { style } from '../styles/styles';
+import * as Icon from "react-native-feather";
 
-const Menu = (props) => {
+function CustomMenu({ navigation: { goBack } }) {
   return (
-    <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
-    </DrawerContentScrollView>
+    <SafeAreaView>
+    <View style={style.container}>
+        <Pressable onPress={() => goBack()}><Icon.X style={style.menuButton} /></Pressable>
+        <Text style={style.h4Style}>Ilmoittaudu viikkokisaan</Text>
+        <Text style={style.h4Style}>Pisteiden syöttö</Text>
+        <Text style={style.h4Style}>Ranking listat</Text>
+        <Text style={style.h4Style}>ViikkoBiitsi säännöt</Text>
+        <Text style={style.h4Style}>Yhteytiedot</Text>
+        
+    </View>
+    </SafeAreaView>
   )
 }
 
-export default Menu
+export default CustomMenu

@@ -21,10 +21,10 @@ function Code({navigation}) {
             </View>
   
             <View style={style.homeButtonsContainer}>
-              <Pressable onPress={() => navigation.navigate('Home')} style={style.homeButtons}>
+              <Pressable onPress={() => navigation.navigate('Home')}>
                 <Text style={style.buttonText}>Kirjaudu sisään</Text>
               </Pressable>
-              </View>
+            </View>
         </SafeAreaView>
         </ImageBackground>
 
