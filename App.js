@@ -1,4 +1,5 @@
 import Home from "./components/Home.jsx";
+import Code from "./components/Code.jsx"
 import Menu from "./components/Menu.jsx"
 import Points from "./components/Points.jsx";
 import Enrolment from "./components/Enrolment.jsx"
