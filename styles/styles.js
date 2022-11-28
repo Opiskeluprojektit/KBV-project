@@ -151,11 +151,17 @@ export const style = StyleSheet.create({
 
     // EnrolmentScreen styles
 
+    addPlayer: {
+        color: Colors.darkText,
+        top: 12,
+        alignSelf: 'center'
+    }, 
+
     enrolButton: {
         flexDirection: "column",
         width: 230,
         height: 53,
-        marginBottom: 15
+        marginBottom: 35
     },
 
     predictedRanking: {
