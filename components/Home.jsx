@@ -3,7 +3,7 @@ import { Image, Text, View, SafeAreaView, Pressable, Linking, ImageBackground } 
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 
-export default function Home({navigation}) {
+export default function Home({navigation,root}) {
 
   const backgroundImage = require('../assets/Volleyball1.jpg');
 
@@ -13,8 +13,8 @@ export default function Home({navigation}) {
 
           <View style={style.header}>
             <View style={style.HomeScreenLogo}></View>
-            {/* <Pressable onPress={() => navigation.navigate('CustomMenu')}><View><Icon.Menu style={style.menuButton} /></View></Pressable> */}
-            <Pressable onPress={() => navigation.openDrawer()}><View><Icon.Menu style={style.menuButton} /></View></Pressable>
+            <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} /></View></Pressable>
+            {/* <Pressable onPress={() => root.openDrawer()}><View><Icon.Menu style={style.menuButton} /></View></Pressable> */}
           </View>
           
           <View style={style.heading}>
