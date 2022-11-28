@@ -53,10 +53,10 @@ function Enrolment({ navigation: { goBack } }) {
               
               
               {/* Päivitetään alla olevaan uusi tyyli iconille? */}
-              <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Plus style={[style.icons]}/></View> 
+              <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.Plus style={[style.icons]}/></View> 
               <Text>Lisää pelaaja</Text></Pressable>
 
-              <Pressable onPress={() => goBack()} style={[style.enrolButton]}>
+              <Pressable onPress={() => goBack()} style={[style.enrolButton, style.button]}>
                 <Text style={style.buttonText}>Ilmoittaudu</Text>
               </Pressable>
 
