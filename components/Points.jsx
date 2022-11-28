@@ -21,7 +21,7 @@ function Points({ navigation: { goBack } }) {
   }
 
   return (
-    <SafeAreaView style={style.appContainer}>
+    <SafeAreaView>
     <View style={style.container}>
       <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
       

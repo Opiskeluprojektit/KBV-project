@@ -34,8 +34,8 @@ function Enrolment({ navigation: { goBack } }) {
   
   return (
     <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
-      <SafeAreaView>
-          <View style={style.container}>
+      <SafeAreaView style={style.container}>
+          <View>
           <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
           </View>
 
@@ -53,10 +53,10 @@ function Enrolment({ navigation: { goBack } }) {
               
               
               {/* Päivitetään alla olevaan uusi tyyli iconille? */}
-              <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Plus style={[style.icons]}/></View> 
-              <Text>Lisää pelaaja</Text></Pressable>
+              <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.Plus style={[style.addPlayer]}/></View> 
+              <Text style={style.text}>Lisää pelaaja</Text></Pressable>
 
-              <Pressable onPress={() => goBack()} style={[style.enrolButton]}>
+              <Pressable onPress={() => goBack()} style={[style.enrolButton, style.button]}>
                 <Text style={style.buttonText}>Ilmoittaudu</Text>
               </Pressable>
 
@@ -72,6 +72,7 @@ function Enrolment({ navigation: { goBack } }) {
       </SafeAreaView>
     </ImageBackground>
   );
+
 }
 
 export default Enrolment; 
