@@ -189,13 +189,19 @@ export const style = StyleSheet.create({
     },
 
     menuClose: {
-        color: Colors.bodyText,
+        color: Colors.darkText,
         alignSelf: 'flex-end',
         marginBottom: 40
     },
 
     menuIcons: {
-        color: Colors.bodyText
+        color: Colors.darkText
+    },
+
+    someIcons: {
+        color: Colors.darkText,
+        marginRight: 10,
+        marginTop: 30
     },
 
     menuContent: {
