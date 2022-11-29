@@ -11,9 +11,8 @@ const division = ["Naiset", "Miehet", "Tytöt", "Pojat"];
 
 temp = formatDMYtoYMD("25.11.2022")
 pvm = new MyDate(temp)
-console.log(pvm.getWeek(), "skriää");
-//console.log(pvm.getWeek(), "Viikkonumero");
-
+console.log(pvm, "pvm itse");
+console.log(pvm.getWeek(), "Viikkonumero");
 
 function Points({ navigation: { goBack } }) {
   const [division, setDivision] = useState("Naiset")

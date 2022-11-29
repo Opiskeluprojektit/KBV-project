@@ -14,6 +14,6 @@ export class MyDate extends Date {
 
 export function formatDMYtoYMD(dateInDMY) {
   //formats a DMY date joint by "." into YMD format join by ".".
-  let formattedDate = dateInDMY.split(".").reverse().join(".");
+  let formattedDate = dateInDMY.split(".").reverse().join("/");
   return formattedDate;
 }
