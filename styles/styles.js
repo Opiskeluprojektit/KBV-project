@@ -12,7 +12,7 @@ export const style = StyleSheet.create({
         marginTop: 24
     },
 
-    // Hamburgermenu icon
+    // Hamburgermenu icon, koko on: width={42} height={40}, lisättävä erikseen
     menuButton: {
         position: "absolute",
         color: Colors.bodyText,

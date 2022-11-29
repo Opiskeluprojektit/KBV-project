@@ -20,8 +20,6 @@ export default function Home({navigation}) {
             <Text style={style.h2Style}>Kokkola{'\n'}Beach{'\n'}Volley</Text>
           </View>
 
-          {/* Testailua */}
-
           <View style={style.homeButtonsContainer}>
             <Pressable onPress={() => navigation.navigate('Enrolment')} style={[style.homeButtons, style.button]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={style.icons}/></View>
