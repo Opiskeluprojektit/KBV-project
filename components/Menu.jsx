@@ -20,8 +20,8 @@ function CustomMenu({ navigation: { goBack } }) {
           <Icon.ArrowUpRight style={style.menuIcons} width={32} height={32}/>
         </Text>
         <Text> 
-          <Icon.Instagram style={style.someIcons} width={36} height={36}/> 
-          <Icon.Facebook style={style.someIcons} width={36} height={36}/>
+          <Icon.Instagram style={style.someIcons} width={32} height={32}/> 
+          <Icon.Facebook style={style.someIcons} width={32} height={32}/>
         </Text>
       </View>
     </SafeAreaView>
