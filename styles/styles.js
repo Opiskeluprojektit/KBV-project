@@ -179,6 +179,7 @@ export const style = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    // SummaryEnrolmentScreen styles
 
 
     // PointsScreen styles

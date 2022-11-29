@@ -4,7 +4,7 @@ import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List } from 'react-native-paper';
 
-function Enrolment({ navigation: { goBack } }) {
+function Enrolment({ navigation, navigation: { goBack } }) {
 
   const backgroundImage = require('../assets/Volleyball1.jpg');
 
@@ -39,8 +39,11 @@ function Enrolment({ navigation: { goBack } }) {
   return (
     <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
       <SafeAreaView style={style.container}>
+
+          {/* Header: Go back -painike ja Menu */}
           <View style={style.header}>
           <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+          <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
           <View style={style.viewContainer}>
@@ -68,17 +71,17 @@ function Enrolment({ navigation: { goBack } }) {
               <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.Plus style={[style.addPlayer]}/></View> 
               <Text style={style.text}>Lisää pelaaja</Text></Pressable>
 
-              <Pressable onPress={() => goBack()} style={[style.enrolButton, style.button]}>
+              <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} style={[style.enrolButton, style.button]}>
                 <Text style={style.buttonText}>Ilmoittaudu</Text>
               </Pressable>
 
               <View style={style.predictedRanking}>
               <Text style={style.text}>Ennustettu lohko</Text>
                 <Text style={style.text}>Pekka Pohjola</Text>
-                <Text>Pekka Pohjola</Text>
-                <Text>Pekka Pohjola</Text>
-                <Text>Pekka Pohjola</Text>
-                <Text>Pekka Pohjola</Text>
+                <Text style={style.text}>Pekka Ojala</Text>
+                <Text style={style.text}>Matti Meikäläinen</Text>
+                <Text style={style.text}>Martti Meikäläinen</Text>
+                <Text style={style.text}>Esa Esimerkki</Text>
               </View>
           </View>
       </SafeAreaView>
