@@ -12,27 +12,27 @@ export const style = StyleSheet.create({
         marginTop: 24
     },
 
-    // Hamburgermenu icon
+    // Hamburgermenu icon, koko on: width={42} height={40}, lisättävä erikseen
     menuButton: {
         position: "absolute",
-        color: Colors.darkText,
+        color: Colors.bodyText,
         alignSelf: 'flex-end',
         top: 2
     },
 
     //Otsikko Menulle ja "kiitos ilmoittautumisesta"
     h4Style: { 
-        color: Colors.darkHeading,
+        color: Colors.darkText,
         fontSize: 34
     },
 
     titles: {
-        color: Colors.darkText, 
+        color: Colors.bodyText, 
         fontSize: 20
     },
 
     text: {
-        color: Colors.darkText,
+        color: Colors.bodyText,
         fontSize: 16
     },
 
@@ -72,13 +72,9 @@ export const style = StyleSheet.create({
 
     // Feather icons
     icons: {
-        color: Colors.darkText,
+        color: Colors.bodyText,
         top: 12,
         alignSelf: 'center'
-    },
-
-    backgroundImage: {
-       
     },
 
     // Ilmoittautumisen, pisteiden syötön ja rankingin vaalea tausta
@@ -130,7 +126,7 @@ export const style = StyleSheet.create({
 
 
     h2Style: {
-        color: Colors.darkHeading,
+        color: Colors.darkText,
         fontSize: 60,
         textAlign: 'left',
         lineHeight: 60,
@@ -153,14 +149,15 @@ export const style = StyleSheet.create({
 
     // Vain Home sivun keltaiset pallurat
     homeEllipse: {
-        alignSelf: 'flex-end'
+        alignSelf: 'flex-end',
+        right: 8
     },
 
 
     // EnrolmentScreen styles
 
     addPlayer: {
-        color: Colors.darkText,
+        color: Colors.bodyText,
         top: 12,
         alignSelf: 'center'
     }, 
@@ -192,13 +189,13 @@ export const style = StyleSheet.create({
     },
 
     menuClose: {
-        color: Colors.darkHeading,
+        color: Colors.bodyText,
         alignSelf: 'flex-end',
         marginBottom: 40
     },
 
     menuIcons: {
-        color: Colors.darkHeading
+        color: Colors.bodyText
     },
 
     menuContent: {
