@@ -8,7 +8,7 @@ import * as db from "../assets/testidata.json"
 
 const division = ["Naiset", "Miehet", "Tytöt", "Pojat"];
 
-function Points({ navigation: { goBack } }) {
+function Points({navigation}) {
   const [division, setDivision] = useState("Naiset")
   const [divisionsExpanded, setDivisionsExpanded] = useState(false)
 
@@ -23,7 +23,7 @@ function Points({ navigation: { goBack } }) {
   return (
     <SafeAreaView>
     <View style={style.container}>
-      <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+      <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
       
       <List.Section title="Sarja">
         <List.Accordion title="Sarja valikko" expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>

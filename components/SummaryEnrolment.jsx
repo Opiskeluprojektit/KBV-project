@@ -3,11 +3,11 @@ import React from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 
-function SummaryEnrolment({ navigation: { goBack } }) {
+function SummaryEnrolment({navigation}) {
   return (
     <SafeAreaView>
     <View style={style.container}>
-        <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.X style={[style.icons]}/></View></Pressable>
+        <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.X style={[style.icons]}/></View></Pressable>
       <Text>Kiitos ilmoittautumisestasi!</Text>
       </View>
     </SafeAreaView>

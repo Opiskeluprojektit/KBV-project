@@ -4,7 +4,7 @@ import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List } from 'react-native-paper';
 
-function Enrolment({ navigation: { goBack } }) {
+function Enrolment({navigation}) {
 
   const backgroundImage = require('../assets/Volleyball1.jpg');
 
@@ -40,7 +40,7 @@ function Enrolment({ navigation: { goBack } }) {
     <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
       <SafeAreaView style={style.container}>
           <View style={style.header}>
-          <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+          <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
           </View>
 
           <View style={style.viewContainer}>

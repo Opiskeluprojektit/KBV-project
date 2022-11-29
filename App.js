@@ -4,7 +4,7 @@ import Points from "./components/Points.jsx";
 import Enrolment from "./components/Enrolment.jsx"
 import Ranking from "./components/Ranking.jsx";
 import Menu from "./components/Menu.jsx";
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider, Provider } from 'react-native-paper';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator()
 
 function App() {
   return (
-  
+  <Provider>
     <NavigationContainer>
     <Stack.Navigator initialRouteName="Code">
       <Stack.Screen name="Code" component={Code} options={{ headerShown: false }}/>
@@ -25,6 +25,7 @@ function App() {
       <Stack.Screen name="Menu" component={Menu} options={{ headerShown: false, presentation: 'modal' }}/>
     </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 
