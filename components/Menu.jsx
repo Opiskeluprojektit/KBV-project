@@ -1,20 +1,29 @@
-import { SafeAreaView, Text, View, Pressable, Button } from 'react-native'
+import { SafeAreaView, Text, View, Pressable} from 'react-native'
 import React from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 
 function CustomMenu({ navigation: { goBack } }) {
   return (
-    <SafeAreaView>
-    <View style={style.container}>
-        <Pressable onPress={() => goBack()}><Icon.X style={style.menuButton} /></Pressable>
-        <Text style={style.h4Style}>Ilmoittaudu viikkokisaan</Text>
-        <Text style={style.h4Style}>Pisteiden syöttö</Text>
-        <Text style={style.h4Style}>Ranking listat</Text>
-        <Text style={style.h4Style}>ViikkoBiitsi säännöt <Icon.ArrowUpRight style={style.icons} width={30} height={30}/></Text>
-        <Text style={style.h4Style}>Yhteytiedot <Icon.ArrowUpRight style={style.icons} width={30} height={30}/></Text>
-        
-    </View>
+    <SafeAreaView style={style.menuContainer}>
+      <View style={style.container}>
+        <Pressable onPress={() => goBack()}>
+          <Icon.X style={style.menuClose} width={32} height={32}/>
+        </Pressable>
+        <Text style={[style.h4Style, style.menuContent]}>Ilmoittaudu viikkokisaan</Text>
+        <Text style={[style.h4Style, style.menuContent]}>Pisteiden syöttö</Text>
+        <Text style={[style.h4Style, style.menuContent]}>Ranking listat</Text>
+        <Text style={[style.h4Style, style.menuContent]}>ViikkoBiitsi säännöt 
+          <Icon.ArrowUpRight style={style.menuIcons} width={32} height={32}/>
+        </Text>
+        <Text style={[style.h4Style, style.menuContent]}>Yhteytiedot 
+          <Icon.ArrowUpRight style={style.menuIcons} width={32} height={32}/>
+        </Text>
+        <Text> 
+          <Icon.Instagram style={style.menuIcons} width={32} height={32}/> 
+          <Icon.Facebook style={style.menuIcons} width={32} height={32}/>
+        </Text>
+      </View>
     </SafeAreaView>
   )
 }

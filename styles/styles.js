@@ -12,6 +12,7 @@ export const style = StyleSheet.create({
         marginTop: 24
     },
 
+    // Hamburgermenu icon
     menuButton: {
         position: "absolute",
         color: Colors.darkText,
@@ -73,11 +74,8 @@ export const style = StyleSheet.create({
     icons: {
         color: Colors.darkText,
         top: 12,
-        alignSelf: 'center',
+        alignSelf: 'center'
     },
-
-    
-
 
     backgroundImage: {
        
@@ -90,6 +88,7 @@ export const style = StyleSheet.create({
         borderTopRightRadius: 50,
         height: "90%"
     }, 
+
     // Listojen ja hakujen tausta
     search: {
         backgroundColor: Colors.inputColor,
@@ -140,22 +139,23 @@ export const style = StyleSheet.create({
     },
 
     homeButtonsContainer: {
-        width: "100%",
         height: "55%"
     },
 
     homeButtons: {
         flexDirection: "column",
-        width: '90%',
+        width: '95%',
         height: 72,
-        marginBottom: 15
+        marginBottom: 15,
+        borderTopRightRadius: 60,
+        borderBottomRightRadius: 60
     },
 
     // Vain Home sivun keltaiset pallurat
     homeEllipse: {
-        //left: 305,
         alignSelf: 'flex-end'
     },
+
 
     // EnrolmentScreen styles
 
@@ -186,4 +186,22 @@ export const style = StyleSheet.create({
     // RankingScreen styles
 
     // Menu styles
+
+    menuContainer: {
+        backgroundColor: Colors.inputColor
+    },
+
+    menuClose: {
+        color: Colors.darkHeading,
+        alignSelf: 'flex-end',
+        marginBottom: 40
+    },
+
+    menuIcons: {
+        color: Colors.darkHeading
+    },
+
+    menuContent: {
+        marginBottom: 20
+    }
 })
