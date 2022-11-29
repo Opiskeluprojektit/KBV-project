@@ -8,7 +8,7 @@ export default function Home({navigation}) {
   const backgroundImage = require('../assets/Volleyball1.jpg');
 
   return (
-    <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
+    <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5, height: '100%', width: 800}}>
       <SafeAreaView style={style.container}>
 
           <View style={style.header}>
