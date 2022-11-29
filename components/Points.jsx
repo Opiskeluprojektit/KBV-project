@@ -5,8 +5,14 @@ import * as Icon from "react-native-feather";
 import { List } from 'react-native-paper'
 
 import * as db from "../assets/testidata.json"
+import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
 const division = ["Naiset", "Miehet", "Tytöt", "Pojat"];
+
+temp = formatDMYtoYMD("25.11.2022")
+pvm = new MyDate(temp)
+console.log(pvm, "pvm itse");
+console.log(pvm.getWeek(), "Viikkonumero");
 
 function Points({ navigation: { goBack } }) {
   const [division, setDivision] = useState("Naiset")
@@ -18,6 +24,7 @@ function Points({ navigation: { goBack } }) {
     //tähän vois laittaa pienen viiveen ja jonkun huomauttimen: "Sarja x valittu".
     setDivisionsExpanded(!divisionsExpanded)
     setDivision(div)
+    //console.log(pvm.getWeek(), "Viikkonumero");
   }
 
   return (

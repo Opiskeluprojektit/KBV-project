@@ -8,7 +8,7 @@ export default function Home({navigation}) {
   const backgroundImage = require('../assets/Volleyball1.jpg');
 
   return (
-    <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
+    <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5, height: '100%', width: 800}}>
       <SafeAreaView style={style.container}>
 
           <View style={style.header}>
@@ -19,8 +19,6 @@ export default function Home({navigation}) {
           <View style={style.heading}>
             <Text style={style.h2Style}>Kokkola{'\n'}Beach{'\n'}Volley</Text>
           </View>
-
-          {/* Testailua */}
 
           <View style={style.homeButtonsContainer}>
             <Pressable onPress={() => navigation.navigate('Enrolment')} style={[style.homeButtons, style.button]}>

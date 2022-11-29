@@ -1,10 +1,16 @@
 import { SafeAreaView, FlatList, Text, View, Pressable, Button, ImageBackground } from 'react-native';
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List } from 'react-native-paper';
 
 function Enrolment({ navigation, navigation: { goBack } }) {
+  const [search, setSearch] = useState('');
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems(DATA);
+  }, [])
 
   const backgroundImage = require('../assets/Volleyball1.jpg');
 
@@ -35,6 +41,11 @@ function Enrolment({ navigation, navigation: { goBack } }) {
     const renderItem = ({ item }) => (
       <Item name={item.name} />
     );
+
+    const executeSearch = (search) => {
+      const searchArray = DATA.filter((item) => item.name.includes(search));
+      setItems(searchArray);
+    }
   
   return (
     <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
@@ -56,15 +67,22 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                   <List.Item title="Naiset 7.6.2023" />
                   <List.Item title="Miehet 8.6.2023" />
                 </List.Accordion>
-            </List.Section>
+              </List.Section>
 
               {/* FlatList pelaajan valinnalle */} 
               <Text style={style.text}>Valitse pelaaja</Text>
-{/*               <FlatList
-                data={DATA}
+              <TextInput
+                label="Haku"
+                value={search}
+                onChangeText={text => setSearch(text)}
+                returnKeyType="search"
+                onSubmitEditing={() => executeSearch(search)}
+              />
+              <FlatList
+                data={items}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
-              /> */}
+                key={item => item.id}
+              />
               
               
               {/* Päivitetään alla olevaan uusi tyyli iconille? */}
