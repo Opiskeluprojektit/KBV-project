@@ -1,4 +1,4 @@
-import { SafeAreaView, FlatList, Text, View, Pressable, Button, ImageBackground } from 'react-native';
+import { SafeAreaView, FlatList, Text, View, Pressable, Button, ImageBackground, TextInput } from 'react-native'; //TextInput lisätty ku herjas sitä
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
