@@ -20,7 +20,7 @@ export const style = StyleSheet.create({
         top: 2
     },
 
-    //Otsikko Menulle ja "kiitos ilmoittautumisesta"
+    //Otsikko Menulle ja screenien otsikoille
     h4Style: { 
         color: Colors.darkText,
         fontSize: 34
