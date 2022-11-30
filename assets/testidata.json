@@ -1,13 +1,13 @@
 
 {
-  "hallinta":[
+  "administration":[
     {
       "ID": 0,
       "koodi": 1234,
       "bonuskerroin": 5
     }
   ],
-  "sijoitus":[
+  "placement":[
     {
       "id": 1,
       "peli_id": 1,
@@ -359,561 +359,561 @@
       "pelaaja_id": 50
     }
   ],
-  "pelaaja":[
+  "player":[
     {
       "ID": 1,
-      "nimi": "Christen Mcintyre",
+      "name": "Christen Mcintyre",
       "ranking": 26,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 2,
-      "nimi": "Elaine Gibbs",
+      "name": "Elaine Gibbs",
       "ranking": 28,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 3,
-      "nimi": "Dane Mann",
+      "name": "Dane Mann",
       "ranking": 19,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 4,
-      "nimi": "Delilah Boyer",
+      "name": "Delilah Boyer",
       "ranking": 13,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 5,
-      "nimi": "Kyla Galloway",
+      "name": "Kyla Galloway",
       "ranking": 28,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 6,
-      "nimi": "Vivien Hines",
+      "name": "Vivien Hines",
       "ranking": 28,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 7,
-      "nimi": "Ethan Rivers",
+      "name": "Ethan Rivers",
       "ranking": 24,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 8,
-      "nimi": "Cade Rasmussen",
+      "name": "Cade Rasmussen",
       "ranking": 18,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 9,
-      "nimi": "Melvin Mooney",
+      "name": "Melvin Mooney",
       "ranking": 19,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 10,
-      "nimi": "Carla Gibson",
+      "name": "Carla Gibson",
       "ranking": 13,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 11,
-      "nimi": "Faith Lucas",
+      "name": "Faith Lucas",
       "ranking": 20,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 12,
-      "nimi": "Jennifer Meyer",
+      "name": "Jennifer Meyer",
       "ranking": 20,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 13,
-      "nimi": "Susan Lane",
+      "name": "Susan Lane",
       "ranking": 10,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 14,
-      "nimi": "Irma Burns",
+      "name": "Irma Burns",
       "ranking": 25,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 15,
-      "nimi": "Clarke Larsen",
+      "name": "Clarke Larsen",
       "ranking": 17,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 16,
-      "nimi": "Hermione Briggs",
+      "name": "Hermione Briggs",
       "ranking": 21,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 17,
-      "nimi": "Zephania Hayes",
+      "name": "Zephania Hayes",
       "ranking": 23,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 18,
-      "nimi": "Galvin Campos",
+      "name": "Galvin Campos",
       "ranking": 22,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 19,
-      "nimi": "Shaine Pope",
+      "name": "Shaine Pope",
       "ranking": 20,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 20,
-      "nimi": "Hilel Stephens",
+      "name": "Hilel Stephens",
       "ranking": 10,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 21,
-      "nimi": "Shannon Pearson",
+      "name": "Shannon Pearson",
       "ranking": 29,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 22,
-      "nimi": "Tanek Copeland",
+      "name": "Tanek Copeland",
       "ranking": 12,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 23,
-      "nimi": "Cody Santana",
+      "name": "Cody Santana",
       "ranking": 24,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 24,
-      "nimi": "Jana Collins",
+      "name": "Jana Collins",
       "ranking": 19,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 25,
-      "nimi": "Baker Stewart",
+      "name": "Baker Stewart",
       "ranking": 22,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 26,
-      "nimi": "Sylvester Hewitt",
+      "name": "Sylvester Hewitt",
       "ranking": 15,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 27,
-      "nimi": "Amaya Rowland",
+      "name": "Amaya Rowland",
       "ranking": 28,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 28,
-      "nimi": "Sacha Dodson",
+      "name": "Sacha Dodson",
       "ranking": 24,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 29,
-      "nimi": "Blythe Jacobs",
+      "name": "Blythe Jacobs",
       "ranking": 23,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 30,
-      "nimi": "Claudia Powell",
+      "name": "Claudia Powell",
       "ranking": 14,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 31,
-      "nimi": "Jacob Soto",
+      "name": "Jacob Soto",
       "ranking": 24,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 32,
-      "nimi": "Constance Winters",
+      "name": "Constance Winters",
       "ranking": 25,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 33,
-      "nimi": "Basil Huber",
+      "name": "Basil Huber",
       "ranking": 14,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 34,
-      "nimi": "Neil Bradshaw",
+      "name": "Neil Bradshaw",
       "ranking": 16,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 35,
-      "nimi": "Lana Buck",
+      "name": "Lana Buck",
       "ranking": 25,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 36,
-      "nimi": "Melinda Dean",
+      "name": "Melinda Dean",
       "ranking": 29,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 37,
-      "nimi": "Yeo Nixon",
+      "name": "Yeo Nixon",
       "ranking": 28,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 38,
-      "nimi": "Aimee Cross",
+      "name": "Aimee Cross",
       "ranking": 27,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 39,
-      "nimi": "Gemma Cleveland",
+      "name": "Gemma Cleveland",
       "ranking": 26,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 40,
-      "nimi": "Justin Garrett",
+      "name": "Justin Garrett",
       "ranking": 13,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 41,
-      "nimi": "Breanna Willis",
+      "name": "Breanna Willis",
       "ranking": 11,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 42,
-      "nimi": "Kameko Gill",
+      "name": "Kameko Gill",
       "ranking": 15,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 43,
-      "nimi": "Lucy Dickson",
+      "name": "Lucy Dickson",
       "ranking": 26,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 44,
-      "nimi": "Dorothy Price",
+      "name": "Dorothy Price",
       "ranking": 30,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 45,
-      "nimi": "Zachary Marquez",
+      "name": "Zachary Marquez",
       "ranking": 17,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 46,
-      "nimi": "Graiden Raymond",
+      "name": "Graiden Raymond",
       "ranking": 13,
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 47,
-      "nimi": "Wallace Abbott",
+      "name": "Wallace Abbott",
       "ranking": 23,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 48,
-      "nimi": "Mara Hogan",
+      "name": "Mara Hogan",
       "ranking": 27,
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 49,
-      "nimi": "Shaeleigh Harrell",
+      "name": "Shaeleigh Harrell",
       "ranking": 26,
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 50,
-      "nimi": "Kermit Sanchez",
+      "name": "Kermit Sanchez",
       "ranking": 16,
-      "sarja": "Miehet"
+      "division": "Miehet"
     }
   ],
-  "pelit":[
+  "game":[
     {
       "ID": 1,
       "date": "15.4.2023",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 2,
       "date": "9.6.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 3,
       "date": "24.11.2021",
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 4,
       "date": "29.5.2023",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 5,
       "date": "12.3.2022",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 6,
       "date": "7.6.2022",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 7,
       "date": "24.8.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 8,
       "date": "5.4.2022",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 9,
       "date": "14.3.2023",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 10,
       "date": "2.1.2023",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 11,
       "date": "1.8.2022",
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 12,
       "date": "27.2.2022",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 13,
       "date": "17.11.2023",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 14,
       "date": "24.5.2023",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 15,
       "date": "3.1.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 16,
       "date": "9.12.2022",
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 17,
       "date": "26.5.2023",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 18,
       "date": "25.3.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 19,
       "date": "4.5.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 20,
       "date": "21.11.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 21,
       "date": "27.7.2022",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 22,
       "date": "23.12.2021",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 23,
       "date": "29.9.2023",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 24,
       "date": "10.12.2021",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 25,
       "date": "23.11.2023",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 26,
       "date": "14.4.2023",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 27,
       "date": "28.8.2022",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 28,
       "date": "8.1.2023",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 29,
       "date": "21.5.2022",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 30,
       "date": "7.7.2023",
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 31,
       "date": "14.10.2023",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 32,
       "date": "27.1.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 33,
       "date": "25.7.2022",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 34,
       "date": "4.6.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 35,
       "date": "24.9.2022",
-      "sarja": "Naiset"
+      "division": "Naiset"
     },
     {
       "ID": 36,
       "date": "28.8.2023",
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 37,
       "date": "18.11.2023",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 38,
       "date": "24.11.2021",
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 39,
       "date": "20.7.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 40,
       "date": "25.3.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 41,
       "date": "5.1.2022",
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 42,
       "date": "13.11.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 43,
       "date": "27.5.2023",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 44,
       "date": "30.1.2023",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 45,
       "date": "22.11.2022",
-      "sarja": "Pojat"
+      "division": "Pojat"
     },
     {
       "ID": 46,
       "date": "9.6.2022",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 47,
       "date": "10.9.2022",
-      "sarja": "Miehet"
+      "division": "Miehet"
     },
     {
       "ID": 48,
       "date": "28.11.2022",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 49,
       "date": "14.11.2022",
-      "sarja": "Tytöt"
+      "division": "Tytöt"
     },
     {
       "ID": 50,
       "date": "21.5.2023",
-      "sarja": "Miehet"
+      "division": "Miehet"
     }
   ],
-  "ilmoittautuminen":[
+  "enrolment":[
     {
       "id": 1,
       "peli_id": 3,
