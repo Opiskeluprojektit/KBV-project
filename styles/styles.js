@@ -178,6 +178,15 @@ export const style = StyleSheet.create({
 
     // SummaryEnrolmentScreen styles
 
+    // CodeScreen styles
+
+    codeButtons: {
+        flexDirection: "column",
+        width: '95%',
+        height: 72,
+        marginBottom: 15,
+
+     },
 
     // PointsScreen styles
 
