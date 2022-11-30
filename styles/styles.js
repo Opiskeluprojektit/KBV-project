@@ -88,7 +88,8 @@ export const style = StyleSheet.create({
     // Listojen ja hakujen tausta
     search: {
         backgroundColor: Colors.inputColor,
-        height: 50
+        height: 50,
+        borderRadius: 10
     },
 
     // SplashScreen styles
@@ -174,6 +175,7 @@ export const style = StyleSheet.create({
         width: "90%",
         alignSelf: 'center',
         justifyContent: 'center',
+        borderRadius: 10
     },
 
     // SummaryEnrolmentScreen styles
