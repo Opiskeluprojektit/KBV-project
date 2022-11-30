@@ -3,49 +3,36 @@ import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List } from 'react-native-paper';
+import db from '../assets/testidata.json';
+
+const dbPlayers = db.player;
+const dbGames = db.game;
 
 function Enrolment({ navigation, navigation: { goBack } }) {
+  const [division, setDivision] = useState('Naiset');
   const [search, setSearch] = useState('');
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    setItems(DATA);
-  }, [])
+  const [playersToShow, setPlayersToShow] = useState([]);
+  const [playersToEnroll, setPlayersToEnroll] = useState([]);
+  const [gamesToSHow, setGames] = useState([]);
+  //Vois vielä filtteröidä sarjan perusteella pelaajat listaa.
 
   const backgroundImage = require('../assets/Volleyball1.jpg');
-
-/*   Alla oleva DATA rakennettu vain testikäyttöön, 
-  jotta voi tarvittaessa testata searchbarin toimivuutta
-  jollakin datalla */
-  const DATA = [
-    {
-      id: '1',
-      name: 'First name',
-    },
-    {
-      id: '22',
-      name: 'Second name',
-    },
-    {
-      id: '333',
-      name: 'Third name',
-    },
-  ];
   
   const Item = ({ name }) => (
-    <View>
       <Text>{name}</Text>
-    </View>
   );
   
-    const renderItem = ({ item }) => (
-      <Item name={item.name} />
-    );
+  const renderItem = ({ item }) => (
+    <Item name={item.name} />
+  );
 
-    const executeSearch = (search) => {
-      const searchArray = DATA.filter((item) => item.name.includes(search));
-      setItems(searchArray);
-    }
+  const executeSearch = (search) => {
+    setSearch(search);
+    const searchArray = search.length > 0
+      ? db.player.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())
+      ) : [];
+    setPlayersToShow(searchArray);
+  }
   
   return (
     <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
@@ -62,7 +49,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
               <Text style={style.text}>Valitse peli</Text>
               <List.Section>
                 <List.Accordion
-                  title="Miehet 1.6.2023"
+                  title="Pelit"
                   style={style.search}>
                   <List.Item title="Naiset 7.6.2023" />
                   <List.Item title="Miehet 8.6.2023" />
@@ -74,33 +61,41 @@ function Enrolment({ navigation, navigation: { goBack } }) {
               <TextInput
                 label="Haku"
                 value={search}
-                onChangeText={text => setSearch(text)}
+                style={style.search}
+                onChangeText={text => executeSearch(text)}
                 returnKeyType="search"
                 onSubmitEditing={() => executeSearch(search)}
               />
               <FlatList
-                data={items}
+                data={playersToShow}
                 renderItem={renderItem}
-                key={item => item.id}
+                key={i => i.id}
               />
               
               
+              {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,
+              eikä ole lisännyt peliä ja pelaajaa täytössä olevalle pelaajalle */}
               {/* Päivitetään alla olevaan uusi tyyli iconille? */}
               <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.Plus style={[style.addPlayer]}/></View> 
               <Text style={style.text}>Lisää pelaaja</Text></Pressable>
 
+              {/* Lisätään vaihtoehto pressebleen: yhdellä pelaajalla teksti "Ilmoittaudu",
+              kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
               <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} style={[style.enrolButton, style.button]}>
                 <Text style={style.buttonText}>Ilmoittaudu</Text>
               </Pressable>
 
-              <View style={style.predictedRanking}>
+              
+
+                {/* Tähän voi tehdä ennustetun lohkon, jos se tehdään */}
+{/*               <View style={style.predictedRanking}>
               <Text style={style.text}>Ennustettu lohko</Text>
                 <Text style={style.text}>Pekka Pohjola</Text>
                 <Text style={style.text}>Pekka Ojala</Text>
                 <Text style={style.text}>Matti Meikäläinen</Text>
                 <Text style={style.text}>Martti Meikäläinen</Text>
                 <Text style={style.text}>Esa Esimerkki</Text>
-              </View>
+              </View> */}
           </View>
       </SafeAreaView>
     </ImageBackground>
