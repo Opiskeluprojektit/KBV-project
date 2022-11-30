@@ -28,7 +28,9 @@ function Enrolment({ navigation, navigation: { goBack } }) {
 
   const executeSearch = (search) => {
     setSearch(search);
-    const searchArray = db.player.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+    const searchArray = search.length > 0
+      ? db.player.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())
+      ) : [];
     setPlayersToShow(searchArray);
   }
   
@@ -59,6 +61,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
               <TextInput
                 label="Haku"
                 value={search}
+                style={style.search}
                 onChangeText={text => executeSearch(text)}
                 returnKeyType="search"
                 onSubmitEditing={() => executeSearch(search)}

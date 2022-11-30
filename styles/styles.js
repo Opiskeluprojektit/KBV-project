@@ -88,7 +88,8 @@ export const style = StyleSheet.create({
     // Listojen ja hakujen tausta
     search: {
         backgroundColor: Colors.inputColor,
-        height: 50
+        height: 50,
+        borderRadius: 10
     },
 
     // SplashScreen styles
