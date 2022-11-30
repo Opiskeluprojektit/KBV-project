@@ -1,4 +1,4 @@
-import { SafeAreaView, FlatList, Text, View, Pressable, Button, ImageBackground, TextInput } from 'react-native'; //TextInput lisätty ku herjas sitä
+import { SafeAreaView, ScrollView, FlatList, Text, View, Pressable, Button, ImageBackground, TextInput } from 'react-native'; //TextInput lisätty ku herjas sitä
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
@@ -44,6 +44,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
   return (
     <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
       <SafeAreaView style={style.container}>
+      
 
           {/* Header: Go back -painike ja Menu */}
           <View style={style.header}>
@@ -51,7 +52,13 @@ function Enrolment({ navigation, navigation: { goBack } }) {
           <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
+          {/* Alla oleva ScrollView ja sen aisapari kommenteissa,
+          koska ScrollView ja Flatlist ei tule toimeen. 
+          Yritetään rakentaa näkymästä skrollattava, koska sitä se ei ole atm. */}
+          {/* <ScrollView style={style.viewContainer}> */}
           <View style={style.viewContainer}>
+            <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
+ 
               {/* Dropdown pelipäivän valinnalle */}
               <Text style={style.text}>Valitse peli</Text>
               <List.Section>
@@ -62,8 +69,6 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     
                   {gameList}
-                  <List.Item title="Naiset 7.6.2023" />
-                  <List.Item title="Miehet 8.6.2023" />
                 </List.Accordion>
               </List.Section>
 
@@ -76,6 +81,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                 onChangeText={text => executeSearch(text)}
                 returnKeyType="search"
                 onSubmitEditing={() => executeSearch(search)}
+                placeholder="Haku" 
               />
               <FlatList
                 data={playersToShow}
@@ -107,6 +113,8 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                 <Text style={style.text}>Martti Meikäläinen</Text>
                 <Text style={style.text}>Esa Esimerkki</Text>
               </View> */}
+
+          {/* </ScrollView> */}
           </View>
       </SafeAreaView>
     </ImageBackground>

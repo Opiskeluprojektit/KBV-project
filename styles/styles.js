@@ -203,7 +203,8 @@ export const style = StyleSheet.create({
     menuClose: {
         color: Colors.darkText,
         alignSelf: 'flex-end',
-        marginBottom: 40
+        marginBottom: 20,
+        marginTop: 20
     },
 
     menuIcons: {
