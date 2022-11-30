@@ -8,15 +8,22 @@ import db from '../assets/testidata.json';
 const dbPlayers = db.player;
 const dbGames = db.game;
 
+const backgroundImage = require('../assets/Volleyball1.jpg');
+
 function Enrolment({ navigation, navigation: { goBack } }) {
-  const [division, setDivision] = useState('Naiset');
   const [search, setSearch] = useState('');
   const [playersToShow, setPlayersToShow] = useState([]);
   const [playersToEnroll, setPlayersToEnroll] = useState([]);
-  const [gamesToSHow, setGames] = useState([]);
-  //Vois vielä filtteröidä sarjan perusteella pelaajat listaa.
+  const [chosenGame, setChosenGame] = useState();
+  const [gamesToShow, setGames] = useState(dbGames);
+  const [gamesExpanded, setGamesExpanded] = useState(false);
 
-  const backgroundImage = require('../assets/Volleyball1.jpg');
+  const gameList = gamesToShow.map(i => <List.Item key={i.id} title={i.division + " " + i.date} onPress={() => selectGame(i)} />);
+
+  const selectGame = (i) => {
+    setGamesExpanded(!gamesExpanded);
+    setChosenGame(i)
+  }
   
   const Item = ({ name }) => (
       <Text>{name}</Text>
@@ -49,8 +56,12 @@ function Enrolment({ navigation, navigation: { goBack } }) {
               <Text style={style.text}>Valitse peli</Text>
               <List.Section>
                 <List.Accordion
-                  title="Pelit"
-                  style={style.search}>
+                  title={chosenGame ? chosenGame.division + " " + chosenGame.date : "Pelit"}
+                  style={style.search}
+                  expanded={gamesExpanded}
+                  onPress={() => setGamesExpanded(!gamesExpanded)} >
+                    
+                  {gameList}
                   <List.Item title="Naiset 7.6.2023" />
                   <List.Item title="Miehet 8.6.2023" />
                 </List.Accordion>

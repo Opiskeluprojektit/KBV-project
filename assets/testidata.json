@@ -2,7 +2,7 @@
 {
   "administration":[
     {
-      "ID": 0,
+      "id": 0,
       "koodi": 1234,
       "bonuskerroin": 5
     }
@@ -361,301 +361,301 @@
   ],
   "player":[
     {
-      "ID": 1,
+      "id": 1,
       "name": "Christen Mcintyre",
       "ranking": 26,
       "division": "Naiset"
     },
     {
-      "ID": 2,
+      "id": 2,
       "name": "Elaine Gibbs",
       "ranking": 28,
       "division": "Naiset"
     },
     {
-      "ID": 3,
+      "id": 3,
       "name": "Dane Mann",
       "ranking": 19,
       "division": "Naiset"
     },
     {
-      "ID": 4,
+      "id": 4,
       "name": "Delilah Boyer",
       "ranking": 13,
       "division": "Pojat"
     },
     {
-      "ID": 5,
+      "id": 5,
       "name": "Kyla Galloway",
       "ranking": 28,
       "division": "Miehet"
     },
     {
-      "ID": 6,
+      "id": 6,
       "name": "Vivien Hines",
       "ranking": 28,
       "division": "Pojat"
     },
     {
-      "ID": 7,
+      "id": 7,
       "name": "Ethan Rivers",
       "ranking": 24,
       "division": "Pojat"
     },
     {
-      "ID": 8,
+      "id": 8,
       "name": "Cade Rasmussen",
       "ranking": 18,
       "division": "Naiset"
     },
     {
-      "ID": 9,
+      "id": 9,
       "name": "Melvin Mooney",
       "ranking": 19,
       "division": "Miehet"
     },
     {
-      "ID": 10,
+      "id": 10,
       "name": "Carla Gibson",
       "ranking": 13,
       "division": "Miehet"
     },
     {
-      "ID": 11,
+      "id": 11,
       "name": "Faith Lucas",
       "ranking": 20,
       "division": "Miehet"
     },
     {
-      "ID": 12,
+      "id": 12,
       "name": "Jennifer Meyer",
       "ranking": 20,
       "division": "Pojat"
     },
     {
-      "ID": 13,
+      "id": 13,
       "name": "Susan Lane",
       "ranking": 10,
       "division": "Miehet"
     },
     {
-      "ID": 14,
+      "id": 14,
       "name": "Irma Burns",
       "ranking": 25,
       "division": "Miehet"
     },
     {
-      "ID": 15,
+      "id": 15,
       "name": "Clarke Larsen",
       "ranking": 17,
       "division": "Miehet"
     },
     {
-      "ID": 16,
+      "id": 16,
       "name": "Hermione Briggs",
       "ranking": 21,
       "division": "Pojat"
     },
     {
-      "ID": 17,
+      "id": 17,
       "name": "Zephania Hayes",
       "ranking": 23,
       "division": "Miehet"
     },
     {
-      "ID": 18,
+      "id": 18,
       "name": "Galvin Campos",
       "ranking": 22,
       "division": "Pojat"
     },
     {
-      "ID": 19,
+      "id": 19,
       "name": "Shaine Pope",
       "ranking": 20,
       "division": "Naiset"
     },
     {
-      "ID": 20,
+      "id": 20,
       "name": "Hilel Stephens",
       "ranking": 10,
       "division": "Miehet"
     },
     {
-      "ID": 21,
+      "id": 21,
       "name": "Shannon Pearson",
       "ranking": 29,
       "division": "Naiset"
     },
     {
-      "ID": 22,
+      "id": 22,
       "name": "Tanek Copeland",
       "ranking": 12,
       "division": "Miehet"
     },
     {
-      "ID": 23,
+      "id": 23,
       "name": "Cody Santana",
       "ranking": 24,
       "division": "Miehet"
     },
     {
-      "ID": 24,
+      "id": 24,
       "name": "Jana Collins",
       "ranking": 19,
       "division": "Pojat"
     },
     {
-      "ID": 25,
+      "id": 25,
       "name": "Baker Stewart",
       "ranking": 22,
       "division": "Miehet"
     },
     {
-      "ID": 26,
+      "id": 26,
       "name": "Sylvester Hewitt",
       "ranking": 15,
       "division": "Pojat"
     },
     {
-      "ID": 27,
+      "id": 27,
       "name": "Amaya Rowland",
       "ranking": 28,
       "division": "Miehet"
     },
     {
-      "ID": 28,
+      "id": 28,
       "name": "Sacha Dodson",
       "ranking": 24,
       "division": "Miehet"
     },
     {
-      "ID": 29,
+      "id": 29,
       "name": "Blythe Jacobs",
       "ranking": 23,
       "division": "Pojat"
     },
     {
-      "ID": 30,
+      "id": 30,
       "name": "Claudia Powell",
       "ranking": 14,
       "division": "Miehet"
     },
     {
-      "ID": 31,
+      "id": 31,
       "name": "Jacob Soto",
       "ranking": 24,
       "division": "Miehet"
     },
     {
-      "ID": 32,
+      "id": 32,
       "name": "Constance Winters",
       "ranking": 25,
       "division": "Pojat"
     },
     {
-      "ID": 33,
+      "id": 33,
       "name": "Basil Huber",
       "ranking": 14,
       "division": "Miehet"
     },
     {
-      "ID": 34,
+      "id": 34,
       "name": "Neil Bradshaw",
       "ranking": 16,
       "division": "Naiset"
     },
     {
-      "ID": 35,
+      "id": 35,
       "name": "Lana Buck",
       "ranking": 25,
       "division": "Miehet"
     },
     {
-      "ID": 36,
+      "id": 36,
       "name": "Melinda Dean",
       "ranking": 29,
       "division": "Pojat"
     },
     {
-      "ID": 37,
+      "id": 37,
       "name": "Yeo Nixon",
       "ranking": 28,
       "division": "Miehet"
     },
     {
-      "ID": 38,
+      "id": 38,
       "name": "Aimee Cross",
       "ranking": 27,
       "division": "Pojat"
     },
     {
-      "ID": 39,
+      "id": 39,
       "name": "Gemma Cleveland",
       "ranking": 26,
       "division": "Pojat"
     },
     {
-      "ID": 40,
+      "id": 40,
       "name": "Justin Garrett",
       "ranking": 13,
       "division": "Miehet"
     },
     {
-      "ID": 41,
+      "id": 41,
       "name": "Breanna Willis",
       "ranking": 11,
       "division": "Miehet"
     },
     {
-      "ID": 42,
+      "id": 42,
       "name": "Kameko Gill",
       "ranking": 15,
       "division": "Naiset"
     },
     {
-      "ID": 43,
+      "id": 43,
       "name": "Lucy Dickson",
       "ranking": 26,
       "division": "Pojat"
     },
     {
-      "ID": 44,
+      "id": 44,
       "name": "Dorothy Price",
       "ranking": 30,
       "division": "Pojat"
     },
     {
-      "ID": 45,
+      "id": 45,
       "name": "Zachary Marquez",
       "ranking": 17,
       "division": "Miehet"
     },
     {
-      "ID": 46,
+      "id": 46,
       "name": "Graiden Raymond",
       "ranking": 13,
       "division": "Miehet"
     },
     {
-      "ID": 47,
+      "id": 47,
       "name": "Wallace Abbott",
       "ranking": 23,
       "division": "Pojat"
     },
     {
-      "ID": 48,
+      "id": 48,
       "name": "Mara Hogan",
       "ranking": 27,
       "division": "Pojat"
     },
     {
-      "ID": 49,
+      "id": 49,
       "name": "Shaeleigh Harrell",
       "ranking": 26,
       "division": "Naiset"
     },
     {
-      "ID": 50,
+      "id": 50,
       "name": "Kermit Sanchez",
       "ranking": 16,
       "division": "Miehet"
@@ -663,252 +663,252 @@
   ],
   "game":[
     {
-      "ID": 1,
+      "id": 1,
       "date": "15.4.2023",
       "division": "Naiset"
     },
     {
-      "ID": 2,
+      "id": 2,
       "date": "9.6.2022",
       "division": "Pojat"
     },
     {
-      "ID": 3,
+      "id": 3,
       "date": "24.11.2021",
       "division": "Miehet"
     },
     {
-      "ID": 4,
+      "id": 4,
       "date": "29.5.2023",
       "division": "Naiset"
     },
     {
-      "ID": 5,
+      "id": 5,
       "date": "12.3.2022",
       "division": "Naiset"
     },
     {
-      "ID": 6,
+      "id": 6,
       "date": "7.6.2022",
       "division": "Naiset"
     },
     {
-      "ID": 7,
+      "id": 7,
       "date": "24.8.2022",
       "division": "Pojat"
     },
     {
-      "ID": 8,
+      "id": 8,
       "date": "5.4.2022",
       "division": "Naiset"
     },
     {
-      "ID": 9,
+      "id": 9,
       "date": "14.3.2023",
       "division": "Pojat"
     },
     {
-      "ID": 10,
+      "id": 10,
       "date": "2.1.2023",
       "division": "Naiset"
     },
     {
-      "ID": 11,
+      "id": 11,
       "date": "1.8.2022",
       "division": "Miehet"
     },
     {
-      "ID": 12,
+      "id": 12,
       "date": "27.2.2022",
       "division": "Naiset"
     },
     {
-      "ID": 13,
+      "id": 13,
       "date": "17.11.2023",
       "division": "Naiset"
     },
     {
-      "ID": 14,
+      "id": 14,
       "date": "24.5.2023",
       "division": "Tytöt"
     },
     {
-      "ID": 15,
+      "id": 15,
       "date": "3.1.2022",
       "division": "Pojat"
     },
     {
-      "ID": 16,
+      "id": 16,
       "date": "9.12.2022",
       "division": "Miehet"
     },
     {
-      "ID": 17,
+      "id": 17,
       "date": "26.5.2023",
       "division": "Naiset"
     },
     {
-      "ID": 18,
+      "id": 18,
       "date": "25.3.2022",
       "division": "Pojat"
     },
     {
-      "ID": 19,
+      "id": 19,
       "date": "4.5.2022",
       "division": "Pojat"
     },
     {
-      "ID": 20,
+      "id": 20,
       "date": "21.11.2022",
       "division": "Pojat"
     },
     {
-      "ID": 21,
+      "id": 21,
       "date": "27.7.2022",
       "division": "Tytöt"
     },
     {
-      "ID": 22,
+      "id": 22,
       "date": "23.12.2021",
       "division": "Pojat"
     },
     {
-      "ID": 23,
+      "id": 23,
       "date": "29.9.2023",
       "division": "Naiset"
     },
     {
-      "ID": 24,
+      "id": 24,
       "date": "10.12.2021",
       "division": "Pojat"
     },
     {
-      "ID": 25,
+      "id": 25,
       "date": "23.11.2023",
       "division": "Pojat"
     },
     {
-      "ID": 26,
+      "id": 26,
       "date": "14.4.2023",
       "division": "Tytöt"
     },
     {
-      "ID": 27,
+      "id": 27,
       "date": "28.8.2022",
       "division": "Naiset"
     },
     {
-      "ID": 28,
+      "id": 28,
       "date": "8.1.2023",
       "division": "Naiset"
     },
     {
-      "ID": 29,
+      "id": 29,
       "date": "21.5.2022",
       "division": "Tytöt"
     },
     {
-      "ID": 30,
+      "id": 30,
       "date": "7.7.2023",
       "division": "Miehet"
     },
     {
-      "ID": 31,
+      "id": 31,
       "date": "14.10.2023",
       "division": "Pojat"
     },
     {
-      "ID": 32,
+      "id": 32,
       "date": "27.1.2022",
       "division": "Pojat"
     },
     {
-      "ID": 33,
+      "id": 33,
       "date": "25.7.2022",
       "division": "Naiset"
     },
     {
-      "ID": 34,
+      "id": 34,
       "date": "4.6.2022",
       "division": "Pojat"
     },
     {
-      "ID": 35,
+      "id": 35,
       "date": "24.9.2022",
       "division": "Naiset"
     },
     {
-      "ID": 36,
+      "id": 36,
       "date": "28.8.2023",
       "division": "Miehet"
     },
     {
-      "ID": 37,
+      "id": 37,
       "date": "18.11.2023",
       "division": "Pojat"
     },
     {
-      "ID": 38,
+      "id": 38,
       "date": "24.11.2021",
       "division": "Miehet"
     },
     {
-      "ID": 39,
+      "id": 39,
       "date": "20.7.2022",
       "division": "Pojat"
     },
     {
-      "ID": 40,
+      "id": 40,
       "date": "25.3.2022",
       "division": "Pojat"
     },
     {
-      "ID": 41,
+      "id": 41,
       "date": "5.1.2022",
       "division": "Miehet"
     },
     {
-      "ID": 42,
+      "id": 42,
       "date": "13.11.2022",
       "division": "Pojat"
     },
     {
-      "ID": 43,
+      "id": 43,
       "date": "27.5.2023",
       "division": "Tytöt"
     },
     {
-      "ID": 44,
+      "id": 44,
       "date": "30.1.2023",
       "division": "Tytöt"
     },
     {
-      "ID": 45,
+      "id": 45,
       "date": "22.11.2022",
       "division": "Pojat"
     },
     {
-      "ID": 46,
+      "id": 46,
       "date": "9.6.2022",
       "division": "Tytöt"
     },
     {
-      "ID": 47,
+      "id": 47,
       "date": "10.9.2022",
       "division": "Miehet"
     },
     {
-      "ID": 48,
+      "id": 48,
       "date": "28.11.2022",
       "division": "Tytöt"
     },
     {
-      "ID": 49,
+      "id": 49,
       "date": "14.11.2022",
       "division": "Tytöt"
     },
     {
-      "ID": 50,
+      "id": 50,
       "date": "21.5.2023",
       "division": "Miehet"
     }
