@@ -20,7 +20,7 @@ export const style = StyleSheet.create({
         top: 2
     },
 
-    //Otsikko Menulle ja "kiitos ilmoittautumisesta"
+    //Otsikko Menulle ja screenien otsikoille
     h4Style: { 
         color: Colors.darkText,
         fontSize: 34
@@ -175,6 +175,7 @@ export const style = StyleSheet.create({
         width: "90%",
         alignSelf: 'center',
         justifyContent: 'center',
+        borderRadius: 10
     },
 
     // SummaryEnrolmentScreen styles
