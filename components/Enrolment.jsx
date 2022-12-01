@@ -10,7 +10,7 @@ const dbGames = db.game;
 
 const backgroundImage = require('../assets/Volleyball1.jpg');
 
-function Enrolment({ navigation, navigation: { goBack } }) {
+function Enrolment({ navigation }) {
   const [search, setSearch] = useState('');
   const [playersToShow, setPlayersToShow] = useState([]);
   const [playersToEnroll, setPlayersToEnroll] = useState([]);
@@ -50,7 +50,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
       
           {/* Header: Go back -painike ja Menu */}
           <View style={style.header}>
-            <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+            <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
             <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
