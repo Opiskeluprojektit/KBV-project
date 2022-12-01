@@ -10,7 +10,7 @@ import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 const dbPlayers = db.player;
 const dbGames = db.game;
 
-function Points({ navigation: { goBack } }) {
+function Points({navigation}) {
   const [division, setDivision] = useState();
   const [divisionsExpanded, setDivisionsExpanded] = useState(false);
   const [gamesToShow, setGamesToShow] = useState(dbGames);
@@ -49,7 +49,8 @@ function Points({ navigation: { goBack } }) {
   return (
     <SafeAreaView>
       <View style={style.container}>
-        <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+        <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+        <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
         <Text style={style.h4Style}>Pisteiden syöttö</Text>
         <List.Section>
           <List.Accordion title={division ? division : "Sarja valikko"} expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>

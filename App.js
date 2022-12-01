@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator()
 
 function App() {
   return (
-  
+  <PaperProvider>
     <NavigationContainer>
     <Stack.Navigator initialRouteName="Code">
       <Stack.Screen name="Code" component={Code} options={{ headerShown: false }}/>
@@ -27,6 +27,7 @@ function App() {
       <Stack.Screen name="SummaryEnrolment" component={SummaryEnrolment} options={{ headerShown: false, presentation: 'modal' }}/>
     </Stack.Navigator>
     </NavigationContainer>
+    </PaperProvider>
   );
 }
 
