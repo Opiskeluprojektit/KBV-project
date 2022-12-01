@@ -62,68 +62,68 @@ function Enrolment({ navigation }) {
             <View style={style.contentOnLightBG}>
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
-                {/* Dropdown pelipäivän valinnalle */}
-                <Text style={style.text}>Valitse peli</Text>
-                <List.Section>
-                  <List.Accordion
-                    title={chosenGame ? chosenGame.division + " " + chosenGame.date : "Pelit"}
-                    style={style.search}
-                    expanded={gamesExpanded}
-                    onPress={() => setGamesExpanded(!gamesExpanded)} >
-                      
-                    {gameList}
-                  </List.Accordion>
-                </List.Section>
+              {/* Dropdown pelipäivän valinnalle */}
+              <Text style={style.text}>Valitse peli</Text>
+              <List.Section>
+                <List.Accordion
+                  title={chosenGame ? chosenGame.division + " " + chosenGame.date : "Pelit"}
+                  style={style.search}
+                  expanded={gamesExpanded}
+                  onPress={() => setGamesExpanded(!gamesExpanded)} >
+                    
+                  {gameList}
+                </List.Accordion>
+              </List.Section>
 
-                {/* FlatList pelaajan valinnalle */}
-                {chosenGame ? <><Text style={style.text}>Valitse pelaaja</Text>
-                  <TextInput
-                    label="Haku"
-                    value={search}
-                    style={style.search}
-                    onChangeText={text => executeSearch(text)}
-                    returnKeyType="search"
-                    onSubmitEditing={() => executeSearch(search)}
-                    placeholder="   Haku" 
-                  />
-                  <FlatList
-                    data={playersToShow}
-                    renderItem={renderItem}
-                    key={i => i.id}
-                  /></>
-                : null}         
-                
-                
-                {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,
-                eikä ole lisännyt peliä ja pelaajaa täytössä olevalle pelaajalle */}
-                {/* Päivitetään alla olevaan uusi tyyli iconille? */}
-                <View style={style.addPlayer}>
-                  <Pressable onPress={() => goBack()}>
-                    <View style={[style.iconsEllipse]}>
-                      <Icon.Plus style={style.icons}/>
-                    </View> 
-                    <Text style={style.text}>Lisää pelaaja</Text>
-                  </Pressable>
-                </View>
-
-                {/* Lisätään vaihtoehto pressebleen: yhdellä pelaajalla teksti "Ilmoittaudu",
-                kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
-                <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} 
-                  style={[style.enrolButton, style.button]}>
-                  <Text style={style.buttonText}>Ilmoittaudu</Text>
+              {/* FlatList pelaajan valinnalle */}
+              {chosenGame ? <><Text style={style.text}>Valitse pelaaja</Text>
+                <TextInput
+                  label="Haku"
+                  value={search}
+                  style={style.search}
+                  onChangeText={text => executeSearch(text)}
+                  returnKeyType="search"
+                  onSubmitEditing={() => executeSearch(search)}
+                  placeholder="   Haku" 
+                />
+                <FlatList
+                  data={playersToShow}
+                  renderItem={renderItem}
+                  key={i => i.id}
+                /></>
+              : null}         
+              
+              
+              {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,
+              eikä ole lisännyt peliä ja pelaajaa täytössä olevalle pelaajalle */}
+              {/* Päivitetään alla olevaan uusi tyyli iconille? */}
+              <View style={style.addPlayer}>
+                <Pressable style={{flexDirection: "row"}} onPress={() => console.log("pelaaja valittu")}>
+                  <View style={[style.iconsEllipse2]}>
+                    <Icon.Plus style={style.icons}/>
+                  </View> 
+                  <Text style={style.text}>Lisää pelaaja</Text>
                 </Pressable>
+              </View>
 
-                
+              {/* Lisätään vaihtoehto pressebleen: yhdellä pelaajalla teksti "Ilmoittaudu",
+              kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
+              <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} 
+                style={[style.enrolButton, style.button]}>
+                <Text style={style.buttonText}>Ilmoittaudu</Text>
+              </Pressable>
 
-                  {/* Tähän voi tehdä ennustetun lohkon, jos se tehdään */}
-  {/*               <View style={style.predictedRanking}>
-                <Text style={style.text}>Ennustettu lohko</Text>
-                  <Text style={style.text}>Pekka Pohjola</Text>
-                  <Text style={style.text}>Pekka Ojala</Text>
-                  <Text style={style.text}>Matti Meikäläinen</Text>
-                  <Text style={style.text}>Martti Meikäläinen</Text>
-                  <Text style={style.text}>Esa Esimerkki</Text>
-                </View> */}
+              
+
+                {/* Tähän voi tehdä ennustetun lohkon, jos se tehdään */}
+{/*               <View style={style.predictedRanking}>
+              <Text style={style.text}>Ennustettu lohko</Text>
+                <Text style={style.text}>Pekka Pohjola</Text>
+                <Text style={style.text}>Pekka Ojala</Text>
+                <Text style={style.text}>Matti Meikäläinen</Text>
+                <Text style={style.text}>Martti Meikäläinen</Text>
+                <Text style={style.text}>Esa Esimerkki</Text>
+              </View> */}
 
             </View>
           </View>
