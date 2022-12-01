@@ -27,7 +27,7 @@ function Points({ navigation: { goBack } }) {
     <SafeAreaView>
     <View style={style.container}>
       <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
-      
+      <Text style={style.h4Style}>Pisteiden syöttö</Text>
       <List.Section title="Sarja">
         <List.Accordion title="Sarja valikko" expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
           <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />

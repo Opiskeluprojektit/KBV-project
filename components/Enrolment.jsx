@@ -43,13 +43,13 @@ function Enrolment({ navigation, navigation: { goBack } }) {
   
   return (
     <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
-      <SafeAreaView style={style.container}>
+      <SafeAreaView>
       
 
           {/* Header: Go back -painike ja Menu */}
           <View style={style.header}>
-          <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
-          <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
+            <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+            <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
           {/* Alla oleva ScrollView ja sen aisapari kommenteissa,
@@ -57,64 +57,67 @@ function Enrolment({ navigation, navigation: { goBack } }) {
           Yritetään rakentaa näkymästä skrollattava, koska sitä se ei ole atm. */}
           {/* <ScrollView style={style.viewContainer}> */}
           <View style={style.viewContainer}>
-            <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
- 
-              {/* Dropdown pelipäivän valinnalle */}
-              <Text style={style.text}>Valitse peli</Text>
-              <List.Section>
-                <List.Accordion
-                  title={chosenGame ? chosenGame.division + " " + chosenGame.date : "Pelit"}
+            <View style={style.contentOnLightBG}>
+              <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
+  
+                {/* Dropdown pelipäivän valinnalle */}
+                <Text style={style.text}>Valitse peli</Text>
+                <List.Section>
+                  <List.Accordion
+                    title={chosenGame ? chosenGame.division + " " + chosenGame.date : "Pelit"}
+                    style={style.search}
+                    expanded={gamesExpanded}
+                    onPress={() => setGamesExpanded(!gamesExpanded)} >
+                      
+                    {gameList}
+                  </List.Accordion>
+                </List.Section>
+
+                {/* FlatList pelaajan valinnalle */} 
+                <Text style={style.text}>Valitse pelaaja</Text>
+                <TextInput
+                  label="Haku"
+                  value={search}
                   style={style.search}
-                  expanded={gamesExpanded}
-                  onPress={() => setGamesExpanded(!gamesExpanded)} >
-                    
-                  {gameList}
-                </List.Accordion>
-              </List.Section>
+                  onChangeText={text => executeSearch(text)}
+                  returnKeyType="search"
+                  onSubmitEditing={() => executeSearch(search)}
+                  placeholder="Haku" 
+                />
+                <FlatList
+                  data={playersToShow}
+                  renderItem={renderItem}
+                  key={i => i.id}
+                />
+                
+                
+                {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,
+                eikä ole lisännyt peliä ja pelaajaa täytössä olevalle pelaajalle */}
+                {/* Päivitetään alla olevaan uusi tyyli iconille? */}
+                <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.Plus style={[style.addPlayer]}/></View> 
+                <Text style={style.text}>Lisää pelaaja</Text></Pressable>
 
-              {/* FlatList pelaajan valinnalle */} 
-              <Text style={style.text}>Valitse pelaaja</Text>
-              <TextInput
-                label="Haku"
-                value={search}
-                style={style.search}
-                onChangeText={text => executeSearch(text)}
-                returnKeyType="search"
-                onSubmitEditing={() => executeSearch(search)}
-                placeholder="Haku" 
-              />
-              <FlatList
-                data={playersToShow}
-                renderItem={renderItem}
-                key={i => i.id}
-              />
-              
-              
-              {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,
-              eikä ole lisännyt peliä ja pelaajaa täytössä olevalle pelaajalle */}
-              {/* Päivitetään alla olevaan uusi tyyli iconille? */}
-              <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.Plus style={[style.addPlayer]}/></View> 
-              <Text style={style.text}>Lisää pelaaja</Text></Pressable>
+                {/* Lisätään vaihtoehto pressebleen: yhdellä pelaajalla teksti "Ilmoittaudu",
+                kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
+                <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} style={[style.enrolButton, style.button]}>
+                  <Text style={style.buttonText}>Ilmoittaudu</Text>
+                </Pressable>
 
-              {/* Lisätään vaihtoehto pressebleen: yhdellä pelaajalla teksti "Ilmoittaudu",
-              kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
-              <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} style={[style.enrolButton, style.button]}>
-                <Text style={style.buttonText}>Ilmoittaudu</Text>
-              </Pressable>
+                
 
-              
+                  {/* Tähän voi tehdä ennustetun lohkon, jos se tehdään */}
+  {/*               <View style={style.predictedRanking}>
+                <Text style={style.text}>Ennustettu lohko</Text>
+                  <Text style={style.text}>Pekka Pohjola</Text>
+                  <Text style={style.text}>Pekka Ojala</Text>
+                  <Text style={style.text}>Matti Meikäläinen</Text>
+                  <Text style={style.text}>Martti Meikäläinen</Text>
+                  <Text style={style.text}>Esa Esimerkki</Text>
+                </View> */}
 
-                {/* Tähän voi tehdä ennustetun lohkon, jos se tehdään */}
-{/*               <View style={style.predictedRanking}>
-              <Text style={style.text}>Ennustettu lohko</Text>
-                <Text style={style.text}>Pekka Pohjola</Text>
-                <Text style={style.text}>Pekka Ojala</Text>
-                <Text style={style.text}>Matti Meikäläinen</Text>
-                <Text style={style.text}>Martti Meikäläinen</Text>
-                <Text style={style.text}>Esa Esimerkki</Text>
-              </View> */}
+            {/* </ScrollView> */}
 
-          {/* </ScrollView> */}
+            </View>
           </View>
       </SafeAreaView>
     </ImageBackground>

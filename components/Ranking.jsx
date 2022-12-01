@@ -8,7 +8,7 @@ function Ranking({ navigation: { goBack } }) {
     <SafeAreaView>
     <View style={style.container}>
       <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
-      <Text>Ranking</Text>
+      <Text style={style.h4Style}>Ranking-listat</Text>
     </View>
     </SafeAreaView>
   )

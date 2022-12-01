@@ -9,7 +9,13 @@ export const style = StyleSheet.create({
     },
     header: {
         height: "10%",
-        marginTop: 24
+        marginTop: 24,
+    },
+
+    //Vaalea tausta Ilmo, pisteet ja ranking sivuilla
+    contentOnLightBG: {
+        marginLeft: 24,
+        marginRight: 24
     },
 
     // Hamburgermenu icon, koko on: width={42} height={40}, lisättävä erikseen
@@ -20,10 +26,12 @@ export const style = StyleSheet.create({
         top: 2
     },
 
-    //Otsikko Menulle ja screenien otsikoille
+    //Screenien otsikot
     h4Style: { 
         color: Colors.darkText,
-        fontSize: 34
+        fontSize: 34,
+        marginTop: 34,
+        marginBottom: 30
     },
 
     titles: {
@@ -227,6 +235,8 @@ export const style = StyleSheet.create({
     },
 
     menuContent: {
+        color: Colors.darkText,
+        fontSize: 34,
         marginBottom: 20
     }
 })
