@@ -36,7 +36,8 @@ function Enrolment({ navigation, navigation: { goBack } }) {
   const executeSearch = (search) => {
     setSearch(search);
     const searchArray = search.length > 0
-      ? db.player.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())
+      ? db.player.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()
+      && chosenGame.division == dbPlayers.division)
       ) : [];
     setPlayersToShow(searchArray);
   }
@@ -45,17 +46,12 @@ function Enrolment({ navigation, navigation: { goBack } }) {
     <ImageBackground source={backgroundImage}>
       <SafeAreaView>
       
-
           {/* Header: Go back -painike ja Menu */}
           <View style={style.header}>
             <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
             <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
-          {/* Alla oleva ScrollView ja sen aisapari kommenteissa,
-          koska ScrollView ja Flatlist ei tule toimeen. 
-          Yritetään rakentaa näkymästä skrollattava, koska sitä se ei ole atm. */}
-          {/* <ScrollView style={style.viewContainer}> */}
           <View style={style.viewContainer}>
             <View style={style.contentOnLightBG}>
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
@@ -121,8 +117,6 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                   <Text style={style.text}>Martti Meikäläinen</Text>
                   <Text style={style.text}>Esa Esimerkki</Text>
                 </View> */}
-
-            {/* </ScrollView> */}
 
             </View>
           </View>
