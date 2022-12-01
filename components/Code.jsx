@@ -1,9 +1,5 @@
 import React, {useState, useRef} from 'react';
-<<<<<<< HEAD
-import { Image, Text, Alert, StyleSheet, View, SafeAreaView, Pressable, Linking, ImageBackground, TextInput } from 'react-native';
-=======
 import { Text, StyleSheet, View, SafeAreaView, Pressable, Linking, ImageBackground, TextInput } from 'react-native';
->>>>>>> 7ba653db621502159ef877ebb72abb18ab9676b7
 import { style } from '../styles/styles';
 import CodeInput from 'react-native-code-textinput';
 
