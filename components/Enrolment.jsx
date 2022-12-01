@@ -56,7 +56,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
           koska ScrollView ja Flatlist ei tule toimeen. 
           Yritetään rakentaa näkymästä skrollattava, koska sitä se ei ole atm. */}
           {/* <ScrollView style={style.viewContainer}> */}
-          <View style={style.viewContainer}>
+          <ScrollView style={style.viewContainer}>
             <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
  
               {/* Dropdown pelipäivän valinnalle */}
@@ -115,7 +115,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
               </View> */}
 
           {/* </ScrollView> */}
-          </View>
+          </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

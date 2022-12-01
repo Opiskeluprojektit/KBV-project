@@ -180,6 +180,15 @@ export const style = StyleSheet.create({
 
     // SummaryEnrolmentScreen styles
 
+    summaryHeading: { 
+        color: Colors.darkText,
+        fontSize: 40,
+    },
+
+    summaryIcons: {
+        paddingRight: 27
+    }, 
+
     // CodeScreen styles
 
     codeButtons: {
