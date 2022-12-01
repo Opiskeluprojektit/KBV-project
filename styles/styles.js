@@ -172,6 +172,7 @@ export const style = StyleSheet.create({
 
     addPlayer: {
         flexDirection: "row",
+        
         //marginBottom: 24
     }, 
 
