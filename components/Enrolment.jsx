@@ -42,7 +42,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
   }
   
   return (
-    <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
+    <ImageBackground source={backgroundImage}>
       <SafeAreaView>
       
 

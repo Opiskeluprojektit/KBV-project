@@ -13,6 +13,14 @@ export const style = StyleSheet.create({
         marginRight: 24
     },
 
+    // Ilmoittautumisen, pisteiden syötön ja rankingin vaalea tausta
+    viewContainer: {
+        backgroundColor: Colors.backgroundColor,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        height: "90%"
+    }, 
+
     //Vaalea tausta Ilmo, pisteet ja ranking sivuilla
     contentOnLightBG: {
         marginLeft: 24,
@@ -86,13 +94,6 @@ export const style = StyleSheet.create({
         alignSelf: 'center'
     },
 
-    // Ilmoittautumisen, pisteiden syötön ja rankingin vaalea tausta
-    viewContainer: {
-        backgroundColor: Colors.backgroundColor,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        height: "90%"
-    }, 
 
     // Listojen ja hakujen tausta
     search: {
@@ -192,12 +193,19 @@ export const style = StyleSheet.create({
 
     // SummaryEnrolmentScreen styles
 
+    summaryContainer: {
+        marginLeft: 24
+    },
+
     summaryHeading: { 
         color: Colors.darkText,
         fontSize: 40,
+        marginTop: 34,
+        
     },
 
     summaryIcons: {
+        color: Colors.bodyText,
         paddingRight: 27
     }, 
 
