@@ -207,8 +207,18 @@ export const style = StyleSheet.create({
         flexDirection: "column",
         width: '95%',
         height: 72,
-        marginBottom: 15,
 
+
+    },
+
+    codeInputField: {
+        alignItems: 'center',
+        marginBottom: 30,
+    },
+
+    codeInputBox: {
+        backgroundColor: '#F9F9F9',
+        color: 'black',
     },
 
 
