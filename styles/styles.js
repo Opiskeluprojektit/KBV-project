@@ -107,9 +107,30 @@ export const style = StyleSheet.create({
 
     // CodeScreen styles
 
-    codeInputs: { // Näihin syötetään koodi, tarvii lisää määrittelyjä vielä
+    bigLogo: {
+        backgroundColor: Colors.primary,
+        borderRadius: 1000,
+        width: 160,
+        height: 160,
+        marginTop: 120,
+        marginBottom: 50,
+        alignSelf: 'center'
+    },
+
+    codeButtons: {
+        flexDirection: "column",
+        width: '90%',
+        height: 60
+    },
+
+    codeInputField: {
+        alignItems: 'center',
+        marginBottom: 30,
+    },
+
+    codeInputBox: {
         backgroundColor: Colors.inputColor,
-        position: "absolute",
+        color: Colors.bodyText,
         width: 50,
         height: 50,
         borderRadius: 1000,
@@ -120,6 +141,7 @@ export const style = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 4
     },
+
 
     // HomeScreen styles
 
@@ -208,27 +230,6 @@ export const style = StyleSheet.create({
         color: Colors.bodyText,
         paddingRight: 27
     }, 
-
-    // CodeScreen styles
-
-    codeButtons: {
-        flexDirection: "column",
-        width: '95%',
-        height: 72,
-
-
-    },
-
-    codeInputField: {
-        alignItems: 'center',
-        marginBottom: 30,
-    },
-
-    codeInputBox: {
-        backgroundColor: '#F9F9F9',
-        color: 'black',
-    },
-
 
     // PointsScreen styles
 
