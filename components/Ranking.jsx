@@ -8,6 +8,7 @@ function Ranking({navigation}) {
     <SafeAreaView>
     <View style={style.container}>
       <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+      <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
       <Text style={style.h4Style}>Ranking-listat</Text>
     </View>
     </SafeAreaView>
