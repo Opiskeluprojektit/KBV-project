@@ -15,7 +15,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
   const [playersToShow, setPlayersToShow] = useState([]);
   const [playersToEnroll, setPlayersToEnroll] = useState([]);
   const [chosenGame, setChosenGame] = useState();
-  const [gamesToShow, setGames] = useState(dbGames);
+  const [gamesToShow, setGamesToShow] = useState(dbGames);
   const [gamesExpanded, setGamesExpanded] = useState(false);
 
   const gameList = gamesToShow.map(i => <List.Item key={i.id} title={i.division + " " + i.date} onPress={() => selectGame(i)} />);
@@ -25,10 +25,12 @@ function Enrolment({ navigation, navigation: { goBack } }) {
     setChosenGame(i)
   }
   
+  //The component that the FlatList component uses to print it's items.
   const Item = ({ name }) => (
       <Text>{name}</Text>
   );
   
+  //The function that the FlatList component uses to print it's items.
   const renderItem = ({ item }) => (
     <Item name={item.name} />
   );
