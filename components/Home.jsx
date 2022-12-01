@@ -5,10 +5,10 @@ import * as Icon from "react-native-feather";
 
 export default function Home({navigation}) {
 
-  const backgroundImage = require('../assets/Volleyball1.jpg');
+  const backgroundImage = require('../assets/Volleyball50.png');
 
   return (
-    <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5, height: '100%', width: 800}}>
+    <ImageBackground source={backgroundImage} imageStyle={{height: '100%', width: 800}}>
       <SafeAreaView style={style.container}>
 
           <View style={style.header}>

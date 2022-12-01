@@ -37,12 +37,16 @@ function Enrolment({ navigation }) {
 
   const executeSearch = (search) => {
     setSearch(search);
-    const searchArray = search.length > 0
-      ? db.player.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()
-      && chosenGame.division == dbPlayers.division)
-      ) : [];
+    const searchArray =
+      search.length > 0
+        ? dbPlayers.filter(
+            (item) =>
+              item.name.toLowerCase().includes(search.toLowerCase()) &&
+              chosenGame.division === item.division
+          )
+        : [];
     setPlayersToShow(searchArray);
-  }
+  };
   
   return (
     <ImageBackground source={backgroundImage}>
@@ -71,22 +75,23 @@ function Enrolment({ navigation }) {
                   </List.Accordion>
                 </List.Section>
 
-                {/* FlatList pelaajan valinnalle */} 
-                <Text style={style.text}>Valitse pelaaja</Text>
-                <TextInput
-                  label="Haku"
-                  value={search}
-                  style={style.search}
-                  onChangeText={text => executeSearch(text)}
-                  returnKeyType="search"
-                  onSubmitEditing={() => executeSearch(search)}
-                  placeholder="   Haku" 
-                />
-                <FlatList
-                  data={playersToShow}
-                  renderItem={renderItem}
-                  key={i => i.id}
-                />
+                {/* FlatList pelaajan valinnalle */}
+                {chosenGame ? <><Text style={style.text}>Valitse pelaaja</Text>
+                  <TextInput
+                    label="Haku"
+                    value={search}
+                    style={style.search}
+                    onChangeText={text => executeSearch(text)}
+                    returnKeyType="search"
+                    onSubmitEditing={() => executeSearch(search)}
+                    placeholder="   Haku" 
+                  />
+                  <FlatList
+                    data={playersToShow}
+                    renderItem={renderItem}
+                    key={i => i.id}
+                  /></>
+                : null}         
                 
                 
                 {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,

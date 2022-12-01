@@ -19,17 +19,20 @@ function Points({navigation}) {
 
   useEffect(() => {
     gameList = mapGames();
-  }, gamesToShow)
+  }, [gamesToShow])
+
+  useEffect(() => {
+    filterGames();
+  }, [division])
   
   const filterGames = () => {
-    const newGamesToShow = dbGames.filter((i) => i.division !== division);
+    const newGamesToShow = dbGames.filter((i) => i.division === division);
     setGamesToShow(newGamesToShow);
   }
 
   const selectDivision = (div) => {
     setDivisionsExpanded(!divisionsExpanded);
     setDivision(div);
-    filterGames();
   }
 
   const selectGame = (game) => {
