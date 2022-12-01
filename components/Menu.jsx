@@ -19,7 +19,7 @@ function CustomMenu({ navigation: { goBack } }) {
         <Text style={style.menuContent}>Yhteytiedot 
           <Icon.ArrowUpRight style={style.menuIcons} width={32} height={32}/>
         </Text>
-        <Text> 
+        <Text style={style.menuContent}> 
           <Icon.Instagram style={style.someIcons} width={32} height={32}/> 
           <Icon.Facebook style={style.someIcons} width={32} height={32}/>
         </Text>

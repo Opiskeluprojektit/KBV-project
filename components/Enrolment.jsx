@@ -82,7 +82,7 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                   onChangeText={text => executeSearch(text)}
                   returnKeyType="search"
                   onSubmitEditing={() => executeSearch(search)}
-                  placeholder="Haku" 
+                  placeholder="   Haku" 
                 />
                 <FlatList
                   data={playersToShow}
@@ -94,12 +94,19 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                 {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,
                 eikä ole lisännyt peliä ja pelaajaa täytössä olevalle pelaajalle */}
                 {/* Päivitetään alla olevaan uusi tyyli iconille? */}
-                <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.Plus style={[style.addPlayer]}/></View> 
-                <Text style={style.text}>Lisää pelaaja</Text></Pressable>
+                <View style={style.addPlayer}>
+                  <Pressable onPress={() => goBack()}>
+                    <View style={[style.iconsEllipse]}>
+                      <Icon.Plus style={style.icons}/>
+                    </View> 
+                    <Text style={style.text}>Lisää pelaaja</Text>
+                  </Pressable>
+                </View>
 
                 {/* Lisätään vaihtoehto pressebleen: yhdellä pelaajalla teksti "Ilmoittaudu",
                 kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
-                <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} style={[style.enrolButton, style.button]}>
+                <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} 
+                  style={[style.enrolButton, style.button]}>
                   <Text style={style.buttonText}>Ilmoittaudu</Text>
                 </Pressable>
 
