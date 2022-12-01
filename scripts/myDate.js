@@ -1,3 +1,12 @@
+//First format  the date with this function
+
+export function formatDMYtoYMD(dateInDMY) {
+  //formats a DMY date joint by "." into YMD format join by ".".
+  let formattedDate = dateInDMY.split(".").reverse().join("/");
+  return formattedDate;
+}
+
+//Then you can get the week number from the date. By making a new MyDate and calling getWeek() passing the formatted date as a parameter.
 export class MyDate extends Date {
   getWeek = function() {
     var date = new Date(this.getTime());
@@ -10,10 +19,4 @@ export class MyDate extends Date {
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
                           - 3 + (week1.getDay() + 6) % 7) / 7);
   }
-}
-
-export function formatDMYtoYMD(dateInDMY) {
-  //formats a DMY date joint by "." into YMD format join by ".".
-  let formattedDate = dateInDMY.split(".").reverse().join(".");
-  return formattedDate;
 }

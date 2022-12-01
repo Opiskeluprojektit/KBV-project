@@ -4,12 +4,27 @@ import Colors from './colors';
 
 export const style = StyleSheet.create({
     container: {
-        height: "100%",
-        margin: 24
+        height: "100%"
     },
     header: {
         height: "10%",
-        marginTop: 24
+        marginTop: 34,
+        marginLeft: 24,
+        marginRight: 24
+    },
+
+    // Ilmoittautumisen, pisteiden syötön ja rankingin vaalea tausta
+    viewContainer: {
+        backgroundColor: Colors.backgroundColor,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        height: "90%"
+    }, 
+
+    //Vaalea tausta Ilmo, pisteet ja ranking sivuilla
+    contentOnLightBG: {
+        marginLeft: 24,
+        marginRight: 24
     },
 
     // Hamburgermenu icon, koko on: width={42} height={40}, lisättävä erikseen
@@ -20,10 +35,12 @@ export const style = StyleSheet.create({
         top: 2
     },
 
-    //Otsikko Menulle ja "kiitos ilmoittautumisesta"
+    //Screenien otsikot
     h4Style: { 
         color: Colors.darkText,
-        fontSize: 34
+        fontSize: 34,
+        marginTop: 34,
+        marginBottom: 30
     },
 
     titles: {
@@ -77,18 +94,13 @@ export const style = StyleSheet.create({
         alignSelf: 'center'
     },
 
-    // Ilmoittautumisen, pisteiden syötön ja rankingin vaalea tausta
-    viewContainer: {
-        backgroundColor: Colors.backgroundColor,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        height: "90%"
-    }, 
 
     // Listojen ja hakujen tausta
     search: {
         backgroundColor: Colors.inputColor,
-        height: 50
+        height: 50,
+        borderRadius: 10,
+        marginBottom: 20
     },
 
     // SplashScreen styles
@@ -130,17 +142,19 @@ export const style = StyleSheet.create({
         fontSize: 60,
         textAlign: 'left',
         lineHeight: 60,
-        marginTop: 20,
+        marginLeft: 24,
         //fontWeight: 500
     },
 
     homeButtonsContainer: {
-        height: "55%"
+        height: "55%",
+        marginLeft: 24,
+        marginRight: 24
     },
 
     homeButtons: {
         flexDirection: "column",
-        width: '95%',
+        width: '100%',
         height: 72,
         marginBottom: 15,
         borderTopRightRadius: 60,
@@ -157,16 +171,16 @@ export const style = StyleSheet.create({
     // EnrolmentScreen styles
 
     addPlayer: {
-        color: Colors.bodyText,
-        top: 12,
-        alignSelf: 'center'
+        flexDirection: "row",
+        //marginBottom: 24
     }, 
 
     enrolButton: {
-        flexDirection: "column",
+        //flexDirection: 'column',
+        //position: 'absolute',
         width: 230,
         height: 53,
-        marginBottom: 35
+        bottom: 0
     },
 
     predictedRanking: {
@@ -174,8 +188,46 @@ export const style = StyleSheet.create({
         width: "90%",
         alignSelf: 'center',
         justifyContent: 'center',
+        borderRadius: 10
     },
 
+    // SummaryEnrolmentScreen styles
+
+    summaryContainer: {
+        marginLeft: 24
+    },
+
+    summaryHeading: { 
+        color: Colors.darkText,
+        fontSize: 40,
+        marginTop: 34,
+        
+    },
+
+    summaryIcons: {
+        color: Colors.bodyText,
+        paddingRight: 27
+    }, 
+
+    // CodeScreen styles
+
+    codeButtons: {
+        flexDirection: "column",
+        width: '95%',
+        height: 72,
+
+
+    },
+
+    codeInputField: {
+        alignItems: 'center',
+        marginBottom: 30,
+    },
+
+    codeInputBox: {
+        backgroundColor: '#F9F9F9',
+        color: 'black',
+    },
 
 
     // PointsScreen styles
@@ -189,16 +241,26 @@ export const style = StyleSheet.create({
     },
 
     menuClose: {
-        color: Colors.bodyText,
+        color: Colors.darkText,
         alignSelf: 'flex-end',
-        marginBottom: 40
+        margin: 24
     },
 
     menuIcons: {
-        color: Colors.bodyText
+        color: Colors.darkText
+    },
+
+    someIcons: {
+        color: Colors.darkText,
+        marginRight: 10,
+        marginTop: 30
     },
 
     menuContent: {
-        marginBottom: 20
+        color: Colors.darkText,
+        fontSize: 34,
+        marginBottom: 20,
+        marginLeft: 24,
+        marginRight: 24
     }
 })

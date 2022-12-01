@@ -1,5 +1,5 @@
 import { SafeAreaView, Text, View, Pressable, Button } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List } from 'react-native-paper'
@@ -7,42 +7,59 @@ import { List } from 'react-native-paper'
 import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
-const division = ["Naiset", "Miehet", "Tytöt", "Pojat"];
-
-temp = formatDMYtoYMD("25.11.2022")
-pvm = new MyDate(temp)
-console.log(pvm.getWeek(), "skriää");
-//console.log(pvm.getWeek(), "Viikkonumero");
-
+const dbPlayers = db.player;
+const dbGames = db.game;
 
 function Points({ navigation: { goBack } }) {
-  const [division, setDivision] = useState("Naiset")
-  const [divisionsExpanded, setDivisionsExpanded] = useState(false)
+  const [division, setDivision] = useState();
+  const [divisionsExpanded, setDivisionsExpanded] = useState(false);
+  const [gamesToShow, setGamesToShow] = useState(dbGames);
+  const [chosenGame, setChosenGame] = useState();
+  const [gamesExpanded, setGamesExpanded] = useState(false);
 
-  console.log(division);
+  useEffect(() => {
+    gameList = mapGames();
+  }, gamesToShow)
+  
+  const filterGames = () => {
+    const newGamesToShow = dbGames.filter((i) => i.division !== division);
+    setGamesToShow(newGamesToShow);
+  }
 
   const selectDivision = (div) => {
-    //tähän vois laittaa pienen viiveen ja jonkun huomauttimen: "Sarja x valittu".
-    setDivisionsExpanded(!divisionsExpanded)
-    setDivision(div)
-    //console.log(pvm.getWeek(), "Viikkonumero");
+    setDivisionsExpanded(!divisionsExpanded);
+    setDivision(div);
+    filterGames();
   }
+
+  const selectGame = (game) => {
+    setGamesExpanded(!gamesExpanded)
+    setChosenGame(game)
+  }
+
+  const mapGames = () => {
+    return gamesToShow.map(i => <List.Item key={i.id} title={i.division + " " + i.date} onPress={() => selectGame(i)} />);
+  }
+
+  let gameList = mapGames();
 
   return (
     <SafeAreaView>
-    <View style={style.container}>
-      <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
-      
-      <List.Section title="Sarja">
-        <List.Accordion title="Sarja valikko" expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
-          <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
-          <List.Item title="Miehet" onPress={() => selectDivision("Miehet")} />
-          <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
-          <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
-        </List.Accordion>
-      </ List.Section>
-
-    </View>
+      <View style={style.container}>
+        <Pressable onPress={() => goBack()}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+        <Text style={style.h4Style}>Pisteiden syöttö</Text>
+        <List.Section>
+          <List.Accordion title={division ? division : "Sarja valikko"} expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
+            <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
+            <List.Item title="Miehet" onPress={() => selectDivision("Miehet")} />
+            <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
+            <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
+          </List.Accordion>
+          <List.Accordion title={chosenGame ? chosenGame.division + " " + chosenGame.date : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
+            {gameList}
+          </List.Accordion>
+        </ List.Section>
+      </View>
     </SafeAreaView>
   )
 }
