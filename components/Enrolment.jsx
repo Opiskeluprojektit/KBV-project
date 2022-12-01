@@ -10,7 +10,7 @@ const dbGames = db.game;
 
 const backgroundImage = require('../assets/Volleyball1.jpg');
 
-function Enrolment({ navigation, navigation: { goBack } }) {
+function Enrolment({ navigation }) {
   const [search, setSearch] = useState('');
   const [playersToShow, setPlayersToShow] = useState([]);
   const [playersToEnroll, setPlayersToEnroll] = useState([]);
@@ -37,27 +37,27 @@ function Enrolment({ navigation, navigation: { goBack } }) {
 
   const executeSearch = (search) => {
     setSearch(search);
-    const searchArray = search.length > 0
-      ? dbPlayers.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())
-      ) : [];
+    const searchArray =
+      search.length > 0
+        ? dbPlayers.filter(
+            (item) =>
+              item.name.toLowerCase().includes(search.toLowerCase()) &&
+              chosenGame.division === item.division
+          )
+        : [];
     setPlayersToShow(searchArray);
-  }
+  };
   
   return (
     <ImageBackground source={backgroundImage}>
       <SafeAreaView>
       
-
           {/* Header: Go back -painike ja Menu */}
           <View style={style.header}>
-            <Pressable onPress={() => goBack()}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+            <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
             <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
-          {/* Alla oleva ScrollView ja sen aisapari kommenteissa,
-          koska ScrollView ja Flatlist ei tule toimeen. 
-          Yritetään rakentaa näkymästä skrollattava, koska sitä se ei ole atm. */}
-          {/* <ScrollView style={style.viewContainer}> */}
           <View style={style.viewContainer}>
             <View style={style.contentOnLightBG}>
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
@@ -75,22 +75,23 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                   </List.Accordion>
                 </List.Section>
 
-                {/* FlatList pelaajan valinnalle */} 
-                <Text style={style.text}>Valitse pelaaja</Text>
-                <TextInput
-                  label="Haku"
-                  value={search}
-                  style={style.search}
-                  onChangeText={text => executeSearch(text)}
-                  returnKeyType="search"
-                  onSubmitEditing={() => executeSearch(search)}
-                  placeholder="   Haku" 
-                />
-                <FlatList
-                  data={playersToShow}
-                  renderItem={renderItem}
-                  key={i => i.id}
-                />
+                {/* FlatList pelaajan valinnalle */}
+                {chosenGame ? <><Text style={style.text}>Valitse pelaaja</Text>
+                  <TextInput
+                    label="Haku"
+                    value={search}
+                    style={style.search}
+                    onChangeText={text => executeSearch(text)}
+                    returnKeyType="search"
+                    onSubmitEditing={() => executeSearch(search)}
+                    placeholder="   Haku" 
+                  />
+                  <FlatList
+                    data={playersToShow}
+                    renderItem={renderItem}
+                    key={i => i.id}
+                  /></>
+                : null}         
                 
                 
                 {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,
@@ -123,8 +124,6 @@ function Enrolment({ navigation, navigation: { goBack } }) {
                   <Text style={style.text}>Martti Meikäläinen</Text>
                   <Text style={style.text}>Esa Esimerkki</Text>
                 </View> */}
-
-            {/* </ScrollView> */}
 
             </View>
           </View>
