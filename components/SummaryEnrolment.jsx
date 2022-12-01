@@ -14,7 +14,7 @@ function SummaryEnrolment({ navigation }) {
           <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.X style={[style.icons]}/></View></Pressable>
         </View>
 
-        <View>
+        <View style={style.summaryContainer}>
           <Text style={style.summaryHeading}>Kiitos ilmoittautumisestasi!</Text>
           <Text style={style.titles}>ViikkoBiitsi</Text>
           <Text>Kokkola Camping biitsikenttä</Text>
