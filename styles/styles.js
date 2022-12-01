@@ -186,7 +186,8 @@ export const style = StyleSheet.create({
         height: 72,
         marginBottom: 15,
 
-     },
+    },
+
 
     // PointsScreen styles
 
