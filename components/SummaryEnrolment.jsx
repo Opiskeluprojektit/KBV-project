@@ -15,15 +15,15 @@ function SummaryEnrolment({ navigation }) {
         </View>
 
         <View>
-          <Text style={style.h4Style}>Kiitos ilmoittautumisestasi!</Text>
-          <Text>ViikkoBiitsi miehet</Text>
+          <Text style={style.summaryHeading}>Kiitos ilmoittautumisestasi!</Text>
+          <Text style={style.titles}>ViikkoBiitsi</Text>
           <Text>Kokkola Camping biitsikenttä</Text>
           <Text>
-          {/* <View><Icon.Vector/></View> */}
+          <Icon.Clock style={style.summaryIcons}/>
             Torstai ViikkoBiitsi miehet
           </Text>
           <Text>
-            {/* <Icon.Users style={style.menuClose}/> */}
+          <Icon.Users style={style.summaryIcons}/>
             Pekka Pohjola, Pekka Ojala
           </Text>
         </View>
