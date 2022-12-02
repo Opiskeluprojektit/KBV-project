@@ -8,12 +8,17 @@ import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
 const dbPlayers = db.player;
-const dbGames = db.game;
+const dbGames = JSON.parse(JSON.stringify(db.game));
+const formattedDbGames = dbGames.map(i => {i.date = new MyDate(formatDMYtoYMD(i.date)); return i});
+const filteredDbGames = dbGames.filter(i => i.date >= new Date())
+
+const sortedDbGames = filteredDbGames.sort((a, b) => a.date - b.date)
+
 
 function Points({navigation}) {
   const [division, setDivision] = useState();
   const [divisionsExpanded, setDivisionsExpanded] = useState(false);
-  const [gamesToShow, setGamesToShow] = useState(dbGames);
+  const [gamesToShow, setGamesToShow] = useState(sortedDbGames);
   const [chosenGame, setChosenGame] = useState();
   const [gamesExpanded, setGamesExpanded] = useState(false);
 
@@ -26,7 +31,7 @@ function Points({navigation}) {
   }, [division])
   
   const filterGames = () => {
-    const newGamesToShow = dbGames.filter((i) => i.division === division);
+    const newGamesToShow = sortedDbGames.filter((i) => i.division === division);
     setGamesToShow(newGamesToShow);
   }
 
@@ -40,8 +45,12 @@ function Points({navigation}) {
     setChosenGame(game)
   }
 
+  const getGameTitle = (i) => {
+    return i.division + " " + (i.date.getDate() + 1) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
+  }
+
   const mapGames = () => {
-    return gamesToShow.map(i => <List.Item key={i.id} title={i.division + " " + i.date} onPress={() => selectGame(i)} />);
+    return gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
   }
 
   let gameList = mapGames();
@@ -59,7 +68,7 @@ function Points({navigation}) {
             <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
             <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
           </List.Accordion>
-          <List.Accordion title={chosenGame ? chosenGame.division + " " + chosenGame.date : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
+          <List.Accordion title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
             {gameList}
           </List.Accordion>
         </ List.Section>
