@@ -12,13 +12,14 @@ function Code({navigation}) {
 
     const backgroundImage = require('../assets/Volleyball50.png');
 
-    const [code, setCode] = useState('');
+    const [code, setCode] = useState('1234');
     
     const password = 1234;
 
+    console.log(password)
+
     function checkCode() {
       if (code == password) {
-        console.log(code)
         navigation.navigate('Home')
       }else {
         Alert.alert (
@@ -36,7 +37,7 @@ function Code({navigation}) {
           <View style={style.codeInputField}>
             <CodeInput 
               codeSize={4} 
-              value={code}
+              value={1234}
               onValueChange={setCode}
               inputStyle={style.codeInputBox} 
              >
