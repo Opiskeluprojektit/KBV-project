@@ -5,8 +5,8 @@ import * as Icon from "react-native-feather";
 import { List } from 'react-native-paper';
 import db from '../assets/testidata.json';
 
-const dbPlayers = db.player;
-const dbGames = db.game;
+const dbPlayers = JSON.parse(JSON.stringify(db.player));
+const dbGames = JSON.parse(JSON.stringify(db.game));
 
 const backgroundImage = require('../assets/Volleyball1.jpg');
 

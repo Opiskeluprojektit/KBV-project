@@ -6,7 +6,8 @@ export function formatDMYtoYMD(dateInDMY) {
   return formattedDate;
 }
 
-export function sortByDate() {
+//Define a custom non-enumerable sortBy function using a Schwartzian transform on all arrays :
+/* export function sortByDate() {
   if (typeof Object.defineProperty === 'function'){
     try{Object.defineProperty(Array.prototype,'sortBy',{value:sb}); }catch(e){}
   }
@@ -28,7 +29,7 @@ export function sortByDate() {
     }
     return this;
   }
-}
+} */
 
 //Then you can get the week number from the date. By making a new MyDate and calling getWeek() passing the formatted date as a parameter.
 export class MyDate extends Date {

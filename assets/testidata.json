@@ -10,353 +10,353 @@
   "placement":[
     {
       "id": 1,
-      "peli_id": 1,
+      "game_id": 1,
       "summa": -3,
       "sijoitus_pisteet": 16.57,
-      "pelaaja_id": 1
+      "player_id": 1
     },
     {
       "id": 2,
-      "peli_id": 2,
+      "game_id": 2,
       "summa": 1,
       "sijoitus_pisteet": 18.28,
-      "pelaaja_id": 2
+      "player_id": 2
     },
     {
       "id": 3,
-      "peli_id": 3,
+      "game_id": 3,
       "summa": 2,
       "sijoitus_pisteet": 14.15,
-      "pelaaja_id": 3
+      "player_id": 3
     },
     {
       "id": 4,
-      "peli_id": 4,
+      "game_id": 4,
       "summa": 5,
       "sijoitus_pisteet": 21.67,
-      "pelaaja_id": 4
+      "player_id": 4
     },
     {
       "id": 5,
-      "peli_id": 5,
+      "game_id": 5,
       "summa": 5,
       "sijoitus_pisteet": 18.08,
-      "pelaaja_id": 5
+      "player_id": 5
     },
     {
       "id": 6,
-      "peli_id": 6,
+      "game_id": 6,
       "summa": 1,
       "sijoitus_pisteet": 19.60,
-      "pelaaja_id": 6
+      "player_id": 6
     },
     {
       "id": 7,
-      "peli_id": 7,
+      "game_id": 7,
       "summa": -4,
       "sijoitus_pisteet": 19.89,
-      "pelaaja_id": 7
+      "player_id": 7
     },
     {
       "id": 8,
-      "peli_id": 8,
+      "game_id": 8,
       "summa": -1,
       "sijoitus_pisteet": 21.88,
-      "pelaaja_id": 8
+      "player_id": 8
     },
     {
       "id": 9,
-      "peli_id": 9,
+      "game_id": 9,
       "summa": -0,
       "sijoitus_pisteet": 20.72,
-      "pelaaja_id": 9
+      "player_id": 9
     },
     {
       "id": 10,
-      "peli_id": 10,
+      "game_id": 10,
       "summa": 6,
       "sijoitus_pisteet": 18.76,
-      "pelaaja_id": 10
+      "player_id": 10
     },
     {
       "id": 11,
-      "peli_id": 11,
+      "game_id": 11,
       "summa": 4,
       "sijoitus_pisteet": 18.78,
-      "pelaaja_id": 11
+      "player_id": 11
     },
     {
       "id": 12,
-      "peli_id": 12,
+      "game_id": 12,
       "summa": -2,
       "sijoitus_pisteet": 19.05,
-      "pelaaja_id": 12
+      "player_id": 12
     },
     {
       "id": 13,
-      "peli_id": 13,
+      "game_id": 13,
       "summa": 3,
       "sijoitus_pisteet": 15.95,
-      "pelaaja_id": 13
+      "player_id": 13
     },
     {
       "id": 14,
-      "peli_id": 14,
+      "game_id": 14,
       "summa": 6,
       "sijoitus_pisteet": 20.66,
-      "pelaaja_id": 14
+      "player_id": 14
     },
     {
       "id": 15,
-      "peli_id": 15,
+      "game_id": 15,
       "summa": -1,
       "sijoitus_pisteet": 23.14,
-      "pelaaja_id": 15
+      "player_id": 15
     },
     {
       "id": 16,
-      "peli_id": 16,
+      "game_id": 16,
       "summa": 2,
       "sijoitus_pisteet": 21.36,
-      "pelaaja_id": 16
+      "player_id": 16
     },
     {
       "id": 17,
-      "peli_id": 17,
+      "game_id": 17,
       "summa": 2,
       "sijoitus_pisteet": 21.03,
-      "pelaaja_id": 17
+      "player_id": 17
     },
     {
       "id": 18,
-      "peli_id": 18,
+      "game_id": 18,
       "summa": 6,
       "sijoitus_pisteet": 16.78,
-      "pelaaja_id": 18
+      "player_id": 18
     },
     {
       "id": 19,
-      "peli_id": 19,
+      "game_id": 19,
       "summa": -2,
       "sijoitus_pisteet": 17.48,
-      "pelaaja_id": 19
+      "player_id": 19
     },
     {
       "id": 20,
-      "peli_id": 20,
+      "game_id": 20,
       "summa": 5,
       "sijoitus_pisteet": 15.75,
-      "pelaaja_id": 20
+      "player_id": 20
     },
     {
       "id": 21,
-      "peli_id": 21,
+      "game_id": 21,
       "summa": -2,
       "sijoitus_pisteet": 17.59,
-      "pelaaja_id": 21
+      "player_id": 21
     },
     {
       "id": 22,
-      "peli_id": 22,
+      "game_id": 22,
       "summa": 4,
       "sijoitus_pisteet": 18.29,
-      "pelaaja_id": 22
+      "player_id": 22
     },
     {
       "id": 23,
-      "peli_id": 23,
+      "game_id": 23,
       "summa": 3,
       "sijoitus_pisteet": 20.24,
-      "pelaaja_id": 23
+      "player_id": 23
     },
     {
       "id": 24,
-      "peli_id": 24,
+      "game_id": 24,
       "summa": 3,
       "sijoitus_pisteet": 27.07,
-      "pelaaja_id": 24
+      "player_id": 24
     },
     {
       "id": 25,
-      "peli_id": 25,
+      "game_id": 25,
       "summa": 1,
       "sijoitus_pisteet": 16.46,
-      "pelaaja_id": 25
+      "player_id": 25
     },
     {
       "id": 26,
-      "peli_id": 26,
+      "game_id": 26,
       "summa": 2,
       "sijoitus_pisteet": 19.13,
-      "pelaaja_id": 26
+      "player_id": 26
     },
     {
       "id": 27,
-      "peli_id": 27,
+      "game_id": 27,
       "summa": 1,
       "sijoitus_pisteet": 22.51,
-      "pelaaja_id": 27
+      "player_id": 27
     },
     {
       "id": 28,
-      "peli_id": 28,
+      "game_id": 28,
       "summa": 5,
       "sijoitus_pisteet": 18.79,
-      "pelaaja_id": 28
+      "player_id": 28
     },
     {
       "id": 29,
-      "peli_id": 29,
+      "game_id": 29,
       "summa": 3,
       "sijoitus_pisteet": 21.71,
-      "pelaaja_id": 29
+      "player_id": 29
     },
     {
       "id": 30,
-      "peli_id": 30,
+      "game_id": 30,
       "summa": -0,
       "sijoitus_pisteet": 18.39,
-      "pelaaja_id": 30
+      "player_id": 30
     },
     {
       "id": 31,
-      "peli_id": 31,
+      "game_id": 31,
       "summa": 2,
       "sijoitus_pisteet": 22.46,
-      "pelaaja_id": 31
+      "player_id": 31
     },
     {
       "id": 32,
-      "peli_id": 32,
+      "game_id": 32,
       "summa": 5,
       "sijoitus_pisteet": 18.79,
-      "pelaaja_id": 32
+      "player_id": 32
     },
     {
       "id": 33,
-      "peli_id": 33,
+      "game_id": 33,
       "summa": 2,
       "sijoitus_pisteet": 13.96,
-      "pelaaja_id": 33
+      "player_id": 33
     },
     {
       "id": 34,
-      "peli_id": 34,
+      "game_id": 34,
       "summa": 2,
       "sijoitus_pisteet": 22.43,
-      "pelaaja_id": 34
+      "player_id": 34
     },
     {
       "id": 35,
-      "peli_id": 35,
+      "game_id": 35,
       "summa": 3,
       "sijoitus_pisteet": 19.55,
-      "pelaaja_id": 35
+      "player_id": 35
     },
     {
       "id": 36,
-      "peli_id": 36,
+      "game_id": 36,
       "summa": 1,
       "sijoitus_pisteet": 17.99,
-      "pelaaja_id": 36
+      "player_id": 36
     },
     {
       "id": 37,
-      "peli_id": 37,
+      "game_id": 37,
       "summa": -0,
       "sijoitus_pisteet": 14.14,
-      "pelaaja_id": 37
+      "player_id": 37
     },
     {
       "id": 38,
-      "peli_id": 38,
+      "game_id": 38,
       "summa": -0,
       "sijoitus_pisteet": 18.72,
-      "pelaaja_id": 38
+      "player_id": 38
     },
     {
       "id": 39,
-      "peli_id": 39,
+      "game_id": 39,
       "summa": 1,
       "sijoitus_pisteet": 21.90,
-      "pelaaja_id": 39
+      "player_id": 39
     },
     {
       "id": 40,
-      "peli_id": 40,
+      "game_id": 40,
       "summa": 2,
       "sijoitus_pisteet": 17.94,
-      "pelaaja_id": 40
+      "player_id": 40
     },
     {
       "id": 41,
-      "peli_id": 41,
+      "game_id": 41,
       "summa": 2,
       "sijoitus_pisteet": 18.89,
-      "pelaaja_id": 41
+      "player_id": 41
     },
     {
       "id": 42,
-      "peli_id": 42,
+      "game_id": 42,
       "summa": 3,
       "sijoitus_pisteet": 23.45,
-      "pelaaja_id": 42
+      "player_id": 42
     },
     {
       "id": 43,
-      "peli_id": 43,
+      "game_id": 43,
       "summa": -1,
       "sijoitus_pisteet": 16.78,
-      "pelaaja_id": 43
+      "player_id": 43
     },
     {
       "id": 44,
-      "peli_id": 44,
+      "game_id": 44,
       "summa": 5,
       "sijoitus_pisteet": 19.27,
-      "pelaaja_id": 44
+      "player_id": 44
     },
     {
       "id": 45,
-      "peli_id": 45,
+      "game_id": 45,
       "summa": 1,
       "sijoitus_pisteet": 18.02,
-      "pelaaja_id": 45
+      "player_id": 45
     },
     {
       "id": 46,
-      "peli_id": 46,
+      "game_id": 46,
       "summa": 4,
       "sijoitus_pisteet": 17.77,
-      "pelaaja_id": 46
+      "player_id": 46
     },
     {
       "id": 47,
-      "peli_id": 47,
+      "game_id": 47,
       "summa": 5,
       "sijoitus_pisteet": 14.69,
-      "pelaaja_id": 47
+      "player_id": 47
     },
     {
       "id": 48,
-      "peli_id": 48,
+      "game_id": 48,
       "summa": 4,
       "sijoitus_pisteet": 20.62,
-      "pelaaja_id": 48
+      "player_id": 48
     },
     {
       "id": 49,
-      "peli_id": 49,
+      "game_id": 49,
       "summa": 3,
       "sijoitus_pisteet": 17.49,
-      "pelaaja_id": 49
+      "player_id": 49
     },
     {
       "id": 50,
-      "peli_id": 50,
+      "game_id": 50,
       "summa": 0,
       "sijoitus_pisteet": 18.80,
-      "pelaaja_id": 50
+      "player_id": 50
     }
   ],
   "player":[
@@ -916,253 +916,253 @@
   "enrolment":[
     {
       "id": 1,
-      "peli_id": 3,
-      "pelaaja_id": 1
+      "game_id": 3,
+      "player_id": 1
     },
     {
       "id": 2,
-      "peli_id": 4,
-      "pelaaja_id": 2
+      "game_id": 4,
+      "player_id": 2
     },
     {
       "id": 3,
-      "peli_id": 4,
-      "pelaaja_id": 3
+      "game_id": 4,
+      "player_id": 3
     },
     {
       "id": 4,
-      "peli_id": 10,
-      "pelaaja_id": 4
+      "game_id": 10,
+      "player_id": 4
     },
     {
       "id": 5,
-      "peli_id": 4,
-      "pelaaja_id": 5
+      "game_id": 4,
+      "player_id": 5
     },
     {
       "id": 6,
-      "peli_id": 3,
-      "pelaaja_id": 6
+      "game_id": 10,
+      "player_id": 6
     },
     {
       "id": 7,
-      "peli_id": 9,
-      "pelaaja_id": 7
+      "game_id": 10,
+      "player_id": 7
     },
     {
       "id": 8,
-      "peli_id": 2,
-      "pelaaja_id": 8
+      "game_id": 10,
+      "player_id": 8
     },
     {
       "id": 9,
-      "peli_id": 10,
-      "pelaaja_id": 9
+      "game_id": 10,
+      "player_id": 9
     },
     {
       "id": 10,
-      "peli_id": 8,
-      "pelaaja_id": 10
+      "game_id": 10,
+      "player_id": 10
     },
     {
       "id": 11,
-      "peli_id": 3,
-      "pelaaja_id": 11
+      "game_id": 10,
+      "player_id": 11
     },
     {
       "id": 12,
-      "peli_id": 6,
-      "pelaaja_id": 12
+      "game_id": 10,
+      "player_id": 12
     },
     {
       "id": 13,
-      "peli_id": 10,
-      "pelaaja_id": 13
+      "game_id": 10,
+      "player_id": 13
     },
     {
       "id": 14,
-      "peli_id": 3,
-      "pelaaja_id": 14
+      "game_id": 3,
+      "player_id": 14
     },
     {
       "id": 15,
-      "peli_id": 2,
-      "pelaaja_id": 15
+      "game_id": 2,
+      "player_id": 15
     },
     {
       "id": 16,
-      "peli_id": 9,
-      "pelaaja_id": 16
+      "game_id": 9,
+      "player_id": 16
     },
     {
       "id": 17,
-      "peli_id": 5,
-      "pelaaja_id": 17
+      "game_id": 5,
+      "player_id": 17
     },
     {
       "id": 18,
-      "peli_id": 6,
-      "pelaaja_id": 18
+      "game_id": 6,
+      "player_id": 18
     },
     {
       "id": 19,
-      "peli_id": 8,
-      "pelaaja_id": 19
+      "game_id": 8,
+      "player_id": 19
     },
     {
       "id": 20,
-      "peli_id": 5,
-      "pelaaja_id": 20
+      "game_id": 5,
+      "player_id": 20
     },
     {
       "id": 21,
-      "peli_id": 2,
-      "pelaaja_id": 21
+      "game_id": 2,
+      "player_id": 21
     },
     {
       "id": 22,
-      "peli_id": 4,
-      "pelaaja_id": 22
+      "game_id": 4,
+      "player_id": 22
     },
     {
       "id": 23,
-      "peli_id": 6,
-      "pelaaja_id": 23
+      "game_id": 6,
+      "player_id": 23
     },
     {
       "id": 24,
-      "peli_id": 5,
-      "pelaaja_id": 24
+      "game_id": 5,
+      "player_id": 24
     },
     {
       "id": 25,
-      "peli_id": 1,
-      "pelaaja_id": 25
+      "game_id": 1,
+      "player_id": 25
     },
     {
       "id": 26,
-      "peli_id": 3,
-      "pelaaja_id": 26
+      "game_id": 3,
+      "player_id": 26
     },
     {
       "id": 27,
-      "peli_id": 5,
-      "pelaaja_id": 27
+      "game_id": 5,
+      "player_id": 27
     },
     {
       "id": 28,
-      "peli_id": 9,
-      "pelaaja_id": 28
+      "game_id": 9,
+      "player_id": 28
     },
     {
       "id": 29,
-      "peli_id": 8,
-      "pelaaja_id": 29
+      "game_id": 8,
+      "player_id": 29
     },
     {
       "id": 30,
-      "peli_id": 6,
-      "pelaaja_id": 30
+      "game_id": 6,
+      "player_id": 30
     },
     {
       "id": 31,
-      "peli_id": 6,
-      "pelaaja_id": 31
+      "game_id": 6,
+      "player_id": 31
     },
     {
       "id": 32,
-      "peli_id": 3,
-      "pelaaja_id": 32
+      "game_id": 3,
+      "player_id": 32
     },
     {
       "id": 33,
-      "peli_id": 6,
-      "pelaaja_id": 33
+      "game_id": 6,
+      "player_id": 33
     },
     {
       "id": 34,
-      "peli_id": 7,
-      "pelaaja_id": 34
+      "game_id": 7,
+      "player_id": 34
     },
     {
       "id": 35,
-      "peli_id": 7,
-      "pelaaja_id": 35
+      "game_id": 7,
+      "player_id": 35
     },
     {
       "id": 36,
-      "peli_id": 3,
-      "pelaaja_id": 36
+      "game_id": 3,
+      "player_id": 36
     },
     {
       "id": 37,
-      "peli_id": 3,
-      "pelaaja_id": 37
+      "game_id": 3,
+      "player_id": 37
     },
     {
       "id": 38,
-      "peli_id": 1,
-      "pelaaja_id": 38
+      "game_id": 1,
+      "player_id": 38
     },
     {
       "id": 39,
-      "peli_id": 6,
-      "pelaaja_id": 39
+      "game_id": 6,
+      "player_id": 39
     },
     {
       "id": 40,
-      "peli_id": 4,
-      "pelaaja_id": 40
+      "game_id": 4,
+      "player_id": 40
     },
     {
       "id": 41,
-      "peli_id": 6,
-      "pelaaja_id": 41
+      "game_id": 6,
+      "player_id": 41
     },
     {
       "id": 42,
-      "peli_id": 5,
-      "pelaaja_id": 42
+      "game_id": 5,
+      "player_id": 42
     },
     {
       "id": 43,
-      "peli_id": 6,
-      "pelaaja_id": 43
+      "game_id": 6,
+      "player_id": 43
     },
     {
       "id": 44,
-      "peli_id": 7,
-      "pelaaja_id": 44
+      "game_id": 7,
+      "player_id": 44
     },
     {
       "id": 45,
-      "peli_id": 8,
-      "pelaaja_id": 45
+      "game_id": 8,
+      "player_id": 45
     },
     {
       "id": 46,
-      "peli_id": 1,
-      "pelaaja_id": 46
+      "game_id": 1,
+      "player_id": 46
     },
     {
       "id": 47,
-      "peli_id": 8,
-      "pelaaja_id": 47
+      "game_id": 8,
+      "player_id": 47
     },
     {
       "id": 48,
-      "peli_id": 4,
-      "pelaaja_id": 48
+      "game_id": 4,
+      "player_id": 48
     },
     {
       "id": 49,
-      "peli_id": 8,
-      "pelaaja_id": 49
+      "game_id": 8,
+      "player_id": 49
     },
     {
       "id": 50,
-      "peli_id": 2,
-      "pelaaja_id": 50
+      "game_id": 2,
+      "player_id": 50
     }
   ]
 }

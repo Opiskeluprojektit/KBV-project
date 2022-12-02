@@ -16,7 +16,7 @@ function Code({navigation}) {
     
     const password = 1234;
 
-    console.log(password)
+    //console.log(password)
 
     function checkCode() {
       if (code == password) {

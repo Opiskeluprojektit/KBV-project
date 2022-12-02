@@ -7,13 +7,16 @@ import { List } from 'react-native-paper'
 import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
-const dbPlayers = db.player;
-const dbGames = JSON.parse(JSON.stringify(db.game));
-const formattedDbGames = dbGames.map(i => {i.date = new MyDate(formatDMYtoYMD(i.date)); return i});
-const filteredDbGames = dbGames.filter(i => i.date >= new Date())
-
-const sortedDbGames = filteredDbGames.sort((a, b) => a.date - b.date)
-
+//Make deep copies of players, enrolments and games from the database.
+const dbPlayers = JSON.parse(JSON.stringify(db.player));
+const dbEnrolments = JSON.parse(JSON.stringify(db.enrolment));
+const sortedDbGames = JSON.parse(JSON.stringify(db.game))
+  .map((i) => {
+    i.date = new MyDate(formatDMYtoYMD(i.date));
+    return i;
+  })
+  .filter((i) => i.date >= new Date())
+  .sort((a, b) => a.date - b.date);
 
 function Points({navigation}) {
   const [division, setDivision] = useState();
@@ -21,6 +24,8 @@ function Points({navigation}) {
   const [gamesToShow, setGamesToShow] = useState(sortedDbGames);
   const [chosenGame, setChosenGame] = useState();
   const [gamesExpanded, setGamesExpanded] = useState(false);
+  const [enrolledPlayers, setEnrolledPlayers] = useState();
+  const [groups, setGroups] = useState();
 
   useEffect(() => {
     gameList = mapGames();
@@ -30,14 +35,19 @@ function Points({navigation}) {
     filterGames();
   }, [division])
   
-  const filterGames = () => {
-    const newGamesToShow = sortedDbGames.filter((i) => i.division === division);
-    setGamesToShow(newGamesToShow);
-  }
+  useEffect(() => {
+    filterEnrolments()
+  }, [chosenGame])
+  
 
   const selectDivision = (div) => {
     setDivisionsExpanded(!divisionsExpanded);
     setDivision(div);
+  }
+  
+  const filterGames = () => {
+    const newGamesToShow = sortedDbGames.filter((i) => i.division === division);
+    setGamesToShow(newGamesToShow);
   }
 
   const selectGame = (game) => {
@@ -52,6 +62,30 @@ function Points({navigation}) {
   const mapGames = () => {
     return gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
   }
+
+  const filterEnrolments = () => {
+    let enrolmentsToChosenGame;
+    //console.log("chosenGame: ", chosenGame);
+    chosenGame ? enrolmentsToChosenGame = dbEnrolments.concat().filter(i => i.game_id == chosenGame.id) : null
+    let newEnrolledPlayers;
+    enrolmentsToChosenGame ? newEnrolledPlayers = dbPlayers.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
+    newEnrolledPlayers ? console.log("newEnrolledPlayers:", newEnrolledPlayers) : null
+    newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
+  }
+
+  //FlatList search
+  const executeSearch = (search) => {
+    setSearch(search);
+    const newPlayersToShow =
+      search.length > 0
+        ? dbPlayers.filter(
+            (i) =>
+              i.name.toLowerCase().includes(search.toLowerCase()) &&
+              chosenGame.division === item.division
+          )
+        : [];
+    setPlayersToShow(newPlayersToShow);
+  };
 
   let gameList = mapGames();
 
