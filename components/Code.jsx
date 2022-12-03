@@ -1,10 +1,7 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { Image, Text, Alert, StyleSheet, View, SafeAreaView, Pressable, Linking, ImageBackground, TextInput } from 'react-native';
 import { style } from '../styles/styles';
 import CodeInput from 'react-native-code-textinput';
-
-
-
 
 
 
@@ -12,11 +9,8 @@ function Code({navigation}) {
 
     const backgroundImage = require('../assets/Volleyball50.png');
 
-    const [code, setCode] = useState('1234');
-    
+    const [code, setCode] = useState('');
     const password = 1234;
-
-    //console.log(password)
 
     function checkCode() {
       if (code == password) {

@@ -1,3 +1,6 @@
+import { initializeApp } from 'firebase/app';
+import { getDatabase } from 'firebase/database';
+
 const firebaseConfig = {
     apiKey: "AIzaSyBlyjlSNNlTwYPYgo-H14Z3Tcji9lgpUTM",
     authDomain: "kbv-project.firebaseapp.com",
@@ -9,9 +12,4 @@ const firebaseConfig = {
   };
 
 const app = initializeApp(firebaseConfig);
-export const db = getDatabase(app);
-export const ENROLMENT = '/enrollment/';
-export const GAME = '/game/';
-export const PLACEMENT = '/placement/';
-export const PLAYER = '/player/';
-export const ADMIN = '/administration/';
+export const database = getDatabase(app);

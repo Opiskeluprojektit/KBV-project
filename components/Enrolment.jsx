@@ -4,9 +4,17 @@ import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List } from 'react-native-paper';
 import db from '../assets/testidata.json';
+import {database} from '../firebase/Config'
+import {onValue, ref} from 'firebase/database'
+
 
 const dbPlayers = JSON.parse(JSON.stringify(db.player));
 const dbGames = JSON.parse(JSON.stringify(db.game));
+
+
+
+
+
 
 const backgroundImage = require('../assets/Volleyball1.jpg');
 
@@ -17,6 +25,33 @@ function Enrolment({ navigation }) {
   const [chosenGame, setChosenGame] = useState();
   const [gamesToShow, setGamesToShow] = useState(dbGames);
   const [gamesExpanded, setGamesExpanded] = useState(false);
+
+// Firebase tietokannan testaamiseen liittyvää
+  const [gamestest, setGamestest] = useState("");
+  const [playertest, setPlayertest] = useState("");
+
+  // Hakee pelien tiedot firebase tietokannasta
+  useEffect(() => {
+    const games = ref(database,"game/");
+    onValue(games, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const gameItems = {...data};
+      setGamestest(gameItems);
+    });
+  },[]);
+
+// Hakee pelaajien tiedot firebase tietokannasta
+  useEffect(() => {
+    const players = ref(database,"player/");
+    onValue(players, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const playerItems = {...data};
+      setPlayertest(playerItems);
+    });
+  },[]);
+
+  console.log(gamestest)
+  console.log(playertest)
 
   const gameList = gamesToShow.map(i => <List.Item key={i.id} title={i.division + " " + i.date} onPress={() => selectGame(i)} />);
 
