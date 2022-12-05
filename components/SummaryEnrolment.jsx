@@ -5,31 +5,34 @@ import * as Icon from "react-native-feather";
 
 function SummaryEnrolment({ navigation }) {
 
-  const backgroundImage = require('../assets/Volleyball100.png');
+  const backgroundImage = require('../assets/Volleyball50.png');
 
   return (
-    <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
+    <ImageBackground source={backgroundImage} imageStyle={{height: '100%', width: 800}}>
       <SafeAreaView style={style.container}>
         <View style={style.header}>
-          <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.X style={[style.icons]}/></View></Pressable>
+          <Pressable onPress={() => navigation.navigate('Home')}>
+            <View style={style.iconsEllipse}><Icon.X style={[style.icons]}/></View>
+          </Pressable>
         </View>
 
         <View style={style.summaryContainer}>
           <Text style={style.summaryHeading}>Kiitos ilmoittautumisestasi!</Text>
-          <Text style={style.titles}>ViikkoBiitsi</Text>
+          <Text style={style.summaryTitle}>ViikkoBiitsi</Text>
 
-          <Text>
-          <Icon.MapPin style={style.summaryIcons}/>
-          Kokkola Camping biitsikenttä
-          </Text>
-          <Text>
-          <Icon.Clock style={style.summaryIcons}/>
-            Torstai ViikkoBiitsi miehet
-          </Text>
-          <Text>
-          <Icon.Users style={style.summaryIcons}/>
-            Pekka Pohjola, Pekka Ojala
-          </Text>
+          <View style={style.summaryDetails}>
+            <Icon.MapPin style={style.summaryIcons}/>
+            <Text style={style.text}>Kokkola Camping biitsikenttä</Text>
+          </View>
+          <View style={style.summaryDetails}>
+            <Icon.Clock style={style.summaryIcons}/>
+            <Text style={style.text}>Torstai ViikkoBiitsi miehet</Text>
+          </View>
+          <View style={style.summaryDetails}>
+            <Icon.Users style={style.summaryIcons}/>
+            <Text style={style.text}>Pekka Pohjola, Pekka Ojala</Text>
+          </View>
+
         </View>
       </SafeAreaView>
     </ImageBackground>

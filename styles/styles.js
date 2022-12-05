@@ -239,7 +239,7 @@ export const style = StyleSheet.create({
 
     // Container / modal container for summary screen
     summaryContainer: {
-        marginLeft: 24
+        margin: 24
     },
 
     // Heading only for enrolment
@@ -247,16 +247,30 @@ export const style = StyleSheet.create({
         color: Colors.darkText,
         fontSize: 40,
         marginTop: 34,
-        
+        marginBottom: 15
+    },
+
+    summaryTitle: {
+        color: Colors.bodyText, 
+        fontSize: 20,
+        marginBottom: 20
+    },
+
+    summaryDetails: {
+        flexDirection: 'row',
+        marginBottom: 10
     },
 
     // Icons for enrolled players, date and time
     summaryIcons: {
         color: Colors.bodyText,
-        paddingRight: 27
+        marginRight: 20
     }, 
 
     // PointsScreen styles
+    divisionSeparator: {
+        height: 8,
+    },
 
     // RankingScreen styles
 
@@ -287,7 +301,6 @@ export const style = StyleSheet.create({
         fontSize: 34,
         marginBottom: 20,
         marginLeft: 24,
-        marginRight: 24,
-
+        marginRight: 24
     }
 })
