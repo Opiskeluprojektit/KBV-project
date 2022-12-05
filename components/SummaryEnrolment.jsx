@@ -17,7 +17,11 @@ function SummaryEnrolment({ navigation }) {
         <View style={style.summaryContainer}>
           <Text style={style.summaryHeading}>Kiitos ilmoittautumisestasi!</Text>
           <Text style={style.titles}>ViikkoBiitsi</Text>
-          <Text>Kokkola Camping biitsikenttä</Text>
+
+          <Text>
+          <Icon.MapPin style={style.summaryIcons}/>
+          Kokkola Camping biitsikenttä
+          </Text>
           <Text>
           <Icon.Clock style={style.summaryIcons}/>
             Torstai ViikkoBiitsi miehet

@@ -1,4 +1,5 @@
-import { SafeAreaView, ScrollView, FlatList, Text, View, Pressable, Button, ImageBackground, TouchableOpacity } from 'react-native';
+import { SafeAreaView,  FlatList, Text, View, Pressable, 
+  Button, ImageBackground } from 'react-native';
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
@@ -28,11 +29,11 @@ function Enrolment({ navigation }) {
   const [gamesToShow, setGamesToShow] = useState(sortedDBGames);
   const [gamesExpanded, setGamesExpanded] = useState(false);
 
-// Firebase tietokannan testaamiseen liittyvää
+  // Firebase tietokannan testaamiseen liittyvää
   const [gamestest, setGamestest] = useState();
   const [playertest, setPlayertest] = useState();
 
-  // Hakee pelien tiedot firebase tietokannasta
+  // Collects game information from firebase database
   useEffect(() => {
     const games = ref(database,"game/");
     onValue(games, (snapshot) => {
@@ -42,7 +43,7 @@ function Enrolment({ navigation }) {
     });
   },[]);
   
-  // Hakee pelaajien tiedot firebase tietokannasta
+  // Collects player information from firebase database
   useEffect(() => {
     const players = ref(database,"player/");
     onValue(players, (snapshot) => {
@@ -54,22 +55,24 @@ function Enrolment({ navigation }) {
   
   console.log(gamestest)
   
-
+  // The component for closing the game day dropdown and setting the chosen game date
   const selectGame = (i) => {
     setGamesExpanded(!gamesExpanded);
     setChosenGame(i)
   }
   
-  //The component that the FlatList component uses to print it's items.
+  // The component that the FlatList component uses to print it's items.
   const Item = ({ name }) => (
       <Text>{name}</Text>
   );
   
-  //The function that the FlatList component uses to print it's items.
+  // The function that the FlatList component uses to print it's items.
 /*   const renderItem = ({ item }) => (
     <Item name={item.name} />
   ); */
 
+  // The search component for player search:
+    // Search filters the written text and brings up the results according to it
   const executeSearch = (search) => {
     setSearch(search);
     const searchArray =
@@ -84,16 +87,19 @@ function Enrolment({ navigation }) {
   };
 
   const selectPlayer = (player) => {
-    console.log("pelaaja valittu: ", name);
+    console.log("pelaaja valittu: ", player);
     // setPlayersToShow[""];
     const newPlayersToEnroll = playersToEnroll.concat(player);
     setPlayersToEnroll(player);
     //setSearch(name)
   }
     
+  // Converts the game date to specific form: dd.mm.yyyy
   const getGameTitle = (i) => {
     return i.division + " " + (i.date.getDate() + 1) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }
+
+  // Maps the game date list
   const gameList = gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
 
 
@@ -101,17 +107,18 @@ function Enrolment({ navigation }) {
     <ImageBackground source={backgroundImage}>
       <SafeAreaView>
       
-          {/* Header: Go back -painike ja Menu */}
+          {/* Header: Go back button and Menu */}
           <View style={style.header}>
             <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
             <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
+          {/* Heading */}
           <View style={style.viewContainer}>
             <View style={style.contentOnLightBG}>
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
-              {/* Dropdown pelipäivän valinnalle */}
+              {/* Dropdown for choosing gaming day */}
               <Text style={style.text}>Valitse peli</Text>
               <List.Section>
                 <List.Accordion
@@ -124,7 +131,7 @@ function Enrolment({ navigation }) {
                 </List.Accordion>
               </List.Section>
 
-              {/* FlatList pelaajan valinnalle */}
+              {/* FlatList for choosing the player */}
               {chosenGame ? <><Text style={style.text}>Valitse pelaaja</Text>
                 <TextInput
                   label="Haku"
