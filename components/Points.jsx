@@ -1,13 +1,13 @@
-import { SafeAreaView, Text, View, Pressable, Button, ImageBackground } from 'react-native'
+import { SafeAreaView, Text, View, Pressable, Button, ImageBackground, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
-import { List } from 'react-native-paper'
+import { List, TextInput } from 'react-native-paper'
 
 import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
-const backgroundImage = require('../assets/Volleyball1.jpg');
+const backgroundImage = require('../assets/Volleyball100.png');
 
 //Make deep copies of players, enrolments and games from the database.
 const dbPlayers = JSON.parse(JSON.stringify(db.player));
@@ -28,6 +28,7 @@ function Points({navigation}) {
   const [gamesExpanded, setGamesExpanded] = useState(false);
   const [enrolledPlayers, setEnrolledPlayers] = useState();
   const [groups, setGroups] = useState();
+  const [searchPlayer, setSearchPlayer] = useState('')
 
   useEffect(() => {
     gameList = mapGames();
@@ -113,7 +114,25 @@ function Points({navigation}) {
               <List.Accordion title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
                 {gameList}
               </List.Accordion>
+              <TextInput
+                  label="Haku"
+                  value={searchPlayer}
+                  style={style.search}
+                  onChangeText={executeSearch}
+                  returnKeyType="search"
+                  onSubmitEditing={executeSearch}
+                  placeholder="Haku" 
+                />
             </ List.Section>
+
+            {/* LOHKOT JA PISTEIDEN SYÖTTÖ*/}
+            {/* <FlatList 
+            data={enrolledPlayers}
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={renderItem}
+            key={i => i.id}
+            /> */}
+              
           </View>
         </View>
 

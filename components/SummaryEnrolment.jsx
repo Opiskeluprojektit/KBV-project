@@ -5,7 +5,7 @@ import * as Icon from "react-native-feather";
 
 function SummaryEnrolment({ navigation }) {
 
-  const backgroundImage = require('../assets/Volleyball1.jpg');
+  const backgroundImage = require('../assets/Volleyball100.png');
 
   return (
     <ImageBackground source={backgroundImage} imageStyle={{opacity:0.5}}>
