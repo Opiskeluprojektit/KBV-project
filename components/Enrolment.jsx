@@ -27,7 +27,7 @@ function Enrolment({ navigation }) {
   const [gamesExpanded, setGamesExpanded] = useState(false);
 
 // Firebase tietokannan testaamiseen liittyvää
-  const [gamestest, setGamestest] = useState("");
+  const [gamestest, setGamestest] = useState([]);
   const [playertest, setPlayertest] = useState("");
 
   // Hakee pelien tiedot firebase tietokannasta
@@ -51,7 +51,7 @@ function Enrolment({ navigation }) {
   },[]);
 
   console.log(gamestest)
-  console.log(playertest)
+  console.log(gamesToShow)
 
   const gameList = gamesToShow.map(i => <List.Item key={i.id} title={i.division + " " + i.date} onPress={() => selectGame(i)} />);
 
