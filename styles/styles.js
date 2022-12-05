@@ -252,6 +252,9 @@ export const style = StyleSheet.create({
     }, 
 
     // PointsScreen styles
+    divisionSeparator: {
+        height: 8,
+    },
 
     // RankingScreen styles
 
