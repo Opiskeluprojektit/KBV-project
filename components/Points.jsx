@@ -1,11 +1,13 @@
-import { SafeAreaView, Text, View, Pressable, Button } from 'react-native'
+import { SafeAreaView, Text, View, Pressable, Button, ImageBackground, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
-import { List } from 'react-native-paper'
+import { List, TextInput } from 'react-native-paper'
 
 import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
+
+const backgroundImage = require('../assets/Volleyball100.png');
 
 //Make deep copies of players, enrolments and games from the database.
 const dbPlayers = JSON.parse(JSON.stringify(db.player));
@@ -26,6 +28,7 @@ function Points({navigation}) {
   const [gamesExpanded, setGamesExpanded] = useState(false);
   const [enrolledPlayers, setEnrolledPlayers] = useState();
   const [groups, setGroups] = useState();
+  const [searchPlayer, setSearchPlayer] = useState('')
 
   useEffect(() => {
     gameList = mapGames();
@@ -90,24 +93,51 @@ function Points({navigation}) {
   let gameList = mapGames();
 
   return (
-    <SafeAreaView>
-      <View style={style.container}>
-        <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
-        <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
-        <Text style={style.h4Style}>Pisteiden syöttö</Text>
-        <List.Section>
-          <List.Accordion title={division ? division : "Sarja valikko"} expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
-            <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
-            <List.Item title="Miehet" onPress={() => selectDivision("Miehet")} />
-            <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
-            <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
-          </List.Accordion>
-          <List.Accordion title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
-            {gameList}
-          </List.Accordion>
-        </ List.Section>
-      </View>
-    </SafeAreaView>
+    <ImageBackground source={backgroundImage}>
+      <SafeAreaView>
+
+        <View style={style.header}>
+          <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+          <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
+        </View>
+
+        <View style={style.viewContainer}>
+          <View style={style.contentOnLightBG}>
+            <Text style={style.h4Style}>Pisteiden syöttö</Text>
+            <List.Section>
+              <List.Accordion title={division ? division : "Sarja valikko"} expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
+                <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
+                <List.Item title="Miehet" onPress={() => selectDivision("Miehet")} />
+                <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
+                <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
+              </List.Accordion>
+              <List.Accordion title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
+                {gameList}
+              </List.Accordion>
+              <TextInput
+                  label="Haku"
+                  value={searchPlayer}
+                  style={style.search}
+                  onChangeText={executeSearch}
+                  returnKeyType="search"
+                  onSubmitEditing={executeSearch}
+                  placeholder="Haku" 
+                />
+            </ List.Section>
+
+            {/* LOHKOT JA PISTEIDEN SYÖTTÖ*/}
+            {/* <FlatList 
+            data={enrolledPlayers}
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={renderItem}
+            key={i => i.id}
+            /> */}
+              
+          </View>
+        </View>
+
+      </SafeAreaView>
+    </ImageBackground>
   )
 }
 

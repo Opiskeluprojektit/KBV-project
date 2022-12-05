@@ -4,13 +4,13 @@ import { style } from '../styles/styles';
 import CodeInput from 'react-native-code-textinput';
 
 
+const password = 1234;
 
 function Code({navigation}) {
 
     const backgroundImage = require('../assets/Volleyball50.png');
 
-    const [code, setCode] = useState('');
-    const password = 1234;
+    const [code, setCode] = useState(password);
 
     function checkCode() {
       if (code == password) {
@@ -24,25 +24,25 @@ function Code({navigation}) {
 
       return (
         <ImageBackground source={backgroundImage} imageStyle={{height: '100%', width: 800}}>
-        <SafeAreaView style={style.container}>
-          
-          <View style={style.bigLogo}></View>
-          
-          <View style={style.codeInputField}>
-            <CodeInput 
-              codeSize={4} 
-              value={1234}
-              onValueChange={setCode}
-              inputStyle={style.codeInputBox} 
-             >
-            </CodeInput>
-          </View>
-          <View style={style.homeButtonsContainer}>
-            <Pressable onPress={() => checkCode()}style={[style.codeButtons, style.button]}>
-              <Text style={style.buttonText}>Kirjaudu sisään</Text>
-            </Pressable>
-          </View>     
-        </SafeAreaView>
+          <SafeAreaView>
+            
+            <View style={style.bigLogo}></View>
+            
+            <View style={style.codeInputField}>
+              <CodeInput 
+                codeSize={4} 
+                value={1234}
+                onValueChange={setCode}
+                inputStyle={style.codeInputBox}>
+              </CodeInput>
+            </View>
+            <View style={style.homeButtonsContainer}>
+              <Pressable onPress={() => checkCode()}style={[style.codeButtons, style.button]}>
+                <Text style={style.buttonText}>Kirjaudu sisään</Text>
+              </Pressable>
+            </View>     
+            
+          </SafeAreaView>
         </ImageBackground>
       );
     
