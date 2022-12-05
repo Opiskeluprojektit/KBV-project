@@ -112,7 +112,7 @@ function Enrolment({ navigation }) {
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
               {/* Dropdown pelipäivän valinnalle */}
-              <Text style={style.text}>Valitse peli</Text>
+              <Text style={style.titles}>Valitse peli</Text>
               <List.Section>
                 <List.Accordion
                   title={chosenGame ? getGameTitle(chosenGame) : null}
@@ -125,7 +125,7 @@ function Enrolment({ navigation }) {
               </List.Section>
 
               {/* FlatList pelaajan valinnalle */}
-              {chosenGame ? <><Text style={style.text}>Valitse pelaaja</Text>
+              {chosenGame ? <><Text style={style.titles}>Valitse pelaaja</Text>
                 <TextInput
                   label="Haku"
                   value={search}
@@ -150,7 +150,7 @@ function Enrolment({ navigation }) {
                   <View style={[style.iconsEllipse2]}>
                     <Icon.Plus style={style.icons}/>
                   </View> 
-                  <Text style={style.text}>Lisää pelaaja</Text>
+                  <Text style={style.titles}>Lisää pelaaja</Text>
                 </Pressable>
               </View>
 
