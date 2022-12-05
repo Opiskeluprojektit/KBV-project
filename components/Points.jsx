@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View, Pressable, Button } from 'react-native'
+import { SafeAreaView, Text, View, Pressable, Button, ImageBackground } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
@@ -6,6 +6,8 @@ import { List } from 'react-native-paper'
 
 import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
+
+const backgroundImage = require('../assets/Volleyball1.jpg');
 
 //Make deep copies of players, enrolments and games from the database.
 const dbPlayers = JSON.parse(JSON.stringify(db.player));
@@ -90,24 +92,33 @@ function Points({navigation}) {
   let gameList = mapGames();
 
   return (
-    <SafeAreaView>
-      <View style={style.container}>
-        <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
-        <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
-        <Text style={style.h4Style}>Pisteiden syöttö</Text>
-        <List.Section>
-          <List.Accordion title={division ? division : "Sarja valikko"} expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
-            <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
-            <List.Item title="Miehet" onPress={() => selectDivision("Miehet")} />
-            <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
-            <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
-          </List.Accordion>
-          <List.Accordion title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
-            {gameList}
-          </List.Accordion>
-        </ List.Section>
-      </View>
-    </SafeAreaView>
+    <ImageBackground source={backgroundImage}>
+      <SafeAreaView>
+
+        <View style={style.header}>
+          <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+          <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
+        </View>
+
+        <View style={style.viewContainer}>
+          <View style={style.contentOnLightBG}>
+            <Text style={style.h4Style}>Pisteiden syöttö</Text>
+            <List.Section>
+              <List.Accordion title={division ? division : "Sarja valikko"} expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
+                <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
+                <List.Item title="Miehet" onPress={() => selectDivision("Miehet")} />
+                <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
+                <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
+              </List.Accordion>
+              <List.Accordion title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
+                {gameList}
+              </List.Accordion>
+            </ List.Section>
+          </View>
+        </View>
+
+      </SafeAreaView>
+    </ImageBackground>
   )
 }
 
