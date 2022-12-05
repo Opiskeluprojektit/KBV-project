@@ -4,13 +4,13 @@ import { style } from '../styles/styles';
 import CodeInput from 'react-native-code-textinput';
 
 
+const password = 1234;
 
 function Code({navigation}) {
 
     const backgroundImage = require('../assets/Volleyball50.png');
 
-    const [code, setCode] = useState('');
-    const password = 1234;
+    const [code, setCode] = useState(password);
 
     function checkCode() {
       if (code == password) {
