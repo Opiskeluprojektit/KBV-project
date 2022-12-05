@@ -1,20 +1,24 @@
-import { SafeAreaView, ScrollView, FlatList, Text, View, Pressable, Button, ImageBackground, TextInput } from 'react-native'; //TextInput lisätty ku herjas sitä
+import { SafeAreaView, ScrollView, FlatList, Text, View, Pressable, Button, ImageBackground, TouchableOpacity } from 'react-native'; //TextInput lisätty ku herjas sitä
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
-import { List } from 'react-native-paper';
+import { List, TextInput } from 'react-native-paper';
 import db from '../assets/testidata.json';
 import {database} from '../firebase/Config'
 import {onValue, ref} from 'firebase/database'
 
+import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
+
 
 const dbPlayers = JSON.parse(JSON.stringify(db.player));
 const dbGames = JSON.parse(JSON.stringify(db.game));
-
-
-
-
-
+const sortedDbGames = JSON.parse(JSON.stringify(db.game))
+  .map((i) => {
+    i.date = new MyDate(formatDMYtoYMD(i.date));
+    return i;
+  })
+  .filter((i) => i.date >= new Date())
+  .sort((a, b) => a.date - b.date);
 
 const backgroundImage = require('../assets/Volleyball1.jpg');
 
@@ -66,9 +70,9 @@ function Enrolment({ navigation }) {
   );
   
   //The function that the FlatList component uses to print it's items.
-  const renderItem = ({ item }) => (
+/*   const renderItem = ({ item }) => (
     <Item name={item.name} />
-  );
+  ); */
 
   const executeSearch = (search) => {
     setSearch(search);
@@ -82,7 +86,14 @@ function Enrolment({ navigation }) {
         : [];
     setPlayersToShow(searchArray);
   };
-  
+
+  const selectPlayer = (name) => {
+    // setPlayersToShow[""];
+    setPlayersToEnroll(name);
+    //setSearch(name)
+  }
+
+
   return (
     <ImageBackground source={backgroundImage}>
       <SafeAreaView>
@@ -119,18 +130,17 @@ function Enrolment({ navigation }) {
                   onChangeText={text => executeSearch(text)}
                   returnKeyType="search"
                   onSubmitEditing={() => executeSearch(search)}
-                  placeholder="   Haku" 
                 />
                 <FlatList
                   data={playersToShow}
-                  renderItem={renderItem}
+                  // renderItem={renderItem} 
+                  renderItem={({item}) => <TouchableOpacity onPress={() => selectPlayer()}><Item name={item.name} /></TouchableOpacity>}
                   key={i => i.id}
+                  //onPress={() => selectPlayer(i.id)}
+                  //onSubmitEditing={() => selectPlayer(i.id)}
                 /></>
               : null}         
               
-              
-              {/* Lisätään error-modal, jos yrittää painaa Lisää pelaaja,
-              eikä ole lisännyt peliä ja pelaajaa täytössä olevalle pelaajalle */}
               {/* Päivitetään alla olevaan uusi tyyli iconille? */}
               <View style={style.addPlayer}>
                 <Pressable style={{flexDirection: "row"}} onPress={() => console.log("pelaaja valittu")}>
@@ -141,7 +151,9 @@ function Enrolment({ navigation }) {
                 </Pressable>
               </View>
 
-              {/* Lisätään vaihtoehto pressebleen: yhdellä pelaajalla teksti "Ilmoittaudu",
+              <Text>{playersToEnroll}</Text>
+
+              {/* Lisätään vaihtoehto pressableen: yhdellä pelaajalla teksti "Ilmoittaudu",
               kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
               <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} 
                 style={[style.enrolButton, style.button]}>
