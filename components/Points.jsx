@@ -7,6 +7,9 @@ import { List, TextInput } from 'react-native-paper'
 import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
+import {database} from '../firebase/Config'
+import {onValue, ref} from 'firebase/database'
+
 const backgroundImage = require('../assets/Volleyball100.png');
 
 //Make deep copies of players, enrolments and games from the database.
@@ -29,6 +32,32 @@ function Points({navigation}) {
   const [enrolledPlayers, setEnrolledPlayers] = useState();
   const [groups, setGroups] = useState();
   const [searchPlayer, setSearchPlayer] = useState('')
+
+  // Hakee pelien tiedot firebase tietokannasta
+  useEffect(() => {
+    const games = ref(database,"game/");
+    onValue(games, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const gameItems = {...data};
+      setGamestest(gameItems);
+    });
+  },[]);
+
+// Firebase tietokannan testaamiseen liittyvää
+const [gamestest, setGamestest] = useState();
+const [playertest, setPlayertest] = useState();
+
+// Hakee pelaajien tiedot firebase tietokannasta
+  useEffect(() => {
+    const players = ref(database,"player/");
+    onValue(players, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const playerItems = {...data};
+      setPlayertest(playerItems);
+    });
+  },[]);
+
+
 
   useEffect(() => {
     gameList = mapGames();

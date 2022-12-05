@@ -31,8 +31,8 @@ function Enrolment({ navigation }) {
   const [gamesExpanded, setGamesExpanded] = useState(false);
 
 // Firebase tietokannan testaamiseen liittyvää
-  const [gamestest, setGamestest] = useState([]);
-  const [playertest, setPlayertest] = useState("");
+  const [gamestest, setGamestest] = useState();
+  const [playertest, setPlayertest] = useState();
 
   // Hakee pelien tiedot firebase tietokannasta
   useEffect(() => {
