@@ -1,24 +1,22 @@
-import { SafeAreaView, ScrollView, FlatList, Text, View, Pressable, Button, ImageBackground, TouchableOpacity } from 'react-native'; //TextInput lisätty ku herjas sitä
+import { SafeAreaView, ScrollView, FlatList, Text, View, Pressable, Button, ImageBackground, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List, TextInput } from 'react-native-paper';
 import db from '../assets/testidata.json';
-import {database} from '../firebase/Config'
-import {onValue, ref} from 'firebase/database'
-
+import {database} from '../firebase/Config';
+import {onValue, ref} from 'firebase/database';
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
 
 const dbPlayers = JSON.parse(JSON.stringify(db.player));
-const dbGames = JSON.parse(JSON.stringify(db.game));
-const sortedDbGames = JSON.parse(JSON.stringify(db.game))
-  .map((i) => {
-    i.date = new MyDate(formatDMYtoYMD(i.date));
-    return i;
-  })
-  .filter((i) => i.date >= new Date())
-  .sort((a, b) => a.date - b.date);
+const sortedDBGames = JSON.parse(JSON.stringify(db.game))
+.map((i) => {
+  i.date = new MyDate(formatDMYtoYMD(i.date));
+  return i;
+})
+.filter((i) => i.date >= new Date())
+.sort((a, b) => a.date - b.date);
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
@@ -27,7 +25,7 @@ function Enrolment({ navigation }) {
   const [playersToShow, setPlayersToShow] = useState([]);
   const [playersToEnroll, setPlayersToEnroll] = useState([]);
   const [chosenGame, setChosenGame] = useState();
-  const [gamesToShow, setGamesToShow] = useState(dbGames);
+  const [gamesToShow, setGamesToShow] = useState(sortedDBGames);
   const [gamesExpanded, setGamesExpanded] = useState(false);
 
 // Firebase tietokannan testaamiseen liittyvää
@@ -43,8 +41,8 @@ function Enrolment({ navigation }) {
       setGamestest(gameItems);
     });
   },[]);
-
-// Hakee pelaajien tiedot firebase tietokannasta
+  
+  // Hakee pelaajien tiedot firebase tietokannasta
   useEffect(() => {
     const players = ref(database,"player/");
     onValue(players, (snapshot) => {
@@ -53,11 +51,9 @@ function Enrolment({ navigation }) {
       setPlayertest(playerItems);
     });
   },[]);
-
+  
   console.log(gamestest)
   console.log(gamesToShow)
-
-  const gameList = gamesToShow.map(i => <List.Item key={i.id} title={i.division + " " + i.date} onPress={() => selectGame(i)} />);
 
   const selectGame = (i) => {
     setGamesExpanded(!gamesExpanded);
@@ -87,11 +83,18 @@ function Enrolment({ navigation }) {
     setPlayersToShow(searchArray);
   };
 
-  const selectPlayer = (name) => {
+  const selectPlayer = (player) => {
+    console.log("pelaaja valittu: ", name);
     // setPlayersToShow[""];
-    setPlayersToEnroll(name);
+    const newPlayersToEnroll = playersToEnroll.concat(player);
+    setPlayersToEnroll(player);
     //setSearch(name)
   }
+    
+  const getGameTitle = (i) => {
+    return i.division + " " + (i.date.getDate() + 1) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
+  }
+  const gameList = gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
 
 
   return (
@@ -112,7 +115,7 @@ function Enrolment({ navigation }) {
               <Text style={style.text}>Valitse peli</Text>
               <List.Section>
                 <List.Accordion
-                  title={chosenGame ? chosenGame.division + " " + chosenGame.date : "Pelit"}
+                  title={chosenGame ? getGameTitle(chosenGame) : null}
                   style={style.search}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
@@ -134,7 +137,7 @@ function Enrolment({ navigation }) {
                 <FlatList
                   data={playersToShow}
                   // renderItem={renderItem} 
-                  renderItem={({item}) => <TouchableOpacity onPress={() => selectPlayer()}><Item name={item.name} /></TouchableOpacity>}
+                  renderItem={({item}) => <Pressable onPress={() => selectPlayer(item)}><Item name={item.name} /></Pressable>}
                   key={i => i.id}
                   //onPress={() => selectPlayer(i.id)}
                   //onSubmitEditing={() => selectPlayer(i.id)}
@@ -150,8 +153,6 @@ function Enrolment({ navigation }) {
                   <Text style={style.text}>Lisää pelaaja</Text>
                 </Pressable>
               </View>
-
-              <Text>{playersToEnroll}</Text>
 
               {/* Lisätään vaihtoehto pressableen: yhdellä pelaajalla teksti "Ilmoittaudu",
               kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}

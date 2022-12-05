@@ -78,7 +78,8 @@ function Points({navigation}) {
 
   //FlatList search
   const executeSearch = (search) => {
-    setSearch(search);
+    console.log(Search);
+    /* setSearch(search);
     const newPlayersToShow =
       search.length > 0
         ? dbPlayers.filter(
@@ -87,7 +88,7 @@ function Points({navigation}) {
               chosenGame.division === item.division
           )
         : [];
-    setPlayersToShow(newPlayersToShow);
+    setPlayersToShow(newPlayersToShow); */
   };
 
   let gameList = mapGames();
@@ -115,13 +116,12 @@ function Points({navigation}) {
                 {gameList}
               </List.Accordion>
               <TextInput
-                  label="Haku"
+                  label="Pelaajahaku"
                   value={searchPlayer}
                   style={style.search}
                   onChangeText={executeSearch}
                   returnKeyType="search"
                   onSubmitEditing={executeSearch}
-                  placeholder="Haku" 
                 />
             </ List.Section>
 
