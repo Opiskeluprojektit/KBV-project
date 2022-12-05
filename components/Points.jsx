@@ -7,7 +7,7 @@ import { List } from 'react-native-paper'
 import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
-const backgroundImage = require('../assets/Volleyball1.jpg');
+const backgroundImage = require('../assets/Volleyball100.png');
 
 //Make deep copies of players, enrolments and games from the database.
 const dbPlayers = JSON.parse(JSON.stringify(db.player));

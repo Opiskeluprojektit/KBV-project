@@ -3,7 +3,7 @@ import React from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 
-const backgroundImage = require('../assets/Volleyball1.jpg');
+const backgroundImage = require('../assets/Volleyball100.png');
 
 function Ranking({navigation}) {
   return (

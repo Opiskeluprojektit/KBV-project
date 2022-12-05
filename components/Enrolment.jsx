@@ -16,7 +16,7 @@ const dbGames = JSON.parse(JSON.stringify(db.game));
 
 
 
-const backgroundImage = require('../assets/Volleyball1.jpg');
+const backgroundImage = require('../assets/Volleyball100.png');
 
 function Enrolment({ navigation }) {
   const [search, setSearch] = useState('');

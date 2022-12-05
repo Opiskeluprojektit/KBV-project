@@ -86,19 +86,20 @@ export const style = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4
     },
-        // Keltainen ympyrä iconin alla
-        iconsEllipse2: {
-            backgroundColor: Colors.iconsBackground,
-            width: 50,
-            height: 50,
-            borderRadius: 1000,
-            shadowOffset: {
-                width: 0,
-                height: 4
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 4
+
+    // Keltainen ympyrä iconin alla
+    iconsEllipse2: {
+        backgroundColor: Colors.iconsBackground,
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
         },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
 
     // Feather icons
     icons: {
@@ -138,6 +139,7 @@ export const style = StyleSheet.create({
 
     codeInputField: {
         alignItems: 'center',
+        //alignSelf: 'center',
         marginBottom: 30,
     },
 
