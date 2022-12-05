@@ -236,19 +236,30 @@ export const style = StyleSheet.create({
     // SummaryEnrolmentScreen styles
 
     summaryContainer: {
-        marginLeft: 24
+        margin: 24
     },
 
     summaryHeading: { 
         color: Colors.darkText,
         fontSize: 40,
         marginTop: 34,
-        
+        marginBottom: 15
+    },
+
+    summaryTitle: {
+        color: Colors.bodyText, 
+        fontSize: 20,
+        marginBottom: 20
+    },
+
+    summaryDetails: {
+        flexDirection: 'row',
+        marginBottom: 10
     },
 
     summaryIcons: {
         color: Colors.bodyText,
-        paddingRight: 27
+        marginRight: 20
     }, 
 
     // PointsScreen styles
@@ -282,7 +293,6 @@ export const style = StyleSheet.create({
         fontSize: 34,
         marginBottom: 20,
         marginLeft: 24,
-        marginRight: 24,
-
+        marginRight: 24
     }
 })
