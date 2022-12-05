@@ -13,7 +13,7 @@ export const style = StyleSheet.create({
         marginRight: 24
     },
 
-    // Ilmoittautumisen, pisteiden syötön ja rankingin vaalea tausta
+    // Enrolment, points and ranking light background
     viewContainer: {
         backgroundColor: Colors.backgroundColor,
         borderTopLeftRadius: 50,
@@ -21,13 +21,13 @@ export const style = StyleSheet.create({
         height: "90%"
     }, 
 
-    //Vaalea tausta Ilmo, pisteet ja ranking sivuilla
+    // Enrolment, points and ranking light background
     contentOnLightBG: {
         marginLeft: 24,
         marginRight: 24
     },
 
-    // Hamburgermenu icon, koko on: width={42} height={40}, lisättävä erikseen
+    // Hamburgermenu icon, size is: width={42} height={40}
     menuButton: {
         position: "absolute",
         color: Colors.bodyText,
@@ -35,7 +35,7 @@ export const style = StyleSheet.create({
         top: 2
     },
 
-    //Screenien otsikot
+    //Screen headerlines
     h4Style: { 
         color: Colors.darkText,
         fontSize: 34,
@@ -72,7 +72,7 @@ export const style = StyleSheet.create({
         fontSize: 20
     },
 
-    // Keltainen ympyrä iconin alla
+    // Yellow circle for icons
     iconsEllipse: {
         backgroundColor: Colors.iconsBackground,
         position: "absolute",
@@ -87,7 +87,7 @@ export const style = StyleSheet.create({
         shadowRadius: 4
     },
 
-    // Keltainen ympyrä iconin alla
+    // Yellow circle for icons
     iconsEllipse2: {
         backgroundColor: Colors.iconsBackground,
         width: 50,
@@ -109,7 +109,7 @@ export const style = StyleSheet.create({
     },
 
 
-    // Listojen ja hakujen tausta
+    // List and search background
     search: {
         backgroundColor: Colors.inputColor,
         height: 50,
@@ -122,17 +122,22 @@ export const style = StyleSheet.create({
     // CodeScreen styles
 
     bigLogo: {
-        backgroundColor: Colors.primary,
-        borderRadius: 1000,
-        width: 160,
-        height: 160,
+        width: 150,
+        height: 150,
         marginTop: 120,
         marginBottom: 50,
         alignSelf: 'center'
     },
 
+    codeContainer: {
+        height: "55%",
+        marginLeft: 24,
+        marginRight: 24,
+        alignSelf: 'center'
+    },
+
     codeButtons: {
-        flexDirection: "column",
+        flexDirection: 'column',
         width: '90%',
         height: 60
     },
@@ -198,7 +203,7 @@ export const style = StyleSheet.create({
         borderBottomRightRadius: 60
     },
 
-    // Vain Home sivun keltaiset pallurat
+    // Only HomeScreen yellow circles
     homeEllipse: {
         alignSelf: 'flex-end',
         right: 8
@@ -277,6 +282,7 @@ export const style = StyleSheet.create({
         fontSize: 34,
         marginBottom: 20,
         marginLeft: 24,
-        marginRight: 24
+        marginRight: 24,
+
     }
 })
