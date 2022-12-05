@@ -3,12 +3,12 @@ import { Image, Text, Alert, StyleSheet, View, SafeAreaView, Pressable, Linking,
 import { style } from '../styles/styles';
 import CodeInput from 'react-native-code-textinput';
 
-
 const password = 1234;
 
 function Code({navigation}) {
 
     const backgroundImage = require('../assets/Volleyball50.png');
+    const logo = require('../assets/Logo2.png');
 
     const [code, setCode] = useState(password);
 
@@ -26,7 +26,7 @@ function Code({navigation}) {
         <ImageBackground source={backgroundImage} imageStyle={{height: '100%', width: 800}}>
           <SafeAreaView>
             
-            <View style={style.bigLogo}></View>
+            <Image source={logo} style={style.bigLogo}></Image>
             
             <View style={style.codeInputField}>
               <CodeInput 
@@ -36,9 +36,9 @@ function Code({navigation}) {
                 inputStyle={style.codeInputBox}>
               </CodeInput>
             </View>
-            <View style={style.homeButtonsContainer}>
-              <Pressable onPress={() => checkCode()}style={[style.codeButtons, style.button]}>
-                <Text style={style.buttonText}>Kirjaudu sisään</Text>
+            <View style={style.codeContainer}>
+              <Pressable onPress={() => checkCode()}>
+                <Text style={style.titles}>Kirjaudu sisään</Text>
               </Pressable>
             </View>     
             

@@ -6,13 +6,14 @@ import * as Icon from "react-native-feather";
 export default function Home({navigation}) {
 
   const backgroundImage = require('../assets/Volleyball50.png');
+  const logo = require('../assets/Logo2.png');
 
   return (
     <ImageBackground source={backgroundImage} imageStyle={{height: '100%', width: 800}}>
       <SafeAreaView style={style.container}>
 
           <View style={style.header}>
-            <View style={style.HomeScreenLogo}></View>
+          <Image source={logo} style={style.HomeScreenLogo}></Image>
             <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
           
