@@ -20,7 +20,7 @@ const sortedDbGames = JSON.parse(JSON.stringify(db.game))
     i.date = new MyDate(formatDMYtoYMD(i.date));
     return i;
   })
-  .filter((i) => i.date >= new Date())
+  .filter((i) => i.date >= new Date ())
   .sort((a, b) => a.date - b.date);
 
 function Points({navigation}) {
@@ -32,6 +32,7 @@ function Points({navigation}) {
   const [enrolledPlayers, setEnrolledPlayers] = useState();
   const [groups, setGroups] = useState();
   const [searchPlayer, setSearchPlayer] = useState('')
+
 
   // Hakee pelien tiedot firebase tietokannasta
   useEffect(() => {
@@ -88,12 +89,14 @@ const [playertest, setPlayertest] = useState();
   }
 
   const getGameTitle = (i) => {
-    return i.division + " " + (i.date.getDate() + 1) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
+    return i.division + " " + (i.date.getDate()) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }
 
   const mapGames = () => {
     return gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
   }
+  
+  let gameList = mapGames();
 
   const filterEnrolments = () => {
     let enrolmentsToChosenGame;
@@ -103,23 +106,34 @@ const [playertest, setPlayertest] = useState();
     enrolmentsToChosenGame ? newEnrolledPlayers = dbPlayers.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
     newEnrolledPlayers ? console.log("newEnrolledPlayers:", newEnrolledPlayers) : null
     newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
+    newEnrolledPlayers ? console.log("newEnrolledPlayers: ", newEnrolledPlayers):null;
+  }
+
+  //Flatlist components
+  const DivisionSeparator = () => {
+    <View style={style.divisionSeparator}></View>
+  }
+
+  const Division = ({item}) => {
+    console.log(item.name);
+    return <Text>{item.name}</Text>
   }
 
   //FlatList search
   const executeSearch = (search) => {
-    setSearch(search);
-    const newPlayersToShow =
+    //console.log(search);
+    setSearchPlayer(search);
+    /* const newPlayersToShow =
       search.length > 0
         ? dbPlayers.filter(
-            (i) =>
+            (i) =>as
               i.name.toLowerCase().includes(search.toLowerCase()) &&
               chosenGame.division === item.division
           )
         : [];
-    setPlayersToShow(newPlayersToShow);
+    setPlayersToShow(newPlayersToShow); */
   };
 
-  let gameList = mapGames();
 
   return (
     <ImageBackground source={backgroundImage}>
@@ -144,24 +158,26 @@ const [playertest, setPlayertest] = useState();
                 {gameList}
               </List.Accordion>
               <TextInput
-                  label="Haku"
+                  label="Pelaajahaku"
                   value={searchPlayer}
                   style={style.search}
                   onChangeText={executeSearch}
                   returnKeyType="search"
                   onSubmitEditing={executeSearch}
-                  placeholder="Haku" 
                 />
             </ List.Section>
 
             {/* LOHKOT JA PISTEIDEN SYÖTTÖ*/}
-            {/* <FlatList 
-            data={enrolledPlayers}
-            ItemSeparatorComponent={ItemSeparator}
-            renderItem={renderItem}
-            key={i => i.id}
-            /> */}
+            {enrolledPlayers ? <View>
+              <FlatList 
+                data={enrolledPlayers}
+                ItemSeparatorComponent={DivisionSeparator}
+                renderItem={Division}
+                key={i => i.id}
+              />
               
+            </View> : null}
+            
           </View>
         </View>
 

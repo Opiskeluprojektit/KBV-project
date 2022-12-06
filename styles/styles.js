@@ -210,13 +210,14 @@ export const style = StyleSheet.create({
     },
 
 
-    // EnrolmentScreen styles
+// EnrolmentScreen styles
 
     addPlayer: {
         flexDirection: "row",
         //marginBottom: 24
     }, 
 
+    // Button for enrolment
     enrolButton: {
         //flexDirection: 'column',
         //position: 'absolute',
@@ -225,6 +226,7 @@ export const style = StyleSheet.create({
         bottom: 0
     },
 
+    // Styles for predicted ranking element
     predictedRanking: {
         backgroundColor: Colors.inputColor,
         width: "90%",
@@ -233,25 +235,42 @@ export const style = StyleSheet.create({
         borderRadius: 10
     },
 
-    // SummaryEnrolmentScreen styles
+// SummaryEnrolmentScreen styles
 
+    // Container / modal container for summary screen
     summaryContainer: {
-        marginLeft: 24
+        margin: 24
     },
 
+    // Heading only for enrolment
     summaryHeading: { 
         color: Colors.darkText,
         fontSize: 40,
         marginTop: 34,
-        
+        marginBottom: 15
     },
 
+    summaryTitle: {
+        color: Colors.bodyText, 
+        fontSize: 20,
+        marginBottom: 20
+    },
+
+    summaryDetails: {
+        flexDirection: 'row',
+        marginBottom: 10
+    },
+
+    // Icons for enrolled players, date and time
     summaryIcons: {
         color: Colors.bodyText,
-        paddingRight: 27
+        marginRight: 20
     }, 
 
     // PointsScreen styles
+    divisionSeparator: {
+        height: 8,
+    },
 
     // RankingScreen styles
 
@@ -282,7 +301,6 @@ export const style = StyleSheet.create({
         fontSize: 34,
         marginBottom: 20,
         marginLeft: 24,
-        marginRight: 24,
-
+        marginRight: 24
     }
 })
