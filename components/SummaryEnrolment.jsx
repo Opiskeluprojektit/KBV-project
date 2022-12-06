@@ -12,7 +12,7 @@ function SummaryEnrolment({ navigation }) {
       <SafeAreaView style={style.container}>
         <View style={style.header}>
           <Pressable onPress={() => navigation.navigate('Home')}>
-            <View style={style.iconsEllipse}><Icon.X style={[style.icons]}/></View>
+            <View style={style.iconsClose}><Icon.X style={[style.icons]}/></View>
           </Pressable>
         </View>
 

@@ -87,20 +87,6 @@ export const style = StyleSheet.create({
         shadowRadius: 4
     },
 
-    // Yellow circle for icons
-    iconsEllipse2: {
-        backgroundColor: Colors.iconsBackground,
-        width: 50,
-        height: 50,
-        borderRadius: 1000,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4
-    },
-
     // Feather icons
     icons: {
         color: Colors.bodyText,
@@ -235,6 +221,30 @@ export const style = StyleSheet.create({
         borderRadius: 10
     },
 
+    // Yellow circle for adding the player
+    iconsAddPlayer: {
+        backgroundColor: Colors.iconsBackground,
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        //position: 'absolute'
+        //overflow: 'hidden'
+    },
+
+    addPlayerText: {
+        textAlignVertical: 'center',
+        textAlign: 'left',
+        fontSize: 20,
+        letterSpacing: 0.1,
+        fontWeight: '500', // pitäskö tämä olla myös titles'issä
+    },
+
 // SummaryEnrolmentScreen styles
 
     // Container / modal container for summary screen
@@ -266,6 +276,20 @@ export const style = StyleSheet.create({
         color: Colors.bodyText,
         marginRight: 20
     }, 
+
+    iconsClose: {
+        backgroundColor: Colors.iconsBackground,
+        position: "relative",
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+    },
 
     // PointsScreen styles
     divisionSeparator: {

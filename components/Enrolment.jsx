@@ -65,14 +65,11 @@ function Enrolment({ navigation }) {
   const Item = ({ name }) => (
       <Text>{name}</Text>
   );
-  
-  // The function that the FlatList component uses to print it's items.
-/*   const renderItem = ({ item }) => (
-    <Item name={item.name} />
-  ); */
 
   // The search component for player search:
     // Search filters the written text and brings up the results according to it
+    /* Tähän lisätään vielä, että pelaajaa ei näytetä, jos hän on jo 
+        ilmoittautunut kyseiseen peliin */
   const executeSearch = (search) => {
     setSearch(search);
     const searchArray =
@@ -86,6 +83,7 @@ function Enrolment({ navigation }) {
     setPlayersToShow(searchArray);
   };
 
+  // Selecting the player from the flatlist
   const selectPlayer = (player) => {
     console.log("pelaaja valittu: ", player);
     // setPlayersToShow[""];
@@ -119,7 +117,7 @@ function Enrolment({ navigation }) {
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
               {/* Dropdown for choosing gaming day */}
-              <Text style={style.text}>Valitse peli</Text>
+              <Text style={style.titles}>Valitse peli</Text>
               <List.Section>
                 <List.Accordion
                   title={chosenGame ? getGameTitle(chosenGame) : null}
@@ -132,7 +130,7 @@ function Enrolment({ navigation }) {
               </List.Section>
 
               {/* FlatList for choosing the player */}
-              {chosenGame ? <><Text style={style.text}>Valitse pelaaja</Text>
+              {chosenGame ? <><Text style={style.titles}>Valitse pelaaja</Text>
                 <TextInput
                   label="Haku"
                   value={search}
@@ -143,24 +141,22 @@ function Enrolment({ navigation }) {
                 />
                 <FlatList
                   data={playersToShow}
-                  // renderItem={renderItem} 
                   renderItem={({item}) => <Pressable onPress={() => selectPlayer(item)}><Item name={item.name} /></Pressable>}
                   key={i => i.id}
-                  //onPress={() => selectPlayer(i.id)}
-                  //onSubmitEditing={() => selectPlayer(i.id)}
                 /></>
               : null}         
               
-              {/* Päivitetään alla olevaan uusi tyyli iconille? */}
+              {/* Button for adding new player to enrol */}
               <View style={style.addPlayer}>
-                <Pressable style={{flexDirection: "row"}} onPress={() => console.log("pelaaja valittu")}>
-                  <View style={[style.iconsEllipse2]}>
+                <Pressable style={{flexDirection: "row"}} onPress={() => console.log("Lisää uusi pelaaja")}>
+                  <View style={[style.iconsAddPlayer]}>
                     <Icon.Plus style={style.icons}/>
                   </View> 
-                  <Text style={style.text}>Lisää pelaaja</Text>
+                  <Text style={style.addPlayerText}>Lisää pelaaja</Text>
                 </Pressable>
               </View>
 
+              {/* Button for enrolment */}
               {/* Lisätään vaihtoehto pressableen: yhdellä pelaajalla teksti "Ilmoittaudu",
               kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
               <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} 
@@ -169,8 +165,7 @@ function Enrolment({ navigation }) {
               </Pressable>
 
               
-
-                {/* Tähän voi tehdä ennustetun lohkon, jos se tehdään */}
+                {/* Predicted ranking for the chosen game */}
 {/*               <View style={style.predictedRanking}>
               <Text style={style.text}>Ennustettu lohko</Text>
                 <Text style={style.text}>Pekka Pohjola</Text>
