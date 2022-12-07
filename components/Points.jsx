@@ -8,7 +8,7 @@ import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
 import {database} from '../firebase/Config'
-import {onValue, ref} from 'firebase/database'
+import {onValue, ref, set} from 'firebase/database'
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
@@ -71,6 +71,10 @@ const [playertest, setPlayertest] = useState();
   useEffect(() => {
     filterEnrolments()
   }, [chosenGame])
+
+  useEffect(() => {
+    groupPlayers()
+  }, [enrolledPlayers])
   
 
   const selectDivision = (div) => {
@@ -104,19 +108,36 @@ const [playertest, setPlayertest] = useState();
     chosenGame ? enrolmentsToChosenGame = dbEnrolments.concat().filter(i => i.game_id == chosenGame.id) : null
     let newEnrolledPlayers;
     enrolmentsToChosenGame ? newEnrolledPlayers = dbPlayers.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
-    newEnrolledPlayers ? console.log("newEnrolledPlayers:", newEnrolledPlayers) : null
+    //newEnrolledPlayers ? console.log("newEnrolledPlayers:", newEnrolledPlayers) : null
     newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
-    newEnrolledPlayers ? console.log("newEnrolledPlayers: ", newEnrolledPlayers):null;
+    //newEnrolledPlayers ? console.log("newEnrolledPlayers: ", newEnrolledPlayers) : null;
   }
 
-  //Flatlist components
-  const DivisionSeparator = () => {
-    <View style={style.divisionSeparator}></View>
-  }
+  //Flatlist components and functions
+  
+    const GroupSeparator = () => {
+      <View style={style.divisionSeparator}></View>
+    }
+  
+    const Group = ({item}) => {
+      return <View>
+        <Text>{item[0].name}</Text>
 
-  const Division = ({item}) => {
-    console.log(item.name);
-    return <Text>{item.name}</Text>
+      </View>
+    }
+
+  //divides the players in to groups of 4. Uncomment the commented console logs to see what this does.
+  const groupPlayers = () => {
+    //console.log(enrolledPlayers);
+    const newGroups = enrolledPlayers ? enrolledPlayers.reduce((groups, player, i) => {
+      let j = Math.floor(i / 4)
+      groups[j] = groups[j] || []
+      groups[j].push(player)
+      return groups
+    }, []) : null
+    //console.log("newGroups: ", newGroups);
+
+    setGroups(newGroups);
   }
 
   //FlatList search
@@ -168,12 +189,11 @@ const [playertest, setPlayertest] = useState();
             </ List.Section>
 
             {/* LOHKOT JA PISTEIDEN SYÖTTÖ*/}
-            {enrolledPlayers ? <View>
-              <FlatList 
-                data={enrolledPlayers}
-                ItemSeparatorComponent={DivisionSeparator}
-                renderItem={Division}
-                key={i => i.id}
+            {groups ? <View>
+              <FlatList
+                data={groups}
+                ItemSeparatorComponent={GroupSeparator}
+                renderItem={Group}
               />
               
             </View> : null}
