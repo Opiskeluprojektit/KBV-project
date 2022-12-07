@@ -10,12 +10,15 @@ function SummaryEnrolment({ navigation }) {
   return (
     <ImageBackground source={backgroundImage} imageStyle={{height: '100%', width: 800}}>
       <SafeAreaView style={style.container}>
+
+        {/* Header and button for closing the summary */}
         <View style={style.header}>
           <Pressable onPress={() => navigation.navigate('Home')}>
-            <View style={style.iconsEllipse}><Icon.X style={[style.icons]}/></View>
+            <View style={style.iconsClose}><Icon.X style={[style.icons]}/></View>
           </Pressable>
         </View>
 
+        {/* Thank you for enrolling and the play where the games are played */}
         <View style={style.summaryContainer}>
           <Text style={style.summaryHeading}>Kiitos ilmoittautumisestasi!</Text>
           <Text style={style.summaryTitle}>ViikkoBiitsi</Text>
@@ -24,10 +27,14 @@ function SummaryEnrolment({ navigation }) {
             <Icon.MapPin style={style.summaryIcons}/>
             <Text style={style.text}>Kokkola Camping biitsikenttä</Text>
           </View>
+
+          {/* Game to which the enrolment has been done */}
           <View style={style.summaryDetails}>
             <Icon.Clock style={style.summaryIcons}/>
             <Text style={style.text}>Torstai ViikkoBiitsi miehet</Text>
           </View>
+
+          {/* The players which were enrolled */}
           <View style={style.summaryDetails}>
             <Icon.Users style={style.summaryIcons}/>
             <Text style={style.text}>Pekka Pohjola, Pekka Ojala</Text>

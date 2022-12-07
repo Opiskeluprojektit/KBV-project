@@ -86,20 +86,6 @@ export const style = StyleSheet.create({
         shadowRadius: 4
     },
 
-    // Yellow circle for icons
-    iconsEllipse2: {
-        backgroundColor: Colors.iconsBackground,
-        width: 50,
-        height: 50,
-        borderRadius: 1000,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4
-    },
-
     // Feather icons
     icons: {
         color: Colors.bodyText,
@@ -209,13 +195,14 @@ export const style = StyleSheet.create({
     },
 
 
-    // EnrolmentScreen styles
+// EnrolmentScreen styles
 
     addPlayer: {
         flexDirection: "row",
         //marginBottom: 24
     }, 
 
+    // Button for enrolment
     enrolButton: {
         //flexDirection: 'column',
         //position: 'absolute',
@@ -224,6 +211,7 @@ export const style = StyleSheet.create({
         bottom: 0
     },
 
+    // Styles for predicted ranking element
     predictedRanking: {
         backgroundColor: Colors.inputColor,
         width: "90%",
@@ -232,12 +220,38 @@ export const style = StyleSheet.create({
         borderRadius: 10
     },
 
-    // SummaryEnrolmentScreen styles
+    // Yellow circle for adding the player
+    iconsAddPlayer: {
+        backgroundColor: Colors.iconsBackground,
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        //position: 'absolute'
+        //overflow: 'hidden'
+    },
 
+    addPlayerText: {
+        textAlignVertical: 'center',
+        textAlign: 'left',
+        fontSize: 20,
+        letterSpacing: 0.1,
+        fontWeight: '500', // pitäskö tämä olla myös titles'issä
+    },
+
+// SummaryEnrolmentScreen styles
+
+    // Container / modal container for summary screen
     summaryContainer: {
         margin: 24
     },
 
+    // Heading only for enrolment
     summaryHeading: { 
         color: Colors.darkText,
         fontSize: 40,
@@ -256,10 +270,25 @@ export const style = StyleSheet.create({
         marginBottom: 10
     },
 
+    // Icons for enrolled players, date and time
     summaryIcons: {
         color: Colors.bodyText,
         marginRight: 20
     }, 
+
+    iconsClose: {
+        backgroundColor: Colors.iconsBackground,
+        position: "relative",
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+    },
 
     // PointsScreen styles
     divisionSeparator: {
