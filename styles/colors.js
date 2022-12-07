@@ -6,7 +6,7 @@ const Colors = {
     inputColor: '#E6F4F1', //Vaalea tausta input-kentille ja menulle
     iconsBackground: '#EEE8A9', //Keltainen tausta
     primary: '#27B9C0', //Logon väri
-    secondary: '#005C70' //Button backgroundcolor 
+    secondary: '#005C70' //Button backgroundcolor
 }
 
 export default Colors;

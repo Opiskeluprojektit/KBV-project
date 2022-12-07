@@ -99,7 +99,14 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.inputColor,
         height: 50,
         borderRadius: 10,
-        marginBottom: 20
+        marginBottom: 20,
+        shadowColor: 'rgb(0, 0, 0)',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
     },
 
     // SplashScreen styles
