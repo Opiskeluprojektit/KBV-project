@@ -193,10 +193,10 @@ export const style = StyleSheet.create({
     homeButtons: {
         flexDirection: "column",
         width: '100%',
-        height: 72,
+        height: 74,
         marginBottom: 15,
-        borderTopRightRadius: 60,
-        borderBottomRightRadius: 60
+        //borderTopRightRadius: 60,
+        //borderBottomRightRadius: 60
     },
 
     // Only HomeScreen yellow circles
@@ -263,13 +263,6 @@ export const style = StyleSheet.create({
     },
 
     // Heading only for enrolment
-    summaryHeading: { 
-        color: Colors.darkText,
-        fontWeight: '500',
-        fontSize: 40,
-        marginTop: 34,
-        marginBottom: 15
-    },
 
     summaryTitle: {
         color: Colors.darkText, 
@@ -320,7 +313,8 @@ export const style = StyleSheet.create({
     menuClose: {
         color: Colors.darkText,
         alignSelf: 'flex-end',
-        margin: 24
+        margin: 24,
+        marginTop: 34
     },
 
     menuIcons: {
@@ -329,7 +323,7 @@ export const style = StyleSheet.create({
 
     someIcons: {
         color: Colors.darkText,
-        marginRight: 10,
+        marginRight: 15,
         marginTop: 30
     },
 
