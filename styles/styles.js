@@ -102,14 +102,7 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.inputColor,
         height: 50,
         borderRadius: 10,
-        marginBottom: 20,
-        shadowColor: 'rgb(0, 0, 0)',
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
+        marginBottom: 20
     },
 
     // SplashScreen styles
@@ -215,8 +208,6 @@ export const style = StyleSheet.create({
 
     // Button for enrolment
     enrolButton: {
-        //flexDirection: 'column',
-        //position: 'absolute',
         width: 230,
         height: 53,
         bottom: 0
@@ -242,9 +233,7 @@ export const style = StyleSheet.create({
             height: 4
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4,
-        //position: 'absolute'
-        //overflow: 'hidden'
+        shadowRadius: 4
     },
 
     addPlayerText: {
@@ -252,7 +241,7 @@ export const style = StyleSheet.create({
         textAlign: 'left',
         fontSize: 20,
         letterSpacing: 0.1,
-        fontWeight: '500', // pitäskö tämä olla myös titles'issä
+        fontWeight: '500'
     },
 
 // SummaryEnrolmentScreen styles
