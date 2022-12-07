@@ -291,7 +291,8 @@ export const style = StyleSheet.create({
 
     iconsClose: {
         backgroundColor: Colors.iconsBackground,
-        position: "relative",
+        alignSelf: 'flex-end',
+        marginLeft: 24,
         width: 50,
         height: 50,
         borderRadius: 1000,
