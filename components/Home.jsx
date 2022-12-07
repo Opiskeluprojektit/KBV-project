@@ -24,7 +24,7 @@ export default function Home({navigation}) {
           <View style={style.homeButtonsContainer}>
             <Pressable onPress={() => navigation.navigate('Enrolment')} style={[style.homeButtons, style.button]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={style.icons}/></View>
-              <Text style={style.buttonText}>Ilmoittaudu viikkokisaan</Text>
+              <Text style={style.buttonText}>Ilmoittaudu</Text>
             </Pressable>
             <Pressable onPress={() => navigation.navigate('Points')} style={[style.homeButtons, style.button]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Edit style={style.icons}/></View>

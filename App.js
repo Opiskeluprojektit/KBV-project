@@ -9,11 +9,10 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-
-
 const Stack = createNativeStackNavigator()
 
 function App() {
+
   return (
   <PaperProvider>
     <NavigationContainer>

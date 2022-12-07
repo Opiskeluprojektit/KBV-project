@@ -1,6 +1,5 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet} from 'react-native';
 import Colors from './colors';
-
 
 export const style = StyleSheet.create({
     container: {
@@ -38,6 +37,7 @@ export const style = StyleSheet.create({
     //Screen headerlines
     h4Style: { 
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 34,
         marginTop: 34,
         marginBottom: 30
@@ -45,6 +45,7 @@ export const style = StyleSheet.create({
 
     titles: {
         color: Colors.bodyText, 
+        fontWeight: '500',
         fontSize: 20
     },
 
@@ -69,6 +70,7 @@ export const style = StyleSheet.create({
 
     buttonText: {
         color: Colors.lightText,
+        fontWeight: '500',
         fontSize: 20
     },
 
@@ -152,7 +154,7 @@ export const style = StyleSheet.create({
     // HomeScreen styles
 
     heading: {
-        height: '30%',
+        height: '35%',
         width: '100%'
     },
 
@@ -167,15 +169,16 @@ export const style = StyleSheet.create({
 
     h2Style: {
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 60,
         textAlign: 'left',
         lineHeight: 60,
         marginLeft: 24,
-        //fontWeight: 500
+        marginTop: 24
     },
 
     homeButtonsContainer: {
-        height: "55%",
+        height: "50%",
         marginLeft: 24,
         marginRight: 24
     },
@@ -183,10 +186,10 @@ export const style = StyleSheet.create({
     homeButtons: {
         flexDirection: "column",
         width: '100%',
-        height: 72,
+        height: 74,
         marginBottom: 15,
-        borderTopRightRadius: 60,
-        borderBottomRightRadius: 60
+        //borderTopRightRadius: 60,
+        //borderBottomRightRadius: 60
     },
 
     // Only HomeScreen yellow circles
@@ -205,8 +208,6 @@ export const style = StyleSheet.create({
 
     // Button for enrolment
     enrolButton: {
-        //flexDirection: 'column',
-        //position: 'absolute',
         width: 230,
         height: 53,
         bottom: 0
@@ -232,9 +233,7 @@ export const style = StyleSheet.create({
             height: 4
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4,
-        //position: 'absolute'
-        //overflow: 'hidden'
+        shadowRadius: 4
     },
 
     addPlayerText: {
@@ -242,7 +241,7 @@ export const style = StyleSheet.create({
         textAlign: 'left',
         fontSize: 20,
         letterSpacing: 0.1,
-        fontWeight: '500', // pitäskö tämä olla myös titles'issä
+        fontWeight: '500'
     },
 
 // SummaryEnrolmentScreen styles
@@ -253,17 +252,12 @@ export const style = StyleSheet.create({
     },
 
     // Heading only for enrolment
-    summaryHeading: { 
-        color: Colors.darkText,
-        fontSize: 40,
-        marginTop: 34,
-        marginBottom: 15
-    },
 
     summaryTitle: {
-        color: Colors.bodyText, 
+        color: Colors.darkText, 
+        fontWeight: '500',
         fontSize: 20,
-        marginBottom: 20
+        marginBottom: 10
     },
 
     summaryDetails: {
@@ -279,7 +273,8 @@ export const style = StyleSheet.create({
 
     iconsClose: {
         backgroundColor: Colors.iconsBackground,
-        position: "relative",
+        alignSelf: 'flex-end',
+        marginLeft: 24,
         width: 50,
         height: 50,
         borderRadius: 1000,
@@ -307,7 +302,8 @@ export const style = StyleSheet.create({
     menuClose: {
         color: Colors.darkText,
         alignSelf: 'flex-end',
-        margin: 24
+        margin: 24,
+        marginTop: 34
     },
 
     menuIcons: {
@@ -316,12 +312,13 @@ export const style = StyleSheet.create({
 
     someIcons: {
         color: Colors.darkText,
-        marginRight: 10,
+        marginRight: 15,
         marginTop: 30
     },
 
     menuContent: {
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 34,
         marginBottom: 20,
         marginLeft: 24,

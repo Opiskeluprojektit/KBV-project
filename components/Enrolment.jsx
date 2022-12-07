@@ -122,11 +122,12 @@ function Enrolment({ navigation }) {
                 <List.Accordion
                   title={chosenGame ? getGameTitle(chosenGame) : null}
                   style={style.search}
+                  theme={{colors: {background: '#F9F9F9'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     
                   {gameList}
-                </List.Accordion>
+                </List.Accordion> 
               </List.Section>
 
               {/* FlatList for choosing the player */}
@@ -135,6 +136,8 @@ function Enrolment({ navigation }) {
                   label="Haku"
                   value={search}
                   style={style.search}
+                  underlineColor={'#1B1B1B'}
+                  activeUnderlineColor={'#005C70'}
                   onChangeText={text => executeSearch(text)}
                   returnKeyType="search"
                   onSubmitEditing={() => executeSearch(search)}
