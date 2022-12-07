@@ -37,6 +37,7 @@ export const style = StyleSheet.create({
     //Screen headerlines
     h4Style: { 
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 34,
         marginTop: 34,
         marginBottom: 30
@@ -44,6 +45,7 @@ export const style = StyleSheet.create({
 
     titles: {
         color: Colors.bodyText, 
+        fontWeight: '500',
         fontSize: 20
     },
 
@@ -68,6 +70,7 @@ export const style = StyleSheet.create({
 
     buttonText: {
         color: Colors.lightText,
+        fontWeight: '500',
         fontSize: 20
     },
 
@@ -158,7 +161,7 @@ export const style = StyleSheet.create({
     // HomeScreen styles
 
     heading: {
-        height: '30%',
+        height: '35%',
         width: '100%'
     },
 
@@ -173,15 +176,16 @@ export const style = StyleSheet.create({
 
     h2Style: {
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 60,
         textAlign: 'left',
         lineHeight: 60,
         marginLeft: 24,
-        //fontWeight: 500
+        marginTop: 24
     },
 
     homeButtonsContainer: {
-        height: "55%",
+        height: "50%",
         marginLeft: 24,
         marginRight: 24
     },
@@ -261,15 +265,17 @@ export const style = StyleSheet.create({
     // Heading only for enrolment
     summaryHeading: { 
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 40,
         marginTop: 34,
         marginBottom: 15
     },
 
     summaryTitle: {
-        color: Colors.bodyText, 
+        color: Colors.darkText, 
+        fontWeight: '500',
         fontSize: 20,
-        marginBottom: 20
+        marginBottom: 10
     },
 
     summaryDetails: {
@@ -328,6 +334,7 @@ export const style = StyleSheet.create({
 
     menuContent: {
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 34,
         marginBottom: 20,
         marginLeft: 24,

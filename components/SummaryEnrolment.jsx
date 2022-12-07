@@ -20,7 +20,7 @@ function SummaryEnrolment({ navigation }) {
 
         {/* Thank you for enrolling and the play where the games are played */}
         <View style={style.summaryContainer}>
-          <Text style={style.summaryHeading}>Kiitos ilmoittautumisestasi!</Text>
+          <Text style={style.summaryHeading}>Kiitos ilmoittautumisesta!</Text>
           <Text style={style.summaryTitle}>ViikkoBiitsi</Text>
 
           <View style={style.summaryDetails}>
