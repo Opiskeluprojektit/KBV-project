@@ -148,13 +148,13 @@ const [playertest, setPlayertest] = useState();
           <View style={style.contentOnLightBG}>
             <Text style={style.h4Style}>Pisteiden syöttö</Text>
             <List.Section>
-              <List.Accordion title={division ? division : "Sarja valikko"} expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
+              <List.Accordion title={division ? division : "Sarja valikko"} style={style.search} expanded={divisionsExpanded} onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
                 <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
                 <List.Item title="Miehet" onPress={() => selectDivision("Miehet")} />
                 <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
                 <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
               </List.Accordion>
-              <List.Accordion title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
+              <List.Accordion title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} style={style.search} expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
                 {gameList}
               </List.Accordion>
               <TextInput

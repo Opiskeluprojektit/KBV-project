@@ -126,7 +126,7 @@ function Enrolment({ navigation }) {
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     
                   {gameList}
-                </List.Accordion>
+                </List.Accordion> 
               </List.Section>
 
               {/* FlatList for choosing the player */}
