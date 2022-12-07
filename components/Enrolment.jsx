@@ -112,7 +112,7 @@ function Enrolment({ navigation }) {
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
               {/* Dropdown pelipäivän valinnalle */}
-              <Text style={style.titles}>Valitse peli</Text>
+              <Text style={style.titles}>Valitse peli</Text> 
               <List.Section>
                 <List.Accordion
                   title={chosenGame ? getGameTitle(chosenGame) : null}
