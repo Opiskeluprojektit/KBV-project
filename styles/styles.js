@@ -105,8 +105,6 @@ export const style = StyleSheet.create({
         marginBottom: 20
     },
 
-    // SplashScreen styles
-
     // CodeScreen styles
 
     bigLogo: {
@@ -189,6 +187,12 @@ export const style = StyleSheet.create({
         marginBottom: 15,
         //borderTopRightRadius: 60,
         //borderBottomRightRadius: 60
+    },
+
+    bigButtonText: {
+        color: Colors.lightText,
+        fontWeight: '500',
+        fontSize: 20
     },
 
     // Only HomeScreen yellow circles
