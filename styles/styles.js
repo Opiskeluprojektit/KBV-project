@@ -287,8 +287,17 @@ export const style = StyleSheet.create({
     },
 
     // PointsScreen styles
-    divisionSeparator: {
-        height: 8,
+    groupSeparator: {
+    },
+
+    playerSeparator: {
+        paddingTop: 8,
+        paddingBottom: 8
+    },
+
+    playerScoresContainer: {
+        flexDirection: "row",
+        alignItems: "stretch"
     },
 
     // RankingScreen styles
