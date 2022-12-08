@@ -126,7 +126,7 @@ function Enrolment({ navigation }) {
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     
-                  {gameList}
+                  {gameList} 
                 </List.Accordion> 
               </List.Section>
 

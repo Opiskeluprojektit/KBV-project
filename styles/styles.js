@@ -71,7 +71,7 @@ export const style = StyleSheet.create({
     buttonText: {
         color: Colors.lightText,
         fontWeight: '500',
-        fontSize: 20
+        fontSize: 16
     },
 
     // Yellow circle for icons
@@ -132,7 +132,6 @@ export const style = StyleSheet.create({
 
     codeInputField: {
         alignItems: 'center',
-        //alignSelf: 'center',
         marginBottom: 30,
     },
 
@@ -209,7 +208,7 @@ export const style = StyleSheet.create({
     // Button for enrolment
     enrolButton: {
         width: 230,
-        height: 53,
+        height: 56,
         bottom: 0
     },
 
