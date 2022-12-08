@@ -117,23 +117,22 @@ function Enrolment({ navigation }) {
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
               {/* Dropdown for choosing gaming day */}
-              <Text style={style.titles}>Valitse peli</Text>
               <List.Section>
                 <List.Accordion
-                  title={chosenGame ? getGameTitle(chosenGame) : null}
+                  title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
                   style={style.search}
                   theme={{colors: {background: '#F9F9F9'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     
-                  {gameList}
+                  {gameList} 
                 </List.Accordion> 
               </List.Section>
 
               {/* FlatList for choosing the player */}
-              {chosenGame ? <><Text style={style.titles}>Valitse pelaaja</Text>
+              {chosenGame ? <>
                 <TextInput
-                  label="Haku"
+                  label="Pelaajahaku"
                   value={search}
                   style={style.search}
                   underlineColor={'#1B1B1B'}

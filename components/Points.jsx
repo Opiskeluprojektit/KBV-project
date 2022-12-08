@@ -224,7 +224,7 @@ const [playertest, setPlayertest] = useState();
             <Text style={style.h4Style}>Pisteiden syöttö</Text>
             <List.Section>
               <List.Accordion 
-                title={division ? division : "Sarja valikko"} 
+                title={division ? division : "Sarjavalikko"} 
                 style={style.search}
                 theme={{colors: {background: '#F9F9F9'}}} 
                 expanded={divisionsExpanded} 
