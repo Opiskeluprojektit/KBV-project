@@ -35,8 +35,8 @@ export default function Home({navigation}) {
               <Text style={style.bigButtonText}>Ranking-listat</Text>
             </Pressable>
             <Pressable  onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}} style={[style.homeButtons, style.button]}>
-              <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
               <Text style={style.bigButtonText}>ViikkoBiitsi-säännöt</Text>
+              <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
             </Pressable>
           </View>
           

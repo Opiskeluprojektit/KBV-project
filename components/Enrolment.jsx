@@ -197,7 +197,7 @@ function Enrolment({ navigation }) {
               <Provider>
                 <Portal>
                   <Modal visible={visible} contentContainerStyle={style.modalContainer}>
-                    <Text style={style.modalTitle}>Kiitos ilmoittautumisesta!</Text>
+                    <Text style={style.modalTitle}>Kiitos{'\n'}ilmoittautumisesta!</Text>
                     <View style={style.modal}>
                       <Text style={style.summaryTitle}>ViikkoBiitsi</Text>
 
