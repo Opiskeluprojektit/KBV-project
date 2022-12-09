@@ -247,6 +247,42 @@ export const style = StyleSheet.create({
         fontWeight: '500'
     },
 
+    // SummaryEnrolmentModal styles
+    modalContainer: {
+        backgroundColor: Colors.inputColor,
+        width: '80%',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 50,
+    },
+
+    modal: {
+        left: 24,
+        marginTop: 42,
+    },
+
+    modalTitle: {
+        fontSize: 24,
+        fontWeight: '500',
+        textAlign: 'center',
+        marginTop: 242, // vaihdetaan 42, kunhan marginin testaus lopetettu
+    },
+
+    // Icons for enrolled players, date and time
+    summaryIcons: {
+        color: Colors.bodyText,
+        marginRight: 20
+    }, 
+
+    summaryButton: {
+        backgroundColor: Colors.secondary,
+        width: 120,
+        height: 40,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
 // SummaryEnrolmentScreen styles
 
     // Container / modal container for summary screen
@@ -268,11 +304,7 @@ export const style = StyleSheet.create({
         marginBottom: 10
     },
 
-    // Icons for enrolled players, date and time
-    summaryIcons: {
-        color: Colors.bodyText,
-        marginRight: 20
-    }, 
+
 
     iconsClose: {
         backgroundColor: Colors.iconsBackground,
