@@ -115,21 +115,8 @@ export const style = StyleSheet.create({
         alignSelf: 'center'
     },
 
-    codeContainer: {
-        height: "55%",
-        marginLeft: 24,
-        marginRight: 24,
-        alignSelf: 'center'
-    },
-
-    codeButtons: {
-        flexDirection: 'column',
-        width: '90%',
-        height: 60
-    },
-
     codeInputField: {
-        alignItems: 'center',
+        alignSelf: 'center',
         marginBottom: 30,
     },
 
@@ -145,6 +132,11 @@ export const style = StyleSheet.create({
         },
         shadowOpacity: 0.5,
         shadowRadius: 4
+    },
+
+    codeContainer: {
+        height: "55%",
+        alignSelf: 'center'
     },
 
 
@@ -181,12 +173,9 @@ export const style = StyleSheet.create({
     },
 
     homeButtons: {
-        flexDirection: "column",
-        width: '100%',
+        width: '95%',
         height: 74,
-        marginBottom: 15,
-        //borderTopRightRadius: 60,
-        //borderBottomRightRadius: 60
+        marginBottom: 15
     },
 
     bigButtonText: {
@@ -198,7 +187,8 @@ export const style = StyleSheet.create({
     // Only HomeScreen yellow circles
     homeEllipse: {
         alignSelf: 'flex-end',
-        right: 8
+        //right: 8
+        right: -24
     },
 
 
@@ -262,10 +252,11 @@ export const style = StyleSheet.create({
     },
 
     modalTitle: {
+        color: Colors.secondary,
         fontSize: 24,
         fontWeight: '500',
         textAlign: 'center',
-        marginTop: 242, // vaihdetaan 42, kunhan marginin testaus lopetettu
+        marginTop: 242, // vaihdetaan 34, kunhan marginin testaus lopetettu
     },
 
     buttonSummaryStyles: {
@@ -307,8 +298,6 @@ export const style = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: 10
     },
-
-
 
     iconsClose: {
         backgroundColor: Colors.iconsBackground,
