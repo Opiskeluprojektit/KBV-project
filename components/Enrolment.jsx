@@ -33,6 +33,9 @@ function Enrolment({ navigation }) {
 
   const [enrolledPlayerName, setEnrolledPlayerName] = useState('');
   const [enrolledPlayerRanking, setEnrolledPlayerRanking] = useState('');
+  const [enrolledPlayerDivision, setEnrolledPlayerDivision] = useState('');
+
+
 
   // Firebase tietokannan testaamiseen liittyvää
   const [gamestest, setGamestest] = useState();
@@ -63,7 +66,9 @@ function Enrolment({ navigation }) {
   // The component for closing the game day dropdown and setting the chosen game date
   const selectGame = (i) => {
     setGamesExpanded(!gamesExpanded);
-    setChosenGame(i)
+    setChosenGame(i);
+    setEnrolledPlayerDivision(i.division);
+  
   }
   
   // The component that the FlatList component uses to print it's items.
@@ -204,14 +209,15 @@ function Enrolment({ navigation }) {
                       {/* Game to which the enrolment has been done */}
                       <View style={style.summaryDetails}>
                         <Icon.Clock style={style.summaryIcons}/>
-                        <Text style={style.text}>Torstai ViikkoBiitsi miehet</Text>
+                         {console.log(chosenGame)}
+                        <Text style={style.text}>{chosenGame.date} ViikkoBiitsi {enrolledPlayerDivision}</Text>
                       </View>
 
                       {/* The players which were enrolled */}
                       <View style={style.summaryDetails}>
                         <Icon.Users style={style.summaryIcons}/>
                         <Text style={style.text}>{enrolledPlayerName} 
-                          <br/>Ranking: {enrolledPlayerRanking}</Text>
+                          {"\n"}Ranking: {enrolledPlayerRanking}</Text>
                       </View>
 
                       <View>
