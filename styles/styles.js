@@ -268,6 +268,10 @@ export const style = StyleSheet.create({
         marginTop: 242, // vaihdetaan 42, kunhan marginin testaus lopetettu
     },
 
+    buttonSummaryStyles: {
+        flexDirection: "row",
+    },
+
     // Icons for enrolled players, date and time
     summaryIcons: {
         color: Colors.bodyText,
