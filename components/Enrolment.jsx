@@ -28,6 +28,7 @@ function Enrolment({ navigation }) {
   const [chosenGame, setChosenGame] = useState();
   const [gamesToShow, setGamesToShow] = useState(sortedDBGames);
   const [gamesExpanded, setGamesExpanded] = useState(false);
+  // const [gamesToShow, setGamesToShow] = useState("");
 
   // Firebase tietokannan testaamiseen liittyvää
   const [gamestest, setGamestest] = useState();
@@ -53,7 +54,7 @@ function Enrolment({ navigation }) {
     });
   },[]);
   
-  console.log(gamestest)
+  console.log(gamesToShow)
   
   // The component for closing the game day dropdown and setting the chosen game date
   const selectGame = (i) => {
@@ -102,6 +103,14 @@ function Enrolment({ navigation }) {
   // Maps the game date list
   const gameList = gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
 
+  // Firebase tietokannan testaamiseen liittyvää
+  /* const gameList = <List.Item>{gamesToShow.length > 0 ? (
+    gamesToShow.map(i =>(
+      <Item key={i.id}
+      title={getGameTitle(i)} onPress={() => selectGame(i)}/>
+    ))
+    ) : null }
+    </List.Item>; */
 
   return (
     <ImageBackground source={backgroundImage}>
