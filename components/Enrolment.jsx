@@ -64,7 +64,7 @@ function Enrolment({ navigation }) {
   }, [enrolledPlayers])
   
   
-  console.log(gamestest)
+  //console.log(gamestest)
   
   // The component for closing the game day dropdown and setting the chosen game date
   const selectGame = (i) => {
