@@ -101,8 +101,9 @@ export const style = StyleSheet.create({
     search: {
         backgroundColor: Colors.inputColor,
         height: 50,
-        borderRadius: 10,
-        marginBottom: 20
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        marginBottom: 10
     },
 
     // CodeScreen styles
@@ -315,12 +316,47 @@ export const style = StyleSheet.create({
     },
 
     // PointsScreen styles
+    
     groupSeparator: {
     },
 
     playerSeparator: {
         paddingTop: 8,
         paddingBottom: 8
+    },
+
+    playerContainer: {
+        backgroundColor: Colors.inputColor,
+        height: 50,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        marginBottom: 10,
+        justifyContent: 'center'
+    },
+
+    pointTitles: {
+        color: Colors.bodyText, 
+        fontWeight: '500',
+        fontSize: 20,
+        marginBottom: 10,
+        marginTop: 30,
+        alignSelf: 'center'
+    },
+
+    pointTexts: {
+        color: Colors.bodyText,
+        fontSize: 16,
+        paddingLeft: 15
+    },
+
+    numInput: {
+        backgroundColor: Colors.inputColor,
+        width: '31%',
+        height: 50,
+        marginRight: 13,
+        marginBottom: 13,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
     },
 
     playerScoresContainer: {

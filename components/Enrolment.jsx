@@ -167,7 +167,7 @@ function Enrolment({ navigation }) {
                 <List.Accordion
                   title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
                   style={style.search}
-                  theme={{colors: {background: '#F9F9F9'}}}
+                  theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     
