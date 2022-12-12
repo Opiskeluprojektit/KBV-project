@@ -17,10 +17,12 @@ export default function Home({navigation}) {
             <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
           
+          {/* Heading*/}
           <View style={style.heading}>
             <Text style={style.h2Style}>Kokkola{'\n'}Beach{'\n'}Volley</Text>
           </View>
 
+          {/* Navigation to different screens: Enrolment, Points, Ranking and to rules in KBV website*/}
           <View style={style.homeButtonsContainer}>
             <Pressable onPress={() => navigation.navigate('Enrolment')} style={[style.homeButtons, style.button]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={style.icons}/></View>

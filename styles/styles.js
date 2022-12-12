@@ -195,6 +195,10 @@ export const style = StyleSheet.create({
 
 // EnrolmentScreen styles
 
+    playerSearch: {
+        marginBottom: 5
+    },
+
     addPlayer: {
         flexDirection: "row",
         //marginBottom: 24
@@ -207,14 +211,6 @@ export const style = StyleSheet.create({
         bottom: 0
     },
 
-    // Styles for predicted ranking element
-    predictedRanking: {
-        backgroundColor: Colors.inputColor,
-        width: "90%",
-        alignSelf: 'center',
-        justifyContent: 'center',
-        borderRadius: 10
-    },
 
     // Yellow circle for adding the player
     iconsAddPlayer: {
@@ -238,7 +234,23 @@ export const style = StyleSheet.create({
         fontWeight: '500'
     },
 
-    // SummaryEnrolmentModal styles
+// SummaryEnrolmentModal styles
+    
+    //Title for summary enrolment modal
+    summaryTitle: {
+        color: Colors.darkText, 
+        fontWeight: '500',
+        fontSize: 20,
+        marginBottom: 10
+    },
+
+    // Enrolment details
+    summaryDetails: {
+        flexDirection: 'row',
+        marginBottom: 10
+    },
+    
+    // Container for summary modal
     modalContainer: {
         backgroundColor: Colors.inputColor,
         width: '80%',
@@ -252,6 +264,7 @@ export const style = StyleSheet.create({
         marginTop: 42,
     },
 
+    // Title for summary modal
     modalTitle: {
         color: Colors.secondary,
         fontSize: 24,
@@ -259,9 +272,14 @@ export const style = StyleSheet.create({
         textAlign: 'center',
         marginTop: 242, // vaihdetaan 34, kunhan marginin testaus lopetettu
     },
-
-    buttonSummaryStyles: {
-        flexDirection: "row",
+    
+    // Styles for predicted ranking element
+    predictedRanking: {
+        backgroundColor: Colors.inputColor,
+        width: "90%",
+        alignSelf: 'center',
+        justifyContent: 'center',
+        borderRadius: 10
     },
 
     // Icons for enrolled players, date and time
@@ -269,6 +287,11 @@ export const style = StyleSheet.create({
         color: Colors.bodyText,
         marginRight: 20
     }, 
+
+    // Modal button styles
+    buttonSummaryStyles: {
+        flexDirection: "row",
+    },   
 
     summaryButton: {
         backgroundColor: Colors.secondary,
@@ -279,43 +302,7 @@ export const style = StyleSheet.create({
         justifyContent: 'center',
     },
 
-// SummaryEnrolmentScreen styles
-
-    // Container / modal container for summary screen
-    summaryContainer: {
-        margin: 24
-    },
-
-    // Heading only for enrolment
-
-    summaryTitle: {
-        color: Colors.darkText, 
-        fontWeight: '500',
-        fontSize: 20,
-        marginBottom: 10
-    },
-
-    summaryDetails: {
-        flexDirection: 'row',
-        marginBottom: 10
-    },
-
-    iconsClose: {
-        backgroundColor: Colors.iconsBackground,
-        alignSelf: 'flex-end',
-        marginLeft: 24,
-        width: 50,
-        height: 50,
-        borderRadius: 1000,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-    },
-
-    // PointsScreen styles
+// PointsScreen styles
     
     groupSeparator: {
     },
@@ -364,9 +351,9 @@ export const style = StyleSheet.create({
         alignItems: "stretch"
     },
 
-    // RankingScreen styles
+// RankingScreen styles
 
-    // Menu styles
+// Menu styles
 
     menuContainer: {
         backgroundColor: Colors.inputColor
