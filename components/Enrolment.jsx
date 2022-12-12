@@ -3,7 +3,7 @@ import { SafeAreaView,  FlatList, Text, View, Pressable,
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
-import { List, TextInput } from 'react-native-paper';
+import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
 import db from '../assets/testidata.json';
 import {database} from '../firebase/Config';
 import {onValue, ref} from 'firebase/database';
@@ -22,13 +22,20 @@ const sortedDBGames = JSON.parse(JSON.stringify(db.game))
 const backgroundImage = require('../assets/Volleyball100.png');
 
 function Enrolment({ navigation }) {
+  // Nämä constit tullaan kommentoimaan myös
   const [search, setSearch] = useState('');
   const [playersToShow, setPlayersToShow] = useState([]);
   const [playersToEnroll, setPlayersToEnroll] = useState([]);
   const [chosenGame, setChosenGame] = useState();
   const [gamesToShow, setGamesToShow] = useState(sortedDBGames);
   const [gamesExpanded, setGamesExpanded] = useState(false);
-  // const [gamesToShow, setGamesToShow] = useState("");
+  const [visible, setVisible] = React.useState(false);
+
+  const [enrolledPlayerName, setEnrolledPlayerName] = useState('');
+  const [enrolledPlayerRanking, setEnrolledPlayerRanking] = useState('');
+  const [enrolledPlayerDivision, setEnrolledPlayerDivision] = useState('');
+
+
 
   // Firebase tietokannan testaamiseen liittyvää
   const [gamestest, setGamestest] = useState();
@@ -54,26 +61,23 @@ function Enrolment({ navigation }) {
     });
   },[]);
   
-  console.log(gamesToShow)
-  
   // The component for closing the game day dropdown and setting the chosen game date
   const selectGame = (i) => {
     setGamesExpanded(!gamesExpanded);
-    setChosenGame(i)
+    setChosenGame(i);
+    setEnrolledPlayerDivision(i.division);
+  
   }
   
   // The component that the FlatList component uses to print it's items.
   const Item = ({ name }) => (
       <Text>{name}</Text>
   );
-  
-  // The function that the FlatList component uses to print it's items.
-/*   const renderItem = ({ item }) => (
-    <Item name={item.name} />
-  ); */
 
   // The search component for player search:
     // Search filters the written text and brings up the results according to it
+    /* Tähän lisätään vielä, että pelaajaa ei näytetä, jos hän on jo 
+        ilmoittautunut kyseiseen peliin */
   const executeSearch = (search) => {
     setSearch(search);
     const searchArray =
@@ -87,12 +91,15 @@ function Enrolment({ navigation }) {
     setPlayersToShow(searchArray);
   };
 
+  // Selecting the player from the flatlist
   const selectPlayer = (player) => {
     console.log("pelaaja valittu: ", player);
-    // setPlayersToShow[""];
-    const newPlayersToEnroll = playersToEnroll.concat(player);
+    // const newPlayersToEnroll = playersToEnroll.concat(player);
     setPlayersToEnroll(player);
-    //setSearch(name)
+    setSearch(player.name);
+    setPlayersToShow();
+    setEnrolledPlayerName(player.name);
+    setEnrolledPlayerRanking(player.ranking);
   }
     
   // Converts the game date to specific form: dd.mm.yyyy
@@ -103,14 +110,22 @@ function Enrolment({ navigation }) {
   // Maps the game date list
   const gameList = gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
 
-  // Firebase tietokannan testaamiseen liittyvää
-  /* const gameList = <List.Item>{gamesToShow.length > 0 ? (
-    gamesToShow.map(i =>(
-      <Item key={i.id}
-      title={getGameTitle(i)} onPress={() => selectGame(i)}/>
-    ))
-    ) : null }
-    </List.Item>; */
+  // Showing and hiding the summary modal
+  const showModal = () => setVisible(true);
+  const hideModal = () => {
+    setVisible(false);
+    setChosenGame();
+  }
+
+  function checkModal() {
+    if (chosenGame == "" 
+    || playersToEnroll == ""
+        ) {
+          Alert.alert("Tarkista peli- ja pelaajavalinnat!")
+    } else {
+      showModal;
+    }
+  }
 
   return (
     <ImageBackground source={backgroundImage}>
@@ -128,58 +143,115 @@ function Enrolment({ navigation }) {
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
               {/* Dropdown for choosing gaming day */}
-              <Text style={style.text}>Valitse peli</Text>
               <List.Section>
                 <List.Accordion
-                  title={chosenGame ? getGameTitle(chosenGame) : null}
+                  title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
                   style={style.search}
+                  theme={{colors: {background: '#F9F9F9'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     
-                  {gameList}
-                </List.Accordion>
+                  {gameList} 
+                </List.Accordion> 
               </List.Section>
 
               {/* FlatList for choosing the player */}
-              {chosenGame ? <><Text style={style.text}>Valitse pelaaja</Text>
+              {chosenGame ? <>
                 <TextInput
-                  label="Haku"
+                  label="Pelaajahaku"
                   value={search}
                   style={style.search}
+                  underlineColor={'#1B1B1B'}
+                  activeUnderlineColor={'#005C70'}
                   onChangeText={text => executeSearch(text)}
                   returnKeyType="search"
                   onSubmitEditing={() => executeSearch(search)}
                 />
                 <FlatList
                   data={playersToShow}
-                  // renderItem={renderItem} 
                   renderItem={({item}) => <Pressable onPress={() => selectPlayer(item)}><Item name={item.name} /></Pressable>}
                   key={i => i.id}
-                  //onPress={() => selectPlayer(i.id)}
-                  //onSubmitEditing={() => selectPlayer(i.id)}
                 /></>
               : null}         
               
-              {/* Päivitetään alla olevaan uusi tyyli iconille? */}
-              <View style={style.addPlayer}>
-                <Pressable style={{flexDirection: "row"}} onPress={() => console.log("pelaaja valittu")}>
-                  <View style={[style.iconsEllipse2]}>
+              {/* HIDDEN, not in use: Button for adding new player to enrol */}
+              {/* <View style={style.addPlayer}>
+                <Pressable style={{flexDirection: "row"}} onPress={() => console.log("Lisää uusi pelaaja")}>
+                  <View style={[style.iconsAddPlayer]}>
                     <Icon.Plus style={style.icons}/>
                   </View> 
-                  <Text style={style.text}>Lisää pelaaja</Text>
+                  <Text style={style.addPlayerText}>Lisää pelaaja</Text>
                 </Pressable>
-              </View>
+              </View> */}
 
+              {/* Button for enrolment */}
               {/* Lisätään vaihtoehto pressableen: yhdellä pelaajalla teksti "Ilmoittaudu",
               kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
-              <Pressable onPress={() => navigation.navigate('SummaryEnrolment')} 
+              <Pressable onPress={showModal} 
                 style={[style.enrolButton, style.button]}>
                 <Text style={style.buttonText}>Ilmoittaudu</Text>
               </Pressable>
 
-              
+              </View>
+          </View>
 
-                {/* Tähän voi tehdä ennustetun lohkon, jos se tehdään */}
+              {/* Modal for showing enrolment summary */}
+              {/* Thank you for enrolling and the play where the games are played */}
+              <Provider>
+                <Portal>
+                  <Modal visible={visible} contentContainerStyle={style.modalContainer}>
+                    <Text style={style.modalTitle}>Kiitos{'\n'}ilmoittautumisesta!</Text>
+                    <View style={style.modal}>
+                      <Text style={style.summaryTitle}>ViikkoBiitsi</Text>
+
+                      {/* Game to which the enrolment has been done */}
+                      <View style={style.summaryDetails}>
+                        <Icon.Clock style={style.summaryIcons}/>
+                         {console.log(chosenGame)}
+                        <Text style={style.text}>{chosenGame.date} ViikkoBiitsi {enrolledPlayerDivision}</Text>
+                      </View>
+
+                      {/* The players which were enrolled */}
+                      <View style={style.summaryDetails}>
+                        <Icon.Users style={style.summaryIcons}/>
+                        <Text style={style.text}>{enrolledPlayerName} 
+                          {"\n"}Ranking: {enrolledPlayerRanking}</Text>
+                      </View>
+
+                      <View>
+                        <Text style={style.text}>Pekka Pohjola</Text>
+                        <Text style={style.text}>Pekka Ojala</Text>
+                        <Text style={style.text}>Matti Meikäläinen</Text>
+                        <Text style={style.text}>Martti Meikäläinen</Text>
+                        <Text style={style.text}>Esa Esimerkki</Text>
+                        <Text style={style.text}>Pekka Pohjola</Text>
+                        <Text style={style.text}>Pekka Ojala</Text>
+                        <Text style={style.text}>Matti Meikäläinen</Text>
+                        <Text style={style.text}>Martti Meikäläinen</Text>
+                        <Text style={style.text}>Esa Esimerkki</Text>
+                        <Text style={style.text}>Pekka Pohjola</Text>
+                        <Text style={style.text}>Pekka Ojala</Text>
+                        <Text style={style.text}>Matti Meikäläinen</Text>
+                        <Text style={style.text}>Martti Meikäläinen</Text>
+                        <Text style={style.text}>Esa Esimerkki</Text>
+                      </View>
+
+                      <Pressable onPress={() => navigation.navigate('Home')} 
+                          style={[style.summaryButton]}>
+                          <Text style={style.buttonText}>Sulje</Text>
+                        </Pressable>
+
+                      <Pressable onPress={hideModal} 
+                        style={[style.summaryButton]}>
+                        <Text style={style.buttonText}>Lisää pelaaja</Text>
+                      </Pressable>
+                    </View>
+                  </Modal>
+                </Portal>
+              </Provider>
+
+              
+                {/* Predicted ranking for the chosen game */}
 {/*               <View style={style.predictedRanking}>
               <Text style={style.text}>Ennustettu lohko</Text>
                 <Text style={style.text}>Pekka Pohjola</Text>
@@ -189,8 +261,7 @@ function Enrolment({ navigation }) {
                 <Text style={style.text}>Esa Esimerkki</Text>
               </View> */}
 
-            </View>
-          </View>
+
       </SafeAreaView>
     </ImageBackground>
   );

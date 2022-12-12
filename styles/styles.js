@@ -1,6 +1,5 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet} from 'react-native';
 import Colors from './colors';
-
 
 export const style = StyleSheet.create({
     container: {
@@ -38,6 +37,7 @@ export const style = StyleSheet.create({
     //Screen headerlines
     h4Style: { 
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 34,
         marginTop: 34,
         marginBottom: 30
@@ -45,6 +45,7 @@ export const style = StyleSheet.create({
 
     titles: {
         color: Colors.bodyText, 
+        fontWeight: '500',
         fontSize: 20
     },
 
@@ -69,27 +70,14 @@ export const style = StyleSheet.create({
 
     buttonText: {
         color: Colors.lightText,
-        fontSize: 20
+        fontWeight: '500',
+        fontSize: 16
     },
 
     // Yellow circle for icons
     iconsEllipse: {
         backgroundColor: Colors.iconsBackground,
         position: "absolute",
-        width: 50,
-        height: 50,
-        borderRadius: 1000,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4
-    },
-
-    // Yellow circle for icons
-    iconsEllipse2: {
-        backgroundColor: Colors.iconsBackground,
         width: 50,
         height: 50,
         borderRadius: 1000,
@@ -117,8 +105,6 @@ export const style = StyleSheet.create({
         marginBottom: 20
     },
 
-    // SplashScreen styles
-
     // CodeScreen styles
 
     bigLogo: {
@@ -129,22 +115,8 @@ export const style = StyleSheet.create({
         alignSelf: 'center'
     },
 
-    codeContainer: {
-        height: "55%",
-        marginLeft: 24,
-        marginRight: 24,
-        alignSelf: 'center'
-    },
-
-    codeButtons: {
-        flexDirection: 'column',
-        width: '90%',
-        height: 60
-    },
-
     codeInputField: {
-        alignItems: 'center',
-        //alignSelf: 'center',
+        alignSelf: 'center',
         marginBottom: 30,
     },
 
@@ -162,11 +134,16 @@ export const style = StyleSheet.create({
         shadowRadius: 4
     },
 
+    codeContainer: {
+        height: "55%",
+        alignSelf: 'center'
+    },
+
 
     // HomeScreen styles
 
     heading: {
-        height: '30%',
+        height: '35%',
         width: '100%'
     },
 
@@ -181,32 +158,37 @@ export const style = StyleSheet.create({
 
     h2Style: {
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 60,
         textAlign: 'left',
         lineHeight: 60,
         marginLeft: 24,
-        //fontWeight: 500
+        marginTop: 24
     },
 
     homeButtonsContainer: {
-        height: "55%",
+        height: "50%",
         marginLeft: 24,
         marginRight: 24
     },
 
     homeButtons: {
-        flexDirection: "column",
-        width: '100%',
-        height: 72,
-        marginBottom: 15,
-        borderTopRightRadius: 60,
-        borderBottomRightRadius: 60
+        width: '95%',
+        height: 74,
+        marginBottom: 15
+    },
+
+    bigButtonText: {
+        color: Colors.lightText,
+        fontWeight: '500',
+        fontSize: 20
     },
 
     // Only HomeScreen yellow circles
     homeEllipse: {
         alignSelf: 'flex-end',
-        right: 8
+        //right: 8
+        right: -24
     },
 
 
@@ -219,10 +201,8 @@ export const style = StyleSheet.create({
 
     // Button for enrolment
     enrolButton: {
-        //flexDirection: 'column',
-        //position: 'absolute',
         width: 230,
-        height: 53,
+        height: 56,
         bottom: 0
     },
 
@@ -235,30 +215,48 @@ export const style = StyleSheet.create({
         borderRadius: 10
     },
 
-// SummaryEnrolmentScreen styles
-
-    // Container / modal container for summary screen
-    summaryContainer: {
-        margin: 24
+    // Yellow circle for adding the player
+    iconsAddPlayer: {
+        backgroundColor: Colors.iconsBackground,
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
     },
 
-    // Heading only for enrolment
-    summaryHeading: { 
-        color: Colors.darkText,
-        fontSize: 40,
-        marginTop: 34,
-        marginBottom: 15
-    },
-
-    summaryTitle: {
-        color: Colors.bodyText, 
+    addPlayerText: {
+        textAlignVertical: 'center',
+        textAlign: 'left',
         fontSize: 20,
-        marginBottom: 20
+        letterSpacing: 0.1,
+        fontWeight: '500'
     },
 
-    summaryDetails: {
-        flexDirection: 'row',
-        marginBottom: 10
+    // SummaryEnrolmentModal styles
+    modalContainer: {
+        backgroundColor: Colors.inputColor,
+        width: '80%',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 50,
+    },
+
+    modal: {
+        left: 24,
+        marginTop: 42,
+    },
+
+    modalTitle: {
+        color: Colors.secondary,
+        fontSize: 24,
+        fontWeight: '500',
+        textAlign: 'center',
+        marginTop: 242, // vaihdetaan 34, kunhan marginin testaus lopetettu
     },
 
     // Icons for enrolled players, date and time
@@ -267,9 +265,63 @@ export const style = StyleSheet.create({
         marginRight: 20
     }, 
 
+    summaryButton: {
+        backgroundColor: Colors.secondary,
+        width: 120,
+        height: 40,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+// SummaryEnrolmentScreen styles
+
+    // Container / modal container for summary screen
+    summaryContainer: {
+        margin: 24
+    },
+
+    // Heading only for enrolment
+
+    summaryTitle: {
+        color: Colors.darkText, 
+        fontWeight: '500',
+        fontSize: 20,
+        marginBottom: 10
+    },
+
+    summaryDetails: {
+        flexDirection: 'row',
+        marginBottom: 10
+    },
+
+    iconsClose: {
+        backgroundColor: Colors.iconsBackground,
+        alignSelf: 'flex-end',
+        marginLeft: 24,
+        width: 50,
+        height: 50,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+    },
+
     // PointsScreen styles
-    divisionSeparator: {
-        height: 8,
+    groupSeparator: {
+    },
+
+    playerSeparator: {
+        paddingTop: 8,
+        paddingBottom: 8
+    },
+
+    playerScoresContainer: {
+        flexDirection: "row",
+        alignItems: "stretch"
     },
 
     // RankingScreen styles
@@ -283,7 +335,8 @@ export const style = StyleSheet.create({
     menuClose: {
         color: Colors.darkText,
         alignSelf: 'flex-end',
-        margin: 24
+        margin: 24,
+        marginTop: 34
     },
 
     menuIcons: {
@@ -292,12 +345,13 @@ export const style = StyleSheet.create({
 
     someIcons: {
         color: Colors.darkText,
-        marginRight: 10,
+        marginRight: 15,
         marginTop: 30
     },
 
     menuContent: {
         color: Colors.darkText,
+        fontWeight: '500',
         fontSize: 34,
         marginBottom: 20,
         marginLeft: 24,

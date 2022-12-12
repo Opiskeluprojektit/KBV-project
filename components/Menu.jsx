@@ -10,7 +10,7 @@ function CustomMenu({navigation, navigation: { goBack } }) {
         <Pressable onPress={() => goBack()}>
           <Icon.X style={style.menuClose} width={32} height={32}/>
         </Pressable>
-        <Text style={style.menuContent} onPress={() => { navigation.goBack(); navigation.navigate('Enrolment')}}>Ilmoittaudu viikkokisaan</Text>
+        <Text style={style.menuContent} onPress={() => { navigation.goBack(); navigation.navigate('Enrolment')}}>Ilmoittaudu</Text>
         <Text style={style.menuContent} onPress={() => { navigation.goBack(); navigation.navigate('Points')}}>Pisteiden syöttö</Text>
         <Text style={style.menuContent} onPress={() => { navigation.goBack(); navigation.navigate('Ranking')}}>Ranking listat</Text>
         <Text style={style.menuContent} onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}}>ViikkoBiitsi säännöt 
