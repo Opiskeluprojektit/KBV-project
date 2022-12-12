@@ -105,8 +105,6 @@ function Enrolment({ navigation }) {
 
   // Selecting the player from the flatlist
   const selectPlayer = (player) => {
-    console.log("pelaaja valittu: ", player);
-    // const newPlayersToEnroll = playersToEnroll.concat(player);
     setPlayersToEnroll(player);
     setSearch(player.name);
     setPlayersToShow();
@@ -125,6 +123,8 @@ function Enrolment({ navigation }) {
   const hideModal = () => {
     setVisible(false);
     setChosenGame();
+    setPlayersToEnroll();
+    setSearch();
 
   }
 
@@ -132,8 +132,9 @@ function Enrolment({ navigation }) {
     if (checkModal()) {
       //push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
       //newDbEnrolments.push({id: 99, game_id: chosenGame.id, player_id: playersToEnroll.id});
-      
+
       filterEnrolments()
+
       
     }
     else {
