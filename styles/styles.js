@@ -300,6 +300,7 @@ export const style = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
+        marginHorizontal: 10,
     },
 
 // PointsScreen styles
