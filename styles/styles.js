@@ -301,7 +301,7 @@ export const style = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 5
+        marginHorizontal: 10,
     },
 
 // PointsScreen styles
