@@ -105,8 +105,6 @@ function Enrolment({ navigation }) {
 
   // Selecting the player from the flatlist
   const selectPlayer = (player) => {
-    console.log("pelaaja valittu: ", player);
-    // const newPlayersToEnroll = playersToEnroll.concat(player);
     setPlayersToEnroll(player);
     setSearch(player.name);
     setPlayersToShow();
