@@ -270,7 +270,7 @@ export const style = StyleSheet.create({
         fontSize: 24,
         fontWeight: '500',
         textAlign: 'center',
-        marginTop: 242, // vaihdetaan 34, kunhan marginin testaus lopetettu
+        marginTop: 34, // Voi vaihtaa 242, jos tarvii testata selaimella
     },
     
     // Styles for predicted ranking element
@@ -291,6 +291,7 @@ export const style = StyleSheet.create({
     // Modal button styles
     buttonSummaryStyles: {
         flexDirection: "row",
+        margin: 20,
     },   
 
     summaryButton: {
@@ -300,6 +301,7 @@ export const style = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
+        marginLeft: 5
     },
 
 // PointsScreen styles
