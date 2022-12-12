@@ -25,14 +25,23 @@ let newDbEnrolments = dbEnrolments.concat();
 const backgroundImage = require('../assets/Volleyball100.png');
 
 function Enrolment({ navigation }) {
-  // Nämä constit tullaan kommentoimaan myös
-  const [search, setSearch] = useState('');
-  const [playersToShow, setPlayersToShow] = useState([]);
-  const [playersToEnroll, setPlayersToEnroll] = useState();
-  const [enrolledPlayers, setEnrolledPlayers] = useState();
-  const [chosenGame, setChosenGame] = useState();
+  
+  // Games shown in dropdown list
   const [gamesToShow, setGamesToShow] = useState(sortedDBGames);
   const [gamesExpanded, setGamesExpanded] = useState(false);
+
+  // What game has been chosen from dropdown list
+  const [chosenGame, setChosenGame] = useState();
+
+  // Search for player and filtered players to show on flatlist
+  const [search, setSearch] = useState('');
+  const [playersToShow, setPlayersToShow] = useState([]);
+
+  // Player to enroll and show in summary
+  const [playersToEnroll, setPlayersToEnroll] = useState();
+  const [enrolledPlayers, setEnrolledPlayers] = useState();
+
+  // If summary enrolment modal visible or not
   const [visible, setVisible] = React.useState(false);
 
   // Firebase tietokannan testaamiseen liittyvää
@@ -132,6 +141,7 @@ function Enrolment({ navigation }) {
     }
   } 
 
+  // Checking if game and player has been chosen
   function checkModal() {
     return chosenGame && playersToEnroll ? true : false;
   }
@@ -191,12 +201,19 @@ function Enrolment({ navigation }) {
                 />
                 <FlatList
                   data={playersToShow}
-                  renderItem={({item}) => <Pressable onPress={() => selectPlayer(item)}><Item name={item.name} /></Pressable>}
+                  renderItem={({item}) => 
+                    <Pressable style={style.playerSearch}
+                    onPress={() => selectPlayer(item)}>
+                      <Item name={item.name} />
+                    
+                    </Pressable>}
                   key={i => i.id}
                 /></>
               : null}         
               
-              {/* HIDDEN, not in use: Button for adding new player to enrol */}
+              {/* HIDDEN, not in use: Button for adding new player to enrol 
+              pressing enrol button:
+                This can be added later if necessary*/}
               {/* <View style={style.addPlayer}>
                 <Pressable style={{flexDirection: "row"}} onPress={() => console.log("Lisää uusi pelaaja")}>
                   <View style={[style.iconsAddPlayer]}>
@@ -207,19 +224,21 @@ function Enrolment({ navigation }) {
               </View> */}
 
               {/* Button for enrolment */}
-              {/* Lisätään vaihtoehto pressableen: yhdellä pelaajalla teksti "Ilmoittaudu",
-              kahdella tai useammalla pelaajalla teksti: "Ilmoita x pelaajaa". x:n tilalle pelaajien määrä*/}
+              {/* If previously mentioned add new player button will be taken into use
+              this text could be changed to "Ilmoittaudu" if only one player is enrolled
+              but "Ilmoita x pelaajaa" if two or more player are been enrolled. 
+              And instead of x there would be the amount of players*/}
               <Pressable onPress={handleEnrollment} 
                 style={[style.enrolButton, style.button]}>
                 <Text style={style.buttonText}>Ilmoittaudu</Text>
               </Pressable>
-
               </View>
           </View>
 
               {/* Modal for showing enrolment summary */}
               <Provider>
                 <Portal>
+                  {/* Thank you for enrolling */}
                   <Modal visible={visible} contentContainerStyle={style.modalContainer}>
                     <Text style={style.modalTitle}>Kiitos{'\n'}ilmoittautumisesta!</Text>
                     <View style={style.modal}>
@@ -247,6 +266,7 @@ function Enrolment({ navigation }) {
                         />
                       </View>
 
+                      {/* Buttons for closing the modal and adding new player */}
                       <View style={style.buttonSummaryStyles}>
                         <Pressable onPress={() => navigation.navigate('Home')} 
                             style={[style.summaryButton]}>
