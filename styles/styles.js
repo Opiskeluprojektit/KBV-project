@@ -106,7 +106,7 @@ export const style = StyleSheet.create({
         marginBottom: 10
     },
 
-    // CodeScreen styles
+// CodeScreen styles
 
     bigLogo: {
         width: 150,
@@ -141,7 +141,7 @@ export const style = StyleSheet.create({
     },
 
 
-    // HomeScreen styles
+// HomeScreen styles
 
     heading: {
         height: '35%',
@@ -352,6 +352,7 @@ export const style = StyleSheet.create({
     },
 
 // RankingScreen styles
+    // Screen hasn't been built yet.
 
 // Menu styles
 
@@ -367,13 +368,13 @@ export const style = StyleSheet.create({
     },
 
     menuIcons: {
-        color: Colors.darkText
+        color: Colors.darkText,
     },
 
     someIcons: {
         color: Colors.darkText,
         marginRight: 15,
-        marginTop: 30
+        marginTop: 30,
     },
 
     menuContent: {
