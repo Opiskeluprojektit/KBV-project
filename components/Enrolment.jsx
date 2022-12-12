@@ -90,7 +90,7 @@ function Enrolment({ navigation }) {
               item.name.toLowerCase().includes(search.toLowerCase()) &&
               chosenGame.division === item.division
           )
-        : [];
+        : [];    
     setPlayersToShow(searchArray);
   };
 
@@ -116,6 +116,7 @@ function Enrolment({ navigation }) {
   const hideModal = () => {
     setVisible(false);
     setChosenGame();
+
   }
 
   const handleEnrollment = () => {
@@ -124,6 +125,7 @@ function Enrolment({ navigation }) {
       //newDbEnrolments.push({id: 99, game_id: chosenGame.id, player_id: playersToEnroll.id});
       
       filterEnrolments()
+      
     }
     else {
       Alert.alert("Tarkista peli- ja pelaajavalinnat!")

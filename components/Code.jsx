@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import { Image, Text, Alert, StyleSheet, View, SafeAreaView, Pressable, Linking, ImageBackground, TextInput } from 'react-native';
 import { style } from '../styles/styles';
 import CodeInput from 'react-native-code-textinput';
-
+/** Password will be retrieved from firebase */
 const password = 1234;
 
 function Code({navigation}) {
@@ -10,9 +10,9 @@ function Code({navigation}) {
     const backgroundImage = require('../assets/Volleyball50.png');
     const logo = require('../assets/Logo2.png');
 
-    const [code, setCode] = useState(password);
+    const [code, setCode] = useState(password);   //stores input, hardwired for testing purposes
 
-    function checkCode() {
+    function checkCode() {                        //checks if input matches password
       if (code == password) {
         navigation.navigate('Home')
       }else {
