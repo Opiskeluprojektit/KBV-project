@@ -10,6 +10,7 @@ import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 
 import {database} from '../firebase/Config'
 import {onValue, ref, set} from 'firebase/database'
+import { color } from 'react-native-reanimated';
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
@@ -123,7 +124,7 @@ const [playertest, setPlayertest] = useState();
   const Group = ({item}) => {
     console.log(item);
     return (<View>
-      <Text>Lohko {item[0].group + 1}</Text>
+      <Text style={style.pointTitles}>Lohko {item[0].group + 1}</Text>
       <FlatList
         data={item}
         ItemSeparatorComponent={PlayerSeparator}
@@ -136,20 +137,29 @@ const [playertest, setPlayertest] = useState();
   const Player = ({item}) => {
     console.log("item.scores: ", item.scores);
     return (<View>
-      <Text>{item.name}</Text>
+      <View style={style.playerContainer}><Text style={style.pointTexts}>{item.name}</Text></View>
       {(item.orderNumber % 4) == 0 ?
         <View style={style.playerScoresContainer}>
-          <TextInput 
+          <TextInput
+            style={style.numInput}
+            underlineColor={'#1B1B1B'}
+            activeUnderlineColor={'#005C70'} 
             value={item.scores[0] || 0}
             keyboardType={"number-pad"}
             label={"Erä 1"}
           />
-          <TextInput 
+          <TextInput
+            style={style.numInput}
+            underlineColor={'#1B1B1B'}
+            activeUnderlineColor={'#005C70'}   
             value={item.scores[0] || 0}
             keyboardType={"number-pad"}
             label={"Erä 1"}
           />
-          <TextInput 
+          <TextInput
+            style={style.numInput}
+            underlineColor={'#1B1B1B'}
+            activeUnderlineColor={'#005C70'}   
             value={item.scores[0] || 0}
             keyboardType={"number-pad"}
             label={"Erä 1"}
@@ -226,7 +236,7 @@ const [playertest, setPlayertest] = useState();
               <List.Accordion 
                 title={division ? division : "Sarjavalikko"} 
                 style={style.search}
-                theme={{colors: {background: '#F9F9F9'}}} 
+                theme={{colors: {background: '#F9F9F9', primary: '#005C70'} }} 
                 expanded={divisionsExpanded} 
                 onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
                 <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
@@ -237,7 +247,7 @@ const [playertest, setPlayertest] = useState();
               <List.Accordion 
                 title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} 
                 style={style.search} 
-                theme={{colors: {background: '#F9F9F9'}}} 
+                theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}} 
                 expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
                 {gameList}
               </List.Accordion>

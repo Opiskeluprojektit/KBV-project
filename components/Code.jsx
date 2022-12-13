@@ -2,17 +2,32 @@ import React, {useState, useRef, useEffect} from 'react';
 import { Image, Text, Alert, StyleSheet, View, SafeAreaView, Pressable, Linking, ImageBackground, TextInput } from 'react-native';
 import { style } from '../styles/styles';
 import CodeInput from 'react-native-code-textinput';
-
-const password = 1234;
+import {database} from '../firebase/Config';
+import {onValue, ref} from 'firebase/database';
+/** Password will be retrieved from firebase */
+const passwordhard = 1234;
 
 function Code({navigation}) {
+
+    useEffect(() => {
+      const administration = ref(database,"administration/0");
+      onValue(administration, (snapshot) => {
+        const data = snapshot.val() ? snapshot.val() : {};
+        const adminItems = {...data};
+        const parse = JSON.parse(JSON.stringify(adminItems))
+        setPassword(parse.koodi);
+      });
+    },[]);
+
+    console.log(password);
 
     const backgroundImage = require('../assets/Volleyball50.png');
     const logo = require('../assets/Logo2.png');
 
-    const [code, setCode] = useState(password);
+    const [code, setCode] = useState(passwordhard);   //stores input, hardwired for testing purposes
+    const [password, setPassword] = useState("")
 
-    function checkCode() {
+    function checkCode() {                        //checks if input matches password
       if (code == password) {
         navigation.navigate('Home')
       }else {
