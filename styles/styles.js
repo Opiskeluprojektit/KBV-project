@@ -266,7 +266,7 @@ export const style = StyleSheet.create({
 
     // Title for summary modal
     modalTitle: {
-        color: Colors.secondary,
+        color: Colors.darkText,
         fontSize: 24,
         fontWeight: '500',
         textAlign: 'center',
@@ -301,6 +301,7 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: 10,
+        marginBottom: 34
     },
 
 // PointsScreen styles
