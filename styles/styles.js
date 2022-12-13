@@ -7,7 +7,7 @@ export const style = StyleSheet.create({
     },
     header: {
         height: "10%",
-        marginTop: 34,
+        marginTop: 40,
         marginLeft: 24,
         marginRight: 24
     },
@@ -34,7 +34,7 @@ export const style = StyleSheet.create({
         top: 2
     },
 
-    //Screen headerlines
+    // Screen headerlines
     h4Style: { 
         color: Colors.darkText,
         fontWeight: '500',
@@ -54,6 +54,7 @@ export const style = StyleSheet.create({
         fontSize: 16
     },
 
+    // Button styles 
     button: {
         backgroundColor: Colors.primary,
         borderRadius: 10,
@@ -157,7 +158,7 @@ export const style = StyleSheet.create({
         borderRadius: 1000
     },
 
-
+    // Title style
     h2Style: {
         color: Colors.darkText,
         fontWeight: '500',
@@ -168,6 +169,7 @@ export const style = StyleSheet.create({
         marginTop: 24
     },
 
+    // Button styles
     homeButtonsContainer: {
         height: "50%",
         marginLeft: 24,
@@ -227,6 +229,7 @@ export const style = StyleSheet.create({
         shadowRadius: 4
     },
 
+    // Not in use right now
     addPlayerText: {
         textAlignVertical: 'center',
         textAlign: 'left',
@@ -377,11 +380,12 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.primaryVariant
     },
 
+    // Menu icons X, arrows and some icons
     menuClose: {
         color: Colors.darkText,
         alignSelf: 'flex-end', 
         margin: 24,
-        marginTop: 34
+        marginTop: 40
     },
 
     menuIcons: {
@@ -394,6 +398,7 @@ export const style = StyleSheet.create({
         marginTop: 30,
     },
 
+    // Sign in
     menuContent: {
         color: Colors.darkText,
         fontWeight: '500',
