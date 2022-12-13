@@ -14,7 +14,7 @@ export const style = StyleSheet.create({
 
     // Enrolment, points and ranking light background
     viewContainer: {
-        backgroundColor: Colors.backgroundColor,
+        backgroundColor: Colors.background,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         height: "90%"
@@ -55,7 +55,7 @@ export const style = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: Colors.secondary,
+        backgroundColor: Colors.primary,
         borderRadius: 10,
         alignItems: 'center',
         alignSelf: 'center',
@@ -69,14 +69,14 @@ export const style = StyleSheet.create({
     },
 
     buttonText: {
-        color: Colors.lightText,
+        color: Colors.buttonText,
         fontWeight: '500',
         fontSize: 16
     },
 
     // Yellow circle for icons
     iconsEllipse: {
-        backgroundColor: Colors.iconsBackground,
+        backgroundColor: Colors.secondary,
         position: "absolute",
         width: 50,
         height: 50,
@@ -99,7 +99,7 @@ export const style = StyleSheet.create({
 
     // List and search background
     search: {
-        backgroundColor: Colors.inputColor,
+        backgroundColor: Colors.primaryVariant,
         height: 50,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -122,7 +122,7 @@ export const style = StyleSheet.create({
     },
 
     codeInputBox: {
-        backgroundColor: Colors.inputColor,
+        backgroundColor: Colors.primaryVariant,
         color: Colors.bodyText,
         width: 50,
         height: 50,
@@ -149,7 +149,7 @@ export const style = StyleSheet.create({
     },
 
     HomeScreenLogo: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Colors.brandColor,
         position: "absolute",
         width: 50,
         height: 50,
@@ -180,7 +180,7 @@ export const style = StyleSheet.create({
     },
 
     bigButtonText: {
-        color: Colors.lightText,
+        color: Colors.buttonText,
         fontWeight: '500',
         fontSize: 20
     },
@@ -214,7 +214,7 @@ export const style = StyleSheet.create({
 
     // Yellow circle for adding the player
     iconsAddPlayer: {
-        backgroundColor: Colors.iconsBackground,
+        backgroundColor: Colors.secondary,
         width: 50,
         height: 50,
         borderRadius: 1000,
@@ -252,7 +252,7 @@ export const style = StyleSheet.create({
     
     // Container for summary modal
     modalContainer: {
-        backgroundColor: Colors.inputColor,
+        backgroundColor: Colors.primaryVariant,
         width: '80%',
         justifyContent: 'center',
         alignSelf: 'center',
@@ -275,7 +275,7 @@ export const style = StyleSheet.create({
     
     // Styles for predicted ranking element
     predictedRanking: {
-        backgroundColor: Colors.inputColor,
+        backgroundColor: Colors.primaryVariant,
         width: "90%",
         alignSelf: 'center',
         justifyContent: 'center',
@@ -295,7 +295,7 @@ export const style = StyleSheet.create({
     },   
 
     summaryButton: {
-        backgroundColor: Colors.secondary,
+        backgroundColor: Colors.primary,
         width: 120,
         height: 40,
         borderRadius: 10,
@@ -316,7 +316,7 @@ export const style = StyleSheet.create({
     },
 
     playerContainer: {
-        backgroundColor: Colors.inputColor,
+        backgroundColor: Colors.primaryVariant,
         height: 50,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -340,7 +340,7 @@ export const style = StyleSheet.create({
     },
 
     numInput: {
-        backgroundColor: Colors.inputColor,
+        backgroundColor: Colors.primaryVariant,
         width: '31%',
         height: 50,
         marginRight: 13,
@@ -360,7 +360,7 @@ export const style = StyleSheet.create({
 // Menu styles
 
     menuContainer: {
-        backgroundColor: Colors.inputColor
+        backgroundColor: Colors.primaryVariant
     },
 
     menuClose: {
