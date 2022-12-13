@@ -4,30 +4,15 @@ import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
-import db from '../assets/testidata.json';
 import {database} from '../firebase/Config';
 import {onValue, ref} from 'firebase/database';
-import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
-
-
-const dbPlayers = JSON.parse(JSON.stringify(db.player));
-const dbEnrolments = JSON.parse(JSON.stringify(db.enrolment));
-const sortedDBGames = JSON.parse(JSON.stringify(db.game))
-.map((i) => {
-  i.date = new MyDate(formatDMYtoYMD(i.date));
-  return i;
-})
-.filter((i) => i.date >= new Date())
-.sort((a, b) => a.date - b.date);
-
-let newDbEnrolments = dbEnrolments.concat();
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
 function Enrolment({ navigation }) {
   
   // Games shown in dropdown list
-  const [gamesToShow, setGamesToShow] = useState(sortedDBGames);
+  const [gamesToShow, setGamesToShow] = useState([]);
   const [gamesExpanded, setGamesExpanded] = useState(false);
 
   // What game has been chosen from dropdown list
@@ -45,8 +30,8 @@ function Enrolment({ navigation }) {
   const [visible, setVisible] = React.useState(false);
 
   // Firebase tietokannan testaamiseen liittyvää
-  const [gamestest, setGamestest] = useState([]);
-  const [playertest, setPlayertest] = useState([]);
+  const [player, setPlayer] = useState([]);
+  const [enrolment, setEnrolment] = useState([]);
 
   // Collects game information from firebase database
   useEffect(() => {
@@ -55,13 +40,10 @@ function Enrolment({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = {...data};
       const parse = JSON.parse(JSON.stringify(gameItems))
-      setGamestest(parse);
+      const parseKeys = Object.values(parse)
+      setGamesToShow(parseKeys);
     });
   },[]);
-
-  let gamestestKeys = Object.keys(gamestest)
-
-  console.log(gamestestKeys);
   
   // Collects player information from firebase database
   useEffect(() => {
@@ -70,9 +52,24 @@ function Enrolment({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const playerItems = {...data};
       const parse = JSON.parse(JSON.stringify(playerItems))
-      setPlayertest(parse);
+      let parseKeys = Object.values(parse)
+      setPlayer(parseKeys);
     });
   },[]);
+
+// Collects enrolment information from firebase database
+  useEffect(() => {
+    const enrolment = ref(database,"enrolment/");
+    onValue(enrolment, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const enrolmentItems = {...data};
+      const parse = JSON.parse(JSON.stringify(enrolmentItems))
+      const parseKeys = Object.values(parse)
+      setEnrolment(parseKeys);
+    });
+  },[]);
+
+  let newDbEnrolments = enrolment.concat();
 
 /*   useEffect(() => {
     checkModal() ? showModal() : null;
@@ -101,7 +98,7 @@ function Enrolment({ navigation }) {
     setSearch(search);
     const searchArray =
       search.length > 0
-        ? dbPlayers.filter(
+        ? player.filter(
             (item) =>
               item.name.toLowerCase().includes(search.toLowerCase()) &&
               chosenGame.division === item.division  
@@ -126,11 +123,11 @@ function Enrolment({ navigation }) {
     
   // Converts the game date to specific form: dd.mm.yyyy
   const getGameTitle = (i) => {
-    return i.division + " " + (i.date.getDate()) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
-  }
+    return i.division + " " + i.date;
+  }  
 
   // Maps the game date list
-  // const gameList =  gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
+   const gameList =  gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
 
   // Showing and hiding the summary modal
   const showModal = () => setVisible(true);
@@ -165,7 +162,7 @@ function Enrolment({ navigation }) {
     let newEnrolledPlayers;
     //console.log("chosenGame: ", chosenGame);
     chosenGame ? enrolmentsToChosenGame = newDbEnrolments.concat().filter(i => i.game_id == chosenGame.id) : null
-    enrolmentsToChosenGame ? newEnrolledPlayers = dbPlayers.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
+    enrolmentsToChosenGame ? newEnrolledPlayers = player.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
     newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
   }
 
@@ -191,16 +188,12 @@ function Enrolment({ navigation }) {
               {/* Dropdown for choosing gaming day */}
               <List.Section>
                 <List.Accordion
-                  title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
+                  // title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
                   style={style.search}
                   theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
-                    
-                  {/* {gameList}  */}
-                  {gamestestKeys.length > 0 ? (gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />)) : 
-  (<Text>There are no items</Text>
-  )}
+                  {gameList}
                 </List.Accordion> 
               </List.Section>
 

@@ -28,37 +28,54 @@ const sortedDbGames = JSON.parse(JSON.stringify(db.game))
 function Points({navigation}) {
   const [division, setDivision] = useState();
   const [divisionsExpanded, setDivisionsExpanded] = useState(false);
-  const [gamesToShow, setGamesToShow] = useState(sortedDbGames);
+  const [gamesToShow, setGamesToShow] = useState([]);
   const [chosenGame, setChosenGame] = useState();
   const [gamesExpanded, setGamesExpanded] = useState(false);
   const [enrolledPlayers, setEnrolledPlayers] = useState();
   const [groups, setGroups] = useState();
   //const [searchPlayer, setSearchPlayer] = useState('')
 
-  // Hakee pelien tiedot firebase tietokannasta
+  // Firebase tietokannan testaamiseen liittyvää
+  const [player, setPlayer] = useState([]);
+  const [enrolment, setEnrolment] = useState([]);
+
+  // Collects game information from firebase database
   useEffect(() => {
     const games = ref(database,"game/");
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = {...data};
-      setGamestest(gameItems);
+      const parse = JSON.parse(JSON.stringify(gameItems))
+      const parseKeys = Object.values(parse)
+      setGamesToShow(parseKeys);
     });
   },[]);
-
-// Firebase tietokannan testaamiseen liittyvää
-const [gamestest, setGamestest] = useState();
-const [playertest, setPlayertest] = useState();
-
-// Hakee pelaajien tiedot firebase tietokannasta
+  
+  // Collects player information from firebase database
   useEffect(() => {
     const players = ref(database,"player/");
     onValue(players, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const playerItems = {...data};
-      setPlayertest(playerItems);
+      const parse = JSON.parse(JSON.stringify(playerItems))
+      let parseKeys = Object.values(parse)
+      setPlayer(parseKeys);
     });
   },[]);
 
+// Collects enrolment information from firebase database
+  useEffect(() => {
+    const enrolment = ref(database,"enrolment/");
+    onValue(enrolment, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const enrolmentItems = {...data};
+      const parse = JSON.parse(JSON.stringify(enrolmentItems))
+      const parseKeys = Object.values(parse)
+      setEnrolment(parseKeys);
+    });
+  },[]);
+
+  let newDbEnrolments = enrolment.concat();
 
 
   useEffect(() => {
@@ -94,7 +111,7 @@ const [playertest, setPlayertest] = useState();
   }
 
   const getGameTitle = (i) => {
-    return i.division + " " + (i.date.getDate()) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
+    return i.division + " " + i.date.getDate() + "." + i.date.getMonth() + 1 + "." + i.date.getFullYear();
   }
 
   const mapGames = () => {
@@ -106,9 +123,9 @@ const [playertest, setPlayertest] = useState();
   const filterEnrolments = () => {
     let enrolmentsToChosenGame;
     //console.log("chosenGame: ", chosenGame);
-    chosenGame ? enrolmentsToChosenGame = dbEnrolments.concat().filter(i => i.game_id == chosenGame.id) : null
+    chosenGame ? enrolmentsToChosenGame = enrolment.concat().filter(i => i.game_id == chosenGame.id) : null
     let newEnrolledPlayers;
-    enrolmentsToChosenGame ? newEnrolledPlayers = dbPlayers.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
+    enrolmentsToChosenGame ? newEnrolledPlayers = player.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
     //newEnrolledPlayers ? console.log("newEnrolledPlayers:", newEnrolledPlayers) : null
     newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
     //newEnrolledPlayers ? console.log("newEnrolledPlayers: ", newEnrolledPlayers) : null;

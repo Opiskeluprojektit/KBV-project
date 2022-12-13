@@ -20,8 +20,6 @@ function Code({navigation}) {
       });
     },[]);
 
-    console.log(password);
-
     const backgroundImage = require('../assets/Volleyball50.png');
     const logo = require('../assets/Logo2.png');
 
