@@ -150,12 +150,15 @@ function Points({navigation}) {
   }
 
   const handleScoreChange = (points, round, group) => {
+    console.log("points, round, group:", points, round, group);
     //update points to groups.
     let newGroups = groups.concat();
-    /* newGroups[group] = newGroups[group].reduce((group, player, i) => {
-      //player.score[round] =
-      return player
-    }, []) */
+    newGroups[group] = newGroups[group].reduce((newGroup, player, playerNumber) => {
+      player.scores[round] = playerNumber == 0 || (round == 0 && playerNumber == 3) || (round == 1 && playerNumber == 1) || (round == 2 && playerNumber == 2) ? points : -points;
+      newGroup.push(player)
+      return newGroup
+    }, [])
+    console.log("newGrouops:", newGroups);
     //newGroups[group][0].scores[round] = points;
     setGroups(newGroups)
     //finally make an useEffect that reacts to groups to calculate ranking scores.
@@ -196,8 +199,8 @@ function Points({navigation}) {
         </View> : 
         <View style={style.playerScoresContainer}>
           <Text>{item.scores[0]}</Text>
-          <Text>{item.scores[0]}</Text>
-          <Text>{item.scores[0]}</Text>
+          <Text>{item.scores[1]}</Text>
+          <Text>{item.scores[2]}</Text>
         </View> }
     </View>
     )
