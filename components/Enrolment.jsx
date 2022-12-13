@@ -262,7 +262,7 @@ function Enrolment({ navigation }) {
 
                       {/* The players which were enrolled */}
                       <View style={style.summaryDetails}>
-                        <Icon.Users style={style.summaryIcons}/>
+                        <Icon.User style={style.summaryIcons}/>
                         {playersToEnroll ? <Text style={style.text}>{playersToEnroll.name} 
                           {"\n"}Ranking: {playersToEnroll.ranking}</Text> : null}
                       </View>
