@@ -9,6 +9,7 @@ const passwordhard = 1234;
 
 function Code({navigation}) {
 
+    // Collects code from firebase database
     useEffect(() => {
       const administration = ref(database,"administration/0");
       onValue(administration, (snapshot) => {
