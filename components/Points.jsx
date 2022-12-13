@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { List, TextInput } from 'react-native-paper'
-// import NumericInput from 'react-native-numeric-input'
 
 import * as db from "../assets/testidata.json"
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
@@ -122,15 +121,15 @@ const [playertest, setPlayertest] = useState();
 
   const Group = ({item}) => {
     //console.log(item);
-    return (<View>
-      <Text style={style.pointTitles}>Lohko {item[0].group + 1}</Text>
-      <FlatList
-        data={item}
-        ItemSeparatorComponent={PlayerSeparator}
-        renderItem={Player}
-      />
-
-    </View>)
+    return (
+      <View>
+        <Text style={style.pointTitles}>Lohko {item[0].group + 1}</Text>
+        <FlatList
+          data={item}
+          ItemSeparatorComponent={PlayerSeparator}
+          renderItem={Player}/>
+      </View>
+    )
   }
 
   const handleScoreChange = (points, round, group) => {
@@ -183,7 +182,8 @@ const [playertest, setPlayertest] = useState();
           <Text>{item.scores[0]}</Text>
           <Text>{item.scores[0]}</Text>
         </View> }
-    </View>)
+    </View>
+    )
   }
 
   const PlayerSeparator = () => {
@@ -234,63 +234,61 @@ const [playertest, setPlayertest] = useState();
 
 
   return (
-    <ImageBackground source={backgroundImage}>
-      <SafeAreaView>
-
-        <View style={style.header}>
-          <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
-          <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
+    <ImageBackground source={backgroundImage} style={{flex: 1}}>
+      <View style={[style.container, {flexDirection: "column"}]}>
+        <View style={{ flex: 1}}>
+          <View style={style.pointsHeader}>
+            <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+            <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
+          </View>
         </View>
-
-        <View style={style.viewContainer}>
-          <View style={style.contentOnLightBG}>
+        <View style={style.pointsContainer}>
+          <View style={{flex: 1, marginHorizontal: 24}}>
             <Text style={style.h4Style}>Pisteiden syöttö</Text>
             <List.Section>
               <List.Accordion 
-                title={division ? division : "Sarjavalikko"} 
-                style={style.search}
-                theme={{colors: {background: '#F9F9F9', primary: '#005C70'} }} 
-                expanded={divisionsExpanded} 
-                onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
+                  title={division ? division : "Sarjavalikko"} 
+                  style={style.search}
+                  theme={{colors: {background: '#F9F9F9', primary: '#005C70'} }} 
+                  expanded={divisionsExpanded} 
+                  onPress={() => setDivisionsExpanded(!divisionsExpanded)}>
                 <List.Item title="Naiset" onPress={() => selectDivision("Naiset")} />
                 <List.Item title="Miehet" onPress={() => selectDivision("Miehet")} />
                 <List.Item title="Tytöt" onPress={() => selectDivision("Tytöt")} />
                 <List.Item title="Pojat" onPress={() => selectDivision("Pojat")} />
               </List.Accordion>
               <List.Accordion 
-                title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} 
-                style={style.search} 
-                theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}} 
-                expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
-                {gameList}
+                  title={chosenGame ? getGameTitle(chosenGame) : "Pelit"} 
+                  style={style.search} 
+                  theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}} 
+                  expanded={gamesExpanded} onPress={() => setGamesExpanded(!gamesExpanded)}>
+                  {gameList}
               </List.Accordion>
-              {/* <TextInput
-                label="Pelaajahaku"
-                value={searchPlayer}
-                style={style.search}
-                underlineColor={'#1B1B1B'}
-                activeUnderlineColor={'#005C70'}
-                onChangeText={executeSearch}
-                returnKeyType="search"
-                onSubmitEditing={executeSearch}
-              /> */}
+                {/* <TextInput
+                    label="Pelaajahaku"
+                    value={searchPlayer}
+                    style={style.search}
+                    underlineColor={'#1B1B1B'}
+                    activeUnderlineColor={'#005C70'}
+                    onChangeText={executeSearch}
+                    returnKeyType="search"
+                    onSubmitEditing={executeSearch}
+                /> */}
             </ List.Section>
 
             {/* LOHKOT JA PISTEIDEN SYÖTTÖ*/}
-            {groups ? <View>
+            {groups ? <View style={{flex: 1}}>
               <FlatList
                 data={groups}
                 ItemSeparatorComponent={GroupSeparator}
                 renderItem={Group}
                 scrollEnabled={true}
               />
-              
-            </View> : null}
-            
+                
+            </View> : null}      
           </View>
         </View>
-
-      </SafeAreaView>
+      </View>
     </ImageBackground>
   )
 }

@@ -86,7 +86,8 @@ export const style = StyleSheet.create({
             height: 4
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4
+        shadowRadius: 4,
+        //marginTop: 24 // poista myöhemmin
     },
 
     // Feather icons
@@ -306,6 +307,20 @@ export const style = StyleSheet.create({
     },
 
 // PointsScreen styles
+
+    pointsContainer: {
+        backgroundColor: Colors.background,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        height: "83%"
+    }, 
+
+    pointsHeader: {
+        height: "10%",
+        marginTop: 44,
+        marginLeft: 24,
+        marginRight: 24
+    },
     
     groupSeparator: {
     },
@@ -328,9 +343,8 @@ export const style = StyleSheet.create({
         color: Colors.bodyText, 
         fontWeight: '500',
         fontSize: 20,
-        marginBottom: 10,
-        marginTop: 30,
-        alignSelf: 'center'
+        marginBottom: 15,
+        marginTop: 30
     },
 
     pointTexts: {
@@ -365,7 +379,7 @@ export const style = StyleSheet.create({
 
     menuClose: {
         color: Colors.darkText,
-        alignSelf: 'flex-end',
+        alignSelf: 'flex-end', 
         margin: 24,
         marginTop: 34
     },
