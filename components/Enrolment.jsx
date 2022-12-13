@@ -71,9 +71,15 @@ function Enrolment({ navigation }) {
     });
   },[]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     checkModal() ? showModal() : null;
-  }, [enrolledPlayers])
+  }, [enrolledPlayers]) */
+
+    useEffect(() => {
+    filterEnrolments()
+  }, [chosenGame])
+  
+  //console.log(gamestest)
   
   // The component for closing the game day dropdown and setting the chosen game date
   const selectGame = (i) => {
@@ -97,24 +103,29 @@ function Enrolment({ navigation }) {
         ? dbPlayers.filter(
             (item) =>
               item.name.toLowerCase().includes(search.toLowerCase()) &&
-              chosenGame.division === item.division
+              chosenGame.division === item.division  
           )
         : [];    
     setPlayersToShow(searchArray);
   };
 
   // Selecting the player from the flatlist
+    // Tämä ei toimi -> Laura palaa myöhemmin
   const selectPlayer = (player) => {
-    console.log("pelaaja valittu: ", player);
-    // const newPlayersToEnroll = playersToEnroll.concat(player);
-    setPlayersToEnroll(player);
-    setSearch(player.name);
-    setPlayersToShow();
+    if (enrolledPlayers.find((i) => {i.name === player.name})) {
+      Alert.alert("Pelaaja on jo ilmoittautunut")
+    } else {
+      setPlayersToEnroll(player);
+      setSearch(player.name);
+      setPlayersToShow();
+    }
+
+
   }
     
   // Converts the game date to specific form: dd.mm.yyyy
   const getGameTitle = (i) => {
-    return i.division + " " + (i.date.getDate() + 1) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
+    return i.division + " " + (i.date.getDate()) + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }
 
   // Maps the game date list
@@ -125,15 +136,17 @@ function Enrolment({ navigation }) {
   const hideModal = () => {
     setVisible(false);
     setChosenGame();
-
+    setPlayersToEnroll();
+    setSearch();
   }
 
   const handleEnrollment = () => {
     if (checkModal()) {
       //push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
       //newDbEnrolments.push({id: 99, game_id: chosenGame.id, player_id: playersToEnroll.id});
-      
-      filterEnrolments()
+
+      //filterEnrolments()
+      showModal();
       
     }
     else {
@@ -225,9 +238,9 @@ function Enrolment({ navigation }) {
 
               {/* Button for enrolment */}
               {/* If previously mentioned add new player button will be taken into use
-              this text could be changed to "Ilmoittaudu" if only one player is enrolled
-              but "Ilmoita x pelaajaa" if two or more player are been enrolled. 
-              And instead of x there would be the amount of players*/}
+              this text could be "Ilmoittaudu" if only one player is enrolled
+              but changed to "Ilmoita x pelaajaa" if two or more player are been enrolled. 
+              And instead of x there would be the amount of players */}
               <Pressable onPress={handleEnrollment} 
                 style={[style.enrolButton, style.button]}>
                 <Text style={style.buttonText}>Ilmoittaudu</Text>

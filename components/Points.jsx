@@ -33,8 +33,7 @@ function Points({navigation}) {
   const [gamesExpanded, setGamesExpanded] = useState(false);
   const [enrolledPlayers, setEnrolledPlayers] = useState();
   const [groups, setGroups] = useState();
-  const [searchPlayer, setSearchPlayer] = useState('')
-
+  //const [searchPlayer, setSearchPlayer] = useState('')
 
   // Hakee pelien tiedot firebase tietokannasta
   useEffect(() => {
@@ -122,7 +121,7 @@ const [playertest, setPlayertest] = useState();
   }
 
   const Group = ({item}) => {
-    console.log(item);
+    //console.log(item);
     return (<View>
       <Text style={style.pointTitles}>Lohko {item[0].group + 1}</Text>
       <FlatList
@@ -134,8 +133,19 @@ const [playertest, setPlayertest] = useState();
     </View>)
   }
 
+  const handleScoreChange = (points, round, group) => {
+    //update points to groups.
+    let newGroups = groups.concat();
+    /* newGroups[group] = newGroups[group].reduce((group, player, i) => {
+      //player.score[round] =
+      return player
+    }, []) */
+    //newGroups[group][0].scores[round] = points;
+    setGroups(newGroups)
+    //finally make an useEffect that reacts to groups to calculate ranking scores.
+  }
+
   const Player = ({item}) => {
-    console.log("item.scores: ", item.scores);
     return (<View>
       <View style={style.playerContainer}><Text style={style.pointTexts}>{item.name}</Text></View>
       {(item.orderNumber % 4) == 0 ?
@@ -144,31 +154,34 @@ const [playertest, setPlayertest] = useState();
             style={style.numInput}
             underlineColor={'#1B1B1B'}
             activeUnderlineColor={'#005C70'} 
-            value={item.scores[0] || 0}
+            value={item.scores[0]}
             keyboardType={"number-pad"}
+            onChangeText={value => handleScoreChange(value, 0, item.group)}
             label={"Erä 1"}
           />
           <TextInput
             style={style.numInput}
             underlineColor={'#1B1B1B'}
             activeUnderlineColor={'#005C70'}   
-            value={item.scores[0] || 0}
+            value={item.scores[1]}
             keyboardType={"number-pad"}
-            label={"Erä 1"}
+            onChangeText={value => handleScoreChange(value, 1, item.group)}
+            label={"Erä 2"}
           />
           <TextInput
             style={style.numInput}
             underlineColor={'#1B1B1B'}
             activeUnderlineColor={'#005C70'}   
-            value={item.scores[0] || 0}
+            value={item.scores[2]}
             keyboardType={"number-pad"}
-            label={"Erä 1"}
+            onChangeText={value => handleScoreChange(value, 2, item.group)}
+            label={"Erä 3"}
           />
         </View> : 
         <View style={style.playerScoresContainer}>
-          <Text>3</Text>
-          <Text>1</Text>
-          <Text>-2</Text>
+          <Text>{item.scores[0]}</Text>
+          <Text>{item.scores[0]}</Text>
+          <Text>{item.scores[0]}</Text>
         </View> }
     </View>)
   }
