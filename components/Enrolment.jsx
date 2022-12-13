@@ -45,8 +45,8 @@ function Enrolment({ navigation }) {
   const [visible, setVisible] = React.useState(false);
 
   // Firebase tietokannan testaamiseen liittyvää
-  const [gamestest, setGamestest] = useState();
-  const [playertest, setPlayertest] = useState();
+  const [gamestest, setGamestest] = useState([]);
+  const [playertest, setPlayertest] = useState([]);
 
   // Collects game information from firebase database
   useEffect(() => {
@@ -54,12 +54,14 @@ function Enrolment({ navigation }) {
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = {...data};
-      setGamestest(gameItems);
+      const parse = JSON.parse(JSON.stringify(gameItems))
+      setGamestest(parse);
     });
   },[]);
-  
-  console.log(sortedDBGames)
-  console.log(gamestest);
+
+  let gamestestKeys = Object.keys(gamestest)
+
+  console.log(gamestestKeys);
   
   // Collects player information from firebase database
   useEffect(() => {
@@ -67,7 +69,8 @@ function Enrolment({ navigation }) {
     onValue(players, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const playerItems = {...data};
-      setPlayertest(playerItems);
+      const parse = JSON.parse(JSON.stringify(playerItems))
+      setPlayertest(parse);
     });
   },[]);
 
@@ -78,8 +81,6 @@ function Enrolment({ navigation }) {
     useEffect(() => {
     filterEnrolments()
   }, [chosenGame])
-  
-  //console.log(gamestest)
   
   // The component for closing the game day dropdown and setting the chosen game date
   const selectGame = (i) => {
@@ -129,7 +130,7 @@ function Enrolment({ navigation }) {
   }
 
   // Maps the game date list
-  const gameList = gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
+  // const gameList =  gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
 
   // Showing and hiding the summary modal
   const showModal = () => setVisible(true);
@@ -196,7 +197,10 @@ function Enrolment({ navigation }) {
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     
-                  {gameList} 
+                  {/* {gameList}  */}
+                  {gamestestKeys.length > 0 ? (gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />)) : 
+  (<Text>There are no items</Text>
+  )}
                 </List.Accordion> 
               </List.Section>
 

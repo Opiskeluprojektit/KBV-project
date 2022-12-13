@@ -9,6 +9,7 @@ const passwordhard = 1234;
 
 function Code({navigation}) {
 
+    // Collects code from firebase database
     useEffect(() => {
       const administration = ref(database,"administration/0");
       onValue(administration, (snapshot) => {
@@ -24,7 +25,7 @@ function Code({navigation}) {
     const backgroundImage = require('../assets/Volleyball50.png');
     const logo = require('../assets/Logo2.png');
 
-    const [code, setCode] = useState("");   //stores input, hardwired for testing purposes
+    const [code, setCode] = useState(passwordhard);   //stores input, hardwired for testing purposes
     const [password, setPassword] = useState("")
 
     function checkCode() {                        //checks if input matches password
