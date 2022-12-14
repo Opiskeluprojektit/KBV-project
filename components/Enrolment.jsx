@@ -2,6 +2,7 @@ import { SafeAreaView,  FlatList, Text, View, Pressable, Alert,
   Button, ImageBackground } from 'react-native';
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
+import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 import * as Icon from "react-native-feather";
 import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
 import {database} from '../firebase/Config';
@@ -40,7 +41,12 @@ function Enrolment({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = {...data};
       const parse = JSON.parse(JSON.stringify(gameItems))
-      const parseKeys = Object.values(parse)
+      let parseKeys = Object.values(parse).map((i) => {
+        i.date = new MyDate(formatDMYtoYMD(i.date));
+        return i;
+      })
+      .filter((i) => i.date >= new Date ())
+      .sort((a, b) => a.date - b.date);
       setGamesToShow(parseKeys);
     });
   },[]);
@@ -110,7 +116,7 @@ function Enrolment({ navigation }) {
   // Selecting the player from the flatlist
     // Tämä ei toimi -> Laura palaa myöhemmin
   const selectPlayer = (player) => {
-    if (enrolledPlayers.find((i) => {i.name === player.name})) {
+    if (enrolledPlayers.find((i) => i.name === player.name)) {
       Alert.alert("Pelaaja on jo ilmoittautunut")
     } else {
       setPlayersToEnroll(player);
@@ -123,7 +129,7 @@ function Enrolment({ navigation }) {
     
   // Converts the game date to specific form: dd.mm.yyyy
   const getGameTitle = (i) => {
-    return i.division + " " + i.date;
+    return i.division + " " + i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }  
 
   // Maps the game date list
