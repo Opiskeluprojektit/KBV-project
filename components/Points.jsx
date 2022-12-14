@@ -214,9 +214,9 @@ function Points({navigation}) {
           />
         </View> : 
         <View style={style.playerScoresContainer}>
-          <Text>{item.scores[0]}</Text>
-          <Text>{item.scores[1]}</Text>
-          <Text>{item.scores[2]}</Text>
+          <Text style={style.text}>{item.scores[0]}</Text>
+          <Text style={style.text}>{item.scores[1]}</Text>
+          <Text style={style.text}>{item.scores[2]}</Text>
         </View> }
     </View>
     )

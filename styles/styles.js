@@ -190,7 +190,6 @@ export const style = StyleSheet.create({
     // Only HomeScreen yellow circles
     homeEllipse: {
         alignSelf: 'flex-end',
-        //right: 8
         right: -24
     },
 
@@ -262,8 +261,7 @@ export const style = StyleSheet.create({
     },
 
     modal: {
-        left: 24,
-        marginTop: 42,
+        margin: 24
     },
 
     // Title for summary modal
@@ -304,7 +302,13 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: 10,
-        marginBottom: 34
+        marginBottom: 10,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
     },
 
 // PointsScreen styles
