@@ -34,8 +34,6 @@ function Enrolment({ navigation }) {
   const [player, setPlayer] = useState([]);
   const [enrolment, setEnrolment] = useState([]);
 
-  const [newToDo, setNewToDo] = useState('');
-
   // Collects game information from firebase database
   useEffect(() => {
     const games = ref(database,"game/");
@@ -154,12 +152,11 @@ function Enrolment({ navigation }) {
 
       let enrolmentLength = enrolment.length + 1;
 	      //const addNewTodo = () => {
-      const newToDoItem ={id: enrolmentLength, game_id: chosenGame.id, player_id: playersToEnroll.id};
+      const newToDoItem = {id: enrolmentLength, game_id: chosenGame.id, player_id: playersToEnroll.id};
       const newToDoItemKey = newDbEnrolments.push(child(ref(database), enrolment_ref)).key;
       const updates = {};
       updates[enrolment_ref + newToDoItemKey] = newToDoItem;
       console.log(newToDoItem)
-      setNewToDo('');
       filterEnrolments()
       showModal();
       console.log(enrolment)
