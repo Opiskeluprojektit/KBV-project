@@ -34,10 +34,10 @@ function Points({navigation}) {
   const [groups, setGroups] = useState();
   //const [searchPlayer, setSearchPlayer] = useState('')
 
-  useEffect(() => {
+ /*   useEffect(() => {
     console.log("gamesToShow in useEffect:", gamesToShow);
     setGamesToShow(sortedDbGames)
-  }, [])
+  }, []) */
   
   
 
@@ -52,7 +52,12 @@ function Points({navigation}) {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = {...data};
       const parse = JSON.parse(JSON.stringify(gameItems))
-      const parseKeys = Object.values(parse)
+      let parseKeys = Object.values(parse).map((i) => {
+        i.date = new MyDate(formatDMYtoYMD(i.date));
+        return i;
+      })
+      .filter((i) => i.date >= new Date ())
+      .sort((a, b) => a.date - b.date);
       setGamesToShow(parseKeys);
     });
   },[]); 
