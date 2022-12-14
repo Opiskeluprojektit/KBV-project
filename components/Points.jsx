@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View, Pressable, Button, ImageBackground, FlatList, ScrollView } from 'react-native'
+import { Text, View, Pressable, ImageBackground, FlatList, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
@@ -214,9 +214,9 @@ function Points({navigation}) {
           />
         </View> : 
         <View style={style.playerScoresContainer}>
-          <Text>{item.scores[0]}</Text>
-          <Text>{item.scores[1]}</Text>
-          <Text>{item.scores[2]}</Text>
+          <Text style={style.text}>{item.scores[0]}</Text>
+          <Text style={style.text}>{item.scores[1]}</Text>
+          <Text style={style.text}>{item.scores[2]}</Text>
         </View> }
     </View>
     )

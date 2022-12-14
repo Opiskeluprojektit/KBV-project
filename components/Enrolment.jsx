@@ -274,7 +274,7 @@ function Enrolment({ navigation }) {
                       {/* Game to which the enrolment has been done */}
                       <View style={style.summaryDetails}>
                         <Icon.Clock style={style.summaryIcons}/>
-                        {chosenGame ? <Text style={style.text}>ViikkoBiitsi {getGameTitle(chosenGame)}</Text> : null}
+                        {chosenGame ? <Text style={style.text}>{getGameTitle(chosenGame)}</Text> : null}
                       </View>
 
                       {/* The players which were enrolled */}
@@ -290,6 +290,7 @@ function Enrolment({ navigation }) {
                           data={enrolledPlayers}
                           renderItem={Player}
                           keyExtractor={item => item.id}
+                          style={{marginTop: 10}}
                         />
                       </View>
 
