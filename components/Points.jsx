@@ -27,7 +27,7 @@ const sortedDbGames = JSON.parse(JSON.stringify(db.game))
 function Points({navigation}) {
   const [division, setDivision] = useState();
   const [divisionsExpanded, setDivisionsExpanded] = useState(false);
-  const [gamesToShow, setGamesToShow] = useState(sortedDbGames);
+  const [gamesToShow, setGamesToShow] = useState([]);
   const [chosenGame, setChosenGame] = useState();
   const [gamesExpanded, setGamesExpanded] = useState(false);
   const [enrolledPlayers, setEnrolledPlayers] = useState();
@@ -46,7 +46,7 @@ function Points({navigation}) {
   const [enrolment, setEnrolment] = useState([]);
 
   // Collects game information from firebase database
-  /* useEffect(() => {
+ useEffect(() => {
     const games = ref(database,"game/");
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
@@ -55,7 +55,7 @@ function Points({navigation}) {
       const parseKeys = Object.values(parse)
       setGamesToShow(parseKeys);
     });
-  },[]); */
+  },[]); 
   
   // Collects player information from firebase database
   useEffect(() => {
@@ -119,7 +119,8 @@ function Points({navigation}) {
   }
 
   const getGameTitle = (i) => {
-    return i.division + " " + i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
+    i.date = new Date(i.date)
+    return i.division + " " + i.date.getDate() + "." + i.date.getMonth() + 1 + "." + i.date.getFullYear();
   }
 
   const mapGames = () => {
