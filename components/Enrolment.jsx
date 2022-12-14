@@ -129,6 +129,7 @@ function Enrolment({ navigation }) {
     
   // Converts the game date to specific form: dd.mm.yyyy
   const getGameTitle = (i) => {
+    i.date = new Date(i.date)
     return i.division + " " + i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }  
 
@@ -194,7 +195,7 @@ function Enrolment({ navigation }) {
               {/* Dropdown for choosing gaming day */}
               <List.Section>
                 <List.Accordion
-                  // title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
+                  title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
                   style={style.search}
                   theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}}
                   expanded={gamesExpanded}
