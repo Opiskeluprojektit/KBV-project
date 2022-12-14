@@ -27,19 +27,26 @@ const sortedDbGames = JSON.parse(JSON.stringify(db.game))
 function Points({navigation}) {
   const [division, setDivision] = useState();
   const [divisionsExpanded, setDivisionsExpanded] = useState(false);
-  const [gamesToShow, setGamesToShow] = useState([]);
+  const [gamesToShow, setGamesToShow] = useState(sortedDbGames);
   const [chosenGame, setChosenGame] = useState();
   const [gamesExpanded, setGamesExpanded] = useState(false);
   const [enrolledPlayers, setEnrolledPlayers] = useState();
   const [groups, setGroups] = useState();
   //const [searchPlayer, setSearchPlayer] = useState('')
 
+  useEffect(() => {
+    console.log("gamesToShow in useEffect:", gamesToShow);
+    setGamesToShow(sortedDbGames)
+  }, [])
+  
+  
+
   // Firebase tietokannan testaamiseen liittyvää
   const [player, setPlayer] = useState([]);
   const [enrolment, setEnrolment] = useState([]);
 
   // Collects game information from firebase database
-  useEffect(() => {
+  /* useEffect(() => {
     const games = ref(database,"game/");
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
@@ -48,7 +55,7 @@ function Points({navigation}) {
       const parseKeys = Object.values(parse)
       setGamesToShow(parseKeys);
     });
-  },[]);
+  },[]); */
   
   // Collects player information from firebase database
   useEffect(() => {
@@ -100,8 +107,10 @@ function Points({navigation}) {
   }
   
   const filterGames = () => {
-    const newGamesToShow = sortedDbGames.filter((i) => i.division === division);
-    setGamesToShow(newGamesToShow);
+    if (division) {
+      const newGamesToShow = sortedDbGames.filter((i) => i.division === division);
+      setGamesToShow(newGamesToShow);
+    }
   }
 
   const selectGame = (game) => {
@@ -110,14 +119,15 @@ function Points({navigation}) {
   }
 
   const getGameTitle = (i) => {
-    return i.division + " " + i.date.getDate() + "." + i.date.getMonth() + 1 + "." + i.date.getFullYear();
+    return i.division + " " + i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }
 
   const mapGames = () => {
+    console.log("gamesToShow: ", gamesToShow);
     return gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
   }
   
-  let gameList = mapGames();
+  let gameList = gamesToShow ? mapGames() : null;
 
   const filterEnrolments = () => {
     let enrolmentsToChosenGame;
