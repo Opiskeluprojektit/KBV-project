@@ -5,8 +5,8 @@ import { style } from '../styles/styles';
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 import * as Icon from "react-native-feather";
 import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
-import {database} from '../firebase/Config';
-import {onValue, ref} from 'firebase/database';
+import {database, TODOS_REF} from '../firebase/Config';
+import {onValue, ref, update, child, push} from 'firebase/database';
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
@@ -33,6 +33,8 @@ function Enrolment({ navigation }) {
   // Firebase tietokannan testaamiseen liittyvää
   const [player, setPlayer] = useState([]);
   const [enrolment, setEnrolment] = useState([]);
+
+  const [newToDo, setNewToDo] = useState('');
 
   // Collects game information from firebase database
   useEffect(() => {
@@ -150,8 +152,21 @@ function Enrolment({ navigation }) {
       //push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
       //newDbEnrolments.push({id: 99, game_id: chosenGame.id, player_id: playersToEnroll.id});
 
-      //filterEnrolments()
+	      //const addNewTodo = () => {
+      const newToDoItem = {
+        done: false,
+        todoItem: newToDo
+      };
+      const newToDoItemKey = push(child(ref(database), TODOS_REF)).key;
+      const updates = {};
+      updates[TODOS_REF + newToDoItemKey] = newToDoItem;
+      console.log(newToDoItem)
+      setNewToDo('');
+      filterEnrolments()
       showModal();
+      console.log(enrolment)
+      return update(ref(database), updates);
+    //}
       
     }
     else {
