@@ -202,11 +202,15 @@ function Points({navigation}) {
             onChangeText={value => handleScoreChange(value, 2, item.group)}
             label={"Erä 3"}
           />
+          {/* raking score: */}
+          <Text>27,75</Text>
         </View> : 
         <View style={style.playerScoresContainer}>
           <Text style={[style.numInput, style.numInputText]}>{item.scores[0]}</Text>
           <Text style={[style.numInput, style.numInputText]}>{item.scores[1]}</Text>
           <Text style={[style.numInput, style.numInputText]}>{item.scores[2]}</Text>
+          {/* raking score: */}
+          <Text>27,75</Text>
         </View> }
     </View>
     )
