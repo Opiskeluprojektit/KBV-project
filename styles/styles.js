@@ -359,13 +359,30 @@ export const style = StyleSheet.create({
 
     numInput: {
         backgroundColor: Colors.primaryVariant,
-        width: '31%',
+        width: '26%',
         height: 50,
-        marginRight: 13,
-        marginTop: 10,
+        marginRight: 10,
+        marginTop: 5,
+        marginBottom: 30
+    },
+
+    rankingNumber: {
+        backgroundColor: Colors.primaryVariant,
+        width: 50,
+        height: 50,
+        marginRight: 10,
+        marginTop: 5,
         marginBottom: 30,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10
+        borderRadius: 1000,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    numInputText: {
+        color: Colors.bodyText,
+        fontSize: 16,
+        paddingLeft: 10,
+        paddingTop: 15
     },
 
     playerScoresContainer: {
