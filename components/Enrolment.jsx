@@ -147,22 +147,19 @@ function Enrolment({ navigation }) {
 
   const handleEnrollment = () => {
     if (checkModal()) {
-      //push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
-      //newDbEnrolments.push({id: 99, game_id: chosenGame.id, player_id: playersToEnroll.id});
-
       let enrolmentLength = enrolment.length + 1;
-	      //const addNewTodo = () => {
       const newToDoItem = {id: enrolmentLength, game_id: chosenGame.id, player_id: playersToEnroll.id};
-      const newToDoItemKey = newDbEnrolments.push(child(ref(database), enrolment_ref)).key;
+      const newToDoItemKey = push(child(ref(database), enrolment_ref)).key;
+      //push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
+      newDbEnrolments.push(newToDoItem)
       const updates = {};
       updates[enrolment_ref + newToDoItemKey] = newToDoItem;
+      update(ref(database), updates);
       console.log(newToDoItem)
       filterEnrolments()
       showModal();
       console.log(enrolment)
-      return update(ref(database), updates);
-    //}
-      
+      return;
     }
     else {
       Alert.alert("Tarkista peli- ja pelaajavalinnat!")
@@ -181,6 +178,7 @@ function Enrolment({ navigation }) {
     chosenGame ? enrolmentsToChosenGame = newDbEnrolments.concat().filter(i => i.game_id == chosenGame.id) : null
     enrolmentsToChosenGame ? newEnrolledPlayers = player.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
     newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
+    console.log(enrolledPlayers)
   }
 
   const Player = ({item}) => {
