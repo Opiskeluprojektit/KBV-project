@@ -359,11 +359,23 @@ export const style = StyleSheet.create({
 
     numInput: {
         backgroundColor: Colors.primaryVariant,
-        width: '31%',
+        width: '26%',
         height: 50,
-        marginRight: 13,
+        marginRight: 10,
         marginTop: 5,
         marginBottom: 30
+    },
+
+    rankingNumber: {
+        backgroundColor: Colors.primaryVariant,
+        width: 50,
+        height: 50,
+        marginRight: 10,
+        marginTop: 5,
+        marginBottom: 30,
+        borderRadius: 1000,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     numInputText: {
