@@ -229,7 +229,7 @@ function Points({navigation}) {
           />
           {/* raking score: */}
           <View style={style.rankingNumber}>
-            <Text style={style.text}>27,75</Text>
+            <Text style={style.text}>{item.sum}</Text>
           </View>
         </View> : 
         <View style={style.playerScoresContainer}>
@@ -238,7 +238,7 @@ function Points({navigation}) {
           <Text style={[style.numInput, style.numInputText]}>{item.scores[2]}</Text>
           {/* raking score: */}
           <View style={style.rankingNumber}>
-            <Text style={style.text}>27,75</Text>
+            <Text style={style.text}>{item.sum}</Text>
           </View>
           
         </View> }
