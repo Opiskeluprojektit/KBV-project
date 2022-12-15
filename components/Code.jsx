@@ -58,7 +58,8 @@ function Code({navigation}) {
             
           </SafeAreaView>
         </ImageBackground>
-      );
+      ); 
+
     
   }
 export default Code;

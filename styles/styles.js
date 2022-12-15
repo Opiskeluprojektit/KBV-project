@@ -34,7 +34,7 @@ export const style = StyleSheet.create({
         top: 2
     },
 
-    // Screen headerlines
+    // Screen headlines
     h4Style: { 
         color: Colors.darkText,
         fontWeight: '500',
@@ -87,8 +87,7 @@ export const style = StyleSheet.create({
             height: 4
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4,
-        //marginTop: 24 // poista myöhemmin
+        shadowRadius: 4
     },
 
     // Feather icons
@@ -120,7 +119,7 @@ export const style = StyleSheet.create({
 
     codeInputField: {
         alignSelf: 'center',
-        marginBottom: 30,
+        marginBottom: 30
     },
 
     codeInputBox: {
@@ -191,7 +190,6 @@ export const style = StyleSheet.create({
     // Only HomeScreen yellow circles
     homeEllipse: {
         alignSelf: 'flex-end',
-        //right: 8
         right: -24
     },
 
@@ -203,8 +201,7 @@ export const style = StyleSheet.create({
     },
 
     addPlayer: {
-        flexDirection: "row",
-        //marginBottom: 24
+        flexDirection: "row"
     }, 
 
     // Button for enrolment
@@ -264,8 +261,7 @@ export const style = StyleSheet.create({
     },
 
     modal: {
-        left: 24,
-        marginTop: 42,
+        margin: 24
     },
 
     // Title for summary modal
@@ -295,7 +291,7 @@ export const style = StyleSheet.create({
     // Modal button styles
     buttonSummaryStyles: {
         flexDirection: "row",
-        margin: 20,
+        marginTop: 20,
     },   
 
     summaryButton: {
@@ -306,7 +302,13 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: 10,
-        marginBottom: 34
+        marginBottom: 10,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
     },
 
 // PointsScreen styles
@@ -315,7 +317,7 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.background,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
-        height: "83%"
+        height: "82%"
     }, 
 
     pointsHeader: {
@@ -338,7 +340,6 @@ export const style = StyleSheet.create({
         height: 50,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
-        marginBottom: 10,
         justifyContent: 'center'
     },
 
@@ -361,7 +362,8 @@ export const style = StyleSheet.create({
         width: '31%',
         height: 50,
         marginRight: 13,
-        marginBottom: 13,
+        marginTop: 10,
+        marginBottom: 30,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10
     },

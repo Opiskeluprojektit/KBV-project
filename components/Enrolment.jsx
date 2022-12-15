@@ -5,8 +5,8 @@ import { style } from '../styles/styles';
 import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
 import * as Icon from "react-native-feather";
 import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
-import {database} from '../firebase/Config';
-import {onValue, ref} from 'firebase/database';
+import {database, enrolment_ref} from '../firebase/Config';
+import {onValue, ref, update, child, push} from 'firebase/database';
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
@@ -150,8 +150,18 @@ function Enrolment({ navigation }) {
       //push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
       //newDbEnrolments.push({id: 99, game_id: chosenGame.id, player_id: playersToEnroll.id});
 
-      //filterEnrolments()
+      let enrolmentLength = enrolment.length + 1;
+	      //const addNewTodo = () => {
+      const newToDoItem = {id: enrolmentLength, game_id: chosenGame.id, player_id: playersToEnroll.id};
+      const newToDoItemKey = newDbEnrolments.push(child(ref(database), enrolment_ref)).key;
+      const updates = {};
+      updates[enrolment_ref + newToDoItemKey] = newToDoItem;
+      console.log(newToDoItem)
+      filterEnrolments()
       showModal();
+      console.log(enrolment)
+      return update(ref(database), updates);
+    //}
       
     }
     else {
@@ -264,7 +274,7 @@ function Enrolment({ navigation }) {
                       {/* Game to which the enrolment has been done */}
                       <View style={style.summaryDetails}>
                         <Icon.Clock style={style.summaryIcons}/>
-                        {chosenGame ? <Text style={style.text}>ViikkoBiitsi {getGameTitle(chosenGame)}</Text> : null}
+                        {chosenGame ? <Text style={style.text}>{getGameTitle(chosenGame)}</Text> : null}
                       </View>
 
                       {/* The players which were enrolled */}
@@ -280,6 +290,7 @@ function Enrolment({ navigation }) {
                           data={enrolledPlayers}
                           renderItem={Player}
                           keyExtractor={item => item.id}
+                          style={{marginTop: 10}}
                         />
                       </View>
 
