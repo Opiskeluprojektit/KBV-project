@@ -119,7 +119,6 @@ function Points({navigation}) {
   }
 
   const mapGames = () => {
-    console.log("gamesToShow: ", gamesToShow);
     return gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
   }
   
@@ -155,19 +154,45 @@ function Points({navigation}) {
   }
 
   const handleScoreChange = (points, round, group) => {
-    console.log("points, round, group:", points, round, group);
     //update points to groups.
     let newGroups = groups.concat();
-    newGroups[group] = newGroups[group].reduce((newGroup, player, playerNumber) => {
-      player.scores[round] = playerNumber == 0 || (round == 0 && playerNumber == 3) || (round == 1 && playerNumber == 1) || (round == 2 && playerNumber == 2) ? points : -points;
-      newGroup.push(player)
-      return newGroup
-    }, [])
-    console.log("newGrouops:", newGroups);
-    //newGroups[group][0].scores[round] = points;
+
+    //Check if user has typed in an entire number instead of "." or "-";
+    if (Number(points)) {
+      newGroups[group] = newGroups[group].reduce((newGroup, player, playerNumber) => {
+        player.scores[round] = playerNumber == 0 || (round == 0 && playerNumber == 3) || (round == 1 && playerNumber == 1) || (round == 2 && playerNumber == 2) ? Number(points) : Number(-points);
+        player.sum = player.scores.reduce((sum, score) => {
+          return sum + score;
+        }, 0)
+        newGroup.push(player)
+        return newGroup
+      }, [])
+      console.log("newGrouops:", newGroups);
+      //newGroups[group][0].scores[round] = points;
+      //finally make an useEffect that reacts to groups to calculate ranking scores.
+      //Actually propably not a good idea to make an useEffect for that, lets instead make a function for it.
+      newGroups = countRankingScoresByGroup(newGroups, group);   
+    } else {
+      //Save the incomplete input into the groups.
+      newGroups[group][0].scores[round] = points;
+    }
     setGroups(newGroups)
-    //finally make an useEffect that reacts to groups to calculate ranking scores.
-    //Actually propably not a good idea to make an useEffect for that, lets instead make a function for it.
+  }
+
+  const countRankingScoresByGroup = (groups, groupNumber) => {
+
+    let temp = groups.concat();
+    temp[groupNumber] = temp[groupNumber].sort((a,b) => b.sum - a.sum)
+    temp[groupNumber].reduce((group, player, i) => {
+      console.log("player:", player);
+      player.ranking = (15.5 + 0.5 * (1 - (i + 1)) - (groupNumber + 1) / 2)
+      group.push(player)
+      //console.log((15.5 + 0.5 * (1 - (i + 1)) - (groupNumber + 1) / 2));
+      return group
+    },[])
+    console.log(temp);
+
+    return temp;
   }
 
   const Player = ({item}) => {
@@ -179,7 +204,7 @@ function Points({navigation}) {
             style={style.numInput}
             underlineColor={'#1B1B1B'}
             activeUnderlineColor={'#005C70'} 
-            value={item.scores[0]}
+            value={item.scores[0] ? item.scores[0].toString(): ""}
             keyboardType={"number-pad"}
             onChangeText={value => handleScoreChange(value, 0, item.group)}
             label={"Erä 1"}
@@ -188,7 +213,7 @@ function Points({navigation}) {
             style={style.numInput}
             underlineColor={'#1B1B1B'}
             activeUnderlineColor={'#005C70'}   
-            value={item.scores[1]}
+            value={item.scores[1] ? item.scores[1].toString(): ""}
             keyboardType={"number-pad"}
             onChangeText={value => handleScoreChange(value, 1, item.group)}
             label={"Erä 2"}
@@ -197,13 +222,13 @@ function Points({navigation}) {
             style={style.numInput}
             underlineColor={'#1B1B1B'}
             activeUnderlineColor={'#005C70'}   
-            value={item.scores[2]}
+            value={item.scores[2] ? item.scores[2].toString(): ""}
             keyboardType={"number-pad"}
             onChangeText={value => handleScoreChange(value, 2, item.group)}
             label={"Erä 3"}
           />
           {/* raking score: */}
-          <Text>27,75</Text>
+          <Text></Text>
         </View> : 
         <View style={style.playerScoresContainer}>
           <Text style={style.text}>{item.scores[0]}</Text>
@@ -230,7 +255,7 @@ function Points({navigation}) {
       groups[j].push(player);
       return groups
     }, []) : null
-    console.log("newGroups: ", newGroups);
+    //console.log("newGroups: ", newGroups);
 
     setGroups(newGroups);
   }
