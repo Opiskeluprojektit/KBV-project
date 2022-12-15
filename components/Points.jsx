@@ -13,8 +13,8 @@ import { color } from 'react-native-reanimated';
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
-//Make deep copies of players, enrolments and games from the database.
-const dbPlayers = JSON.parse(JSON.stringify(db.player));
+//Make deep copies of players, enrolments and games from the test data (testidata.json).
+/* const dbPlayers = JSON.parse(JSON.stringify(db.player));
 const dbEnrolments = JSON.parse(JSON.stringify(db.enrolment));
 const sortedDbGames = JSON.parse(JSON.stringify(db.game))
   .map((i) => {
@@ -22,7 +22,7 @@ const sortedDbGames = JSON.parse(JSON.stringify(db.game))
     return i;
   })
   .filter((i) => i.date >= new Date ())
-  .sort((a, b) => a.date - b.date);
+  .sort((a, b) => a.date - b.date); */
 
 function Points({navigation}) {
   const [division, setDivision] = useState();
@@ -34,14 +34,7 @@ function Points({navigation}) {
   const [groups, setGroups] = useState();
   //const [searchPlayer, setSearchPlayer] = useState('')
 
- /*   useEffect(() => {
-    console.log("gamesToShow in useEffect:", gamesToShow);
-    setGamesToShow(sortedDbGames)
-  }, []) */
-  
-  
-
-  // Firebase tietokannan testaamiseen liittyvää
+  // Players and enrolments from the database
   const [player, setPlayer] = useState([]);
   const [enrolment, setEnrolment] = useState([]);
 
@@ -86,9 +79,6 @@ function Points({navigation}) {
     });
   },[]);
 
-  let newDbEnrolments = enrolment.concat();
-
-
   useEffect(() => {
     gameList = mapGames();
   }, [gamesToShow])
@@ -113,7 +103,7 @@ function Points({navigation}) {
   
   const filterGames = () => {
     if (division) {
-      const newGamesToShow = sortedDbGames.filter((i) => i.division === division);
+      const newGamesToShow = gamesToShow.filter((i) => i.division === division);
       setGamesToShow(newGamesToShow);
     }
   }
@@ -125,7 +115,7 @@ function Points({navigation}) {
 
   const getGameTitle = (i) => {
     i.date = new Date(i.date)
-    return i.division + " " + i.date.getDate() + "." + i.date.getMonth() + 1 + "." + i.date.getFullYear();
+    return i.division + " " + i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }
 
   const mapGames = () => {
@@ -153,7 +143,6 @@ function Points({navigation}) {
   }
 
   const Group = ({item}) => {
-    //console.log(item);
     return (
       <View>
         <Text style={style.pointTitles}>Lohko {item[0].group + 1}</Text>
@@ -178,6 +167,7 @@ function Points({navigation}) {
     //newGroups[group][0].scores[round] = points;
     setGroups(newGroups)
     //finally make an useEffect that reacts to groups to calculate ranking scores.
+    //Actually propably not a good idea to make an useEffect for that, lets instead make a function for it.
   }
 
   const Player = ({item}) => {
@@ -268,7 +258,6 @@ function Points({navigation}) {
     setPlayersToShow(newPlayersToShow);
   }; */
 
-
   return (
     <ImageBackground source={backgroundImage} style={{flex: 1}}>
       <View style={[style.container, {flexDirection: "column"}]}>
@@ -328,13 +317,5 @@ function Points({navigation}) {
     </ImageBackground>
   )
 }
-
-/* const tulokset = {
-  player1: {
-    scores: [3, -1, 2],
-    summa: 4,
-    rankingScore: 27,92
-  }
-} */
 
 export default Points
