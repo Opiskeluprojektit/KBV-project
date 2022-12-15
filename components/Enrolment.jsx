@@ -147,18 +147,19 @@ function Enrolment({ navigation }) {
 
   const handleEnrollment = () => {
     if (checkModal()) {
+
+      // Making a running id number for enrolments, making a enrolment item and enrolment key
       let enrolmentLength = enrolment.length + 1;
-      const newToDoItem = {id: enrolmentLength, game_id: chosenGame.id, player_id: playersToEnroll.id};
-      const newToDoItemKey = push(child(ref(database), enrolment_ref)).key;
-      //push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
-      newDbEnrolments.push(newToDoItem)
+      const newEnrolment = {id: enrolmentLength, game_id: chosenGame.id, player_id: playersToEnroll.id};
+      const newEnrolmentKey = push(child(ref(database), enrolment_ref)).key;
+
+      // Push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
+      newDbEnrolments.push(newEnrolment)
       const updates = {};
-      updates[enrolment_ref + newToDoItemKey] = newToDoItem;
+      updates[enrolment_ref + newEnrolmentKey] = newEnrolment;
       update(ref(database), updates);
-      console.log(newToDoItem)
       filterEnrolments()
       showModal();
-      console.log(enrolment)
       return;
     }
     else {
@@ -174,11 +175,9 @@ function Enrolment({ navigation }) {
   const filterEnrolments = () => {
     let enrolmentsToChosenGame;
     let newEnrolledPlayers;
-    //console.log("chosenGame: ", chosenGame);
     chosenGame ? enrolmentsToChosenGame = newDbEnrolments.concat().filter(i => i.game_id == chosenGame.id) : null
     enrolmentsToChosenGame ? newEnrolledPlayers = player.concat().filter(i => enrolmentsToChosenGame.find(j => j.player_id === i.id)).sort((a,b) => b.ranking - a.ranking) : null
     newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
-    console.log(enrolledPlayers)
   }
 
   const Player = ({item}) => {
