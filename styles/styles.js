@@ -362,10 +362,15 @@ export const style = StyleSheet.create({
         width: '31%',
         height: 50,
         marginRight: 13,
-        marginTop: 10,
-        marginBottom: 30,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10
+        marginTop: 5,
+        marginBottom: 30
+    },
+
+    numInputText: {
+        color: Colors.bodyText,
+        fontSize: 16,
+        paddingLeft: 10,
+        paddingTop: 15
     },
 
     playerScoresContainer: {
