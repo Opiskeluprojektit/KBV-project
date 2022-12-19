@@ -8,23 +8,23 @@ import {onValue, ref} from 'firebase/database';
 const passwordhard = 1234;
 
 function Code({navigation}) {
-
-    // Collects code from firebase database
-    useEffect(() => {
-      const administration = ref(database,"administration/0");
-      onValue(administration, (snapshot) => {
-        const data = snapshot.val() ? snapshot.val() : {};
-        const adminItems = {...data};
-        const parse = JSON.parse(JSON.stringify(adminItems))
-        setPassword(parse.koodi);
-      });
-    },[]);
-
-    const backgroundImage = require('../assets/Volleyball50.png');
-    const logo = require('../assets/Logo2.png');
-
-    const [code, setCode] = useState(passwordhard);   //stores input, hardwired for testing purposes
-    const [password, setPassword] = useState("")
+  
+  const backgroundImage = require('../assets/Volleyball50.png');
+  const logo = require('../assets/Logo2.png');
+  
+  const [code, setCode] = useState(passwordhard);   //stores input, hardwired for testing purposes
+  const [password, setPassword] = useState()
+  
+      // Collects code from firebase database
+      useEffect(() => {
+        const administration = ref(database,"administration/0");
+        onValue(administration, (snapshot) => {
+          const data = snapshot.val() ? snapshot.val() : {};
+          const adminItems = {...data};
+          const parse = JSON.parse(JSON.stringify(adminItems))
+          setPassword(parse.koodi);
+        });
+      },[]);
 
     function checkCode() {                        //checks if input matches password
       if (code == password) {
