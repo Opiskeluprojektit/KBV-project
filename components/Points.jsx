@@ -1,31 +1,23 @@
-import {
-  Text,
-  View,
-  Pressable,
-  ImageBackground,
-  FlatList,
-  ScrollView,
-} from "react-native";
+import { Text, View, Pressable, ImageBackground, FlatList} from "react-native";
 import React, { useState, useEffect } from "react";
 import { style } from "../styles/styles";
 import * as Icon from "react-native-feather";
 import { List, TextInput } from "react-native-paper";
 
-import * as db from "../assets/testidata.json";
-import { MyDate, formatDMYtoYMD } from "../scripts/myDate";
+import { formatDMYtoYMD } from "../scripts/myDate";
 
 import { database } from "../firebase/Config";
 import { onValue, ref, set } from "firebase/database";
-import { color } from "react-native-reanimated";
 
 const backgroundImage = require("../assets/Volleyball100.png");
 
+//import * as db from "../assets/testidata.json";
 //Make deep copies of players, enrolments and games from the test data (testidata.json).
 /* const dbPlayers = JSON.parse(JSON.stringify(db.player));
 const dbEnrolments = JSON.parse(JSON.stringify(db.enrolment));
 const sortedDbGames = JSON.parse(JSON.stringify(db.game))
   .map((i) => {
-    i.date = new MyDate(formatDMYtoYMD(i.date));
+    i.date = new Date(formatDMYtoYMD(i.date));
     return i;
   })
   .filter((i) => i.date >= new Date ())
@@ -40,10 +32,7 @@ function Points({ navigation }) {
   const [enrolledPlayers, setEnrolledPlayers] = useState();
   const [groups, setGroups] = useState();
   const [game, setGame] = useState();
-
-  // Bonus multiplier still needs to be fetched from the administration in the db.
   const [bonusMultiplier, setBonusMultiplier] = useState();
-  //const [searchPlayer, setSearchPlayer] = useState('')
 
   // Players and enrolments from the database
   const [player, setPlayer] = useState([]);
@@ -58,7 +47,7 @@ function Points({ navigation }) {
       const parse = JSON.parse(JSON.stringify(gameItems));
       let parseKeys = Object.values(parse)
         .map((i) => {
-          i.date = new MyDate(formatDMYtoYMD(i.date));
+          i.date = new Date(formatDMYtoYMD(i.date));
           return i;
         })
         .filter((i) => i.date >= new Date())
@@ -124,6 +113,7 @@ function Points({ navigation }) {
     setDivision(div);
   };
 
+  // When a division is chosen a new gamesToShow array is filtered from the game table.
   const filterGames = () => {
     if (division) {
       const newGamesToShow = game.filter((i) => i.division === division);
@@ -137,16 +127,16 @@ function Points({ navigation }) {
     setChosenGame(game);
   };
 
-  const getGameTitle = (i) => {
-    i.date = new Date(i.date);
+  const getGameTitle = (game) => {
+    game.date = new Date(game.date);
     return (
-      i.division +
+      game.division +
       " " +
-      i.date.getDate() +
+      game.date.getDate() +
       "." +
-      (i.date.getMonth() + 1) +
+      (game.date.getMonth() + 1) +
       "." +
-      i.date.getFullYear()
+      game.date.getFullYear()
     );
   };
 
@@ -186,10 +176,7 @@ function Points({ navigation }) {
 
   //Flatlist components and functions
 
-  const GroupSeparator = () => {
-    <View style={style.groupSeparator}></View>;
-  };
-
+  //RenderItem for the main FlatList that renders the groups.
   const Group = ({ item }) => {
     return (
       <View>
@@ -198,9 +185,14 @@ function Points({ navigation }) {
           data={item}
           ItemSeparatorComponent={PlayerSeparator}
           renderItem={Player}
-        />
+          />
       </View>
     );
+  };
+  
+  // Give Separator component styles to affect how flatlist Items are separated from each other.
+  const GroupSeparator = () => {
+    <View style={style.groupSeparator}></View>;
   };
 
   const handleScoreChange = (points, round, group) => {
@@ -211,6 +203,8 @@ function Points({ navigation }) {
     if (Number(points)) {
       newGroups[group] = newGroups[group].reduce(
         (newGroup, player, playerNumber) => {
+          // Player 1 and their pair gets points and the opposing players get points in negative.
+          // Pairs change on each round so different conditions need to be taken into consiredation.
           player.scores[round] =
             playerNumber == 0 ||
             (round == 0 && playerNumber == 3) ||
@@ -226,10 +220,8 @@ function Points({ navigation }) {
         },
         []
       );
-      console.log("newGrouops:", newGroups);
-      //newGroups[group][0].scores[round] = points;
-      //finally make an useEffect that reacts to groups to calculate ranking scores.
-      //Actually propably not a good idea to make an useEffect for that, lets instead make a function for it.
+      //console.log("newGrouops:", newGroups);
+
       newGroups = countRankingScoresByGroup(newGroups, group);
     } else {
       //Save the incomplete input into the groups.
@@ -269,12 +261,14 @@ function Points({ navigation }) {
     return newGroups;
   };
 
+  //RenderItem for the FlatList inside the Group component
   const Player = ({ item }) => {
     return (
       <View>
         <View style={style.playerContainer}>
           <Text style={style.pointTexts}>{item.name}</Text>
         </View>
+        {/* Checks if the player of this iteration is the first player of the group and if they are, returns textInputs. */}
         {item.orderNumber % 4 == 0 ? (
           <View style={style.playerScoresContainer}>
             <TextInput
@@ -304,7 +298,7 @@ function Points({ navigation }) {
               onChangeText={(value) => handleScoreChange(value, 2, item.group)}
               label={"Erä 3"}
             />
-            {/* raking score: */}
+            {/* ranking score: */}
             <View style={style.rankingNumber}>
               <Text style={style.text}>{item.sum}</Text>
             </View>
@@ -384,6 +378,7 @@ function Points({ navigation }) {
           <View style={{ flex: 1, marginHorizontal: 24 }}>
             <Text style={style.h4Style}>Pisteiden syöttö</Text>
             <List.Section>
+              {/* Division selection */}
               <List.Accordion
                 title={division ? division : "Sarjavalikko"}
                 style={style.search}
@@ -410,6 +405,7 @@ function Points({ navigation }) {
                   onPress={() => selectDivision("Pojat")}
                 />
               </List.Accordion>
+              {/* Game selection */}
               <List.Accordion
                 title={chosenGame ? getGameTitle(chosenGame) : "Pelit"}
                 style={style.search}

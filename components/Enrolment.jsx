@@ -2,7 +2,7 @@ import { SafeAreaView,  FlatList, Text, View, Pressable, Alert,
   Button, ImageBackground } from 'react-native';
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
-import { MyDate, formatDMYtoYMD } from '../scripts/myDate';
+import { formatDMYtoYMD } from '../scripts/myDate';
 import * as Icon from "react-native-feather";
 import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
 import {database, enrolment_ref} from '../firebase/Config';
@@ -42,7 +42,7 @@ function Enrolment({ navigation }) {
       const gameItems = {...data};
       const parse = JSON.parse(JSON.stringify(gameItems))
       let parseKeys = Object.values(parse).map((i) => {
-        i.date = new MyDate(formatDMYtoYMD(i.date));
+        i.date = new Date(formatDMYtoYMD(i.date));
         return i;
       })
       .filter((i) => i.date >= new Date ())
