@@ -172,6 +172,7 @@ function Enrolment({ navigation }) {
     return chosenGame && playersToEnroll ? true : false;
   }
 
+  // Filter enrolments to show the enrolled player on the modal
   const filterEnrolments = () => {
     let enrolmentsToChosenGame;
     let newEnrolledPlayers;
@@ -254,7 +255,7 @@ function Enrolment({ navigation }) {
               And instead of x there would be the amount of players */}
               <Pressable onPress={handleEnrollment} 
                 style={[style.enrolButton, style.button]}>
-                <Text style={style.buttonText}>Ilmoittaudu</Text>
+                <Text style={style.buttonText}>Ilmoittaudu</Text> 
               </Pressable>
               </View>
           </View>
@@ -274,7 +275,7 @@ function Enrolment({ navigation }) {
                         {chosenGame ? <Text style={style.text}>{getGameTitle(chosenGame)}</Text> : null}
                       </View>
 
-                      {/* The players which were enrolled */}
+                      {/* The player which was enrolled: their name and ranking */}
                       <View style={style.summaryDetails}>
                         <Icon.User style={style.summaryIcons}/>
                         {playersToEnroll ? <Text style={style.text}>{playersToEnroll.name} 
