@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#18B5BC"
-      }
+      },
+      "package": "com.n0saje00.KBVproject"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "32798671-1e82-49f2-a4d6-08c94c4cc788"
+      }
     }
   }
 }
