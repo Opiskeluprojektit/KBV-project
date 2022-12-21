@@ -12,7 +12,6 @@ function Code({navigation}) {
   const backgroundImage = require('../assets/Volleyball50.png');
   const logo = require('../assets/Logo2.png');
   
-  const [code, setCode] = useState(passwordhard);   //stores input, hardwired for testing purposes
   const [password, setPassword] = useState()
   
       // Collects code from firebase database
