@@ -138,6 +138,7 @@ function Enrolment({ navigation }) {
 
   // Showing and hiding the summary modal
   const showModal = () => setVisible(true);
+  
   const hideModal = () => {
     setVisible(false);
     setChosenGame();
