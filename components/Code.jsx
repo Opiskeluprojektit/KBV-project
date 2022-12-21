@@ -5,14 +5,14 @@ import CodeInput from 'react-native-code-textinput';
 import {database} from '../firebase/Config';
 import {onValue, ref} from 'firebase/database';
 /** Password will be retrieved from firebase */
-const passwordhard = 1234;
+
 
 function Code({navigation}) {
   
   const backgroundImage = require('../assets/Volleyball50.png');
   const logo = require('../assets/Logo2.png');
   
-  const [code, setCode] = useState(passwordhard);   //stores input, hardwired for testing purposes
+  const [code, setCode] = useState();   //stores input, hardwired for testing purposes
   const [password, setPassword] = useState()
   
       // Collects code from firebase database
