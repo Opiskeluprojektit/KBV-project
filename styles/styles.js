@@ -197,7 +197,7 @@ export const style = StyleSheet.create({
 // EnrolmentScreen styles
 
     playerSearch: {
-        marginBottom: 5
+        marginBottom: 15
     },
 
     addPlayer: {
@@ -421,7 +421,7 @@ export const style = StyleSheet.create({
     menuContent: {
         color: Colors.darkText,
         fontWeight: '500',
-        fontSize: 34,
+        fontSize: 30,
         marginBottom: 20,
         marginLeft: 24,
         marginRight: 24
