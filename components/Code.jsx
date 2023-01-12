@@ -13,7 +13,7 @@ function Code({navigation}) {
   const logo = require('../assets/Logo2.png');
   
   const [code, setCode] = useState();   //stores input, hardwired for testing purposes
-  const [password, setPassword] = useState()
+  const [password, setPassword] = useState(1234)
   
       // Collects code from firebase database
       useEffect(() => {
