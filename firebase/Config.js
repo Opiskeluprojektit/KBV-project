@@ -2,14 +2,14 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBlyjlSNNlTwYPYgo-H14Z3Tcji9lgpUTM",
-    authDomain: "kbv-project.firebaseapp.com",
-    databaseURL: "https://kbv-project-default-rtdb.europe-west1.firebasedatabase.app/",
-    projectId: "kbv-project",
-    storageBucket: "kbv-project.appspot.com",
-    messagingSenderId: "106294837772",
-    appId: "1:106294837772:web:125a2ae6ed87234344e429"
-  };
+  apiKey: "AIzaSyBf-mOUWd6w61FzOJKnMgGZ2G18lNnpNlM",
+  authDomain: "kbv-project-e233a.firebaseapp.com",
+  databaseURL: "https://kbv-project-e233a-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "kbv-project-e233a",
+  storageBucket: "kbv-project-e233a.appspot.com",
+  messagingSenderId: "468583703273",
+  appId: "1:468583703273:web:f001061f66f6741b8e4678"
+};
 
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);

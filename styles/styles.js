@@ -426,4 +426,5 @@ export const style = StyleSheet.create({
         marginLeft: 24,
         marginRight: 24
     }
+
 })
