@@ -472,7 +472,7 @@
       "id": 19,
       "name": "Shaine Pope",
       "ranking": 20,
-      "division": "Naiset"
+      "division": "Tytöt"
     },
     {
       "id": 20,
@@ -592,7 +592,7 @@
       "id": 39,
       "name": "Gemma Cleveland",
       "ranking": 26,
-      "division": "Pojat"
+      "division": "Tytöt"
     },
     {
       "id": 40,
@@ -941,22 +941,22 @@
     },
     {
       "id": 6,
-      "game_id": 10,
+      "game_id": 50,
       "player_id": 6
     },
     {
       "id": 7,
-      "game_id": 10,
+      "game_id": 50,
       "player_id": 7
     },
     {
       "id": 8,
-      "game_id": 10,
+      "game_id": 50,
       "player_id": 8
     },
     {
       "id": 9,
-      "game_id": 10,
+      "game_id": 50,
       "player_id": 9
     },
     {
@@ -971,12 +971,12 @@
     },
     {
       "id": 12,
-      "game_id": 10,
+      "game_id": 50,
       "player_id": 12
     },
     {
       "id": 13,
-      "game_id": 10,
+      "game_id": 50,
       "player_id": 13
     },
     {
