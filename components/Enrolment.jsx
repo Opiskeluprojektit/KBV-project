@@ -114,7 +114,6 @@ function Enrolment({ navigation }) {
   };
 
   // Selecting the player from the flatlist
-    // Tämä ei toimi -> Laura palaa myöhemmin
   const selectPlayer = (player) => {
     if (enrolledPlayers.find((i) => i.name === player.name)) {
       Alert.alert("Pelaaja on jo ilmoittautunut")
@@ -123,8 +122,6 @@ function Enrolment({ navigation }) {
       setSearch(player.name);
       setPlayersToShow();
     }
-
-
   }
     
   // Converts the game date to specific form: dd.mm.yyyy
