@@ -221,8 +221,9 @@ function Points({ navigation }) {
         []
       );
       //console.log("newGrouops:", newGroups);
-
-      newGroups = countRankingScoresByGroup(newGroups, group);
+      console.log("newGroups[group].scores", newGroups[group][0].scores);
+      //newGroups[group].scores ? console.log("newGroups[group].scores.length", newGroups[group].scores.length) : null;
+      newGroups[group][0].scores ? newGroups = (newGroups[group][0].scores.length > 2) ?  countRankingScoresByGroup(newGroups, group) : newGroups : null;
     } else {
       //Save the incomplete input into the groups.
       newGroups[group][0].scores[round] = points;
@@ -340,7 +341,7 @@ function Points({ navigation }) {
           return groups;
         }, [])
       : null;
-    //console.log("newGroups: ", newGroups);
+    console.log("newGroups: ", newGroups);
 
     setGroups(newGroups);
   };
@@ -353,6 +354,8 @@ function Points({ navigation }) {
     //These last two are given to make the nested FlatList management easier.
     player.orderNumber = i;
     player.group = j;
+
+    //console.log("player:", player);
 
     return player;
   };

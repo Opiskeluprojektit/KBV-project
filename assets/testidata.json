@@ -11,352 +11,502 @@
     {
       "id": 1,
       "game_id": 1,
-      "summa": -3,
-      "sijoitus_pisteet": 16.57,
-      "player_id": 1
+      "sum": -3,
+      "ranking": 16.57,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 2,
       "game_id": 2,
-      "summa": 1,
-      "sijoitus_pisteet": 18.28,
-      "player_id": 2
+      "sum": 1,
+      "ranking": 18.28,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 3,
       "game_id": 3,
-      "summa": 2,
-      "sijoitus_pisteet": 14.15,
-      "player_id": 3
+      "sum": 2,
+      "ranking": 14.15,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 4,
       "game_id": 4,
-      "summa": 5,
-      "sijoitus_pisteet": 21.67,
-      "player_id": 4
+      "sum": 5,
+      "ranking": 21.67,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 5,
       "game_id": 5,
-      "summa": 5,
-      "sijoitus_pisteet": 18.08,
-      "player_id": 5
+      "sum": 5,
+      "ranking": 18.08,
+      "player_id": 5,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 6,
       "game_id": 6,
-      "summa": 1,
-      "sijoitus_pisteet": 19.60,
-      "player_id": 6
+      "sum": 1,
+      "ranking": 19.60,
+      "player_id": 6,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 7,
       "game_id": 7,
-      "summa": -4,
-      "sijoitus_pisteet": 19.89,
-      "player_id": 7
+      "sum": -4,
+      "ranking": 19.89,
+      "player_id": 7,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 8,
       "game_id": 8,
-      "summa": -1,
-      "sijoitus_pisteet": 21.88,
-      "player_id": 8
+      "sum": -1,
+      "ranking": 21.88,
+      "player_id": 8,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 9,
       "game_id": 9,
-      "summa": -0,
-      "sijoitus_pisteet": 20.72,
-      "player_id": 9
+      "sum": -0,
+      "ranking": 20.72,
+      "player_id": 9,
+      "group": null,
+      "scores": [],
+      "orderNumber":null
     },
     {
       "id": 10,
       "game_id": 10,
-      "summa": 6,
-      "sijoitus_pisteet": 18.76,
-      "player_id": 10
+      "sum": 6,
+      "ranking": 18.76,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 11,
       "game_id": 11,
-      "summa": 4,
-      "sijoitus_pisteet": 18.78,
-      "player_id": 11
+      "sum": 4,
+      "ranking": 18.78,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 12,
       "game_id": 12,
-      "summa": -2,
-      "sijoitus_pisteet": 19.05,
-      "player_id": 12
+      "sum": -2,
+      "ranking": 19.05,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 13,
       "game_id": 13,
-      "summa": 3,
-      "sijoitus_pisteet": 15.95,
-      "player_id": 13
+      "sum": 3,
+      "ranking": 15.95,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 14,
       "game_id": 14,
-      "summa": 6,
-      "sijoitus_pisteet": 20.66,
-      "player_id": 14
+      "sum": 6,
+      "ranking": 20.66,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 15,
       "game_id": 15,
-      "summa": -1,
-      "sijoitus_pisteet": 23.14,
-      "player_id": 15
+      "sum": -1,
+      "ranking": 23.14,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 16,
       "game_id": 16,
-      "summa": 2,
-      "sijoitus_pisteet": 21.36,
-      "player_id": 16
+      "sum": 2,
+      "ranking": 21.36,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 17,
       "game_id": 17,
-      "summa": 2,
-      "sijoitus_pisteet": 21.03,
-      "player_id": 17
+      "sum": 2,
+      "ranking": 21.03,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 18,
       "game_id": 18,
-      "summa": 6,
-      "sijoitus_pisteet": 16.78,
-      "player_id": 18
+      "sum": 6,
+      "ranking": 16.78,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 19,
       "game_id": 19,
-      "summa": -2,
-      "sijoitus_pisteet": 17.48,
-      "player_id": 19
+      "sum": -2,
+      "ranking": 17.48,
+      "player_id": 1,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 20,
       "game_id": 20,
-      "summa": 5,
-      "sijoitus_pisteet": 15.75,
-      "player_id": 20
+      "sum": 5,
+      "ranking": 15.75,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 21,
       "game_id": 21,
-      "summa": -2,
-      "sijoitus_pisteet": 17.59,
-      "player_id": 21
+      "sum": -2,
+      "ranking": 17.59,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 22,
       "game_id": 22,
-      "summa": 4,
-      "sijoitus_pisteet": 18.29,
-      "player_id": 22
+      "sum": 4,
+      "ranking": 18.29,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 23,
       "game_id": 23,
-      "summa": 3,
-      "sijoitus_pisteet": 20.24,
-      "player_id": 23
+      "sum": 3,
+      "ranking": 20.24,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 24,
       "game_id": 24,
-      "summa": 3,
-      "sijoitus_pisteet": 27.07,
-      "player_id": 24
+      "sum": 3,
+      "ranking": 27.07,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 25,
       "game_id": 25,
-      "summa": 1,
-      "sijoitus_pisteet": 16.46,
-      "player_id": 25
+      "sum": 1,
+      "ranking": 16.46,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 26,
       "game_id": 26,
-      "summa": 2,
-      "sijoitus_pisteet": 19.13,
-      "player_id": 26
+      "sum": 2,
+      "ranking": 19.13,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 27,
       "game_id": 27,
-      "summa": 1,
-      "sijoitus_pisteet": 22.51,
-      "player_id": 27
+      "sum": 1,
+      "ranking": 22.51,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 28,
       "game_id": 28,
-      "summa": 5,
-      "sijoitus_pisteet": 18.79,
-      "player_id": 28
+      "sum": 5,
+      "ranking": 18.79,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 29,
       "game_id": 29,
-      "summa": 3,
-      "sijoitus_pisteet": 21.71,
-      "player_id": 29
+      "sum": 3,
+      "ranking": 21.71,
+      "player_id": 2,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 30,
       "game_id": 30,
-      "summa": -0,
-      "sijoitus_pisteet": 18.39,
-      "player_id": 30
+      "sum": -0,
+      "ranking": 18.39,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 31,
       "game_id": 31,
-      "summa": 2,
-      "sijoitus_pisteet": 22.46,
-      "player_id": 31
+      "sum": 2,
+      "ranking": 22.46,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 32,
       "game_id": 32,
-      "summa": 5,
-      "sijoitus_pisteet": 18.79,
-      "player_id": 32
+      "sum": 5,
+      "ranking": 18.79,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 33,
       "game_id": 33,
-      "summa": 2,
-      "sijoitus_pisteet": 13.96,
-      "player_id": 33
+      "sum": 2,
+      "ranking": 13.96,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 34,
       "game_id": 34,
-      "summa": 2,
-      "sijoitus_pisteet": 22.43,
-      "player_id": 34
+      "sum": 2,
+      "ranking": 22.43,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 35,
       "game_id": 35,
-      "summa": 3,
-      "sijoitus_pisteet": 19.55,
-      "player_id": 35
+      "sum": 3,
+      "ranking": 19.55,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 36,
       "game_id": 36,
-      "summa": 1,
-      "sijoitus_pisteet": 17.99,
-      "player_id": 36
+      "sum": 1,
+      "ranking": 17.99,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 37,
       "game_id": 37,
-      "summa": -0,
-      "sijoitus_pisteet": 14.14,
-      "player_id": 37
+      "sum": -0,
+      "ranking": 14.14,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 38,
       "game_id": 38,
-      "summa": -0,
-      "sijoitus_pisteet": 18.72,
-      "player_id": 38
+      "sum": -0,
+      "ranking": 18.72,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 39,
       "game_id": 39,
-      "summa": 1,
-      "sijoitus_pisteet": 21.90,
-      "player_id": 39
+      "sum": 1,
+      "ranking": 21.90,
+      "player_id": 3,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 40,
       "game_id": 40,
-      "summa": 2,
-      "sijoitus_pisteet": 17.94,
-      "player_id": 40
+      "sum": 2,
+      "ranking": 17.94,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 41,
       "game_id": 41,
-      "summa": 2,
-      "sijoitus_pisteet": 18.89,
-      "player_id": 41
+      "sum": 2,
+      "ranking": 18.89,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 42,
       "game_id": 42,
-      "summa": 3,
-      "sijoitus_pisteet": 23.45,
-      "player_id": 42
+      "sum": 3,
+      "ranking": 23.45,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 43,
       "game_id": 43,
-      "summa": -1,
-      "sijoitus_pisteet": 16.78,
-      "player_id": 43
+      "sum": -1,
+      "ranking": 16.78,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 44,
       "game_id": 44,
-      "summa": 5,
-      "sijoitus_pisteet": 19.27,
-      "player_id": 44
+      "sum": 5,
+      "ranking": 19.27,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 45,
       "game_id": 45,
-      "summa": 1,
-      "sijoitus_pisteet": 18.02,
-      "player_id": 45
+      "sum": 1,
+      "ranking": 18.02,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 46,
       "game_id": 46,
-      "summa": 4,
-      "sijoitus_pisteet": 17.77,
-      "player_id": 46
+      "sum": 4,
+      "ranking": 17.77,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 47,
       "game_id": 47,
-      "summa": 5,
-      "sijoitus_pisteet": 14.69,
-      "player_id": 47
+      "sum": 5,
+      "ranking": 14.69,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 48,
       "game_id": 48,
-      "summa": 4,
-      "sijoitus_pisteet": 20.62,
-      "player_id": 48
+      "sum": 4,
+      "ranking": 20.62,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 49,
       "game_id": 49,
-      "summa": 3,
-      "sijoitus_pisteet": 17.49,
-      "player_id": 49
+      "sum": 3,
+      "ranking": 17.49,
+      "player_id": 4,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     },
     {
       "id": 50,
       "game_id": 50,
-      "summa": 0,
-      "sijoitus_pisteet": 18.80,
-      "player_id": 50
+      "sum": 0,
+      "ranking": 18.80,
+      "player_id": 5,
+      "group": null,
+      "scores": [],
+      "orderNumber": null
     }
   ],
   "player":[
