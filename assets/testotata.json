@@ -1,0 +1,33 @@
+{"placement":{
+  "dörr": {
+     "id": 1,
+     "game_id": 1,
+     "sum": -3,
+     "ranking": 16.57,
+     "player_id": 1,
+     "group": null,
+     "scores": {},
+     "orderNumber":null
+   },
+   "durr": {
+     "id": 2,
+     "game_id": 2,
+     "sum": 1,
+     "ranking": 18.28,
+     "player_id": 2,
+     "group": null,
+     "scores": {},
+     "orderNumber":null
+   },
+   "Herp": {
+     "id": 3,
+     "game_id": 3,
+     "sum": 2,
+     "ranking": 14.15,
+     "player_id": 3,
+     "group": null,
+     "scores": {},
+     "orderNumber":null
+   }
+  }
+}
