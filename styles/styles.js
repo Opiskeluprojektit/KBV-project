@@ -145,7 +145,7 @@ export const style = StyleSheet.create({
 // HomeScreen styles
 
     heading: {
-        height: '35%',
+        height: '30%',
         width: '100%'
     },
 
@@ -170,7 +170,7 @@ export const style = StyleSheet.create({
 
     // Button styles
     homeButtonsContainer: {
-        height: "50%",
+        height: "55%",
         marginLeft: 24,
         marginRight: 24
     },
@@ -425,6 +425,47 @@ export const style = StyleSheet.create({
         marginBottom: 20,
         marginLeft: 24,
         marginRight: 24
-    }
+    },
 
+    // Admin screen
+    adminHeader: {
+        textAlign: 'center'
+    },
+
+    adminBox: {
+        width: "90%",
+        marginLeft: "5%"
+    },
+
+    adminSelect: {
+        width: "35%",
+        marginLeft: "7.5%",
+        backgroundColor: "#C4C4C4",
+        borderRadius: "5px",
+        marginBottom: 4
+    },
+
+    datePickerContainer: {
+        marginRight: "10%",
+        marginLeft: "10%",
+        alignItems: 'center'
+    },
+
+    
+    adminText: {
+        textAlign: 'center',
+        fontSize: 16,
+        marginTop: 5
+    },
+
+    adminDesc: {
+        height: 60,
+        marginLeft: "5%",
+        width: "90%",
+        backgroundColor: Colors.primaryVariant
+    },
+
+    adminButton: {
+        marginTop: "5%"
+    }
 })
