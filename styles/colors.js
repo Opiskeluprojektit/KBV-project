@@ -6,7 +6,8 @@ const Colors = {
     secondary: '#EEE8A9', //Yellow background for icons
     background: '#F9F9F9', //Light backgroundcolor
     bodyText: '#1B1B1B', //BodyText, titles, Feather icons and hamburgericon
-    buttonText: '#FFFFFF' //Button text   
+    buttonText: '#FFFFFF', //Button text   
+    secondaryOnClick: '#EEE8A9', //Darker backgroundcolor for button when chosen
 }
 
 export default Colors;

@@ -118,7 +118,9 @@ export const style = StyleSheet.create({
     },
 
     codeInputField: {
-        alignSelf: 'center',
+        //alignSelf: 'center',
+        marginLeft: 50,
+        marginRight: 50,
         marginBottom: 30
     },
 
@@ -172,7 +174,7 @@ export const style = StyleSheet.create({
     homeButtonsContainer: {
         height: "55%",
         marginLeft: 24,
-        marginRight: 24
+        marginRight: 42 //oli ennen 24
     },
 
     homeButtons: {
@@ -193,16 +195,35 @@ export const style = StyleSheet.create({
         right: -24
     },
 
+    chosenRankingYear: {
+        color: Colors.secondaryOnClick,
+    },
+
 
 // EnrolmentScreen styles
 
     playerSearch: {
-        marginBottom: 15
+        backgroundColor: Colors.secondaryOnClick,
+        padding: 15,
+        marginVertical: 4,
+        marginHorizontal: 10,
+        // marginRight: 10,
+        // borderColor: "black",
+        // borderWidth: 0.2,
+        // paddingTop: 10,
+        // paddingBottom: 10,
+        // paddingLeft: 10,
     },
 
     addPlayer: {
         flexDirection: "row"
     }, 
+
+    flatList: {
+        //flex: 1,
+        marginBottom: 10,
+        paddingBottom: 100,
+    },
 
     // Button for enrolment
     enrolButton: {
@@ -254,14 +275,14 @@ export const style = StyleSheet.create({
     // Container for summary modal
     modalContainer: {
         backgroundColor: Colors.primaryVariant,
-        width: '80%',
+        width: '90%', //ennen oli 80%
         justifyContent: 'center',
         alignSelf: 'center',
         borderRadius: 50,
     },
 
     modal: {
-        margin: 24
+        margin: 20 //ennen oli 24 (samaan aikaan modalin leveys 80%)
     },
 
     // Title for summary modal
@@ -297,7 +318,7 @@ export const style = StyleSheet.create({
     summaryButton: {
         backgroundColor: Colors.primary,
         width: 120,
-        height: 40,
+        height: 50, //oli ennen 40
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -309,6 +330,7 @@ export const style = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4
+        
     },
 
 // PointsScreen styles

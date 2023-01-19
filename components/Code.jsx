@@ -26,6 +26,13 @@ function Code({navigation}) {
         });
       },[]);
 
+      //Uncomment to automatically take you to homescreen after code input
+      // useEffect(() => {
+      //   if (code.length === 4) {
+      //     checkCode();
+      //   }
+      // }, [code]);
+
     function checkCode() {                        //checks if input matches password
       if (code == password) {
         navigation.navigate('Home')

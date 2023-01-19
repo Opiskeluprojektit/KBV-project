@@ -115,6 +115,8 @@ function Enrolment({ navigation }) {
   };
 
   // Selecting the player from the flatlist
+  //Jos pelaaja on jo pelissä => alert
+    // Tämä ei toimi -> Laura palaa myöhemmin
   const selectPlayer = (player) => {
     if (enrolledPlayers.find((i) => i.name === player.name)) {
       Alert.alert("Pelaaja on jo ilmoittautunut")
@@ -190,7 +192,7 @@ function Enrolment({ navigation }) {
       
           {/* Header: Go back button and Menu */}
           <View style={style.header}>
-            <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+            <Pressable  style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate('Home')}><View><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
             <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
@@ -225,6 +227,7 @@ function Enrolment({ navigation }) {
                   onSubmitEditing={() => executeSearch(search)}
                 />
                 <FlatList
+                  style={style.flatList}
                   data={playersToShow}
                   renderItem={({item}) => 
                     <Pressable style={style.playerSearch}
@@ -301,7 +304,7 @@ function Enrolment({ navigation }) {
 
                         <Pressable onPress={hideModal} 
                           style={[style.summaryButton]}>
-                          <Text style={style.buttonText}>Lisää pelaaja</Text>
+                          <Text style={style.buttonText}>Lisää uusi pelaaja</Text>
                         </Pressable>
                       </View>
                     </View>

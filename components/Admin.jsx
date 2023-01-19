@@ -149,7 +149,23 @@ function Admin({ navigation }) {
 
 
                                 </View>
-                            ) : null}
+                            ) : shouldShow ? (
+                                <View>
+                                    <Pressable onPress={() => showMode("date")}><Text>Valitse päivä</Text></Pressable>
+                                    <Pressable onPress={() => showMode("time")}><Text>Valitse kellonaika</Text></Pressable>
+                                    {show && (
+                                        <DateTimePicker
+                                            testID='dateTimePicker'
+                                            value={date}
+                                            mode={mode}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChange}
+                                        />
+                                    )}
+                                
+                                </View>
+                            ): null}
 
                         </View>
 
