@@ -6,7 +6,7 @@ import { List, TextInput } from "react-native-paper";
 
 import { formatDMYtoYMD } from "../scripts/myDate";
 
-import { database } from "../firebase/Config";
+import { database, PLACEMENT_REF } from "../firebase/Config";
 import { onValue, ref, set } from "firebase/database";
 
 const backgroundImage = require("../assets/Volleyball100.png");
@@ -64,8 +64,10 @@ function Points({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const playerItems = { ...data };
       const parse = JSON.parse(JSON.stringify(playerItems));
-      let parseKeys = Object.values(parse);
-      setPlayer(parseKeys);
+      console.log("parse players", parse);
+      let asArray = Object.entries(parse);
+      console.log("asArray players", asArray);
+      setPlayer(asArray);
     });
   }, []);
 
@@ -76,6 +78,8 @@ function Points({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const enrolmentItems = { ...data };
       const parse = JSON.parse(JSON.stringify(enrolmentItems));
+      
+      console.log("parse", parse);
       const parseKeys = Object.values(parse);
       setEnrolment(parseKeys);
     });
@@ -161,6 +165,7 @@ function Points({ navigation }) {
           .filter((i) => i.game_id == chosenGame.id))
       : null;
     let newEnrolledPlayers;
+    console.log("player before concat", player);
     enrolmentsToChosenGame
       ? (newEnrolledPlayers = player
           .concat()
@@ -221,7 +226,7 @@ function Points({ navigation }) {
         []
       );
       //console.log("newGrouops:", newGroups);
-      console.log("newGroups[group].scores", newGroups[group][0].scores);
+      saveResultsToDB(newGroups, group);
       //newGroups[group].scores ? console.log("newGroups[group].scores.length", newGroups[group].scores.length) : null;
       newGroups[group][0].scores ? newGroups = (newGroups[group][0].scores.length > 2) ?  countRankingScoresByGroup(newGroups, group) : newGroups : null;
     } else {
@@ -230,6 +235,17 @@ function Points({ navigation }) {
     }
     setGroups(newGroups);
   };
+
+  // Send results to the database.
+  const saveResultsToDB = (groups, groupNumber) => {
+    groups[groupNumber].forEach(player => {
+      console.log("pellaaja", player);
+      /* newPlacement = {
+        
+      }
+      set(ref(db, PLACEMENT_REF)) */
+    });
+  }
 
   // Counts the ranking scores each player, without changing their order in the groups.player array.
   // This could be changed to only happen when the user submits the scores to the database to improve performance of the list,
@@ -251,7 +267,7 @@ function Points({ navigation }) {
 
     let newGroups = groups.concat();
 
-    newGroups[groupNumber] = groups[groupNumber].reduce((group, player, i) => {
+    newGroups[groupNumber] = groups[groupNumber].reduce((group, player) => {
       player.ranking = temp[groupNumber].find(
         (e) => player.name === e.name
       ).ranking;
