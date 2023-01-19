@@ -7,6 +7,7 @@ import * as Icon from "react-native-feather";
 import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
 import {database, enrolment_ref} from '../firebase/Config';
 import {onValue, ref, update, child, push} from 'firebase/database';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
@@ -199,6 +200,7 @@ function Enrolment({ navigation }) {
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
               {/* Dropdown for choosing gaming day */}
+              
               <List.Section>
                 <List.Accordion
                   title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
@@ -207,7 +209,7 @@ function Enrolment({ navigation }) {
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                   {gameList}
-                </List.Accordion> 
+                </List.Accordion>
               </List.Section>
 
               {/* FlatList for choosing the player */}
