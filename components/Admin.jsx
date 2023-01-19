@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView } from 'react-native';
+import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
 import { List, TextInput, Modal, Portal, Provider, Button } from 'react-native-paper';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
@@ -52,7 +52,7 @@ function Admin({ navigation }) {
       };
 
     const addEvent = () => {
-        console.log()
+        console.log("Sarja: " + division + " Tapahtuma-aika: " + text + " Kuvaus: " + desc)
     }
 
     return (
@@ -121,11 +121,12 @@ function Admin({ navigation }) {
                     {/* Date and time picker */}
 
                         <View>
+
                             <Pressable onPress={() => showItems()} style={[style.search, style.adminBox]}> 
                             <Text style={style.adminText}>Tapahtumapäivä</Text>
                             <Text style={style.adminText}>{text}</Text>
                             </Pressable>
-                            {shouldShow ? 
+                            {shouldShow && Platform.OS === 'ios' ? 
                             (
                                 <View style={style.datePickerContainer}>
                                 <DateTimePicker
@@ -139,6 +140,7 @@ function Admin({ navigation }) {
 
                                 <DateTimePicker
                                     testID='dateTimePicker'
+                                    style={{marginBottom: "5%"}}
                                     value={date}
                                     mode={'time'}
                                     is24Hour={true}
