@@ -1,15 +1,15 @@
 import React from 'react'
 import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
 import { List, TextInput, Modal, Portal, Provider, Button } from 'react-native-paper';
-import { style } from '../styles/styles';
+import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker'
 
 
-const backgroundImage = require('../assets/Volleyball100.png');
+const backgroundImage = require('../../assets/Volleyball50.png');
 
-function Admin({ navigation }) {
+function AdminEvents({ navigation }) {
     const [division, setDivision] = useState()
     const [divisionExpand, setDivisionsExpand] = useState(false)
 
@@ -62,7 +62,7 @@ function Admin({ navigation }) {
 
                 {/* Header: Go back button and Menu */}
                 <View style={style.header}>
-                    <Pressable onPress={() => navigation.navigate('Home')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+                    <Pressable onPress={() => navigation.navigate('AdminNav')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
                     <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
                 </View>
 
@@ -205,4 +205,4 @@ function Admin({ navigation }) {
 
 }
 
-export default Admin
+export default AdminEvents
