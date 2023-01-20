@@ -40,7 +40,7 @@ export default function Home({navigation}) {
               <Text style={style.bigButtonText}>ViikkoBiitsi-säännöt</Text>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
             </Pressable>
-            <Pressable  onPress={() => navigation.navigate('Admin')} style={[style.homeButtons, style.button]}>
+            <Pressable  onPress={() => navigation.navigate('AdminNav')} style={[style.homeButtons, style.button]}>
               <Text style={style.bigButtonText}>Admin Paneeli</Text>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Settings style={style.icons}/></View>
             </Pressable>
