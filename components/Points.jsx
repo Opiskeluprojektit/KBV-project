@@ -6,8 +6,8 @@ import { List, TextInput } from "react-native-paper";
 
 import { formatDMYtoYMD } from "../scripts/myDate";
 
-import { database, PLACEMENT_REF } from "../firebase/Config";
-import { onValue, ref, set } from "firebase/database";
+import { database, placement_ref } from "../firebase/Config";
+import { onValue, ref, update, child, push } from "firebase/database";
 
 const backgroundImage = require("../assets/Volleyball100.png");
 
@@ -33,10 +33,11 @@ function Points({ navigation }) {
   const [groups, setGroups] = useState();
   const [game, setGame] = useState();
   const [bonusMultiplier, setBonusMultiplier] = useState();
+  const [dbPlacement, setDbPlacement] = useState([]);
 
   // Players and enrolments from the database
   const [player, setPlayer] = useState([]);
-  const [enrolment, setEnrolment] = useState([]);
+  const [enrolment, setEnrolment] = useState();
 
   // Collects game information from firebase database
   useEffect(() => {
@@ -45,13 +46,19 @@ function Points({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = { ...data };
       const parse = JSON.parse(JSON.stringify(gameItems));
-      let parseKeys = Object.values(parse)
-        .map((i) => {
+      const keys = Object.keys(parse);
+      let parseKeys = Object.values(parse);
+      console.log("parseKeys[0].id:", parseKeys[0].id, Number.isInteger(parseKeys[0].id));
+      parseKeys.forEach((element, i) => {
+        (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
+      });
+      parseKeys = parseKeys.map((i) => {
           i.date = new Date(formatDMYtoYMD(i.date));
           return i;
         })
         .filter((i) => i.date >= new Date())
         .sort((a, b) => a.date - b.date);
+      
       setGame(parseKeys);
       setGamesToShow(parseKeys);
     });
@@ -64,12 +71,27 @@ function Points({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const playerItems = { ...data };
       const parse = JSON.parse(JSON.stringify(playerItems));
-      console.log("parse players", parse);
-      let asArray = Object.entries(parse);
-      console.log("asArray players", asArray);
-      setPlayer(asArray);
+      const keys = Object.keys(parse)
+      let parseKeys = Object.values(parse)
+      console.log(parseKeys);
+      parseKeys.forEach((element, i) => {
+        (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
+      });
+      setPlayer(parseKeys);
     });
   }, []);
+
+  const pullExistingPlacements = () => {
+    const placement = ref(database, placement_ref + chosenGame.id);
+    onValue(placement, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const placementItems = { ...data };
+      const parse = JSON.parse(JSON.stringify(placementItems));
+      let parseKeys = Object.values(parse)
+      console.log("placements:", parseKeys);
+      setDbPlacement(parseKeys);
+    });
+  }
 
   // Collects enrolment information from firebase database
   useEffect(() => {
@@ -78,9 +100,18 @@ function Points({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const enrolmentItems = { ...data };
       const parse = JSON.parse(JSON.stringify(enrolmentItems));
-      
-      console.log("parse", parse);
-      const parseKeys = Object.values(parse);
+      const keys = Object.keys(parse)
+      console.log("keys", keys);
+      console.log(parse);
+      let parseKeys = Object.values(parse)
+      console.log(parseKeys);
+      /* parseKeys.forEach((element, i) => {
+        delete Object.assign(parseKeys, {[keys[i]]: parseKeys[i] });
+      }); */
+      parseKeys.forEach((element, i) => {
+        element.id = keys[i];
+      });
+      console.log("parseKeys enrolments", parseKeys);
       setEnrolment(parseKeys);
     });
   }, []);
@@ -106,6 +137,7 @@ function Points({ navigation }) {
 
   useEffect(() => {
     filterEnrolments();
+    chosenGame ? pullExistingPlacements() : null;
   }, [chosenGame]);
 
   useEffect(() => {
@@ -158,7 +190,8 @@ function Points({ navigation }) {
 
   const filterEnrolments = () => {
     let enrolmentsToChosenGame;
-    //console.log("chosenGame: ", chosenGame);
+    console.log("chosenGame: ", chosenGame);
+    console.log("enrolment: ", enrolment);
     chosenGame
       ? (enrolmentsToChosenGame = enrolment
           .concat()
@@ -166,17 +199,18 @@ function Points({ navigation }) {
       : null;
     let newEnrolledPlayers;
     console.log("player before concat", player);
+    console.log("enrolments to chjosen game:", enrolmentsToChosenGame);
     enrolmentsToChosenGame
       ? (newEnrolledPlayers = player
           .concat()
           .filter((i) =>
-            enrolmentsToChosenGame.find((j) => j.player_id === i.id)
+            enrolmentsToChosenGame.find((j) => j.player_id == i.id)
           )
           .sort((a, b) => b.ranking - a.ranking))
       : null;
     //newEnrolledPlayers ? console.log("newEnrolledPlayers:", newEnrolledPlayers) : null
     newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
-    //newEnrolledPlayers ? console.log("newEnrolledPlayers: ", newEnrolledPlayers) : null;
+    newEnrolledPlayers ? console.log("newEnrolledPlayers: ", newEnrolledPlayers) : null;
   };
 
   //Flatlist components and functions
@@ -226,9 +260,14 @@ function Points({ navigation }) {
         []
       );
       //console.log("newGrouops:", newGroups);
-      saveResultsToDB(newGroups, group);
       //newGroups[group].scores ? console.log("newGroups[group].scores.length", newGroups[group].scores.length) : null;
-      newGroups[group][0].scores ? newGroups = (newGroups[group][0].scores.length > 2) ?  countRankingScoresByGroup(newGroups, group) : newGroups : null;
+      if (newGroups[group][0].scores
+          && newGroups[group][0].scores.length > 2
+          && newGroups[group][0].scores.every(e => Number.isInteger(e))
+          && !newGroups[group][0].scores.includes(undefined)) {
+        newGroups = countRankingScoresByGroup(newGroups, group)
+        saveResultsToDB(newGroups, group);
+      } 
     } else {
       //Save the incomplete input into the groups.
       newGroups[group][0].scores[round] = points;
@@ -239,11 +278,28 @@ function Points({ navigation }) {
   // Send results to the database.
   const saveResultsToDB = (groups, groupNumber) => {
     groups[groupNumber].forEach(player => {
+
+      const previousPlacement = dbPlacement.find(e => {
+        return e.player_id === player.id;
+      })
+
       console.log("pellaaja", player);
-      /* newPlacement = {
-        
+      console.log("placement ref", placement_ref);
+      const placementKey = previousPlacement ? previousPlacement.id : push(child(ref(database), placement_ref)).key;
+      const newPlacement = {
+        "id": placementKey,
+        "game_id": chosenGame.id,
+        "sum": player.sum,
+        "ranking": player.ranking,
+        "player_id": player.id,
+        "group": groupNumber,
+        "scores": player.scores,
+        "orderNumber": player.orderNumber,
+        "playerName": player.name
       }
-      set(ref(db, PLACEMENT_REF)) */
+      const updates = {};
+      updates[placement_ref + "/" +  chosenGame.id + "/" + placementKey] = newPlacement;
+      update(ref(database), updates);
     });
   }
 
@@ -364,9 +420,13 @@ function Points({ navigation }) {
 
   const addScoringVariablesToPlayer = (player, i, j) => {
     //Gives the player objects, scores, sum and ranking keys, for calculating and submitting competition results.
-    player.scores = [];
-    player.sum = null;
-    player.ranking = null;
+    const previousPlacement = dbPlacement.find(e => {
+      return e.player_id === player.id;
+    })
+
+    player.scores = previousPlacement ? previousPlacement.scores : [];
+    player.sum = previousPlacement ? previousPlacement.sum : null;
+    player.ranking = previousPlacement ? previousPlacement.ranking : null;
     //These last two are given to make the nested FlatList management easier.
     player.orderNumber = i;
     player.group = j;

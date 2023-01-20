@@ -10,9 +10,6 @@ npm-debug.*
 *.orig.*
 web-build/
 
-# Firebase
-/firebase/Config.js
-
 # macOS
 .DS_Store
 
@@ -77,3 +74,4 @@ web-build/
 dist/
 
 # @end expo-cli
+/firebase/Config.js
