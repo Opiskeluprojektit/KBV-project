@@ -1,10 +1,12 @@
 import React from 'react'
-import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
+import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform, Alert } from 'react-native';
 import { List, TextInput, Modal, Portal, Provider, Button } from 'react-native-paper';
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { database, EVENT_REF } from '../../firebase/Config';
+import {onValue, ref, update, child, push} from 'firebase/database';
 
 
 const backgroundImage = require('../../assets/Volleyball50.png');
@@ -17,6 +19,8 @@ function AdminEvents({ navigation }) {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [text, setText] = useState('Tyhjä');
+    const [dateDb, setDateDb] = useState('');
+    const [timeDb, setTimeDb] = useState('');
 
     const [desc, setDesc] = useState('');
 
@@ -36,9 +40,18 @@ function AdminEvents({ navigation }) {
         setDate(currentDate);
 
         let tempDate = new Date(currentDate);
-        let fDate = tempDate.getDate() + '.' + (tempDate.getMonth() + 1) + '.' + tempDate.getFullYear();
-        let fTime = tempDate.getHours() + ':' + tempDate.getMinutes();
+
+        let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+        let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+        let fTime = fHours + ':' + fMinutes;
+
+        let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
+        let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
+        let fDate = day + '.' + month + '.' + tempDate.getFullYear();
+
         setText(fDate + ', ' + fTime)
+        setTimeDb(fTime)
+        setDateDb(fDate)
     }
 
     const showMode = (currentMode) => {
@@ -51,8 +64,21 @@ function AdminEvents({ navigation }) {
         setDivision(div);
       };
 
-    const addEvent = () => {
-        console.log("Sarja: " + division + " Tapahtuma-aika: " + text + " Kuvaus: " + desc)
+    function addEvent() {
+
+
+        if (division && dateDb && timeDb) {
+
+            push(ref(database, EVENT_REF), {
+                date: dateDb,
+                time: timeDb,
+                division: division,
+                description: desc
+        }) 
+
+        } else {
+            Alert.alert("Muista valita sarja sekä tapahtuman päivänmäärä!")
+        }
     }
 
     return (

@@ -456,11 +456,12 @@ export const style = StyleSheet.create({
 
     adminBox: {
         width: "90%",
+        height: 70,
         marginLeft: "5%"
     },
 
     adminSelect: {
-        width: "35%",
+        width: "70%",
         marginLeft: "7.5%",
         backgroundColor: "#C4C4C4",
         borderRadius: "5px",
