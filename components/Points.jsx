@@ -7,7 +7,7 @@ import { List, TextInput } from "react-native-paper";
 import { formatDMYtoYMD } from "../scripts/myDate";
 
 import { database, placement_ref } from "../firebase/Config";
-import { onValue, ref, update, child, push } from "firebase/database";
+import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
 
 const backgroundImage = require("../assets/Volleyball100.png");
 
@@ -41,14 +41,13 @@ function Points({ navigation }) {
 
   // Collects game information from firebase database
   useEffect(() => {
-    const games = ref(database, "game/");
+    const games = query(ref(database, "game/"));
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = { ...data };
       const parse = JSON.parse(JSON.stringify(gameItems));
       const keys = Object.keys(parse);
       let parseKeys = Object.values(parse);
-      console.log("parseKeys[0].id:", parseKeys[0].id, Number.isInteger(parseKeys[0].id));
       parseKeys.forEach((element, i) => {
         (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
       });
@@ -58,7 +57,6 @@ function Points({ navigation }) {
         })
         .filter((i) => i.date >= new Date())
         .sort((a, b) => a.date - b.date);
-      
       setGame(parseKeys);
       setGamesToShow(parseKeys);
     });
@@ -73,26 +71,13 @@ function Points({ navigation }) {
       const parse = JSON.parse(JSON.stringify(playerItems));
       const keys = Object.keys(parse)
       let parseKeys = Object.values(parse)
-      console.log(parseKeys);
       parseKeys.forEach((element, i) => {
         (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
       });
       setPlayer(parseKeys);
     });
   }, []);
-
-  const pullExistingPlacements = () => {
-    const placement = ref(database, placement_ref + chosenGame.id);
-    onValue(placement, (snapshot) => {
-      const data = snapshot.val() ? snapshot.val() : {};
-      const placementItems = { ...data };
-      const parse = JSON.parse(JSON.stringify(placementItems));
-      let parseKeys = Object.values(parse)
-      console.log("placements:", parseKeys);
-      setDbPlacement(parseKeys);
-    });
-  }
-
+  
   // Collects enrolment information from firebase database
   useEffect(() => {
     const enrolment = ref(database, "enrolment/");
@@ -101,17 +86,13 @@ function Points({ navigation }) {
       const enrolmentItems = { ...data };
       const parse = JSON.parse(JSON.stringify(enrolmentItems));
       const keys = Object.keys(parse)
-      console.log("keys", keys);
-      console.log(parse);
       let parseKeys = Object.values(parse)
-      console.log(parseKeys);
       /* parseKeys.forEach((element, i) => {
         delete Object.assign(parseKeys, {[keys[i]]: parseKeys[i] });
       }); */
       parseKeys.forEach((element, i) => {
         element.id = keys[i];
       });
-      console.log("parseKeys enrolments", parseKeys);
       setEnrolment(parseKeys);
     });
   }, []);
@@ -126,11 +107,23 @@ function Points({ navigation }) {
       setBonusMultiplier(parse.bonuskerroin);
     });
   }, []);
-
+  
+  // Collects placement information from firebase database
+  const pullExistingPlacements = () => {
+    const placement = ref(database, placement_ref + chosenGame.id);
+    onValue(placement, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const placementItems = { ...data };
+      const parse = JSON.parse(JSON.stringify(placementItems));
+      let parseKeys = Object.values(parse)
+      setDbPlacement(parseKeys);
+    });
+  }
+  
   useEffect(() => {
     gameList = mapGames();
   }, [gamesToShow]);
-
+  
   useEffect(() => {
     filterGames();
   }, [division]);
@@ -153,7 +146,6 @@ function Points({ navigation }) {
   const filterGames = () => {
     if (division) {
       const newGamesToShow = game.filter((i) => i.division === division);
-      console.log("filtered game", game);
       setGamesToShow(newGamesToShow);
     }
   };
@@ -198,8 +190,6 @@ function Points({ navigation }) {
           .filter((i) => i.game_id == chosenGame.id))
       : null;
     let newEnrolledPlayers;
-    console.log("player before concat", player);
-    console.log("enrolments to chjosen game:", enrolmentsToChosenGame);
     enrolmentsToChosenGame
       ? (newEnrolledPlayers = player
           .concat()
@@ -278,13 +268,9 @@ function Points({ navigation }) {
   // Send results to the database.
   const saveResultsToDB = (groups, groupNumber) => {
     groups[groupNumber].forEach(player => {
-
       const previousPlacement = dbPlacement.find(e => {
         return e.player_id === player.id;
       })
-
-      console.log("pellaaja", player);
-      console.log("placement ref", placement_ref);
       const placementKey = previousPlacement ? previousPlacement.id : push(child(ref(database), placement_ref)).key;
       const newPlacement = {
         "id": placementKey,
@@ -423,16 +409,12 @@ function Points({ navigation }) {
     const previousPlacement = dbPlacement.find(e => {
       return e.player_id === player.id;
     })
-
     player.scores = previousPlacement ? previousPlacement.scores : [];
     player.sum = previousPlacement ? previousPlacement.sum : null;
     player.ranking = previousPlacement ? previousPlacement.ranking : null;
     //These last two are given to make the nested FlatList management easier.
     player.orderNumber = i;
     player.group = j;
-
-    //console.log("player:", player);
-
     return player;
   };
 
