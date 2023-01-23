@@ -490,5 +490,9 @@ export const style = StyleSheet.create({
 
     adminButton: {
         marginTop: "5%"
+    },
+
+    adminTitle: {
+        marginTop: 10
     }
 })

@@ -27,6 +27,8 @@ function AdminEvents({ navigation }) {
     
     const [shouldShow, setShouldShow] = useState(false);
 
+    const [visible, setVisible] = React.useState(false);
+
 
     function showItems() {
         setShouldShow(!shouldShow)
@@ -69,17 +71,30 @@ function AdminEvents({ navigation }) {
 
         if (division && dateDb && timeDb) {
 
+
             push(ref(database, EVENT_REF), {
                 date: dateDb,
                 time: timeDb,
                 division: division,
                 description: desc
-        }) 
+            }).then(showModal);
 
         } else {
             Alert.alert("Muista valita sarja sekä tapahtuman päivänmäärä!")
         }
     }
+
+    const showModal = () => setVisible(true);
+
+    const hideModal = () => {
+        setVisible(false);
+        setDivision();
+        setDate(new Date);
+        setDesc('');
+        setShouldShow(false);
+        setText('Tyhjä');
+      }
+
 
     return (
         <>
@@ -202,6 +217,7 @@ function AdminEvents({ navigation }) {
                             <TextInput 
                             style={style.adminDesc}
                             placeholder="Kuvaus..."
+                            value={desc}
                             maxLength={100}
                             numberOfLines={2}
                             onChangeText={setDesc}
@@ -221,7 +237,28 @@ function AdminEvents({ navigation }) {
 
                 </View>
 
+                {/* Modal */}
 
+                <Provider>
+                    <Portal>
+                        <Modal visible={visible} contentContainerStyle={style.modalContainer}>
+                            <Text style={style.modalTitle}>Tapahtuma luotu</Text>
+
+                            <View style={style.buttonSummaryStyles}>
+                                <Pressable onPress={() => navigation.navigate('AdminNav')} 
+                                    style={[style.summaryButton]}>
+                                    <Text style={style.buttonText}>Sulje</Text>
+                                </Pressable>
+
+                                <Pressable onPress={hideModal} 
+                                style={[style.summaryButton]}>
+                                <Text style={style.buttonText}>Lisää uusi tapahtuma</Text>
+                                </Pressable>
+                            </View>
+
+                        </Modal>
+                    </Portal>
+                </Provider>
 
 
             </SafeAreaView>
