@@ -464,7 +464,7 @@ export const style = StyleSheet.create({
         width: "70%",
         marginLeft: "7.5%",
         backgroundColor: "#C4C4C4",
-        borderRadius: "5px",
+        borderRadius: 5,
         marginBottom: 4
     },
 

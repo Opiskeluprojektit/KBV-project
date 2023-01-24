@@ -2,7 +2,7 @@ import { Text, View, Pressable, ImageBackground, FlatList} from "react-native";
 import React, { useState, useEffect } from "react";
 import { style } from "../styles/styles";
 import * as Icon from "react-native-feather";
-import { List, TextInput } from "react-native-paper";
+import { List, TextInput, HelperText } from "react-native-paper";
 
 import { formatDMYtoYMD } from "../scripts/myDate";
 
@@ -41,7 +41,7 @@ function Points({ navigation }) {
 
   // Collects game information from firebase database
   useEffect(() => {
-    const games = query(ref(database, "game/"));
+    const games = query(ref(database, "game/"), orderByChild("isEvent"), equalTo(null));
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = { ...data };
@@ -119,6 +119,11 @@ function Points({ navigation }) {
       setDbPlacement(parseKeys);
     });
   }
+
+  useEffect(() => {
+    console.log("dbPlacement", dbPlacement, " enrolledPlayers", enrolledPlayers);
+    dbPlacement !== [] ? groupPlayers() : null;
+  }, [dbPlacement])
   
   useEffect(() => {
     gameList = mapGames();
@@ -229,7 +234,7 @@ function Points({ navigation }) {
     let newGroups = groups.concat();
 
     //Check if user has typed in an entire number instead of "." or "-";
-    if (Number(points)) {
+    if (Number(points) && !checkScoreInput(points)) {
       newGroups[group] = newGroups[group].reduce(
         (newGroup, player, playerNumber) => {
           // Player 1 and their pair gets points and the opposing players get points in negative.
@@ -320,10 +325,54 @@ function Points({ navigation }) {
     return newGroups;
   };
 
+  
+  //divides the players in to groups of 4. Uncomment the commented console logs to see what this does.
+  const groupPlayers = () => {
+    //console.log(enrolledPlayers);
+    const newGroups = enrolledPlayers
+    ? enrolledPlayers.reduce((groups, player, i) => {
+      let j = Math.floor(i / 4);
+      groups[j] = groups[j] || [];
+      player = addScoringVariablesToPlayer(player, i, j);
+      groups[j].push(player);
+      return groups;
+    }, [])
+    : null;
+    console.log("newGroups: ", newGroups);
+    
+    setGroups(newGroups);
+  };
+  
+  const addScoringVariablesToPlayer = (player, i, j) => {
+    //Gives the player objects, scores, sum and ranking keys, for calculating and submitting competition results.
+    const previousPlacement = dbPlacement.find(e => {
+      return e.player_id === player.id;
+    })
+    player.scores = previousPlacement ? previousPlacement.scores : [];
+    player.sum = previousPlacement ? previousPlacement.sum : null;
+    player.ranking = previousPlacement ? previousPlacement.ranking : null;
+    //These last two are given to make the nested FlatList management easier.
+    player.orderNumber = i;
+    player.group = j;
+    return player;
+  };
+
+  const checkScoreInput = (value) => {
+    if (value >= -21 && value <= 21) {
+      return false;
+    }
+    return true;
+  }
+
   //RenderItem for the FlatList inside the Group component
   const Player = ({ item }) => {
     return (
       <View>
+      {item.orderNumber % 4 == 0 ? (
+        <HelperText type="error" visible={(checkScoreInput(item.scores[0]) || checkScoreInput(item.scores[1]) || checkScoreInput(item.scores[2]))}>
+          Syötä laillinen pistemäärä -21 ja 21 väliltä.
+        </HelperText>
+      ) : null}
         <View style={style.playerContainer}>
           <Text style={style.pointTexts}>{item.name}</Text>
         </View>
@@ -335,6 +384,7 @@ function Points({ navigation }) {
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
               value={item.scores[0] ? item.scores[0].toString() : ""}
+              error={checkScoreInput(item.scores[0] ? item.scores[0].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 0, item.group)}
               label={"Erä 1"}
@@ -344,6 +394,7 @@ function Points({ navigation }) {
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
               value={item.scores[1] ? item.scores[1].toString() : ""}
+              error={checkScoreInput(item.scores[1] ? item.scores[1].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 1, item.group)}
               label={"Erä 2"}
@@ -353,6 +404,7 @@ function Points({ navigation }) {
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
               value={item.scores[2] ? item.scores[2].toString() : ""}
+              error={checkScoreInput(item.scores[2] ? item.scores[2].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 2, item.group)}
               label={"Erä 3"}
@@ -386,38 +438,7 @@ function Points({ navigation }) {
   const PlayerSeparator = () => {
     <View style={style.playerSeparator}></View>;
   };
-
-  //divides the players in to groups of 4. Uncomment the commented console logs to see what this does.
-  const groupPlayers = () => {
-    //console.log(enrolledPlayers);
-    const newGroups = enrolledPlayers
-      ? enrolledPlayers.reduce((groups, player, i) => {
-          let j = Math.floor(i / 4);
-          groups[j] = groups[j] || [];
-          player = addScoringVariablesToPlayer(player, i, j);
-          groups[j].push(player);
-          return groups;
-        }, [])
-      : null;
-    console.log("newGroups: ", newGroups);
-
-    setGroups(newGroups);
-  };
-
-  const addScoringVariablesToPlayer = (player, i, j) => {
-    //Gives the player objects, scores, sum and ranking keys, for calculating and submitting competition results.
-    const previousPlacement = dbPlacement.find(e => {
-      return e.player_id === player.id;
-    })
-    player.scores = previousPlacement ? previousPlacement.scores : [];
-    player.sum = previousPlacement ? previousPlacement.sum : null;
-    player.ranking = previousPlacement ? previousPlacement.ranking : null;
-    //These last two are given to make the nested FlatList management easier.
-    player.orderNumber = i;
-    player.group = j;
-    return player;
-  };
-
+  
   return (
     <ImageBackground source={backgroundImage} style={{ flex: 1 }}>
       <View style={[style.container, { flexDirection: "column" }]}>
