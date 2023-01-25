@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
+import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Alert } from 'react-native';
 import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
-import { onValue, ref, update, push, child } from 'firebase/database';
+import { onValue, ref, update, set, push, child } from 'firebase/database';
 import { database, EVENT_REF } from '../../firebase/Config';
 import { object } from 'prop-types';
 
@@ -23,11 +23,6 @@ function AdminEditEvents({ navigation }) {
     const [desc, setDesc] = useState('');
     const [division, setDivision] = useState();
     const [divisionExpand, setDivisionsExpand] = useState(false)
-
-    const [tempDate, setTempDate] = useState('');
-    const [tempTime, setTempTime] = useState('');
-    const [tempDesc, setTempDesc] = useState('');
-    const [tempDivision, setTempDivision] = useState('');
 
     
     const [mode, setMode] = useState('date');
@@ -78,44 +73,36 @@ function AdminEditEvents({ navigation }) {
 
     const selectDivision = (div) => {
         setDivisionsExpand(!divisionExpand);
-        setTempDivision(div);
+        setDivision(div);
     };
 
     const submitModal = (check) => {
         if (check === "cancel") {
-            setTempDate('')
-            setTempTime('')
-            setTempDesc('')
-            setTempDivision('')
             hideModal()
         } 
         if (check === "submit") {
-            if (tempDivision !== '' && tempDivision !== division) {
-                setDivision(tempDivision)
-            }
-            if (tempDate !== '' && tempDate !== date) {
-                setDate(tempDate)
-            }
-            if (tempTime !== '' && tempTime !== time) {
-                setTime(tempTime)
-            }
-            if (tempDesc !== '' && tempDesc !== desc) {
-                setDesc(tempDesc)
-            }
-
             // const newEvent = {date: date, description: desc, time: time, division: division}
             // const updates = {};
             // updates[EVENT_REF + dbId] = newEvent
             console.log(dbId)
 
-            update(ref(database, EVENT_REF + dbId), {
-                date: date,
-                time: time,
-                division: division,
-                description: desc
-            }).then(hideModal())
+            if (division && date && time) {
+                set(ref(database, EVENT_REF + dbId), {
+                    date: date,
+                    time: time,
+                    division: division,
+                    description: desc
+                }).then(hideModal())
+            } else {
+                Alert.alert("Muista valita sarja, tapahtuman päivänmäärä ja kellonaika!")
+            }
+
 
         }
+    }
+
+    const hide = () => {
+        setDivisionsExpand(false)
     }
 
     
@@ -162,7 +149,9 @@ function AdminEditEvents({ navigation }) {
 
                 <Provider>
                     <Portal>
-                        <Modal visible={visible} contentContainerStyle={[style.modalContainer, {marginTop: "-60%"}]}>
+                            <Modal visible={visible} contentContainerStyle={style.modalContainer}
+                            style={ !divisionExpand ? {marginTop: "-60%"} : { marginTop: 0 } }
+                            >
                             <Text style={[style.modalTitle, {marginBottom: 10}]}>Muokkaa tapahtumaa</Text>
 
                             <View style={style.adminModalView}>
@@ -211,12 +200,13 @@ function AdminEditEvents({ navigation }) {
                                 <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
                                     <TextInput
                                         style={style.modalTextInput}
-                                        placeholder={date}
+                                        value={date}
                                         keyboardType={'numbers-and-punctuation'}
                                         maxLength={10}
-                                        onChangeText={setTempDate}
+                                        onChangeText={setDate}
                                         label={"Päivänmäärä"}
                                         returnKeyType={'done'}
+                                        onFocus={hide}
                                     />
                                 </View>
 
@@ -225,12 +215,13 @@ function AdminEditEvents({ navigation }) {
                                 <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
                                     <TextInput
                                         style={style.modalTextInput}
-                                        placeholder={time}
+                                        value={time}
                                         keyboardType={'numbers-and-punctuation'}
                                         maxLength={5}
-                                        onChangeText={setTempTime}
+                                        onChangeText={setTime}
                                         label={"Kellonaika"}
                                         returnKeyType={'done'}
+                                        onFocus={hide}
                                     />
                                 </View>
                                 
@@ -261,11 +252,11 @@ function AdminEditEvents({ navigation }) {
                         <View>
                             <TextInput 
                             style={[style.adminDesc, {marginBottom: 10, borderTopLeftRadius: 20, borderTopRightRadius: 20} ]}
-                            placeholder="Kuvaus..."
                             value={desc}
                             maxLength={100}
                             numberOfLines={2}
-                            onChangeText={setTempDesc}
+                            onChangeText={setDesc}
+                            onFocus={hide}
                             >
 
                             </TextInput>
