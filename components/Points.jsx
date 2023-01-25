@@ -2,12 +2,12 @@ import { Text, View, Pressable, ImageBackground, FlatList} from "react-native";
 import React, { useState, useEffect } from "react";
 import { style } from "../styles/styles";
 import * as Icon from "react-native-feather";
-import { List, TextInput } from "react-native-paper";
+import { List, TextInput, HelperText } from "react-native-paper";
 
 import { formatDMYtoYMD } from "../scripts/myDate";
 
 import { database, placement_ref } from "../firebase/Config";
-import { onValue, ref, update, child, push } from "firebase/database";
+import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
 
 const backgroundImage = require("../assets/Volleyball100.png");
 
@@ -41,14 +41,13 @@ function Points({ navigation }) {
 
   // Collects game information from firebase database
   useEffect(() => {
-    const games = ref(database, "game/");
+    const games = query(ref(database, "game/"), orderByChild("isEvent"), equalTo(null));
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = { ...data };
       const parse = JSON.parse(JSON.stringify(gameItems));
       const keys = Object.keys(parse);
       let parseKeys = Object.values(parse);
-      console.log("parseKeys[0].id:", parseKeys[0].id, Number.isInteger(parseKeys[0].id));
       parseKeys.forEach((element, i) => {
         (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
       });
@@ -58,7 +57,6 @@ function Points({ navigation }) {
         })
         .filter((i) => i.date >= new Date())
         .sort((a, b) => a.date - b.date);
-      
       setGame(parseKeys);
       setGamesToShow(parseKeys);
     });
@@ -73,26 +71,13 @@ function Points({ navigation }) {
       const parse = JSON.parse(JSON.stringify(playerItems));
       const keys = Object.keys(parse)
       let parseKeys = Object.values(parse)
-      console.log(parseKeys);
       parseKeys.forEach((element, i) => {
         (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
       });
       setPlayer(parseKeys);
     });
   }, []);
-
-  const pullExistingPlacements = () => {
-    const placement = ref(database, placement_ref + chosenGame.id);
-    onValue(placement, (snapshot) => {
-      const data = snapshot.val() ? snapshot.val() : {};
-      const placementItems = { ...data };
-      const parse = JSON.parse(JSON.stringify(placementItems));
-      let parseKeys = Object.values(parse)
-      console.log("placements:", parseKeys);
-      setDbPlacement(parseKeys);
-    });
-  }
-
+  
   // Collects enrolment information from firebase database
   useEffect(() => {
     const enrolment = ref(database, "enrolment/");
@@ -101,17 +86,13 @@ function Points({ navigation }) {
       const enrolmentItems = { ...data };
       const parse = JSON.parse(JSON.stringify(enrolmentItems));
       const keys = Object.keys(parse)
-      console.log("keys", keys);
-      console.log(parse);
       let parseKeys = Object.values(parse)
-      console.log(parseKeys);
       /* parseKeys.forEach((element, i) => {
         delete Object.assign(parseKeys, {[keys[i]]: parseKeys[i] });
       }); */
       parseKeys.forEach((element, i) => {
         element.id = keys[i];
       });
-      console.log("parseKeys enrolments", parseKeys);
       setEnrolment(parseKeys);
     });
   }, []);
@@ -126,11 +107,28 @@ function Points({ navigation }) {
       setBonusMultiplier(parse.bonuskerroin);
     });
   }, []);
+  
+  // Collects placement information from firebase database
+  const pullExistingPlacements = () => {
+    const placement = ref(database, placement_ref + chosenGame.id);
+    onValue(placement, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const placementItems = { ...data };
+      const parse = JSON.parse(JSON.stringify(placementItems));
+      let parseKeys = Object.values(parse)
+      setDbPlacement(parseKeys);
+    });
+  }
 
+  useEffect(() => {
+    console.log("dbPlacement", dbPlacement, " enrolledPlayers", enrolledPlayers);
+    dbPlacement !== [] ? groupPlayers() : null;
+  }, [dbPlacement])
+  
   useEffect(() => {
     gameList = mapGames();
   }, [gamesToShow]);
-
+  
   useEffect(() => {
     filterGames();
   }, [division]);
@@ -153,7 +151,6 @@ function Points({ navigation }) {
   const filterGames = () => {
     if (division) {
       const newGamesToShow = game.filter((i) => i.division === division);
-      console.log("filtered game", game);
       setGamesToShow(newGamesToShow);
     }
   };
@@ -198,8 +195,6 @@ function Points({ navigation }) {
           .filter((i) => i.game_id == chosenGame.id))
       : null;
     let newEnrolledPlayers;
-    console.log("player before concat", player);
-    console.log("enrolments to chjosen game:", enrolmentsToChosenGame);
     enrolmentsToChosenGame
       ? (newEnrolledPlayers = player
           .concat()
@@ -239,7 +234,7 @@ function Points({ navigation }) {
     let newGroups = groups.concat();
 
     //Check if user has typed in an entire number instead of "." or "-";
-    if (Number(points)) {
+    if (Number(points) && !checkScoreInput(points)) {
       newGroups[group] = newGroups[group].reduce(
         (newGroup, player, playerNumber) => {
           // Player 1 and their pair gets points and the opposing players get points in negative.
@@ -278,13 +273,9 @@ function Points({ navigation }) {
   // Send results to the database.
   const saveResultsToDB = (groups, groupNumber) => {
     groups[groupNumber].forEach(player => {
-
       const previousPlacement = dbPlacement.find(e => {
         return e.player_id === player.id;
       })
-
-      console.log("pellaaja", player);
-      console.log("placement ref", placement_ref);
       const placementKey = previousPlacement ? previousPlacement.id : push(child(ref(database), placement_ref)).key;
       const newPlacement = {
         "id": placementKey,
@@ -334,10 +325,54 @@ function Points({ navigation }) {
     return newGroups;
   };
 
+  
+  //divides the players in to groups of 4. Uncomment the commented console logs to see what this does.
+  const groupPlayers = () => {
+    //console.log(enrolledPlayers);
+    const newGroups = enrolledPlayers
+    ? enrolledPlayers.reduce((groups, player, i) => {
+      let j = Math.floor(i / 4);
+      groups[j] = groups[j] || [];
+      player = addScoringVariablesToPlayer(player, i, j);
+      groups[j].push(player);
+      return groups;
+    }, [])
+    : null;
+    console.log("newGroups: ", newGroups);
+    
+    setGroups(newGroups);
+  };
+  
+  const addScoringVariablesToPlayer = (player, i, j) => {
+    //Gives the player objects, scores, sum and ranking keys, for calculating and submitting competition results.
+    const previousPlacement = dbPlacement.find(e => {
+      return e.player_id === player.id;
+    })
+    player.scores = previousPlacement ? previousPlacement.scores : [];
+    player.sum = previousPlacement ? previousPlacement.sum : null;
+    player.ranking = previousPlacement ? previousPlacement.ranking : null;
+    //These last two are given to make the nested FlatList management easier.
+    player.orderNumber = i;
+    player.group = j;
+    return player;
+  };
+
+  const checkScoreInput = (value) => {
+    if (value >= -21 && value <= 21) {
+      return false;
+    }
+    return true;
+  }
+
   //RenderItem for the FlatList inside the Group component
   const Player = ({ item }) => {
     return (
       <View>
+      {item.orderNumber % 4 == 0 ? (
+        <HelperText type="error" visible={(checkScoreInput(item.scores[0]) || checkScoreInput(item.scores[1]) || checkScoreInput(item.scores[2]))}>
+          Syötä laillinen pistemäärä -21 ja 21 väliltä.
+        </HelperText>
+      ) : null}
         <View style={style.playerContainer}>
           <Text style={style.pointTexts}>{item.name}</Text>
         </View>
@@ -349,6 +384,7 @@ function Points({ navigation }) {
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
               value={item.scores[0] ? item.scores[0].toString() : ""}
+              error={checkScoreInput(item.scores[0] ? item.scores[0].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 0, item.group)}
               label={"Erä 1"}
@@ -358,6 +394,7 @@ function Points({ navigation }) {
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
               value={item.scores[1] ? item.scores[1].toString() : ""}
+              error={checkScoreInput(item.scores[1] ? item.scores[1].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 1, item.group)}
               label={"Erä 2"}
@@ -367,6 +404,7 @@ function Points({ navigation }) {
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
               value={item.scores[2] ? item.scores[2].toString() : ""}
+              error={checkScoreInput(item.scores[2] ? item.scores[2].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 2, item.group)}
               label={"Erä 3"}
@@ -400,42 +438,7 @@ function Points({ navigation }) {
   const PlayerSeparator = () => {
     <View style={style.playerSeparator}></View>;
   };
-
-  //divides the players in to groups of 4. Uncomment the commented console logs to see what this does.
-  const groupPlayers = () => {
-    //console.log(enrolledPlayers);
-    const newGroups = enrolledPlayers
-      ? enrolledPlayers.reduce((groups, player, i) => {
-          let j = Math.floor(i / 4);
-          groups[j] = groups[j] || [];
-          player = addScoringVariablesToPlayer(player, i, j);
-          groups[j].push(player);
-          return groups;
-        }, [])
-      : null;
-    console.log("newGroups: ", newGroups);
-
-    setGroups(newGroups);
-  };
-
-  const addScoringVariablesToPlayer = (player, i, j) => {
-    //Gives the player objects, scores, sum and ranking keys, for calculating and submitting competition results.
-    const previousPlacement = dbPlacement.find(e => {
-      return e.player_id === player.id;
-    })
-
-    player.scores = previousPlacement ? previousPlacement.scores : [];
-    player.sum = previousPlacement ? previousPlacement.sum : null;
-    player.ranking = previousPlacement ? previousPlacement.ranking : null;
-    //These last two are given to make the nested FlatList management easier.
-    player.orderNumber = i;
-    player.group = j;
-
-    //console.log("player:", player);
-
-    return player;
-  };
-
+  
   return (
     <ImageBackground source={backgroundImage} style={{ flex: 1 }}>
       <View style={[style.container, { flexDirection: "column" }]}>

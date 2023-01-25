@@ -76,7 +76,8 @@ function AdminEvents({ navigation }) {
                 date: dateDb,
                 time: timeDb,
                 division: division,
-                description: desc
+                description: desc,
+                isEvent: division === "Muut"
             }).then(showModal);
 
         } else {
@@ -98,7 +99,7 @@ function AdminEvents({ navigation }) {
 
     return (
         <>
-        <ImageBackground source={backgroundImage}>
+        <ImageBackground source={backgroundImage} style={{ flex: 1 }}>
             <SafeAreaView>
 
                 {/* Header: Go back button and Menu */}
