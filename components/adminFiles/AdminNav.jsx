@@ -30,6 +30,11 @@ function AdminNav({ navigation }) {
                     <View style={style.homeButtonsContainer}>
                         <Pressable onPress={() => navigation.navigate('AdminEvents')} style={[style.homeButtons, style.button]}>
                         <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Calendar style={style.icons}/></View>
+                        <Text style={style.bigButtonText}>Luo tapahtuma</Text>
+                        </Pressable>
+
+                        <Pressable onPress={() => navigation.navigate('AdminEditEvents')} style={[style.homeButtons, style.button]}>
+                        <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Calendar style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Muokkaa tapahtumia</Text>
                         </Pressable>
 

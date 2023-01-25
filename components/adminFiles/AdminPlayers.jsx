@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
+import { TextInput, List } from 'react-native-paper';
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
 
@@ -8,6 +9,16 @@ import * as Icon from "react-native-feather";
 
 function AdminPlayers({ navigation }) {
    const backgroundImage = require('../../assets/Volleyball50.png'); 
+
+
+   const [division, setDivision] = useState('');
+   const [divisionExpand, setDivisionsExpand] = useState(false)
+
+
+   const selectDivision = (div) => {
+    setDivisionsExpand(!divisionExpand);
+    setDivision(div);
+  };
 
     return (
         <>
@@ -26,6 +37,121 @@ function AdminPlayers({ navigation }) {
                     <View style={style.contentOnLightBG}>
                         <Text style={[style.h4Style, style.adminHeader]}>Lisää tai muokkaa pelaajia</Text>
                     </View>
+
+
+                    <Text style={style.menuContent}>Lisää pelaaja</Text>
+
+
+                    {/* Insert player name and division */}
+
+                    <View style={style.adminAddView}>
+                    <TextInput 
+                            label="Pelaajan nimi"
+                            style={style.adminAddPlayer}
+                            returnKeyType="next"
+                            underlineColor={'#1B1B1B'}
+                            activeUnderlineColor={'#005C70'}
+                            maxLength={50}
+                            />
+
+                    <Pressable style={style.adminAddButton}>
+                        <Text style={style.adminTextBg}>Lisää</Text>
+                    </Pressable>
+
+                    </View>
+
+                    {/* Select division */}
+
+                    <List.Accordion
+
+                        title={division ? division : "Sarjavalikko"}
+                        style={[style.search, style.adminCheck, style.adminShadow]}
+                        theme={{
+                        colors: { background: "#F9F9F9", primary: "#005C70" },
+                        }}
+                        expanded={divisionExpand}
+                        onPress={() => setDivisionsExpand(!divisionExpand)}
+                        > 
+
+                        <List.Item
+                        style={[style.adminSelect, style.adminShadow]}
+                        title="Naiset"
+                        onPress={() => selectDivision("Naiset")}
+                        />
+                        <List.Item
+                        style={[style.adminSelect, style.adminShadow]}
+                        title="Miehet"
+                        onPress={() => selectDivision("Miehet")}
+                        />
+                        <List.Item
+                        style={[style.adminSelect, style.adminShadow]}
+                        title="Tytöt"
+                        onPress={() => selectDivision("Tytöt")}
+                        />
+                        <List.Item
+                        style={[style.adminSelect, style.adminShadow]}
+                        title="Pojat"
+                        onPress={() => selectDivision("Pojat")}
+                        />
+                    </List.Accordion>
+
+
+
+                    <Text style={style.menuContent}>Muokkaa pelaajia</Text>
+
+                    <ScrollView style={style.adminScroll}>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                        <View style={style.adminEventList}>
+                            <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
+                            <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                        </View>
+
+                    </ScrollView>
 
                 </View>
 
