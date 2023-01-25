@@ -34,12 +34,12 @@ function AdminNav({ navigation }) {
                         </Pressable>
 
                         <Pressable onPress={() => navigation.navigate('AdminEditEvents')} style={[style.homeButtons, style.button]}>
-                        <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Calendar style={style.icons}/></View>
+                        <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.AlignJustify style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Muokkaa tapahtumia</Text>
                         </Pressable>
 
                         <Pressable onPress={() => navigation.navigate('AdminPlayers')} style={[style.homeButtons, style.button]}>
-                        <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Users style={style.icons}/></View>
+                        <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Muokkaa pelaajia</Text>
                         </Pressable>
 
