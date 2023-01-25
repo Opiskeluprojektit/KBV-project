@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
-import { TextInput, List } from 'react-native-paper';
+import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Alert } from 'react-native';
+import { TextInput, List, Portal, Provider, Modal } from 'react-native-paper';
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
+import { database, PLAYER_REF } from '../../firebase/Config';
+import {ref, push} from 'firebase/database';
 
 
 
@@ -14,11 +16,38 @@ function AdminPlayers({ navigation }) {
    const [division, setDivision] = useState('');
    const [divisionExpand, setDivisionsExpand] = useState(false)
 
+   const [player, setPlayer] = useState('');
+   const [ranking, setRanking] = useState(0);
+
+   const [visibleFirst, setVisibleFirst] = useState(false);
+
 
    const selectDivision = (div) => {
     setDivisionsExpand(!divisionExpand);
     setDivision(div);
   };
+
+  const addPlayer = () => {
+    if (division && player) {
+        push(ref(database, PLAYER_REF), {
+            division: division,
+            name: player,
+            ranking: ranking
+        }).then(showModal);
+    } else {
+        Alert.alert("Muista täyttää pelaajan nimi ja sarja!")
+    }
+  }
+
+
+  const showModal = () => setVisibleFirst(true);
+
+  const hideModal = () => {
+    setVisibleFirst(false);
+    setDivision('');
+    setPlayer('');
+  }
+
 
     return (
         <>
@@ -52,9 +81,11 @@ function AdminPlayers({ navigation }) {
                             underlineColor={'#1B1B1B'}
                             activeUnderlineColor={'#005C70'}
                             maxLength={50}
+                            value={player}
+                            onChangeText={setPlayer}
                             />
 
-                    <Pressable style={style.adminAddButton}>
+                    <Pressable onPress={addPlayer} style={style.adminAddButton}>
                         <Text style={style.adminTextBg}>Lisää</Text>
                     </Pressable>
 
@@ -156,6 +187,26 @@ function AdminPlayers({ navigation }) {
                 </View>
 
 
+
+                {/* First modal */}
+
+                
+                <Provider>
+                    <Portal>
+                        <Modal visible={visibleFirst} contentContainerStyle={style.modalContainer}>
+                            <Text style={style.modalTitle}>Tapahtuma luotu</Text>
+
+                            <View style={[style.buttonSummaryStyles, style.adminModal]}>
+
+                                <Pressable onPress={hideModal} 
+                                style={[style.summaryButton]}>
+                                <Text style={style.buttonText}>Lisää uusi tapahtuma</Text>
+                                </Pressable>
+                            </View>
+
+                        </Modal>
+                    </Portal>
+                </Provider>
 
 
             </SafeAreaView>

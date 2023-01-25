@@ -660,5 +660,11 @@ export const style = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
         marginBottom: 10
+    },
+
+    adminDeleteButton: {
+        color: "red",
+        fontWeight: '500',
+        fontSize: 20
     }
 })

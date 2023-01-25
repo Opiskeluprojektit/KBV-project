@@ -4,7 +4,7 @@ import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
-import { onValue, ref, update, set, push, child } from 'firebase/database';
+import { onValue, ref, update, set, remove } from 'firebase/database';
 import { database, EVENT_REF } from '../../firebase/Config';
 import { object } from 'prop-types';
 
@@ -77,8 +77,8 @@ function AdminEditEvents({ navigation }) {
     };
 
     const submitModal = (check) => {
-        if (check === "cancel") {
-            hideModal()
+        if (check === "delete") {
+            confirmDelete()
         } 
         if (check === "submit") {
             // const newEvent = {date: date, description: desc, time: time, division: division}
@@ -100,6 +100,26 @@ function AdminEditEvents({ navigation }) {
 
         }
     }
+
+    const executeDelete = (ans) => {
+        if (ans === true) {
+            remove(ref(database, EVENT_REF + dbId)).then(hideModal(), Alert.alert("Tapahtuma poistettu"))
+        } else {
+            console.log("ei poistettu")
+        }
+    }
+
+
+    const confirmDelete = () =>
+        Alert.alert('Huomio!', 'Haluatko varmasti poistaa tapahtuman', [
+            {
+                text: 'Peruuta',
+                onPress: () => executeDelete(false),
+                style: 'cancel',
+            },
+            {text: 'Kyllä', onPress: () => executeDelete(true)},
+    ]);
+
 
     const hide = () => {
         setDivisionsExpand(false)
@@ -270,14 +290,14 @@ function AdminEditEvents({ navigation }) {
 
 
                             <View style={[style.buttonSummaryStyles, style.adminModalButtons]}>
-                                <Pressable onPress={() => submitModal("cancel")} 
+                                <Pressable onPress={() => submitModal("delete")} 
                                     style={[style.summaryButton]}>
-                                    <Text style={style.buttonText}>Peruuta</Text>
+                                    <Text style={style.adminDeleteButton}>Poista</Text>
                                 </Pressable>
 
                                 <Pressable onPress={() => submitModal("submit")} 
                                 style={[style.summaryButton]}>
-                                <Text style={style.buttonText}>Päivitä</Text>
+                                <Text style={style.buttonText}>Tallenna</Text>
                                 </Pressable>
                             </View>
 
