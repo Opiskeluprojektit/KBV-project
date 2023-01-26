@@ -40,6 +40,11 @@ function AdminNav({ navigation }) {
 
                         <Pressable onPress={() => navigation.navigate('AdminPlayers')} style={[style.homeButtons, style.button]}>
                         <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={style.icons}/></View>
+                        <Text style={style.bigButtonText}>Lisää pelaajia</Text>
+                        </Pressable>
+
+                        <Pressable onPress={() => navigation.navigate('AdminEditPlayers')} style={[style.homeButtons, style.button]}>
+                        <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserMinus style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Muokkaa pelaajia</Text>
                         </Pressable>
 

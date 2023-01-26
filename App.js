@@ -8,6 +8,7 @@ import AdminEvents from "./components/adminFiles/AdminEvents.jsx";
 import AdminNav from "./components/adminFiles/AdminNav.jsx";
 import AdminCodes from "./components/adminFiles/AdminCodes";
 import AdminPlayers from "./components/adminFiles/AdminPlayers";
+import AdminEditPlayers from "./components/adminFiles/AdminEditPlayers.jsx";
 import AdminEditEvents from "./components/adminFiles/AdminEditEvents.jsx";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -32,6 +33,7 @@ function App() {
       <Stack.Screen name="AdminEvents" component={AdminEvents} options={{ headerShown: false }}/>
       <Stack.Screen name="AdminEditEvents" component={AdminEditEvents} options={{ headerShown: false }}/>
       <Stack.Screen name="AdminPlayers" component={AdminPlayers} options={{ headerShown: false }}/>
+      <Stack.Screen name="AdminEditPlayers" component={AdminEditPlayers} options={{ headerShown: false }}/>
       <Stack.Screen name="AdminCodes" component={AdminCodes} options={{ headerShown: false }}/>
       
     </Stack.Navigator>

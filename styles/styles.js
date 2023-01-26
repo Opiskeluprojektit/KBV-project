@@ -553,9 +553,9 @@ export const style = StyleSheet.create({
     },
 
     adminAddPlayer: {
+        alignSelf: 'center',
         height: 50,
-        marginLeft: "5%",
-        width: "65%",
+        width: "80%",
         backgroundColor: Colors.primaryVariant
     },
 
@@ -565,11 +565,10 @@ export const style = StyleSheet.create({
 
     adminAddButton: {
         backgroundColor: Colors.primary,
-        position: 'absolute',
-        right: 0,
-        marginRight: "5%",
+        width: "30%",
         height: 45,
         justifyContent: 'center',
+        alignSelf: 'center',
         borderRadius: 10,
         paddingRight: 10,
         paddingLeft: 10
@@ -584,8 +583,8 @@ export const style = StyleSheet.create({
     adminCheck: {
         backgroundColor: Colors.primaryVariant,
         height: 50,
-        width: "65%",
-        marginLeft: "5%",
+        width: "75%",
+        alignSelf: 'center',
         marginTop: 10
     },
 
