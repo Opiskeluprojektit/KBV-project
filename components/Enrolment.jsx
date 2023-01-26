@@ -210,7 +210,8 @@ function Enrolment({ navigation }) {
                   theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
-                  {gameList}
+                  <ScrollView style={{ maxHeight: "75%"}}>{gameList}</ScrollView>
+                  {/* {gameList} */}
                 </List.Accordion>
               </List.Section>
 

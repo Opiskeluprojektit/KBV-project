@@ -194,13 +194,13 @@ function AdminPlayers({ navigation }) {
                 <Provider>
                     <Portal>
                         <Modal visible={visibleFirst} contentContainerStyle={style.modalContainer}>
-                            <Text style={style.modalTitle}>Tapahtuma luotu</Text>
+                            <Text style={style.modalTitle}>Pelaaja lisätty</Text>
 
                             <View style={[style.buttonSummaryStyles, style.adminModal]}>
 
                                 <Pressable onPress={hideModal} 
                                 style={[style.summaryButton]}>
-                                <Text style={style.buttonText}>Lisää uusi tapahtuma</Text>
+                                <Text style={style.buttonText}>Sulje</Text>
                                 </Pressable>
                             </View>
 
