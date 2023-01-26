@@ -119,13 +119,15 @@ function AdminPlayers({ navigation }) {
                         />
                     </List.Accordion>
 
+                    
+
 
                     <View>
                         <Pressable onPress={addPlayer} 
                             style={[style.enrolButton, style.button, style.adminButton]}>
                             <Text style={style.buttonText}>Lisää pelaaja</Text> 
                          </Pressable>
-                        </View>
+                    </View>
 
                 </View>
 
