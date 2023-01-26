@@ -24,23 +24,23 @@ export default function Home({navigation}) {
 
           {/* Navigation to different screens: Enrolment, Points, Ranking and to rules in KBV website*/}
           <View style={style.homeButtonsContainer}>
-            <Pressable onPress={() => navigation.navigate('Enrolment')} style={[style.homeButtons, style.button]}>
+            <Pressable onPress={() => navigation.navigate('Enrolment')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={style.icons}/></View>
               <Text style={style.bigButtonText}>Ilmoittaudu</Text>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('Points')} style={[style.homeButtons, style.button]}>
+            <Pressable onPress={() => navigation.navigate('Points')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Edit style={style.icons}/></View>
               <Text style={style.bigButtonText}>Pisteiden syöttö</Text>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('Ranking')} style={[style.homeButtons, style.button]}>
+            <Pressable onPress={() => navigation.navigate('Ranking')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Award style={style.icons}/></View>
               <Text style={style.bigButtonText}>Ranking-listat</Text>
             </Pressable>
-            <Pressable  onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}} style={[style.homeButtons, style.button]}>
+            <Pressable  onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
               <Text style={style.bigButtonText}>ViikkoBiitsi-säännöt</Text>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
             </Pressable>
-            <Pressable  onPress={() => navigation.navigate('AdminNav')} style={[style.homeButtons, style.button]}>
+            <Pressable  onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
               <Text style={style.bigButtonText}>Admin Paneeli</Text>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Settings style={style.icons}/></View>
             </Pressable>

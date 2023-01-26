@@ -8,6 +8,7 @@ import { formatDMYtoYMD } from "../scripts/myDate";
 
 import { database, placement_ref } from "../firebase/Config";
 import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
+import { ScrollView } from "react-native-gesture-handler";
 
 const backgroundImage = require("../assets/Volleyball100.png");
 
@@ -444,8 +445,8 @@ function Points({ navigation }) {
       <View style={[style.container, { flexDirection: "column" }]}>
         <View style={{ flex: 1 }}>
           <View style={style.pointsHeader}>
-            <Pressable onPress={() => navigation.navigate("Home")}>
-              <View style={[style.iconsEllipse]}>
+            <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate("Home")}>
+              <View>
                 <Icon.ChevronLeft style={[style.icons]} />
               </View>
             </Pressable>
@@ -497,7 +498,7 @@ function Points({ navigation }) {
                 expanded={gamesExpanded}
                 onPress={() => setGamesExpanded(!gamesExpanded)}
               >
-                {gameList}
+                <ScrollView style={{ maxHeight: "75%" }}>{gameList}</ScrollView>
               </List.Accordion>
             </List.Section>
 

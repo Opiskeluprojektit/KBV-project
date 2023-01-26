@@ -1,5 +1,5 @@
 import { SafeAreaView,  FlatList, Text, View, Pressable, Alert, 
-  Button, ImageBackground } from 'react-native';
+  Button, ImageBackground, Keyboard } from 'react-native';
 import React, { useState, useEffect} from 'react';
 import { style } from '../styles/styles';
 import { formatDMYtoYMD } from '../scripts/myDate';
@@ -82,6 +82,13 @@ function Enrolment({ navigation }) {
     checkModal() ? showModal() : null;
   }, [enrolledPlayers]) */
 
+  //empties the playersearch bar if division is changed
+  useEffect(() => {
+    setSearch('');
+    setPlayersToShow([]);
+  }, [chosenGame])
+
+
     useEffect(() => {
     filterEnrolments()
   }, [chosenGame])
@@ -115,8 +122,6 @@ function Enrolment({ navigation }) {
   };
 
   // Selecting the player from the flatlist
-  //Jos pelaaja on jo pelissä => alert
-    // Tämä ei toimi -> Laura palaa myöhemmin
   const selectPlayer = (player) => {
     if (enrolledPlayers.find((i) => i.name === player.name)) {
       Alert.alert("Pelaaja on jo ilmoittautunut")
@@ -192,7 +197,11 @@ function Enrolment({ navigation }) {
       
           {/* Header: Go back button and Menu */}
           <View style={style.header}>
-            <Pressable  style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate('Home')}><View><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+            <Pressable  style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate('Home')}>
+              <View>
+                <Icon.ChevronLeft style={[style.icons]}/>
+              </View>
+            </Pressable>
             <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
           </View>
 
@@ -206,11 +215,11 @@ function Enrolment({ navigation }) {
               <List.Section>
                 <List.Accordion
                   title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
-                  style={style.search}
+                  style={[style.search, {overflow: "hidden"}]}
                   theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
-                  <ScrollView style={{ maxHeight: "75%"}}>{gameList}</ScrollView>
+                    <ScrollView style={{ maxHeight: "75%" }}>{gameList}</ScrollView>
                   {/* {gameList} */}
                 </List.Accordion>
               </List.Section>
@@ -228,6 +237,7 @@ function Enrolment({ navigation }) {
                   onSubmitEditing={() => executeSearch(search)}
                 />
                 <FlatList
+                  keyboardShouldPersistTaps='always' //keyboard wont hide before clicking back
                   style={style.flatList}
                   data={playersToShow}
                   renderItem={({item}) => 
@@ -258,7 +268,7 @@ function Enrolment({ navigation }) {
               but changed to "Ilmoita x pelaajaa" if two or more player are been enrolled. 
               And instead of x there would be the amount of players */}
               <Pressable onPress={handleEnrollment} 
-                style={[style.enrolButton, style.button]}>
+                style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.enrolButton, style.button]}>
                 <Text style={style.buttonText}>Ilmoittaudu</Text> 
               </Pressable>
               </View>
@@ -299,12 +309,12 @@ function Enrolment({ navigation }) {
                       {/* Buttons for closing the modal and adding new player */}
                       <View style={style.buttonSummaryStyles}>
                         <Pressable onPress={() => navigation.navigate('Home')} 
-                            style={[style.summaryButton]}>
+                            style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                             <Text style={style.buttonText}>Sulje</Text>
                           </Pressable>
 
                         <Pressable onPress={hideModal} 
-                          style={[style.summaryButton]}>
+                          style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                           <Text style={style.buttonText}>Lisää uusi pelaaja</Text>
                         </Pressable>
                       </View>

@@ -2,6 +2,7 @@ import { SafeAreaView, Text, View, Pressable, Button, ImageBackground } from 're
 import React from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
+import { DataTable } from 'react-native-paper';
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
@@ -11,7 +12,7 @@ function Ranking({navigation}) {
       <SafeAreaView>
 
       <View style={style.header}>
-        <Pressable onPress={() => navigation.navigate('Home')}><View style={[style.iconsEllipse]}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
+        <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate('Home')}><View><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
         <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
       </View>
 
