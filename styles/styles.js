@@ -382,6 +382,15 @@ export const style = StyleSheet.create({
         paddingLeft: 15
     },
 
+    pointsTextField: {
+        backgroundColor: "#E5E5E5",
+        width: '26%',
+        height: 50,
+        marginRight: 10,
+        marginTop: 5,
+        marginBottom: 30
+    },
+
     numInput: {
         backgroundColor: Colors.primaryVariant,
         width: '26%',
