@@ -222,9 +222,10 @@ export const style = StyleSheet.create({
     }, 
 
     flatList: {
-        //flex: 1,
+        flex: 1,
         marginBottom: 10,
-        paddingBottom: 100,
+        paddingBottom: '85%',
+        position: 'relative',
     },
 
     // Button for enrolment
