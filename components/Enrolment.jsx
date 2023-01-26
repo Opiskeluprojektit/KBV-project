@@ -115,7 +115,7 @@ function Enrolment({ navigation }) {
         ? player.filter(
             (item) =>
               item.name.toLowerCase().includes(search.toLowerCase()) &&
-              chosenGame.division === item.division  
+              (chosenGame.division === item.division  || chosenGame.division === "Muut")
           )
         : [];    
     setPlayersToShow(searchArray);
