@@ -379,17 +379,19 @@ function Points({ navigation }) {
             </View>
           </>
         ) : (
-          <View style={style.playerContainer}>
-            <View style={style.playerScoresContainer}>
-            <Text style={style.pointTexts}>{item.name}</Text>
-              <View style={style.playerScoreRow}>
-                <Text style={style.pointTexts}>{item.scores[0]}</Text>
-                <Text style={style.pointTexts}>{item.scores[1]}</Text>
-                <Text style={style.pointTexts}>{item.scores[2]}</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+            <View style={style.playerContainer}>
+              <View style={style.playerScoresContainer}>
+              <Text style={style.pointTexts}>{item.name}</Text>
+                <View style={style.playerScoreRow}>
+                  <Text style={style.pointTexts}>{item.scores[0]}</Text>
+                  <Text style={style.pointTexts}>{item.scores[1]}</Text>
+                  <Text style={style.pointTexts}>{item.scores[2]}</Text>
+                </View>
               </View>
-              <View style={style.rankingNumber}>
-                <Text style={style.text}>{item.sum}</Text>
-              </View>
+            </View>
+            <View style={[style.rankingNumber, {marginLeft: 10, marginTop: 0}]}>
+              <Text style={style.text}>{item.sum}</Text>
             </View>
           </View>
         )}
