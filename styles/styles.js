@@ -356,11 +356,10 @@ export const style = StyleSheet.create({
     },
 
     playerSeparator: {
-        paddingTop: 8,
-        paddingBottom: 8
     },
 
     playerContainer: {
+        flex: 1,
         backgroundColor: Colors.primaryVariant,
         height: 50,
         borderTopLeftRadius: 10,
@@ -368,12 +367,16 @@ export const style = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    playerScoreRow: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start'
+    },
+
     pointTitles: {
         color: Colors.bodyText, 
         fontWeight: '500',
         fontSize: 20,
-        marginBottom: 15,
-        marginTop: 30
     },
 
     pointTexts: {
@@ -404,7 +407,6 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.primaryVariant,
         width: 50,
         height: 50,
-        marginRight: 10,
         marginTop: 5,
         marginBottom: 30,
         borderRadius: 1000,
