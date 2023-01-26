@@ -1,4 +1,6 @@
 import { StyleSheet} from 'react-native';
+import { color } from 'react-native-reanimated';
+import AdminEvents from '../components/adminFiles/AdminEvents';
 import Colors from './colors';
 
 export const style = StyleSheet.create({
@@ -465,16 +467,16 @@ export const style = StyleSheet.create({
 
     adminBox: {
         width: "90%",
-        height: 70,
+        height: 60,
         marginLeft: "5%"
     },
 
     adminSelect: {
-        width: "70%",
+        width: "60%",
         marginLeft: "7.5%",
-        backgroundColor: "#C4C4C4",
+        backgroundColor: Colors.primaryVariant,
         borderRadius: 5,
-        marginBottom: 4
+        marginBottom: 4,
     },
 
     datePickerContainer: {
@@ -503,5 +505,175 @@ export const style = StyleSheet.create({
 
     adminTitle: {
         marginTop: 10
+    },
+
+    adminModal: {
+        alignSelf: 'center',
+        marginTop: 30,
+    },
+
+    adminEventList: {
+        flexDirection: 'row',
+        backgroundColor: Colors.primaryVariant,
+        marginRight: "5%",
+        marginLeft: "5%",        
+        height: 50,
+        marginBottom: 10,
+        borderRadius: 5
+    },
+
+    adminEventTitle: {
+        marginLeft: 5,
+        marginRight: 5,
+        fontSize: 20,
+        alignSelf: 'center'
+    },
+
+    adminEventButton: {
+        marginLeft: 40,
+        position: 'absolute',
+        right: 0,
+        marginRight: "5%",
+        paddingTop: 5,
+        paddingBottom: 5,
+        backgroundColor: Colors.primary,
+        alignSelf: 'center',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 10
+    },
+
+    adminScroll: {
+        backgroundColor: '#F7FFFF',
+        marginBottom: "40%",
+        paddingTop: 10,
+        borderRadius: 15
+    },
+
+    adminAddPlayer: {
+        height: 50,
+        marginLeft: "5%",
+        width: "65%",
+        backgroundColor: Colors.primaryVariant
+    },
+
+    adminAddView: {
+        flexDirection: 'row',
+    },
+
+    adminAddButton: {
+        backgroundColor: Colors.primary,
+        position: 'absolute',
+        right: 0,
+        marginRight: "5%",
+        height: 45,
+        justifyContent: 'center',
+        borderRadius: 10,
+        paddingRight: 10,
+        paddingLeft: 10
+    },
+
+    adminTextBg: {
+        color: Colors.buttonText,
+        fontSize: 20,
+        textAlign: 'center'
+    },
+
+    adminCheck: {
+        backgroundColor: Colors.primaryVariant,
+        height: 50,
+        width: "65%",
+        marginLeft: "5%",
+        marginTop: 10
+    },
+
+    adminShadow: {
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 3
+    },
+
+    adminSubmit: {
+        position: 'absolute',
+        bottom: 0,
+        left: "21%",
+        marginBottom: 120
+    },
+
+    adminEditCode: {
+        height: 50,
+        marginLeft: "10%",
+        width: "35%",
+        backgroundColor: Colors.primaryVariant
+    },
+
+    modalTextInput: {
+        backgroundColor: "#D9D9D9",
+        width: "50%",
+        marginLeft: "15%",
+        height: 50,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        marginBottom: 10
+    }, 
+    
+    adminModalButtons: {
+        alignSelf: 'center',
+        marginBottom: 10
+    },
+
+    adminModalView: {
+        backgroundColor: Colors.background,
+    },
+
+    adminModalIcon: {
+        color: Colors.bodyText,
+        top: 12,
+        alignSelf: 'center'
+    },
+
+    adminIcons: {
+        color: Colors.bodyText,
+        top: 3,
+        alignSelf: 'center'
+    },
+
+    adminIconsEllipse: {
+        backgroundColor: Colors.primaryVariant,
+        position: "absolute",
+        width: 30,
+        height: 30,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
+
+    adminEllipse: {
+        alignSelf: 'flex-end',
+        left: 18,
+        top: 10
+    },
+
+    adminDatePicker: {
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+        marginLeft: "15%",
+        marginRight: 10,
+        marginTop: 10,
+        marginBottom: 10
+    },
+
+    adminDeleteButton: {
+        color: "red",
+        fontWeight: '500',
+        fontSize: 20
     }
 })

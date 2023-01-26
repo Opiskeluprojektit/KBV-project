@@ -112,13 +112,13 @@ function AdminEvents({ navigation }) {
 
                 <View style={style.viewContainer}>
                     <View style={style.contentOnLightBG}>
-                        <Text style={[style.h4Style, style.adminHeader]}>Admin paneeli</Text>
+                        <Text style={[style.h4Style, style.adminHeader]}>Luo tapahtuma</Text>
                     </View>
 
 
                     {/* Creating an event */}
 
-                    <Text style={style.menuContent}>Luo tapahtuma</Text>
+                    
 
                     {/* Select division for the event */}
 
@@ -134,27 +134,27 @@ function AdminEvents({ navigation }) {
                         > 
 
                         <List.Item
-                        style={style.adminSelect}
+                        style={[style.adminSelect, style.adminShadow]}
                         title="Naiset"
                         onPress={() => selectDivision("Naiset")}
                         />
                         <List.Item
-                        style={style.adminSelect}
+                        style={[style.adminSelect, style.adminShadow]}
                         title="Miehet"
                         onPress={() => selectDivision("Miehet")}
                         />
                         <List.Item
-                        style={style.adminSelect}
+                        style={[style.adminSelect, style.adminShadow]}
                         title="Tytöt"
                         onPress={() => selectDivision("Tytöt")}
                         />
                         <List.Item
-                        style={style.adminSelect}
+                        style={[style.adminSelect, style.adminShadow]}
                         title="Pojat"
                         onPress={() => selectDivision("Pojat")}
                         />
                         <List.Item
-                        style={style.adminSelect}
+                        style={[style.adminSelect, style.adminShadow]}
                         title="Muut"
                         onPress={() => selectDivision("Muut")}
                         />
@@ -245,7 +245,7 @@ function AdminEvents({ navigation }) {
                         <Modal visible={visible} contentContainerStyle={style.modalContainer}>
                             <Text style={style.modalTitle}>Tapahtuma luotu</Text>
 
-                            <View style={style.buttonSummaryStyles}>
+                            <View style={[style.buttonSummaryStyles, style.adminModal]}>
                                 <Pressable onPress={() => navigation.navigate('AdminNav')} 
                                     style={[style.summaryButton]}>
                                     <Text style={style.buttonText}>Sulje</Text>
