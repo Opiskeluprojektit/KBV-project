@@ -410,23 +410,23 @@ function Points({ navigation }) {
               label={"Erä 3"}
             />
             {/* ranking score: */}
-            <View style={style.rankingNumber}>
+            <View style={[style.rankingNumber]}>
               <Text style={style.text}>{item.sum}</Text>
             </View>
           </View>
         ) : (
           <View style={style.playerScoresContainer}>
-            <Text style={[style.numInput, style.numInputText]}>
+            <Text style={[style.pointsTextField, style.numInputText]}>
               {item.scores[0]}
             </Text>
-            <Text style={[style.numInput, style.numInputText]}>
+            <Text style={[style.pointsTextField, style.numInputText]}>
               {item.scores[1]}
             </Text>
-            <Text style={[style.numInput, style.numInputText]}>
+            <Text style={[style.pointsTextField, style.numInputText]}>
               {item.scores[2]}
             </Text>
             {/* raking score: */}
-            <View style={style.rankingNumber}>
+            <View style={[style.rankingNumber, {backgroundColor: "#E5E5E5"}]}>
               <Text style={style.text}>{item.sum}</Text>
             </View>
           </View>
