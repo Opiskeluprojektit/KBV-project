@@ -361,11 +361,18 @@ export const style = StyleSheet.create({
     },
 
     playerContainer: {
+        flex: 1,
         backgroundColor: Colors.primaryVariant,
         height: 50,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         justifyContent: 'center'
+    },
+
+    playerScoreRow: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start'
     },
 
     pointTitles: {

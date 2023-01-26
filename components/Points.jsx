@@ -369,14 +369,31 @@ function Points({ navigation }) {
   const Player = ({ item }) => {
     return (
       <View>
-      {item.orderNumber % 4 == 0 ? (
-        <HelperText type="error" visible={(checkScoreInput(item.scores[0]) || checkScoreInput(item.scores[1]) || checkScoreInput(item.scores[2]))}>
-          Syötä laillinen pistemäärä -21 ja 21 väliltä.
-        </HelperText>
-      ) : null}
-        <View style={style.playerContainer}>
-          <Text style={style.pointTexts}>{item.name}</Text>
-        </View>
+        {item.orderNumber % 4 == 0 ? (
+          <>
+            <HelperText type="error" visible={(checkScoreInput(item.scores[0]) || checkScoreInput(item.scores[1]) || checkScoreInput(item.scores[2]))}>
+              Syötä laillinen pistemäärä -21 ja 21 väliltä.
+            </HelperText>
+            <View style={style.playerContainer}>
+              <Text style={style.pointTexts}>{item.name}</Text>
+            </View>
+          </>
+        ) : (
+          <View style={style.playerContainer}>
+            <View style={style.playerScoresContainer}>
+            <Text style={style.pointTexts}>{item.name}</Text>
+              <View style={style.playerScoreRow}>
+                <Text style={style.pointTexts}>{item.scores[0]}</Text>
+                <Text style={style.pointTexts}>{item.scores[1]}</Text>
+                <Text style={style.pointTexts}>{item.scores[2]}</Text>
+              </View>
+              <View style={style.rankingNumber}>
+                <Text style={style.text}>{item.sum}</Text>
+              </View>
+            </View>
+          </View>
+        )}
+        
         {/* Checks if the player of this iteration is the first player of the group and if they are, returns textInputs. */}
         {item.orderNumber % 4 == 0 ? (
           <View style={style.playerScoresContainer}>
@@ -415,23 +432,7 @@ function Points({ navigation }) {
               <Text style={style.text}>{item.sum}</Text>
             </View>
           </View>
-        ) : (
-          <View style={style.playerScoresContainer}>
-            <Text style={[style.pointsTextField, style.numInputText]}>
-              {item.scores[0]}
-            </Text>
-            <Text style={[style.pointsTextField, style.numInputText]}>
-              {item.scores[1]}
-            </Text>
-            <Text style={[style.pointsTextField, style.numInputText]}>
-              {item.scores[2]}
-            </Text>
-            {/* raking score: */}
-            <View style={[style.rankingNumber, {backgroundColor: "#E5E5E5"}]}>
-              <Text style={style.text}>{item.sum}</Text>
-            </View>
-          </View>
-        )}
+        ) : null }
       </View>
     );
   };
