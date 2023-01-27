@@ -679,5 +679,47 @@ export const style = StyleSheet.create({
         color: "red",
         fontWeight: '500',
         fontSize: 20
+    },
+
+    adminEditPlayer: {
+        alignSelf: 'center',
+        height: 60,
+        width: "90%",
+        backgroundColor: Colors.primaryVariant,
+        marginTop: 10,
+        marginBottom: 10
+    },
+
+    adminModalText: {
+        color: Colors.darkText,
+        fontSize: 20,
+        fontWeight: '500',
+        textAlign: 'left',
+        marginTop: 10,
+        marginLeft: "5%"
+    },
+
+    adminTextShow: {
+        textAlign: 'left',
+        fontSize: 16,
+        marginLeft: 10
+    },
+
+    adminEditRanking: {
+        alignSelf: 'left',
+        height: 40,
+        width: "15%",
+        backgroundColor: Colors.primaryVariant,
+        marginBottom: 10,
+        marginLeft: "5%"
+    }, 
+
+    adminSetRanking: {
+        alignSelf: 'left',
+        height: 50,
+        width: "30%",
+        backgroundColor: Colors.primaryVariant,
+        marginTop: 10,
+        marginLeft: "10%"
     }
 })
