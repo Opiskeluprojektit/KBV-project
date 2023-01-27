@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
+import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Alert } from 'react-native';
 import { TextInput, List, Provider, Portal, Modal } from 'react-native-paper';
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
-import { onValue, ref } from 'firebase/database';
+import { onValue, ref, set, remove } from 'firebase/database';
 import { PLAYER_REF, database } from '../../firebase/Config';
 
 
@@ -19,12 +19,12 @@ function AdminEditPlayers({ navigation }) {
     const [dbId, setDbId] = useState('');
     const [name, setName] = useState('');
     const [division, setDivision] = useState('');
-    const [ranking, setRanking] = useState(0);
+    const [ranking, setRanking] = useState();
 
 
-   useEffect(() => {
-    const events = ref(database, PLAYER_REF);
-    onValue(events, (snapshot) => {
+    useEffect(() => {
+        const events = ref(database, PLAYER_REF);
+        onValue(events, (snapshot) => {
         const data = snapshot.val() ? snapshot.val() : {};
         const playerItems = {...data};
         const keys = Object.keys(playerItems);
@@ -33,14 +33,19 @@ function AdminEditPlayers({ navigation }) {
         })
         setPlayers(parseKeys);
     })
-}, [])
+    }, [])
+
+    useEffect(() => {
+        console.log(ranking)
+    }, [ranking])
+    
 
 
     const allPlayers = players.map((item) => {
         return (
             <View key={item.ID} style={style.adminEventList}>
                 <Text style={style.adminEventTitle}>{item.name} / {item.division}</Text>
-                <Pressable onPress={() => showModal(item.id, item.name, item.division, item.ranking)} style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                <Pressable onPress={() => showModal(item.ID, item.name, item.division, item.ranking)} style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
             </View>
         );
     })
@@ -50,7 +55,7 @@ function AdminEditPlayers({ navigation }) {
         setDbId(id)
         setName(name)
         setDivision(div)
-        setRanking(Number(rank))
+        setRanking(rank)
        };
 
     const hideModal = () => {
@@ -61,6 +66,47 @@ function AdminEditPlayers({ navigation }) {
         setDivisionsExpand(!divisionExpand);
         setDivision(div);
     };
+
+    const submitModal = (check) => {
+        if (check === "delete") {
+            confirmDelete()
+        } 
+        if (check === "submit") {
+
+            if (name && division && ranking) {
+                setRanking(Number(ranking))
+                set(ref(database, PLAYER_REF + dbId), {
+                    name: name,
+                    division: division,
+                    ranking: ranking
+                }).then(hideModal())
+            } else {
+                Alert.alert("Huom!", "Muista täyttää pelaajan nimi, sarja sekä ranking")
+            }
+
+
+        }
+    }
+
+    const confirmDelete = () =>
+            Alert.alert('Huomio!', 'Haluatko varmasti poistaa pelaajan', [
+                {
+                    text: 'Peruuta',
+                    onPress: () => executeDelete(false),
+                    style: 'cancel',
+                },
+                {text: 'Kyllä', onPress: () => executeDelete(true)},
+        ]);
+
+
+    const executeDelete = (ans) => {
+        if (ans === true) {
+            remove(ref(database, PLAYER_REF + dbId)).then(hideModal(), Alert.alert("Tapahtuma poistettu"))
+        } else {
+            console.log("ei poistettu")
+        }
+    }
+    
 
 
 
@@ -107,6 +153,9 @@ function AdminEditPlayers({ navigation }) {
 
                             <View style={style.adminModalView}>
 
+                            <Text style={[style.adminModalText, {marginBottom: 0, marginLeft: "4%"}]}>Pelaajan nimi:</Text>
+
+
                                 <TextInput 
                                 label="Pelaajan nimi"
                                 style={style.adminEditPlayer}
@@ -118,6 +167,7 @@ function AdminEditPlayers({ navigation }) {
                                 onChangeText={setName}
                                 />
 
+                                <Text style={[style.adminModalText, {marginBottom: 5, marginLeft: "4%"}]}>Sarjavalikko:</Text>
 
                                 <List.Accordion
 
@@ -154,17 +204,18 @@ function AdminEditPlayers({ navigation }) {
                                 </List.Accordion>
 
 
-                                <Text style={[style.adminModalText, {marginBottom: 10}]}>Ranking:</Text>
+                                <Text style={[style.adminModalText, {marginBottom: 5, marginLeft: "4%"}]}>Ranking:</Text>
 
                                 <TextInput
                                 style={style.adminEditRanking}
+                                
                                 returnKeyType="done"
                                 keyboardType='number-pad'
                                 underlineColor={'#1B1B1B'}
                                 activeUnderlineColor={'#005C70'}
                                 maxLength={3}
                                 value={ranking}
-                                onChange={setRanking}
+                                onChangeText={setRanking}
                                 />
 
                             </View>
@@ -172,12 +223,15 @@ function AdminEditPlayers({ navigation }) {
 
 
                             <View style={[style.buttonSummaryStyles, style.adminModalButtons]}>
+                                <Pressable onPress={() => submitModal("delete")} 
+                                    style={[style.summaryButton]}>
+                                    <Text style={style.adminDeleteButton}>Poista</Text>
+                                </Pressable>
 
-                                <Pressable onPress={() => hideModal()} 
+                                <Pressable onPress={() => submitModal("submit")} 
                                 style={[style.summaryButton]}>
                                 <Text style={style.buttonText}>Tallenna</Text>
                                 </Pressable>
-                                
                             </View>
 
                     </Modal>

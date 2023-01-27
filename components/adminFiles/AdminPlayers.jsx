@@ -17,7 +17,7 @@ function AdminPlayers({ navigation }) {
    const [divisionExpand, setDivisionsExpand] = useState(false)
 
    const [player, setPlayer] = useState('');
-   const [ranking, setRanking] = useState(0);
+   const [ranking, setRanking] = useState('');
 
    const [visibleFirst, setVisibleFirst] = useState(false);
 
@@ -46,6 +46,7 @@ function AdminPlayers({ navigation }) {
     setVisibleFirst(false);
     setDivision('');
     setPlayer('');
+    setRanking('');
   }
 
 
@@ -84,6 +85,21 @@ function AdminPlayers({ navigation }) {
 
                     </View>
 
+                    <View>
+
+                        <TextInput
+                        style={style.adminSetRanking}
+                        label="Ranking"
+                        returnKeyType="done"
+                        keyboardType='number-pad'
+                        underlineColor={'#1B1B1B'}
+                        activeUnderlineColor={'#005C70'}
+                        maxLength={3}
+                        value={ranking}
+                        onChangeText={setRanking}
+                        />
+                    </View>
+
                     {/* Select division */}
 
                     <List.Accordion
@@ -118,6 +134,8 @@ function AdminPlayers({ navigation }) {
                         onPress={() => selectDivision("Pojat")}
                         />
                     </List.Accordion>
+
+                    
 
                     
 

@@ -710,5 +710,14 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.primaryVariant,
         marginBottom: 10,
         marginLeft: "5%"
+    }, 
+
+    adminSetRanking: {
+        alignSelf: 'left',
+        height: 50,
+        width: "30%",
+        backgroundColor: Colors.primaryVariant,
+        marginTop: 10,
+        marginLeft: "10%"
     }
 })
