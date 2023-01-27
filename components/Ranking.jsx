@@ -1,12 +1,52 @@
 import { SafeAreaView, Text, View, Pressable, Button, ImageBackground } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { DataTable } from 'react-native-paper';
 
+import { database, placement_ref, PLAYER_REF, EVENT_REF } from "../firebase/Config";
+import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
+
 const backgroundImage = require('../assets/Volleyball100.png');
 
 function Ranking({navigation}) {
+  const [placement, setPlacement] = useState([]);
+  const [player, setPlayer] = useState([])
+
+  // Collects placement information from firebase database
+  useEffect(() => {
+    const placement = ref(database, placement_ref);
+    onValue(placement, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const placementItems = { ...data };
+      const parse = JSON.parse(JSON.stringify(placementItems));
+      console.log("placements: ", parse[50]);
+      let parseKeys = Object.values(parse)
+      setPlacement(parseKeys);
+      console.log("placements: ", parseKeys);
+    });
+  }, [])
+
+  // Collects player information from firebase database
+  useEffect(() => {
+    const players = ref(database, PLAYER_REF);
+    onValue(players, (snapshot) => {
+      const data = snapshot.val() ? snapshot.val() : {};
+      const playerItems = { ...data };
+      const parse = JSON.parse(JSON.stringify(playerItems));
+      const keys = Object.keys(parse)
+      let parseKeys = Object.values(parse)
+      parseKeys.forEach((element, i) => {
+        (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
+      });
+      setPlayer(parseKeys);
+      console.log("players: ", parseKeys);
+    });
+  }, []);
+
+
+
+
   return (
     <ImageBackground source={backgroundImage}>
       <SafeAreaView>

@@ -6,7 +6,7 @@ import { List, TextInput, HelperText } from "react-native-paper";
 
 import { formatDMYtoYMD } from "../scripts/myDate";
 
-import { database, placement_ref } from "../firebase/Config";
+import { database, placement_ref, PLAYER_REF } from "../firebase/Config";
 import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -65,7 +65,7 @@ function Points({ navigation }) {
 
   // Collects player information from firebase database
   useEffect(() => {
-    const players = ref(database, "player/");
+    const players = ref(database, PLAYER_REF);
     onValue(players, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const playerItems = { ...data };
@@ -243,8 +243,8 @@ function Points({ navigation }) {
           player.scores[round] =
             playerNumber == 0 ||
             (round == 0 && playerNumber == 3) ||
-            (round == 1 && playerNumber == 1) ||
-            (round == 2 && playerNumber == 2)
+            (round == 1 && playerNumber == 2) ||
+            (round == 2 && playerNumber == 1)
               ? Number(points)
               : Number(-points);
           player.sum = player.scores.reduce((sum, score) => {
