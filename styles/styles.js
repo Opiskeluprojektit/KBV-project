@@ -428,6 +428,15 @@ export const style = StyleSheet.create({
         alignItems: "stretch"
     },
 
+    snackBar: {
+        borderRadius: 10,
+        backgroundColor: Colors.secondary,
+    },
+    
+    snackBarText: {       
+        color: Colors.darkText,
+    },
+
 // RankingScreen styles
     // Screen hasn't been built yet.
 

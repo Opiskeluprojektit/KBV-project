@@ -10,19 +10,9 @@ import { database, placement_ref, PLAYER_REF } from "../firebase/Config";
 import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
 import { ScrollView } from "react-native-gesture-handler";
 
-const backgroundImage = require("../assets/Volleyball100.png");
+import PointsSnackbar from "./pointsComponents/PointsSnackbar";
 
-//import * as db from "../assets/testidata.json";
-//Make deep copies of players, enrolments and games from the test data (testidata.json).
-/* const dbPlayers = JSON.parse(JSON.stringify(db.player));
-const dbEnrolments = JSON.parse(JSON.stringify(db.enrolment));
-const sortedDbGames = JSON.parse(JSON.stringify(db.game))
-  .map((i) => {
-    i.date = new Date(formatDMYtoYMD(i.date));
-    return i;
-  })
-  .filter((i) => i.date >= new Date ())
-  .sort((a, b) => a.date - b.date); */
+const backgroundImage = require("../assets/Volleyball100.png");
 
 function Points({ navigation }) {
   const [division, setDivision] = useState();
@@ -35,6 +25,7 @@ function Points({ navigation }) {
   const [game, setGame] = useState();
   const [bonusMultiplier, setBonusMultiplier] = useState();
   const [dbPlacement, setDbPlacement] = useState([]);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   // Players and enrolments from the database
   const [player, setPlayer] = useState([]);
@@ -292,6 +283,7 @@ function Points({ navigation }) {
       const updates = {};
       updates[placement_ref + "/" +  chosenGame.id + "/" + placementKey] = newPlacement;
       update(ref(database), updates);
+      setShowSnackbar(true);
     });
   }
 
@@ -518,6 +510,7 @@ function Points({ navigation }) {
             ) : null}
           </View>
         </View>
+        <PointsSnackbar props={{showSnackbar, setShowSnackbar}}/>
       </View>
     </ImageBackground>
   );
