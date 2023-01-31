@@ -1,14 +1,49 @@
-import React, { useState } from 'react'
-import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
+import React, { useState, useEffect } from 'react'
+import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform, Alert } from 'react-native';
 import { TextInput, List } from 'react-native-paper';
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
+import { onValue, ref, set } from 'firebase/database';
+import { database, ADMIN_REF } from '../../firebase/Config';
 
 
 
 
 function AdminCodes({ navigation }) {
    const backgroundImage = require('../../assets/Volleyball50.png'); 
+
+
+    const [code, setCode] = useState();
+    const [adminCode, setAdminCode] = useState();
+    const [tempCode, setTempCode] = useState();
+    const [tempAdminCode, setTempAdminCode] = useState();
+    const [bonus, setBonus] = useState(5);
+
+    useEffect(() => {
+        const codes = ref(database, ADMIN_REF + "0");
+        onValue(codes, (snapshot) => {
+            const data = snapshot.val() ? snapshot.val() : {};
+            const codeItems = {...data};
+            const parse = JSON.parse(JSON.stringify(codeItems))
+            setCode(parse.koodi)
+            setAdminCode(parse.adminKoodi)
+            setTempCode(parse.koodi.toString())
+            setTempAdminCode(parse.adminKoodi.toString())
+        });
+        
+    }, [])
+
+
+    const submit = () => {
+        setCode(Number(tempCode))
+        setAdminCode(Number(tempAdminCode))
+
+        set(ref(database, ADMIN_REF + "0"), {
+            koodi: code,
+            adminKoodi: adminCode,
+            bonuskerroin: bonus
+        }).then(Alert.alert("Tiedot tallennettu!"))
+    }
 
     return (
         <>
@@ -28,17 +63,21 @@ function AdminCodes({ navigation }) {
                         <Text style={[style.h4Style, style.adminHeader]}>Muokkaa koodeja</Text>
                     </View>
 
+                   
+
                     <View style={style.adminAddView}>
 
 
                     <TextInput 
-                            label="Yleiskoodi"
+                            label='Yleiskoodi'
                             style={style.adminEditCode}
                             keyboardType='number-pad'
                             returnKeyType="done"
                             underlineColor={'#1B1B1B'}
                             activeUnderlineColor={'#005C70'}
-                            maxLength={50}
+                            maxLength={4}
+                            value={tempCode}
+                            onChangeText={setTempCode}
                             />
 
                     <TextInput 
@@ -48,13 +87,15 @@ function AdminCodes({ navigation }) {
                             returnKeyType="done"
                             underlineColor={'#1B1B1B'}
                             activeUnderlineColor={'#005C70'}
-                            maxLength={50}
+                            maxLength={4}
+                            value={tempAdminCode}
+                            onChangeText={setTempAdminCode}
                             />
 
                     </View> 
 
                     <View>
-                        <Pressable 
+                        <Pressable onPress={() => submit()}
                             style={[style.enrolButton, style.button, style.adminButton, {marginTop:40}]}>
                             <Text style={style.buttonText}>Tallenna</Text> 
                          </Pressable>

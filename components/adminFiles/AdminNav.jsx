@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Platform } from 'react-native';
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
-import { onValue } from 'firebase/database';
+import { onValue, ref } from 'firebase/database';
 import { database, ADMIN_REF } from '../../firebase/Config';
 
 
@@ -10,11 +10,6 @@ import { database, ADMIN_REF } from '../../firebase/Config';
 
 function AdminNav({ navigation }) {
    const backgroundImage = require('../../assets/Volleyball50.png'); 
-
-    const [code, setCode] = useState(0);
-    const [adminCode, setAdminCode] = useState(0);
-
-
 
     return (
         <>
