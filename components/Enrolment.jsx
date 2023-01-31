@@ -246,7 +246,7 @@ function Enrolment({ navigation }) {
                       <Item name={item.name} />
                     
                     </Pressable>}
-                  key={i => i.id}
+                  key={item => item.id}
                 /></>
               : null}         
               

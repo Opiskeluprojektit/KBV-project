@@ -370,7 +370,9 @@ export const style = StyleSheet.create({
     playerScoreRow: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginRight: 15
     },
 
     pointTitles: {
@@ -424,6 +426,15 @@ export const style = StyleSheet.create({
     playerScoresContainer: {
         flexDirection: "row",
         alignItems: "stretch"
+    },
+
+    snackBar: {
+        borderRadius: 10,
+        backgroundColor: Colors.secondary,
+    },
+    
+    snackBarText: {       
+        color: Colors.darkText,
     },
 
 // RankingScreen styles

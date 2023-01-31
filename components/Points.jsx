@@ -6,23 +6,13 @@ import { List, TextInput, HelperText } from "react-native-paper";
 
 import { formatDMYtoYMD } from "../scripts/myDate";
 
-import { database, placement_ref } from "../firebase/Config";
+import { database, placement_ref, PLAYER_REF } from "../firebase/Config";
 import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
 import { ScrollView } from "react-native-gesture-handler";
 
-const backgroundImage = require("../assets/Volleyball100.png");
+import PointsSnackbar from "./pointsComponents/PointsSnackbar";
 
-//import * as db from "../assets/testidata.json";
-//Make deep copies of players, enrolments and games from the test data (testidata.json).
-/* const dbPlayers = JSON.parse(JSON.stringify(db.player));
-const dbEnrolments = JSON.parse(JSON.stringify(db.enrolment));
-const sortedDbGames = JSON.parse(JSON.stringify(db.game))
-  .map((i) => {
-    i.date = new Date(formatDMYtoYMD(i.date));
-    return i;
-  })
-  .filter((i) => i.date >= new Date ())
-  .sort((a, b) => a.date - b.date); */
+const backgroundImage = require("../assets/Volleyball100.png");
 
 function Points({ navigation }) {
   const [division, setDivision] = useState();
@@ -35,6 +25,7 @@ function Points({ navigation }) {
   const [game, setGame] = useState();
   const [bonusMultiplier, setBonusMultiplier] = useState();
   const [dbPlacement, setDbPlacement] = useState([]);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   // Players and enrolments from the database
   const [player, setPlayer] = useState([]);
@@ -65,7 +56,7 @@ function Points({ navigation }) {
 
   // Collects player information from firebase database
   useEffect(() => {
-    const players = ref(database, "player/");
+    const players = ref(database, PLAYER_REF);
     onValue(players, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const playerItems = { ...data };
@@ -243,8 +234,8 @@ function Points({ navigation }) {
           player.scores[round] =
             playerNumber == 0 ||
             (round == 0 && playerNumber == 3) ||
-            (round == 1 && playerNumber == 1) ||
-            (round == 2 && playerNumber == 2)
+            (round == 1 && playerNumber == 2) ||
+            (round == 2 && playerNumber == 1)
               ? Number(points)
               : Number(-points);
           player.sum = player.scores.reduce((sum, score) => {
@@ -292,6 +283,7 @@ function Points({ navigation }) {
       const updates = {};
       updates[placement_ref + "/" +  chosenGame.id + "/" + placementKey] = newPlacement;
       update(ref(database), updates);
+      setShowSnackbar(true);
     });
   }
 
@@ -518,6 +510,7 @@ function Points({ navigation }) {
             ) : null}
           </View>
         </View>
+        <PointsSnackbar props={{showSnackbar, setShowSnackbar}}/>
       </View>
     </ImageBackground>
   );
