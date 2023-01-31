@@ -7,7 +7,7 @@ import { List, TextInput, HelperText } from "react-native-paper";
 import { formatDMYtoYMD } from "../scripts/myDate";
 
 import { database, placement_ref, PLAYER_REF } from "../firebase/Config";
-import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
+import { onValue, ref, update, child, push, query, equalTo, orderByChild } from "firebase/database";
 import { ScrollView } from "react-native-gesture-handler";
 
 import PointsSnackbar from "./pointsComponents/PointsSnackbar";
@@ -282,8 +282,13 @@ function Points({ navigation }) {
       }
       const updates = {};
       updates[placement_ref + "/" +  chosenGame.id + "/" + placementKey] = newPlacement;
-      update(ref(database), updates);
-      setShowSnackbar(true);
+      update(ref(database), updates).then(() => {
+        setShowSnackbar(true);
+      })
+        .catch((error) => {
+          console.log("error: ", error.message);
+          throw new Error('Error: ', error.message);
+        });
     });
   }
 
@@ -300,6 +305,7 @@ function Points({ navigation }) {
       player.ranking +=
         ((player.sum + 63) / 252) *
         (50 - (groupNumber + 1) - 1 * bonusMultiplier);
+      player.ranking = Math.round(player.ranking * 100) / 100;
       group.push(player);
       return group;
     }, []);
