@@ -70,6 +70,20 @@ export const style = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4
     },
+    buttonOpacity: {
+        backgroundColor: Colors.primary,
+        borderRadius: 10,
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        opacity: 0.9,
+    },
 
     buttonText: {
         color: Colors.buttonText,
@@ -107,6 +121,11 @@ export const style = StyleSheet.create({
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         marginBottom: 10
+    },
+    
+    eachGame:{
+        backgroundColor: Colors.primaryVariant,
+        marginTop: 3,
     },
 
 // CodeScreen styles
@@ -205,7 +224,7 @@ export const style = StyleSheet.create({
 // EnrolmentScreen styles
 
     playerSearch: {
-        backgroundColor: Colors.secondaryOnClick,
+        backgroundColor: Colors.primaryVariant,
         padding: 15,
         marginVertical: 4,
         marginHorizontal: 10,
@@ -224,7 +243,7 @@ export const style = StyleSheet.create({
     flatList: {
         flex: 1,
         marginBottom: 10,
-        paddingBottom: '85%',
+        paddingBottom: '50%',
         position: 'relative',
     },
 
@@ -257,6 +276,16 @@ export const style = StyleSheet.create({
         fontSize: 20,
         letterSpacing: 0.1,
         fontWeight: '500'
+    },
+
+    gameDescription: {
+        alignContent: 'center',
+        color: Colors.bodyText,
+        fontSize: 16,
+        backgroundColor: Colors.secondary,
+        padding: 10,
+        borderRadius: 10, 
+
     },
 
 // SummaryEnrolmentModal styles

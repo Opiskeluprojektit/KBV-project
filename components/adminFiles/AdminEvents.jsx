@@ -263,7 +263,7 @@ function AdminEvents({ navigation }) {
 
                         <View>
                         <Pressable onPress={addEvent} 
-                            style={[style.enrolButton, style.button, style.adminButton]}>
+                            style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.enrolButton, style.button, style.adminButton]}>
                             <Text style={style.buttonText}>Luo tapahtuma</Text> 
                          </Pressable>
                         </View>
@@ -286,12 +286,12 @@ function AdminEvents({ navigation }) {
 
                             <View style={[style.buttonSummaryStyles, style.adminModal]}>
                                 <Pressable onPress={() => navigation.navigate('AdminNav')} 
-                                    style={[style.summaryButton]}>
+                                    style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                     <Text style={style.buttonText}>Sulje</Text>
                                 </Pressable>
 
                                 <Pressable onPress={hideModal} 
-                                style={[style.summaryButton]}>
+                                style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                 <Text style={style.buttonText}>Lisää uusi tapahtuma</Text>
                                 </Pressable>
                             </View>

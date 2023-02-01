@@ -291,12 +291,12 @@ function AdminEditEvents({ navigation }) {
 
                             <View style={[style.buttonSummaryStyles, style.adminModalButtons]}>
                                 <Pressable onPress={() => submitModal("delete")} 
-                                    style={[style.summaryButton]}>
+                                    style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                     <Text style={style.adminDeleteButton}>Poista</Text>
                                 </Pressable>
 
                                 <Pressable onPress={() => submitModal("submit")} 
-                                style={[style.summaryButton]}>
+                                style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                 <Text style={style.buttonText}>Tallenna</Text>
                                 </Pressable>
                             </View>

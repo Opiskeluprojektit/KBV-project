@@ -5,7 +5,6 @@ import { style } from "../../styles/styles";
 import Colors from '../../styles/colors';
 
 const PointsSnackbar = ({props}) => {
-  console.log("props: ", props.showSnackbar);
   return (
     <View>
       <Snackbar

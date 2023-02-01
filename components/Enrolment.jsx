@@ -34,6 +34,8 @@ function Enrolment({ navigation }) {
   // Firebase tietokannan testaamiseen liittyvää
   const [player, setPlayer] = useState([]);
   const [enrolment, setEnrolment] = useState([]);
+  const [description, setDescription] = useState('');
+  const [startTime, setStartTime] = useState('');
 
   // Collects game information from firebase database
   useEffect(() => {
@@ -85,6 +87,7 @@ function Enrolment({ navigation }) {
   //empties the playersearch bar if division is changed
   useEffect(() => {
     setSearch('');
+    setPlayersToEnroll();
     setPlayersToShow([]);
   }, [chosenGame])
 
@@ -94,9 +97,11 @@ function Enrolment({ navigation }) {
   }, [chosenGame])
   
   // The component for closing the game day dropdown and setting the chosen game date
-  const selectGame = (i) => {
+  const selectGame = (i, time, description) => {
     setGamesExpanded(!gamesExpanded);
     setChosenGame(i);  
+    setStartTime(time);
+    setDescription(description);
   }
   
   // The component that the FlatList component uses to print it's items.
@@ -138,15 +143,20 @@ function Enrolment({ navigation }) {
     return i.division + " " + i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }  
 
+  const getGameDate = (i) => {
+    i.date = new Date(i.date)
+    return i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear() + "\n" + "Alkaa kello: " + startTime + "\n" + description;
+  }
+
   // Maps the game date list
-   const gameList =  gamesToShow.map(i => <List.Item key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i)} />);
+   const gameList =  gamesToShow.map(i => <List.Item style={style.eachGame} key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i, i.time, i.description)} />);
 
   // Showing and hiding the summary modal
   const showModal = () => setVisible(true);
   
   const hideModal = () => {
     setVisible(false);
-    setChosenGame();
+    //setChosenGame(); //uncomment this to refresh selected game after pressing "Lisää uusi pelaaja" -button
     setPlayersToEnroll();
     setSearch();
   }
@@ -207,6 +217,7 @@ function Enrolment({ navigation }) {
 
           {/* Heading */}
           <View style={style.viewContainer}>
+
             <View style={style.contentOnLightBG}>
               <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
   
@@ -219,40 +230,42 @@ function Enrolment({ navigation }) {
                   theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
-                    <ScrollView style={{ maxHeight: "75%" }}>{gameList}</ScrollView>
+                    <ScrollView style={{maxHeight: "65%"}}>{gameList}</ScrollView>
                   {/* {gameList} */}
                 </List.Accordion>
+                {chosenGame ? <Text style={style.gameDescription}>{getGameDate(chosenGame)}</Text> : null}
               </List.Section>
-
+              {/* {chosenGame ? <Text style={style.text}>{getGameTime(chosenGame)}</Text> : null} */}
               {/* FlatList for choosing the player */}
               {chosenGame ? <>
-                <TextInput
-                  label="Pelaajahaku"
-                  value={search}
-                  style={style.search}
-                  underlineColor={'#1B1B1B'}
-                  activeUnderlineColor={'#005C70'}
-                  onChangeText={text => executeSearch(text)}
-                  returnKeyType="search"
-                  onSubmitEditing={() => executeSearch(search)}
-                />
-                <FlatList
-                  keyboardShouldPersistTaps='always' //keyboard wont hide before clicking back
-                  style={style.flatList}
-                  data={playersToShow}
-                  renderItem={({item}) => 
-                    <Pressable style={style.playerSearch}
-                    onPress={() => selectPlayer(item)}>
-                      <Item name={item.name} />
-                    
-                    </Pressable>}
-                  key={item => item.id}
-                /></>
+                 <TextInput
+                   label="Pelaajahaku"
+                   value={search}
+                   style={style.search}
+                   underlineColor={'#1B1B1B'}
+                   activeUnderlineColor={'#005C70'}
+                   onChangeText={text => executeSearch(text)}
+                   returnKeyType="search"
+                   onSubmitEditing={() => executeSearch(search)}
+                 />
+                 <FlatList
+                   keyboardShouldPersistTaps='always' //keyboard wont hide before clicking back
+                   style={style.flatList}
+                   data={playersToShow}
+                   renderItem={({item}) => 
+                     <Pressable style={style.playerSearch}
+                     onPress={() => selectPlayer(item)}>
+                       <Item name={item.name} />
+                     
+                     </Pressable>}
+                   key={item => item.id}
+                 /></>
               : null}         
               
               {/* HIDDEN, not in use: Button for adding new player to enrol 
               pressing enrol button:
                 This can be added later if necessary*/}
+
               {/* <View style={style.addPlayer}>
                 <Pressable style={{flexDirection: "row"}} onPress={() => console.log("Lisää uusi pelaaja")}>
                   <View style={[style.iconsAddPlayer]}>
@@ -263,6 +276,7 @@ function Enrolment({ navigation }) {
               </View> */}
 
               {/* Button for enrolment */}
+              
               {/* If previously mentioned add new player button will be taken into use
               this text could be "Ilmoittaudu" if only one player is enrolled
               but changed to "Ilmoita x pelaajaa" if two or more player are been enrolled. 
