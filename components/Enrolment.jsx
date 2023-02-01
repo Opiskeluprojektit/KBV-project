@@ -225,32 +225,29 @@ function Enrolment({ navigation }) {
               </List.Section>
 
               {/* FlatList for choosing the player */}
-              {chosenGame ? 
-                <>
-                  <TextInput
-                    label="Pelaajahaku"
-                    value={search}
-                    style={style.search}
-                    underlineColor={'#1B1B1B'}
-                    activeUnderlineColor={'#005C70'}
-                    onChangeText={text => executeSearch(text)}
-                    returnKeyType="search"
-                    onSubmitEditing={() => executeSearch(search)}
-                  />
-                  <FlatList
-                    keyboardShouldPersistTaps='always' //keyboard wont hide before clicking back
-                    style={style.flatList}
-                    data={playersToShow}
-                    renderItem={({item}) => {
-                      console.log(item);
-                      <Pressable style={style.playerSearch}
-                      onPress={() => selectPlayer(item)}>
-                        <Item name={item.name} />
-                      </Pressable>}
-                    }
-                    keyExtractor={item => item.id}
-                  />
-                </>
+              {chosenGame ? <>
+                 <TextInput
+                   label="Pelaajahaku"
+                   value={search}
+                   style={style.search}
+                   underlineColor={'#1B1B1B'}
+                   activeUnderlineColor={'#005C70'}
+                   onChangeText={text => executeSearch(text)}
+                   returnKeyType="search"
+                   onSubmitEditing={() => executeSearch(search)}
+                 />
+                 <FlatList
+                   keyboardShouldPersistTaps='always' //keyboard wont hide before clicking back
+                   style={style.flatList}
+                   data={playersToShow}
+                   renderItem={({item}) => 
+                     <Pressable style={style.playerSearch}
+                     onPress={() => selectPlayer(item)}>
+                       <Item name={item.name} />
+                     
+                     </Pressable>}
+                   key={item => item.id}
+                 /></>
               : null}         
               
               {/* HIDDEN, not in use: Button for adding new player to enrol 
