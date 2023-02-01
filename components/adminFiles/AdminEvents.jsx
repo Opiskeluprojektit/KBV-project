@@ -24,6 +24,9 @@ function AdminEvents({ navigation }) {
 
     const [desc, setDesc] = useState('');
 
+    const [end, setEnd] = useState(1);
+    const [endText, setEndText] = useState()
+
     
     const [shouldShow, setShouldShow] = useState(false);
 
@@ -43,6 +46,7 @@ function AdminEvents({ navigation }) {
 
         let tempDate = new Date(currentDate);
 
+
         let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
         let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
         let fTime = fHours + ':' + fMinutes;
@@ -51,7 +55,19 @@ function AdminEvents({ navigation }) {
         let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
         let fDate = day + '.' + month + '.' + tempDate.getFullYear();
 
+        // if (event === 'minus') {
+        //     if (end >= 1) {
+        //         setEnd(end - 1)
+        //     }
+        // } 
+        // if (event === 'plus') {
+        //     setEnd(end + 1)
+        // }
+
+        // let fEnd = fHours + end < 24 ? fHours + end : "00"
+
         setText(fDate + ', ' + fTime)
+        // setEndText(fEnd + ':' + fMinutes)
         setTimeDb(fTime)
         setDateDb(fDate)
     }
@@ -95,6 +111,18 @@ function AdminEvents({ navigation }) {
         setShouldShow(false);
         setText('Tyhjä');
       }
+
+    // function calc(ans) {
+    //     if (ans === 'minus') {
+    //         if (end >= 1) {
+    //             setEnd(end - 1)
+    //             onChange()
+    //         }
+    //     } else {
+    //         setEnd(end + 1)
+    //         onChange()
+    //     }
+    // }
 
 
     return (
@@ -189,6 +217,12 @@ function AdminEvents({ navigation }) {
                                     display='default'
                                     onChange={onChange} />
 
+                                {/* <View style={{flexDirection: 'row'}}>
+                                    <Pressable onPress={() => calc('minus')} style={{margin: 10, backgroundColor: 'grey', padding: 10}}><Text>-</Text></Pressable>
+                                    <Text>{end}</Text>
+                                    <Pressable onPress={() => calc('plus')} style={{margin: 10, backgroundColor: 'grey', padding: 10}}><Text>+</Text></Pressable>
+                                </View> */}
+
 
                                 </View>
                             ) : shouldShow ? (
@@ -235,6 +269,11 @@ function AdminEvents({ navigation }) {
                         </View>
 
 
+                        {/* <View style={{flexDirection: 'row'}}>
+                            <Pressable onPress={calc('minus')} style={{margin: 10, backgroundColor: 'grey', padding: 10}}><Text>-</Text></Pressable>
+                            <Text>{end}</Text>
+                            <Pressable onPress={calc()} style={{margin: 10, backgroundColor: 'grey', padding: 10}}><Text>+</Text></Pressable>
+                        </View> */}
 
                 </View>
 
