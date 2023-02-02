@@ -38,7 +38,7 @@ function AdminEvents({ navigation }) {
     function showItems() {
         setShouldShow(!shouldShow)
         onChange()
-        onChangeSec()
+        //onChangeSec()
     }
 
 
@@ -224,9 +224,9 @@ function AdminEvents({ navigation }) {
 
                                 </View>
                             ) : shouldShow ? (
-                                <View>
-                                    <Pressable onPress={() => showMode("date")}><Text>Valitse päivä</Text></Pressable>
-                                    <Pressable onPress={() => showMode("time")}><Text>Valitse kellonaika</Text></Pressable>
+                                <View style={style.adminButtonAlign}>
+                                    <Pressable style={style.adminDateButton} onPress={() => showMode("date")}><Text style={style.buttonText}>Valitse päivä</Text></Pressable>
+                                    <Pressable style={style.adminDateButton} onPress={() => showMode("time")}><Text style={style.buttonText}>Valitse kellonaika</Text></Pressable>
                                     {show && (
                                         <DateTimePicker
                                             testID='dateTimePicker'

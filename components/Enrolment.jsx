@@ -91,10 +91,6 @@ function Enrolment({ navigation }) {
     setSearch('');
     setPlayersToEnroll();
     setPlayersToShow([]);
-  }, [chosenGame])
-
-
-    useEffect(() => {
     filterEnrolments()
   }, [chosenGame])
   
@@ -145,6 +141,7 @@ function Enrolment({ navigation }) {
     return i.division + " " + i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear();
   }  
 
+  //THIS IS FOR THE EVENT DESCRIPTION
   const getGameDate = (i) => {
     i.date = new Date(i.date)
     return i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear() + "\n" + "Alkaa kello: " + startTime + "\n" + description;
@@ -227,7 +224,7 @@ function Enrolment({ navigation }) {
               
               <List.Section>
                 <List.Accordion
-                  title={chosenGame ? getGameTitle(chosenGame) : "Valitse peli"}
+                  title={chosenGame ? getGameTitle(chosenGame) : "Valitse tapahtuma"} //This can be changed to "Valitse peli"
                   style={[style.search, {overflow: "hidden"}]}
                   theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}}
                   expanded={gamesExpanded}
@@ -237,7 +234,7 @@ function Enrolment({ navigation }) {
                 </List.Accordion>
                 {chosenGame ? <Text style={style.gameDescription}>{getGameDate(chosenGame)}</Text> : null}
               </List.Section>
-              {/* {chosenGame ? <Text style={style.text}>{getGameTime(chosenGame)}</Text> : null} */}
+              
               {/* FlatList for choosing the player */}
               {chosenGame ? <>
                  <TextInput
@@ -277,6 +274,7 @@ function Enrolment({ navigation }) {
                 </Pressable>
               </View> */}
 
+
               {/* Button for enrolment */}
               
               {/* If previously mentioned add new player button will be taken into use
@@ -302,7 +300,7 @@ function Enrolment({ navigation }) {
                       {/* Game to which the enrolment has been done */}
                       <View style={style.summaryDetails}>
                         <Icon.Clock style={style.summaryIcons}/>
-                        {chosenGame ? <Text style={style.text}>{getGameTitle(chosenGame)}</Text> : null}
+                        {chosenGame ? <Text style={style.text}>{getGameDate(chosenGame)}</Text> : null}
                       </View>
 
                       {/* The player which was enrolled: their name and ranking */}
