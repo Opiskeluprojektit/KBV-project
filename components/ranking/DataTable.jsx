@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { DataTable as PaperTable }  from 'react-native-paper';
 
+
+//Tämä testikomponentti toimii puhtaassa sovelluksessa, mutta ei tässä.
+
 const optionsPerPage = [2, 3, 4];
 
 const DataTable = () => {
