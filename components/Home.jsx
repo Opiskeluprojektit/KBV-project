@@ -36,10 +36,17 @@ export default function Home({navigation}) {
               </View>
 
               <View style={style.adminBoxCenter}>
-                <Pressable  onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.adminPanelButton]}>
-                  <Text style={[style.bigButtonText, {marginLeft: 10, fontSize: 17}]}>Admin Paneeli</Text>
+
+                <View style={style.adminPanelButton}>
+                  <Text style={[style.bigButtonText, {textAlign: 'center', fontSize: 20}]}>
+                    Admin
+                  </Text>
+                </View>
+
+                {/* <Pressable  onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.adminPanelButton]}>
+                  <Text style={[style.bigButtonText, {marginLeft: 12, fontSize: 16}]}>Admin Paneeli</Text>
                   <View style={[style.adminPanelEllipse, style.adminEllipseHome]}><Icon.ArrowRight style={style.adminIconsButton}/></View>
-                </Pressable>
+                </Pressable> */}
               </View>
 
               <View style={style.adminBoxRight}>
@@ -85,6 +92,11 @@ export default function Home({navigation}) {
             <Pressable  onPress={() => {Linking.openURL('https://sites.google.com/view/kokkolabeachvolley/etusivu/viikkobiitsi/viikkobiitsi-s%C3%A4%C3%A4nn%C3%B6t');}} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
               <Text style={style.bigButtonText}>ViikkoBiitsi-säännöt</Text>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
+            </Pressable>
+
+            <Pressable onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
+              <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Settings style={style.icons}/></View>
+              <Text style={style.bigButtonText}>Admin paneeli</Text>
             </Pressable>
             
           </View>

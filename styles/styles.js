@@ -856,8 +856,8 @@ export const style = StyleSheet.create({
     adminPanelButton: {
         width: '85%',
         height: 60,
-        backgroundColor: Colors.primary,
-        borderRadius: 10,
+        backgroundColor: "#FF4341",
+        borderRadius: 25,
         alignSelf: 'center',
         justifyContent: 'center',
         shadowOffset: {
@@ -869,10 +869,10 @@ export const style = StyleSheet.create({
     },
 
     adminPanelEllipse: {
-        backgroundColor: Colors.secondary,
+        backgroundColor: "#D1D1D1",
         position: "absolute",
-        width: 40,
-        height: 40,
+        width: 35,
+        height: 35,
         borderRadius: 1000,
         shadowOffset: {
             width: 0,
@@ -884,12 +884,12 @@ export const style = StyleSheet.create({
 
     adminEllipseHome: {
         alignSelf: 'flex-end',
-        right: -20
+        right: -10
     },
 
     adminIconsButton: {
         color: Colors.bodyText,
-        top: 9,
+        top: 6,
         alignSelf: 'center'
     }
 })
