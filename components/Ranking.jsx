@@ -2,7 +2,7 @@ import { SafeAreaView, Text, View, Pressable, Button, ImageBackground } from 're
 import React, { useState, useEffect } from "react";
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
-import { DataTable } from 'react-native-paper';
+import DataTable from './ranking/DataTable';
 
 import { database, placement_ref, PLAYER_REF, EVENT_REF } from "../firebase/Config";
 import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
@@ -59,7 +59,9 @@ function Ranking({navigation}) {
         </View>
       </View>
 
-      <View style={{ flex: 1, paddingTop: 100, paddingHorizontal: 30,backgroundColor: '#fff' }}>
+      <DataTable />
+
+     {/*  <View style={{ flex: 1, paddingTop: 100, paddingHorizontal: 30,backgroundColor: '#fff' }}>
         <DataTable>
           <DataTable.Header>
             <DataTable.Title>Pelaaja</DataTable.Title>
@@ -71,7 +73,7 @@ function Ranking({navigation}) {
             <DataTable.Cell numeric>29.99</DataTable.Cell>
           </DataTable.Row>
         </DataTable>
-      </View>
+      </View> */}
 
       </SafeAreaView>
     </ImageBackground>

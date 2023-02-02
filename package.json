@@ -17,6 +17,7 @@
         "@react-navigation/native": "^6.0.16",
         "@react-navigation/native-stack": "^6.9.2",
         "@react-navigation/stack": "^6.3.11",
+        "deepmerge": "^4.3.0",
         "deprecated-react-native-prop-types": "^2.3.0",
         "expo": "~47.0.5",
         "expo-constants": "^14.0.2",
