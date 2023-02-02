@@ -536,6 +536,7 @@ export const style = StyleSheet.create({
     },
 
     adminDesc: {
+        marginTop: 5,
         height: 60,
         marginLeft: "5%",
         width: "90%",
@@ -586,6 +587,26 @@ export const style = StyleSheet.create({
         borderColor: 'black',
         borderRadius: 10
     },
+
+    adminDateButton: {
+        backgroundColor: Colors.primary,
+        color: Colors.bodyText,
+        padding: 10,
+        marginTop: 5,
+        borderRadius: 10,
+        //marginLeft: '9%',
+        alignSelf: 'center',
+
+    },
+
+        //Uncomment to align items horizontally
+    // adminButtonAlign: {
+    //     display: "flex",
+    //     flexDirection: "row",
+    //     flexWrap: "wrap",
+    //     alignItems: 'center',
+
+    // },
 
     adminScroll: {
         backgroundColor: '#F7FFFF',
