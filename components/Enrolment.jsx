@@ -44,9 +44,11 @@ function Enrolment({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = {...data};
       const parse = JSON.parse(JSON.stringify(gameItems))
-      let parseKeys = Object.values(parse).map((i) => {
-        i.date = new Date(formatDMYtoYMD(i.date));
-        return i;
+      const keys = Object.keys(parse)
+      let parseKeys = Object.values(parse).map((element, i) => {
+        element.date = new Date(formatDMYtoYMD(element.date));
+        element.id = keys[i];
+        return element;
       })
       .filter((i) => i.date >= new Date ())
       .sort((a, b) => a.date - b.date);
