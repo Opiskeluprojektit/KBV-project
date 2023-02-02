@@ -44,12 +44,9 @@ function Ranking({navigation}) {
     });
   }, []);
 
-
-
-
   return (
-    <ImageBackground source={backgroundImage}>
-      <SafeAreaView>
+    <ImageBackground source={backgroundImage} style={{flex: 1}}>
+      <SafeAreaView style={{flex:1}}>
 
       <View style={style.header}>
         <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate('Home')}><View><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
@@ -60,6 +57,20 @@ function Ranking({navigation}) {
         <View style={style.contentOnLightBG}>
           <Text style={style.h4Style}>Ranking-listat</Text>
         </View>
+      </View>
+
+      <View style={{ flex: 1, paddingTop: 100, paddingHorizontal: 30,backgroundColor: '#fff' }}>
+        <DataTable>
+          <DataTable.Header>
+            <DataTable.Title>Pelaaja</DataTable.Title>
+            <DataTable.Title numeric>Sijoituspisteet</DataTable.Title>
+          </DataTable.Header>
+
+          <DataTable.Row style={{backgroundColor: 'lightyellow'}}>
+            <DataTable.Cell>Makkara Mies</DataTable.Cell>
+            <DataTable.Cell numeric>29.99</DataTable.Cell>
+          </DataTable.Row>
+        </DataTable>
       </View>
 
       </SafeAreaView>
