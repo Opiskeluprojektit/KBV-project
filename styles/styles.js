@@ -770,5 +770,126 @@ export const style = StyleSheet.create({
         paddingRight: 10,
         marginLeft: "10%",
         width: "35%"
+    },
+
+    adminModalLoginView: {
+        backgroundColor: Colors.primaryVariant,
+        width: '90%',
+        alignSelf: 'center',
+        borderRadius: 50,
+        marginTop: "-70%"
+    },
+
+    adminModalTitle: {
+        color: Colors.darkText,
+        fontSize: 24,
+        fontWeight: '500',
+        textAlign: 'center',
+        marginTop: 30,
+        marginBottom: 15
+    },
+
+    adminLoginView: {
+        alignSelf: 'center',
+        marginTop: 30
+    },
+
+    adminLoginInput: {
+        height: 50,
+        backgroundColor: '#C5D1CE',
+        width: "90%",
+        marginBottom: 15,
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+        width: 250,
+        paddingLeft: 7,
+        paddingRight: 7
+    },
+
+    adminLoginButton: {
+        backgroundColor: Colors.primary,
+        width: 120,
+        height: 50, //oli ennen 40
+        borderRadius: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 30,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
+
+    adminBoxLeft: {
+        width: "20%",
+        alignSelf: 'center',
+    },
+
+    adminBoxCenter: {
+        width: "50%",
+        alignSelf: 'center',
+        marginLeft: "5%",
+        marginRight: "5%"
+    },
+
+    adminMenuButton: {
+        color: Colors.bodyText,
+        alignSelf: 'flex-end',
+    },
+
+    adminBoxRight: {
+        width: "20%",
+        alignSelf: 'center'
+    },
+
+    adminHomeScreenLogo: {
+        backgroundColor: Colors.brandColor,
+        width: 50,
+        height: 50,
+        borderRadius: 1000
+    },
+
+    adminPanelButton: {
+        width: '85%',
+        height: 60,
+        backgroundColor: Colors.primary,
+        borderRadius: 10,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
+
+    adminPanelEllipse: {
+        backgroundColor: Colors.secondary,
+        position: "absolute",
+        width: 40,
+        height: 40,
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
+
+    adminEllipseHome: {
+        alignSelf: 'flex-end',
+        right: -20
+    },
+
+    adminIconsButton: {
+        color: Colors.bodyText,
+        top: 9,
+        alignSelf: 'center'
     }
 })

@@ -16,15 +16,17 @@ function AdminEvents({ navigation }) {
     const [divisionExpand, setDivisionsExpand] = useState(false)
 
     const [date, setDate] = useState(new Date);
+    const [secDate, setSecDate] = useState(new Date);
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
     const [text, setText] = useState('Tyhjä');
     const [dateDb, setDateDb] = useState('');
     const [timeDb, setTimeDb] = useState('');
 
+    const [endTimeDb, setEndTimeDb] = useState('');
+
     const [desc, setDesc] = useState('');
 
-    const [end, setEnd] = useState(1);
     const [endText, setEndText] = useState()
 
     
@@ -36,12 +38,13 @@ function AdminEvents({ navigation }) {
     function showItems() {
         setShouldShow(!shouldShow)
         onChange()
+        onChangeSec()
     }
 
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
+        // setShow(Platform.OS === 'ios');
         setDate(currentDate);
 
         let tempDate = new Date(currentDate);
@@ -53,24 +56,27 @@ function AdminEvents({ navigation }) {
 
         let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
         let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
-        let fDate = day + '.' + month + '.' + tempDate.getFullYear();
-
-        // if (event === 'minus') {
-        //     if (end >= 1) {
-        //         setEnd(end - 1)
-        //     }
-        // } 
-        // if (event === 'plus') {
-        //     setEnd(end + 1)
-        // }
-
-        // let fEnd = fHours + end < 24 ? fHours + end : "00"
+        let fDate = day + '.' + month + '.' + tempDate.getFullYear(); 
 
         setText(fDate + ', ' + fTime)
-        // setEndText(fEnd + ':' + fMinutes)
         setTimeDb(fTime)
         setDateDb(fDate)
     }
+
+    // const onChangeSec = (selectedDate) => {
+    //     const currentDate = selectedDate || secDate;
+    //     setSecDate(currentDate)
+
+    //     let tempDate = new Date(currentDate);
+
+    //     let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+    //     let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+    //     let fTime = fHours + ':' + fMinutes;
+
+    //     setEndText(fTime)
+    //     setEndTimeDb(fTime)
+
+    // }
 
     const showMode = (currentMode) => {
         setShow(true);
@@ -111,18 +117,6 @@ function AdminEvents({ navigation }) {
         setShouldShow(false);
         setText('Tyhjä');
       }
-
-    // function calc(ans) {
-    //     if (ans === 'minus') {
-    //         if (end >= 1) {
-    //             setEnd(end - 1)
-    //             onChange()
-    //         }
-    //     } else {
-    //         setEnd(end + 1)
-    //         onChange()
-    //     }
-    // }
 
 
     return (
@@ -194,7 +188,7 @@ function AdminEvents({ navigation }) {
 
                             <Pressable onPress={() => showItems()} style={[style.search, style.adminBox]}> 
                             <Text style={style.adminText}>Tapahtumapäivä</Text>
-                            <Text style={style.adminText}>{text}</Text>
+                            <Text style={style.adminText}>{text} - {endText}</Text>
                             </Pressable>
                             {shouldShow && Platform.OS === 'ios' ? 
                             (
@@ -217,12 +211,16 @@ function AdminEvents({ navigation }) {
                                     display='default'
                                     onChange={onChange} />
 
-                                {/* <View style={{flexDirection: 'row'}}>
-                                    <Pressable onPress={() => calc('minus')} style={{margin: 10, backgroundColor: 'grey', padding: 10}}><Text>-</Text></Pressable>
-                                    <Text>{end}</Text>
-                                    <Pressable onPress={() => calc('plus')} style={{margin: 10, backgroundColor: 'grey', padding: 10}}><Text>+</Text></Pressable>
-                                </View> */}
+                                {/* <DateTimePicker
+                                    testID='dateTimePicker'
+                                    style={{marginBottom: "5%"}}
+                                    value={secDate}
+                                    mode={'time'}
+                                    is24Hour={true}
+                                    display='default'
+                                    onChange={onChangeSec} /> */}
 
+                             
 
                                 </View>
                             ) : shouldShow ? (
