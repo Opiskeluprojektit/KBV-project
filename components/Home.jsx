@@ -94,10 +94,15 @@ export default function Home({navigation}) {
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
             </Pressable>
 
-            <Pressable onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
+            {checkLoginStatus() == true ?
+            (
+              <Pressable onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.adminPanelPressable]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Settings style={style.icons}/></View>
               <Text style={style.bigButtonText}>Admin paneeli</Text>
             </Pressable>
+            ) : null}
+
+            
             
           </View>
           

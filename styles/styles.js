@@ -856,7 +856,7 @@ export const style = StyleSheet.create({
     adminPanelButton: {
         width: '85%',
         height: 60,
-        backgroundColor: "#FF4341",
+        backgroundColor: "#FF2C22",
         borderRadius: 25,
         alignSelf: 'center',
         justifyContent: 'center',
@@ -891,5 +891,19 @@ export const style = StyleSheet.create({
         color: Colors.bodyText,
         top: 6,
         alignSelf: 'center'
+    },
+
+    adminPanelPressable: {
+        backgroundColor: "#FF2C22",
+        borderRadius: 10,
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
     }
 })

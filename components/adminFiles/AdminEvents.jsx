@@ -38,7 +38,6 @@ function AdminEvents({ navigation }) {
     function showItems() {
         setShouldShow(!shouldShow)
         onChange()
-        onChangeSec()
     }
 
 
