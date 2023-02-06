@@ -445,7 +445,7 @@ function Points({ navigation }) {
     <ImageBackground source={backgroundImage} style={{ flex: 1 }}>
       <View style={[style.container, { flexDirection: "column" }]}>
         <View style={{ flex: 1 }}>
-          <View style={style.pointsHeader}>
+          <View style={style.header}>
             <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate("Home")}>
               <View>
                 <Icon.ChevronLeft style={[style.icons]} />

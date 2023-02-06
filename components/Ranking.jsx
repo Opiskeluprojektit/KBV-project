@@ -99,10 +99,10 @@ function Ranking({navigation}) {
         <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
       </View>
 
-      <View style={style.viewContainer}>
-        <View style={style.contentOnLightBG}>
+      <View style={[style.viewContainer, {flex:1}]}>
+        <View style={[style.contentOnLightBG, {flex:1}]}>
           <Text style={style.h4Style}>Ranking-listat</Text>
-          <DataTable>
+          <DataTable  style={{flex:1}}>
             <DataTable.Header>
               <DataTable.Title>#</DataTable.Title>
               <DataTable.Title style={{flex: 4}}>Pelaaja</DataTable.Title>

@@ -373,13 +373,6 @@ export const style = StyleSheet.create({
         borderTopRightRadius: 50,
         height: "82%"
     }, 
-
-    pointsHeader: {
-        height: "10%",
-        marginTop: 44,
-        marginLeft: 24,
-        marginRight: 24
-    },
     
     groupSeparator: {
     },
