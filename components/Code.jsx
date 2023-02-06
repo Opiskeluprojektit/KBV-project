@@ -14,7 +14,7 @@ function Code({navigation}) {
   const backgroundImage = require('../assets/Volleyball50.png');
   const logo = require('../assets/Logo2.png');
   
-  const [code, setCode] = useState(0);   //stores input, hardwired for testing purposes
+  const [code, setCode] = useState(1234);   //stores input, hardwired for testing purposes
   const [password, setPassword] = useState()
 
   const [email, setEmail] = useState('')
