@@ -3,7 +3,6 @@ import { Image, Text, View, SafeAreaView, Pressable, Linking, ImageBackground, A
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { checkLoginStatus } from './adminFiles/CheckLogin';
-import { getAuth } from 'firebase/auth';
 
 export default function Home({navigation}) {
 
@@ -11,14 +10,6 @@ export default function Home({navigation}) {
   const logo = require('../assets/Logo2.png');
 
 
-  async function logout() {
-    try {
-        await getAuth().signOut();
-        navigation.navigate('Code')
-    } catch (err) {
-        return Alert.alert("Logout error. ", err.message);
-    }
-  }
 
 
   return (
@@ -30,9 +21,7 @@ export default function Home({navigation}) {
           (
             <View style={[style.header, {flexDirection: 'row', paddingBottom: 20}]}>
               <View style={style.adminBoxLeft}>
-                <Pressable onPress={() => logout()}>
                 <Image source={logo} style={style.adminHomeScreenLogo}></Image>
-                </Pressable>
               </View>
 
               <View style={style.adminBoxCenter}>
@@ -55,9 +44,7 @@ export default function Home({navigation}) {
             </View>
           ) : (
             <View style={style.header}>
-            <Pressable onPress={() => logout()}>
               <Image source={logo} style={style.HomeScreenLogo}></Image>
-            </Pressable>
               <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
             </View>
           )}
@@ -94,10 +81,15 @@ export default function Home({navigation}) {
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
             </Pressable>
 
-            <Pressable onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.button]}>
+            {checkLoginStatus() == true ?
+            (
+              <Pressable onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.adminPanelPressable]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Settings style={style.icons}/></View>
               <Text style={style.bigButtonText}>Admin paneeli</Text>
             </Pressable>
+            ) : null}
+
+            
             
           </View>
           

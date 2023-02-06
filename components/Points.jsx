@@ -11,6 +11,7 @@ import { onValue, ref, update, child, push, query, equalTo, orderByChild } from 
 import { ScrollView } from "react-native-gesture-handler";
 
 import PointsSnackbar from "./pointsComponents/PointsSnackbar";
+import { SafeAreaView } from "react-native";
 
 const backgroundImage = require("../assets/Volleyball100.png");
 
@@ -443,6 +444,7 @@ function Points({ navigation }) {
   
   return (
     <ImageBackground source={backgroundImage} style={{ flex: 1 }}>
+      <SafeAreaView>
       <View style={[style.container, { flexDirection: "column" }]}>
         <View style={{ flex: 1 }}>
           <View style={style.header}>
@@ -518,6 +520,7 @@ function Points({ navigation }) {
         </View>
         <PointsSnackbar props={{showSnackbar, setShowSnackbar}}/>
       </View>
+      </SafeAreaView>
     </ImageBackground>
   );
 }
