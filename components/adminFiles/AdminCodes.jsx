@@ -156,7 +156,7 @@ function AdminCodes({ navigation }) {
 
                     <View>
                         <Pressable onPress={() => pushDb()}
-                            style={[style.enrolButton, style.button, style.adminButton, {marginTop:40}]}>
+                            style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.enrolButton, style.button, style.adminButton, {marginTop:40}]}>
                             <Text style={style.buttonText}>Tallenna</Text> 
                          </Pressable>
                      </View>

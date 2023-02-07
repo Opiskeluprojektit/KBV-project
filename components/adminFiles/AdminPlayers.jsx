@@ -142,7 +142,7 @@ function AdminPlayers({ navigation }) {
 
                     <View>
                         <Pressable onPress={addPlayer} 
-                            style={[style.enrolButton, style.button, style.adminButton]}>
+                            style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.enrolButton, style.button, style.adminButton]}>
                             <Text style={style.buttonText}>Lisää pelaaja</Text> 
                          </Pressable>
                     </View>

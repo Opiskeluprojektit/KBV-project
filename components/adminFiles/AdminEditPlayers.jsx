@@ -45,7 +45,7 @@ function AdminEditPlayers({ navigation }) {
         return (
             <View key={item.ID} style={style.adminEventList}>
                 <Text style={style.adminEventTitle}>{item.name} / {item.division}</Text>
-                <Pressable onPress={() => showModal(item.ID, item.name, item.division, item.ranking)} style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                <Pressable onPress={() => showModal(item.ID, item.name, item.division, item.ranking)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminEventButton]}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
             </View>
         );
     })
@@ -224,12 +224,12 @@ function AdminEditPlayers({ navigation }) {
 
                             <View style={[style.buttonSummaryStyles, style.adminModalButtons]}>
                                 <Pressable onPress={() => submitModal("delete")} 
-                                    style={[style.summaryButton]}>
+                                    style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                     <Text style={style.adminDeleteButton}>Poista</Text>
                                 </Pressable>
 
                                 <Pressable onPress={() => submitModal("submit")} 
-                                style={[style.summaryButton]}>
+                                style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                 <Text style={style.buttonText}>Tallenna</Text>
                                 </Pressable>
                             </View>

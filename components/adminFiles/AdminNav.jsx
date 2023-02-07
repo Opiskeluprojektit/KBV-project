@@ -32,27 +32,27 @@ function AdminNav({ navigation }) {
                     </View>
 
                     <View style={style.homeButtonsContainer}>
-                        <Pressable onPress={() => navigation.navigate('AdminEvents')} style={[style.homeButtons, style.adminPanelPressable]}>
+                        <Pressable onPress={() => navigation.navigate('AdminEvents')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.adminPanelPressable]}>
                         <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Calendar style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Luo tapahtuma</Text>
                         </Pressable>
 
-                        <Pressable onPress={() => navigation.navigate('AdminEditEvents')} style={[style.homeButtons, style.adminPanelPressable]}>
+                        <Pressable onPress={() => navigation.navigate('AdminEditEvents')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.homeButtons, style.adminPanelPressable]}>
                         <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.AlignJustify style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Muokkaa tapahtumia</Text>
                         </Pressable>
 
-                        <Pressable onPress={() => navigation.navigate('AdminPlayers')} style={[style.homeButtons, style.adminPanelPressable]}>
+                        <Pressable onPress={() => navigation.navigate('AdminPlayers')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.adminPanelPressable]}>
                         <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserPlus style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Lisää pelaajia</Text>
                         </Pressable>
 
-                        <Pressable onPress={() => navigation.navigate('AdminEditPlayers')} style={[style.homeButtons, style.adminPanelPressable]}>
+                        <Pressable onPress={() => navigation.navigate('AdminEditPlayers')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.adminPanelPressable]}>
                         <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.UserMinus style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Muokkaa pelaajia</Text>
                         </Pressable>
 
-                        <Pressable onPress={() => navigation.navigate('AdminCodes')} style={[style.homeButtons, style.adminPanelPressable]}>
+                        <Pressable onPress={() => navigation.navigate('AdminCodes')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.adminPanelPressable]}>
                         <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Key style={style.icons}/></View>
                         <Text style={style.bigButtonText}>Muokkaa koodeja</Text>
                         </Pressable>

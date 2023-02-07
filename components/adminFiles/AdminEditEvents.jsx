@@ -53,7 +53,7 @@ function AdminEditEvents({ navigation }) {
     return (
         <View key={item.ID} style={style.adminEventList}>
             <Text style={style.adminEventTitle}>{item.division} {item.date}</Text>
-            <Pressable onPress={() => showModal(item.division, item.date, item.time, item.description, item.ID)} style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+            <Pressable onPress={() => showModal(item.division, item.date, item.time, item.description, item.ID)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminEventButton]}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
         </View>
     );
    })
