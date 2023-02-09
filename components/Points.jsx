@@ -444,8 +444,7 @@ function Points({ navigation }) {
   
   return (
     <ImageBackground source={backgroundImage} style={{ flex: 1 }}>
-      <SafeAreaView>
-      <View style={[style.container, { flexDirection: "column" }]}>
+      <SafeAreaView style={[{ flexDirection: "column" }, { flex: 1 }]}>
         <View style={{ flex: 1 }}>
           <View style={style.header}>
             <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate("Home")}>
@@ -519,7 +518,6 @@ function Points({ navigation }) {
           </View>
         </View>
         <PointsSnackbar props={{showSnackbar, setShowSnackbar}}/>
-      </View>
       </SafeAreaView>
     </ImageBackground>
   );
