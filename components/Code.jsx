@@ -58,7 +58,6 @@ function Code({navigation}) {
         setCode(0)
         navigation.navigate('Home')
       } else if (code == userPw) {
-        setCode(0)
         showModal()
       } else {
         Alert.alert (
@@ -76,6 +75,7 @@ function Code({navigation}) {
           signInWithEmailAndPassword(auth, email, userPw)
           .then((userCredential) => {
             const user = userCredential.user;
+            setCode(0)
             hideModal()
             navigation.navigate('Home')
           })
@@ -143,6 +143,8 @@ function Code({navigation}) {
                         <View style={style.adminLoginView}>
                            <TextInput
                             style={style.adminLoginInput}
+                            keyboardType='email-address'
+                            textContentType='emailAddress'
                             placeholder='Sähköposti'
                             onChangeText={(email) => setEmail(email)}
                             maxLength={50}
@@ -151,6 +153,8 @@ function Code({navigation}) {
 
                           <TextInput
                             style={style.adminLoginInput}
+                            keyboardType='default'
+                            textContentType='password'
                             placeholder='Salasana'
                             onChangeText={(pw) => setUserPw(pw)}
                             maxLength={50}

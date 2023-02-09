@@ -23,6 +23,8 @@ function AdminEditEvents({ navigation }) {
     const [desc, setDesc] = useState('');
     const [division, setDivision] = useState();
     const [divisionExpand, setDivisionsExpand] = useState(false)
+    const [filterDiv, setFilterDiv] = useState('Kaikki');
+    const [filterExpand, setFilterExpand] = useState(false)
 
     
     const [mode, setMode] = useState('date');
@@ -48,8 +50,18 @@ function AdminEditEvents({ navigation }) {
     console.log(events)
     }
 
+    const createFilter = () => {
+        let data = events
 
-   const allEvents = events.map((item) => {
+        if (filterDiv !== 'Kaikki') {
+            data = data.filter((div) => div.division == filterDiv).map(({ID, date, description, division}) => ({ID, date, description, division}));
+        }
+
+        return data;
+    }
+
+
+   const allEvents = createFilter().map((item) => {
     return (
         <View key={item.ID} style={style.adminEventList}>
             <Text style={style.adminEventTitle}>{item.division} {item.date}</Text>
@@ -126,6 +138,10 @@ function AdminEditEvents({ navigation }) {
     }
 
     
+    const selectFilter = (fil) => {
+        setFilterDiv(fil)
+        setFilterExpand(!filterExpand)
+    }
 
    
 
@@ -146,8 +162,58 @@ function AdminEditEvents({ navigation }) {
                 <View style={style.viewContainer}>
 
                     <View style={style.contentOnLightBG}>
-                        <Text style={[style.h4Style, style.adminHeader]}>Muokkaa tapahtumia</Text>
+                        <Text style={[style.h4Style, style.adminHeader, {marginBottom: 15}]}>Muokkaa tapahtumia</Text>
                     </View>
+
+                    
+
+                    {/* Select filter for events */}
+
+                    <View>
+                        <List.Accordion
+
+                            title={filterDiv ? filterDiv : "Filtteröi tapahtumia"}
+                            style={[style.search, style.adminBox]}
+                            theme={{
+                            colors: { background: "#F9F9F9", primary: "#005C70" },
+                            }}
+                            expanded={filterExpand}
+                            onPress={() => setFilterExpand(!filterExpand)}
+                            > 
+
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Kaikki"
+                                onPress={() => selectFilter("Kaikki")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Naiset"
+                                onPress={() => selectFilter("Naiset")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Miehet"
+                                onPress={() => selectFilter("Miehet")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Tytöt"
+                                onPress={() => selectFilter("Tytöt")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Pojat"
+                                onPress={() => selectFilter("Pojat")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Muut"
+                                onPress={() => selectFilter("Muut")}
+                            />
+                        </List.Accordion>
+                    </View>
+
 
                     <ScrollView style={style.adminScroll}>
 

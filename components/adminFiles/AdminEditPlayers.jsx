@@ -21,6 +21,9 @@ function AdminEditPlayers({ navigation }) {
     const [division, setDivision] = useState('');
     const [ranking, setRanking] = useState();
 
+    const [filterDiv, setFilterDiv] = useState('Kaikki');
+    const [filterExpand, setFilterExpand] = useState();
+
 
     useEffect(() => {
         const events = ref(database, PLAYER_REF);
@@ -39,9 +42,17 @@ function AdminEditPlayers({ navigation }) {
         console.log(ranking)
     }, [ranking])
     
+    const createFilter = () => {
+        let data = players
 
+        if (filterDiv !== 'Kaikki') {
+            data = data.filter((div) => div.division == filterDiv).map(({ID, name, division}) => ({ID, name, division}));
+        }
 
-    const allPlayers = players.map((item) => {
+        return data;
+    }
+
+    const allPlayers = createFilter().map((item) => {
         return (
             <View key={item.ID} style={style.adminEventList}>
                 <Text style={style.adminEventTitle}>{item.name} / {item.division}</Text>
@@ -107,6 +118,10 @@ function AdminEditPlayers({ navigation }) {
         }
     }
     
+    const selectFilter = (fil) => {
+        setFilterDiv(fil)
+        setFilterExpand(!filterExpand)
+    }
 
 
 
@@ -125,8 +140,51 @@ function AdminEditPlayers({ navigation }) {
 
                 <View style={style.viewContainer}>
                     <View style={style.contentOnLightBG}>
-                        <Text style={[style.h4Style, style.adminHeader]}>Muokkaa pelaajia</Text>
+                        <Text style={[style.h4Style, style.adminHeader, {marginBottom: 15}]}>Muokkaa pelaajia</Text>
                     </View>
+
+                    <View>
+                        <List.Accordion
+
+                            title={filterDiv ? filterDiv : "Filtteröi Pelaajia"}
+                            style={[style.search, style.adminBox]}
+                            theme={{
+                            colors: { background: "#F9F9F9", primary: "#005C70" },
+                            }}
+                            expanded={filterExpand}
+                            onPress={() => setFilterExpand(!filterExpand)}
+                            > 
+
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Kaikki"
+                                onPress={() => selectFilter("Kaikki")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Naiset"
+                                onPress={() => selectFilter("Naiset")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Miehet"
+                                onPress={() => selectFilter("Miehet")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Tytöt"
+                                onPress={() => selectFilter("Tytöt")}
+                            />
+                            <List.Item
+                                style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
+                                title="Pojat"
+                                onPress={() => selectFilter("Pojat")}
+                            />
+                            
+                        </List.Accordion>
+                    </View>
+
+
 
                     <ScrollView style={style.adminScroll}>
 
