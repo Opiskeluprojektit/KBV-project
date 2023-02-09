@@ -92,8 +92,9 @@ function AdminEvents({ navigation }) {
 
         if (division && dateDb && timeDb) {
 
-
-            push(ref(database, EVENT_REF), {
+            const eventKey = push(ref(database, EVENT_REF)).key
+            update(ref(database, EVENT_REF + eventKey), {
+                id: eventKey,
                 date: dateDb,
                 time: timeDb,
                 division: division,
