@@ -4,7 +4,7 @@ import { TextInput, List, Portal, Provider, Modal } from 'react-native-paper';
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
 import { database, PLAYER_REF } from '../../firebase/Config';
-import {ref, push} from 'firebase/database';
+import {ref, push, update} from 'firebase/database';
 
 
 
@@ -29,7 +29,9 @@ function AdminPlayers({ navigation }) {
 
   const addPlayer = () => {
     if (division && player) {
-        push(ref(database, PLAYER_REF), {
+        const playerKey = push(ref(database, PLAYER_REF)).key
+        update(ref(database, PLAYER_REF + playerKey), {
+            id: playerKey,
             division: division,
             name: player,
             ranking: ranking
