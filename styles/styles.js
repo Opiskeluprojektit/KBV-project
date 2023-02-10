@@ -933,5 +933,12 @@ export const style = StyleSheet.create({
         alignSelf: 'flex-start',
         marginLeft: "17%",
         marginTop: "3%"
+    },
+
+    adminEditAndroid: {
+        marginBottom: "5%",
+        alignSelf: 'flex-start',
+        marginLeft: "17%",
+        marginTop: "3%"
     }
 })

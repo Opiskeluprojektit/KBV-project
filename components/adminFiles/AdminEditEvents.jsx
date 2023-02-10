@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Alert } from 'react-native';
+import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollView, Alert, Platform } from 'react-native';
 import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { style } from '../../styles/styles';
@@ -28,7 +28,7 @@ function AdminEditEvents({ navigation }) {
     const [timeStamp, setTimeStamp] = useState()
     const [convertTime, setConvertTime] = useState(new Date)
 
-    
+    const [show, setShow] = useState(false);
     const [mode, setMode] = useState('date');
 
 
@@ -186,6 +186,11 @@ function AdminEditEvents({ navigation }) {
         setFilterExpand(!filterExpand)
     }
 
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    }
+
    
 
     return (
@@ -336,14 +341,39 @@ function AdminEditEvents({ navigation }) {
                                             onFocus={hide}
                                         /> */}
 
-                                        <DateTimePicker
+                                        {Platform.OS === 'ios' ? 
+                                        (
+                                            <DateTimePicker
                                             testID='dateTimePicker'
+                                            minimumDate={new Date}
                                             style={style.adminEditDay}
                                             value={convertTime}
                                             mode={'date'}
                                             is24Hour={true}
                                             display='default'
                                             onChange={onChange} />
+                                        ): Platform.OS === 'android' ? 
+                                        (
+                                            <View style={style.adminButtonAlign}>
+                                                <Pressable style={style.adminDateButton} onPress={() => showMode("date")}><Text style={style.buttonText}>Valitse päivä</Text></Pressable>
+                                                <Pressable style={style.adminDateButton} onPress={() => showMode("time")}><Text style={style.buttonText}>Valitse kellonaika</Text></Pressable>
+                                                {show && (
+                                                    <DateTimePicker
+                                                    testID='dateTimePicker'
+                                                    minimumDate={new Date}
+                                                    style={style.adminEditAndroid}
+                                                    value={convertTime}
+                                                    mode={mode}
+                                                    is24Hour={true}
+                                                    display='default'
+                                                    onChange={onChange} />
+                                                )}
+
+
+                                            </View>
+                                        ): null}
+
+                                        
                                 </View>
 
                                 <View>
@@ -359,14 +389,37 @@ function AdminEditEvents({ navigation }) {
                                             onFocus={hide}
                                         /> */}
 
-                                        <DateTimePicker
+                                        {Platform.OS === 'ios' ? 
+                                        (
+                                            <DateTimePicker
                                             testID='dateTimePicker'
+                                            minimumDate={new Date}
                                             style={style.adminEditTime}
                                             value={convertTime}
                                             mode={'time'}
                                             is24Hour={true}
                                             display='default'
                                             onChange={onChange} />
+                                        ): Platform.OS === 'android' ? 
+                                        (
+                                            <View style={style.adminButtonAlign}>
+                                                <Pressable style={style.adminDateButton} onPress={() => showMode("date")}><Text style={style.buttonText}>Valitse päivä</Text></Pressable>
+                                                <Pressable style={style.adminDateButton} onPress={() => showMode("time")}><Text style={style.buttonText}>Valitse kellonaika</Text></Pressable>
+                                                {show && (
+                                                    <DateTimePicker
+                                                    testID='dateTimePicker'
+                                                    minimumDate={new Date}
+                                                    style={style.adminEditAndroid}
+                                                    value={convertTime}
+                                                    mode={mode}
+                                                    is24Hour={true}
+                                                    display='default'
+                                                    onChange={onChange} />
+                                                )}
+
+
+                                            </View>
+                                        ): null}
                                 </View>
 
                                
