@@ -102,7 +102,7 @@ function Ranking({navigation}) {
       <View style={[style.viewContainer, {flex:1}]}>
         <View style={[style.contentOnLightBG, {flex:1}]}>
           <Text style={style.h4Style}>Ranking-listat</Text>
-          <DataTable  style={{flex:1}}>
+          <DataTable style={{flex:1}}>
             <DataTable.Header>
               <DataTable.Title>#</DataTable.Title>
               <DataTable.Title style={{flex: 4}}>Pelaaja</DataTable.Title>
