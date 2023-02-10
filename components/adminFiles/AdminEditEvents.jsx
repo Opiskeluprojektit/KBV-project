@@ -327,20 +327,10 @@ function AdminEditEvents({ navigation }) {
                                     />
                                 </List.Accordion>
 
-
+                            
                                 <View>
                                     <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
-                                        {/* <TextInput
-                                            style={style.modalTextInput}
-                                            value={date}
-                                            keyboardType={'numbers-and-punctuation'}
-                                            maxLength={10}
-                                            onChangeText={setDate}
-                                            label={"Päivänmäärä"}
-                                            returnKeyType={'done'}
-                                            onFocus={hide}
-                                        /> */}
-
+    
                                         {Platform.OS === 'ios' ? 
                                         (
                                             <DateTimePicker
@@ -355,8 +345,7 @@ function AdminEditEvents({ navigation }) {
                                         ): Platform.OS === 'android' ? 
                                         (
                                             <View style={style.adminButtonAlign}>
-                                                <Pressable style={style.adminDateButton} onPress={() => showMode("date")}><Text style={style.buttonText}>Valitse päivä</Text></Pressable>
-                                                <Pressable style={style.adminDateButton} onPress={() => showMode("time")}><Text style={style.buttonText}>Valitse kellonaika</Text></Pressable>
+                                                <Pressable style={style.adminDateButton} onPress={() => showMode("date")}><Text style={style.buttonText}>Valitse päivä: {date}</Text></Pressable>
                                                 {show && (
                                                     <DateTimePicker
                                                     testID='dateTimePicker'
@@ -403,8 +392,7 @@ function AdminEditEvents({ navigation }) {
                                         ): Platform.OS === 'android' ? 
                                         (
                                             <View style={style.adminButtonAlign}>
-                                                <Pressable style={style.adminDateButton} onPress={() => showMode("date")}><Text style={style.buttonText}>Valitse päivä</Text></Pressable>
-                                                <Pressable style={style.adminDateButton} onPress={() => showMode("time")}><Text style={style.buttonText}>Valitse kellonaika</Text></Pressable>
+                                        <Pressable style={style.adminDateButton} onPress={() => showMode("time")}><Text style={style.buttonText}>Valitse kellonaika: {time}</Text></Pressable>
                                                 {show && (
                                                     <DateTimePicker
                                                     testID='dateTimePicker'
