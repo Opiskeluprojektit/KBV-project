@@ -25,6 +25,8 @@ function AdminEditEvents({ navigation }) {
     const [divisionExpand, setDivisionsExpand] = useState(false)
     const [filterDiv, setFilterDiv] = useState('Kaikki');
     const [filterExpand, setFilterExpand] = useState(false)
+    const [timeStamp, setTimeStamp] = useState()
+    const [convertTime, setConvertTime] = useState(new Date)
 
     
     const [mode, setMode] = useState('date');
@@ -54,7 +56,7 @@ function AdminEditEvents({ navigation }) {
         let data = events
 
         if (filterDiv !== 'Kaikki') {
-            data = data.filter((div) => div.division == filterDiv).map(({ID, date, description, division}) => ({ID, date, description, division}));
+            data = data.filter((div) => div.division == filterDiv).map(({ID, date, time, description, division, timestamp}) => ({ID, date, time, description, division, timestamp}));
         }
 
         return data;
@@ -65,19 +67,58 @@ function AdminEditEvents({ navigation }) {
     return (
         <View key={item.ID} style={style.adminEventList}>
             <Text style={style.adminEventTitle}>{item.division} {item.date}</Text>
-            <Pressable onPress={() => showModal(item.division, item.date, item.time, item.description, item.ID)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminEventButton]}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+            <Pressable onPress={() => showModal(item.division, item.date, item.time, item.description, item.ID, item.timestamp)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminEventButton]}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
         </View>
     );
    })
 
-   const showModal = (div, dd, hh, dsc, id) => {
+   const showModal = (div, dd, hh, dsc, id, stm) => {
     setVisible(true)
     setDivision(div)
     setDate(dd)
     setTime(hh)
     setDesc(dsc)
     setDbId(id)
-   };
+    
+    if (stm) {
+        setConvertTime(new Date(stm))
+    }
+   }; 
+
+   const onChange = (event, selectedDate) => {
+    const changedDate = selectedDate || convertTime;
+    setConvertTime(changedDate)
+
+        let tempDate = new Date(changedDate)
+
+        let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+        let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+        let fTime = fHours + ':' + fMinutes;
+
+        let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
+        let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
+        let fDate = day + '.' + month + '.' + tempDate.getFullYear(); 
+
+        
+        setTime(fTime)
+        setDate(fDate)
+   }
+
+//    const handleTime = () => {
+//     let unixTime = timeStamp
+//     const date = new Date(unixTime)
+
+//     const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+//     const month = Number(date.getMonth() + 1) < 10 ? '0' + Number(date.getMonth() + 1) : Number(date.getMonth() + 1);
+//     const year = date.getFullYear()
+
+//     const hours = date.getHours()
+//     const minutes = "0" + date.getMinutes()
+
+//     const formatTime = hours + ":" + minutes.substring(-2) + " päivä: " + day + "." + month + "." + year
+
+//     console.log(formatTime)
+//    }
 
    const hideModal = () => {
     setVisible(false);
@@ -99,11 +140,13 @@ function AdminEditEvents({ navigation }) {
             console.log(dbId)
 
             if (division && date && time) {
-                set(ref(database, EVENT_REF + dbId), {
+                update(ref(database, EVENT_REF + dbId), {
                     date: date,
                     time: time,
                     division: division,
-                    description: desc
+                    description: desc,
+                    isEvent: division === "Muut",
+                    timestamp: convertTime.valueOf()
                 }).then(hideModal())
             } else {
                 Alert.alert("Muista valita sarja, tapahtuman päivänmäärä ja kellonaika!")
@@ -279,37 +322,54 @@ function AdminEditEvents({ navigation }) {
                                     />
                                 </List.Accordion>
 
-                                <View style={style.adminModalView}>
 
                                 <View>
+                                    <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
+                                        {/* <TextInput
+                                            style={style.modalTextInput}
+                                            value={date}
+                                            keyboardType={'numbers-and-punctuation'}
+                                            maxLength={10}
+                                            onChangeText={setDate}
+                                            label={"Päivänmäärä"}
+                                            returnKeyType={'done'}
+                                            onFocus={hide}
+                                        /> */}
 
-                                <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
-                                    <TextInput
-                                        style={style.modalTextInput}
-                                        value={date}
-                                        keyboardType={'numbers-and-punctuation'}
-                                        maxLength={10}
-                                        onChangeText={setDate}
-                                        label={"Päivänmäärä"}
-                                        returnKeyType={'done'}
-                                        onFocus={hide}
-                                    />
+                                        <DateTimePicker
+                                            testID='dateTimePicker'
+                                            style={style.adminEditDay}
+                                            value={convertTime}
+                                            mode={'date'}
+                                            is24Hour={true}
+                                            display='default'
+                                            onChange={onChange} />
                                 </View>
 
                                 <View>
+                                    <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
+                                        {/* <TextInput
+                                            style={style.modalTextInput}
+                                            value={time}
+                                            keyboardType={'numbers-and-punctuation'}
+                                            maxLength={5}
+                                            onChangeText={setTime}
+                                            label={"Kellonaika"}
+                                            returnKeyType={'done'}
+                                            onFocus={hide}
+                                        /> */}
 
-                                <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
-                                    <TextInput
-                                        style={style.modalTextInput}
-                                        value={time}
-                                        keyboardType={'numbers-and-punctuation'}
-                                        maxLength={5}
-                                        onChangeText={setTime}
-                                        label={"Kellonaika"}
-                                        returnKeyType={'done'}
-                                        onFocus={hide}
-                                    />
+                                        <DateTimePicker
+                                            testID='dateTimePicker'
+                                            style={style.adminEditTime}
+                                            value={convertTime}
+                                            mode={'time'}
+                                            is24Hour={true}
+                                            display='default'
+                                            onChange={onChange} />
                                 </View>
+
+                               
                                 
 
                                     {/* Vaihtoehtosesti voidaan käyttää datetimepickeriä, mutta se vaatii muutoksia tapahtuman luontiin yms. */}
@@ -348,10 +408,7 @@ function AdminEditEvents({ navigation }) {
                             </TextInput>
                         </View>
 
-                                </View>
-
-
-                            </View>
+                    </View>
 
 
 
@@ -366,6 +423,8 @@ function AdminEditEvents({ navigation }) {
                                 <Text style={style.buttonText}>Tallenna</Text>
                                 </Pressable>
                             </View>
+
+                            
 
                         </Modal>
                     </Portal>

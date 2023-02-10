@@ -99,7 +99,8 @@ function AdminEvents({ navigation }) {
                 time: timeDb,
                 division: division,
                 description: desc,
-                isEvent: division === "Muut"
+                isEvent: division === "Muut",
+                timestamp: date.valueOf()
             }).then(showModal);
 
         } else {

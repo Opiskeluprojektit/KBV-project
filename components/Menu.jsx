@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View, Pressable, Linking} from 'react-native'
+import { SafeAreaView, Text, View, Pressable, Linking, Alert} from 'react-native'
 import React from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";

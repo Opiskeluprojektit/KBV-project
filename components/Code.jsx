@@ -146,6 +146,7 @@ function Code({navigation}) {
                             keyboardType='email-address'
                             textContentType='emailAddress'
                             placeholder='Sähköposti'
+                            value={email}
                             onChangeText={(email) => setEmail(email)}
                             maxLength={50}
                             autoFocus
@@ -156,7 +157,8 @@ function Code({navigation}) {
                             keyboardType='default'
                             textContentType='password'
                             placeholder='Salasana'
-                            onChangeText={(pw) => setUserPw(pw)}
+                            value={userPw}
+                            onChangeText={(userPw) => setUserPw(userPw)}
                             maxLength={50}
                            />
                         </View>

@@ -919,5 +919,19 @@ export const style = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4
+    },
+
+    adminEditDay: {
+        marginBottom: "5%",
+        alignSelf: 'flex-start',
+        marginLeft: "12%",
+        marginTop: "3%"
+    },
+
+    adminEditTime: {
+        marginBottom: "5%",
+        alignSelf: 'flex-start',
+        marginLeft: "17%",
+        marginTop: "3%"
     }
 })
