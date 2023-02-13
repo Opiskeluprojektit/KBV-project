@@ -355,7 +355,7 @@ function AdminEditEvents({ navigation }) {
                                                     mode={mode}
                                                     is24Hour={true}
                                                     display='default'
-                                                    onChange={onChange} />
+                                                    onChange={onChange}/>
                                                 )}
 
 
