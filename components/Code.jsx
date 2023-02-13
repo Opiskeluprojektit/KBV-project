@@ -17,8 +17,8 @@ function Code({navigation}) {
   const [code, setCode] = useState(1234);   //stores input, hardwired for testing purposes
   const [password, setPassword] = useState()
 
-  const [email, setEmail] = useState('')
-  const [userPw, setUserPw] = useState('')
+  const [email, setEmail] = useState('testi@testi.fi')
+  const [userPw, setUserPw] = useState('testi123')
 
   const [visible, setVisible] = useState(false);
 
