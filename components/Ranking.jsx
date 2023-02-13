@@ -1,12 +1,11 @@
-import { SafeAreaView, Text, View, Pressable, FlatList, ImageBackground } from 'react-native'
+import { SafeAreaView, Text, View, Pressable, FlatList, ImageBackground, ScrollView } from 'react-native'
 import React, { useState, useEffect } from "react";
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
-import { DataTable } from 'react-native-paper'
+import { DataTable, List } from 'react-native-paper'
 
 import { database, placement_ref, PLAYER_REF, EVENT_REF } from "../firebase/Config";
 import { onValue, ref, update, child, push, query, orderByValue, equalTo, orderByChild } from "firebase/database";
-import { log } from 'react-native-reanimated';
 
 const backgroundImage = require('../assets/Volleyball100.png');
 
@@ -14,11 +13,16 @@ function Ranking({navigation}) {
   const [placement, setPlacement] = useState([]);
   const [player, setPlayer] = useState([])
   const [playersToShow, setPlayersToShow] = useState([])
-  const [filter, setFilter] = useState("Miehet");
+  const [division, setDivision] = useState("Miehet");
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [years, setYears] = useState([year]);
   const [miehet, setMiehet] = useState([])
   const [tytöt, setTytöt] = useState([])
   const [pojat, setPojat] = useState([])
   const [naiset, setNaiset] = useState([])
+  const [divisionsExpanded, setDivisionsExpanded] = useState(false);
+  const [yearExpanded, setYearExpanded] = useState(false);
+
 
 
   // Collects placement information from firebase database
@@ -28,10 +32,11 @@ function Ranking({navigation}) {
       const data = snapshot.val() ? snapshot.val() : {};
       const placementItems = { ...data };
       const parse = JSON.parse(JSON.stringify(placementItems));
-      console.log("placements: ", parse[50]);
+      let keys = Object.keys(parse)
+      keys = keys.sort((a, b) => b - a)
+      setYears(keys)
       let parseKeys = Object.values(parse)
       setPlacement(parseKeys);
-      console.log("placements: ", parseKeys);
     });
   }, [])
 
@@ -47,27 +52,27 @@ function Ranking({navigation}) {
       parseKeys.forEach((element, i) => {
         (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
       });
+      parseKeys = parseKeys.map((e) => {
+        e.ranking = {2023: e.ranking}
+        return e;
+      })
       setPlayer(parseKeys);
-      console.log("players: ", parseKeys);
     });
   }, []);
 
   useEffect(() => {
-    updatePlayersToShow(filter, [])
-  }, [player])
+    updatePlayersToShow(division, [])
+  }, [player, year])
 
   const updatePlayersToShow = (selection, selectedList) => {
-    console.log("selectedList", selectedList)
-    setFilter(selection)
+    setDivision(selection)
     if (selectedList.length > 0 ) setPlayersToShow(selectedList) 
     else {
-      let newList = player.filter(e => e.division === selection)
-      console.log("newList: ", newList);
-      newList = newList.sort((a, b) => b.ranking - a.ranking)
+      let newList = player.filter(e => (e.division === selection && e.ranking[year]))
+      newList = newList.sort((a, b) => b.ranking[year] - a.ranking[year])
         .map((e, i) => {
           e.rankingNumber = i + 1
           return e})
-      console.log("newList: ", newList);
       updateSelection(selection, newList);
       setPlayersToShow(newList)
     }
@@ -85,9 +90,23 @@ function Ranking({navigation}) {
       <DataTable.Row>
         <DataTable.Cell>{item.rankingNumber}</DataTable.Cell>
         <DataTable.Cell style={{flex: 4}}>{item.name}</DataTable.Cell>
-        <DataTable.Cell numeric style={{flex: 2, justifyContent: 'center'}}>{item.ranking}</DataTable.Cell>
+        <DataTable.Cell numeric style={{flex: 2, justifyContent: 'center'}}>{item.ranking[year]}</DataTable.Cell>
       </DataTable.Row>
     )
+  }
+
+  let yearList = years.map(e => {
+    return (
+      <List.Item
+        title={e}
+        onPress={() => selectYear(e)}
+      />
+    )
+  })
+
+  const selectYear = (e) => {
+    setYear(e)
+    setYearExpanded(false);
   }
 
   return (
@@ -102,6 +121,47 @@ function Ranking({navigation}) {
       <View style={[style.viewContainer, {flex:1}]}>
         <View style={[style.contentOnLightBG, {flex:1}]}>
           <Text style={style.h4Style}>Ranking-listat</Text>
+          <List.Section style={{flexDirection: 'column'}}>
+            {/* Division selection */}
+            <List.Accordion
+              title={division ? division : "Sarjavalikko"}
+              style={[style.search]}
+              theme={{
+                colors: { background: "#F9F9F9", primary: "#005C70" },
+              }}
+              expanded={divisionsExpanded}
+              onPress={() => setDivisionsExpanded(!divisionsExpanded)}
+            >
+              <List.Item
+                title="Miehet"
+                onPress={() => updatePlayersToShow("Miehet", miehet)}
+              />
+              <List.Item
+                title="Naiset"
+                onPress={() => updatePlayersToShow("Naiset", naiset)}
+              />
+              <List.Item
+                title="Tytöt"
+                onPress={() => updatePlayersToShow("Tytöt", tytöt)}
+              />
+              <List.Item
+                title="Pojat"
+                onPress={() => updatePlayersToShow("Pojat", pojat)}
+              />
+            </List.Accordion>
+            {/* Game selection */}
+            <List.Accordion
+              title={year ? year : "Kaudet"}
+              style={[style.search]}
+              theme={{
+                colors: { background: "#F9F9F9", primary: "#005C70" },
+              }}
+              expanded={yearExpanded}
+              onPress={() => setYearExpanded(!yearExpanded)}
+            >
+              <ScrollView style={{ maxHeight: "75%" }}>{yearList}</ScrollView>
+            </List.Accordion>
+          </List.Section>
           <DataTable style={{flex:1}}>
             <DataTable.Header>
               <DataTable.Title>#</DataTable.Title>
