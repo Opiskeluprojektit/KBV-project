@@ -15,6 +15,7 @@ function AdminEvents({ navigation }) {
     const [division, setDivision] = useState()
     const [divisionExpand, setDivisionsExpand] = useState(false)
 
+    const [today, setToday] = useState(new Date)
     const [date, setDate] = useState(new Date);
     const [secDate, setSecDate] = useState(new Date);
     const [mode, setMode] = useState('date');
@@ -49,48 +50,91 @@ function AdminEvents({ navigation }) {
 
 
     const onChange = (event, selectedDate) => {
-        
-        if (Platform.OS === 'android') {
-            setShow(false)
+
+        if (Platform.OS === 'android' && selectedDate.valueOf() > today.valueOf()) {
+
+            const currentDate = selectedDate || date;
+            setShow(Platform.OS === 'ios');
+            setDate(currentDate);
+            
+            let tempDate = new Date(currentDate);
+    
+    
+            let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+            let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+            let fTime = fHours + ':' + fMinutes;
+    
+            let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
+            let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
+            let fDate = day + '.' + month + '.' + tempDate.getFullYear(); 
+    
+            setText(fDate + ', ' + fTime)
+            setTimeDb(fTime)
+            setDateDb(fDate)
+
+        } else if (Platform.OS === 'ios') {
+
+            const currentDate = selectedDate || date;
+            setShow(Platform.OS === 'ios');
+            setDate(currentDate);
+            
+            let tempDate = new Date(currentDate);
+    
+    
+            let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+            let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+            let fTime = fHours + ':' + fMinutes;
+    
+            let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
+            let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
+            let fDate = day + '.' + month + '.' + tempDate.getFullYear(); 
+    
+            setText(fDate + ', ' + fTime)
+            setTimeDb(fTime)
+            setDateDb(fDate)
+        } else {
+            Alert.alert("Tapahtuman ajankohta ei voi olla menneisyydessä")
         }
         
-        const currentDate = selectedDate || date;
-        // setShow(Platform.OS === 'ios');
-        setDate(currentDate);
         
-        let tempDate = new Date(currentDate);
-
-
-        let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
-        let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
-        let fTime = fHours + ':' + fMinutes;
-
-        let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
-        let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
-        let fDate = day + '.' + month + '.' + tempDate.getFullYear(); 
-
-        setText(fDate + ', ' + fTime)
-        setTimeDb(fTime)
-        setDateDb(fDate)
     }
 
     const onChangeSec = (event, selectedDate) => {
-        if (Platform.OS === 'android') {
-            setShowSec(false)
+
+        if (Platform.OS === 'android' && selectedDate.valueOf() > today.valueOf()) {
+
+            const currentDate = selectedDate || date
+            setShowSec(Platform.OS === 'ios');
+            setSecDate(currentDate)
+
+            let tempDate = new Date(currentDate)
+
+            let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+            let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+            let fTime = fHours + ':' + fMinutes;
+
+            setEndText(" - " + fTime)
+            setEndTimeDb(fTime)
+            setEndTimeExist(true)
+
+        } else if (Platform.OS === 'ios') {
+
+            const currentDate = selectedDate || date
+            setShowSec(Platform.OS === 'ios');
+            setSecDate(currentDate)
+
+            let tempDate = new Date(currentDate)
+
+            let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+            let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+            let fTime = fHours + ':' + fMinutes;
+
+            setEndText(" - " + fTime)
+            setEndTimeDb(fTime)
+            setEndTimeExist(true)
+        } else {
+            Alert.alert("Tapahtuman ajankohta ei voi olla menneisyydessä")
         }
-
-        const currentDate = selectedDate || date
-        setSecDate(currentDate)
-
-        let tempDate = new Date(currentDate)
-
-        let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
-        let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
-        let fTime = fHours + ':' + fMinutes;
-
-        setEndText(" - " + fTime)
-        setEndTimeDb(fTime)
-        setEndTimeExist(true)
 
     }
 
