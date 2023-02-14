@@ -49,13 +49,8 @@ function AdminEvents({ navigation }) {
 
 
     const onChange = (event, selectedDate) => {
-        
-        if (Platform.OS === 'android') {
-            setShow(false)
-        }
-        
+        setShow(Platform.OS === 'ios');
         const currentDate = selectedDate || date;
-        // setShow(Platform.OS === 'ios');
         setDate(currentDate);
         
         let tempDate = new Date(currentDate);
@@ -75,10 +70,7 @@ function AdminEvents({ navigation }) {
     }
 
     const onChangeSec = (event, selectedDate) => {
-        if (Platform.OS === 'android') {
-            setShowSec(false)
-        }
-
+        setShow(Platform.OS === 'ios');
         const currentDate = selectedDate || date
         setSecDate(currentDate)
 
