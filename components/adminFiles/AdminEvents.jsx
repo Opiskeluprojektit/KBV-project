@@ -19,11 +19,13 @@ function AdminEvents({ navigation }) {
     const [secDate, setSecDate] = useState(new Date);
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+    const [showSec, setShowSec] = useState(false);
     const [text, setText] = useState('Tyhjä');
     const [dateDb, setDateDb] = useState('');
     const [timeDb, setTimeDb] = useState('');
 
     const [endTimeDb, setEndTimeDb] = useState('');
+    const [endTimeExist, setEndTimeExist] = useState(false)
 
     const [desc, setDesc] = useState('');
 
@@ -33,11 +35,16 @@ function AdminEvents({ navigation }) {
     const [shouldShow, setShouldShow] = useState(false);
 
     const [visible, setVisible] = React.useState(false);
+    const [showing, setShowing] = useState(false)
 
 
     function showItems() {
         setShouldShow(!shouldShow)
         onChange()
+    }
+
+    function showItemsSec() {
+        setShowing(!showing)
     }
 
 
@@ -62,23 +69,29 @@ function AdminEvents({ navigation }) {
         setDateDb(fDate)
     }
 
-    // const onChangeSec = (selectedDate) => {
-    //     const currentDate = selectedDate || secDate;
-    //     setSecDate(currentDate)
+    const onChangeSec = (event, selectedDate) => {
+        const currentDate = selectedDate || date
+        setSecDate(currentDate)
 
-    //     let tempDate = new Date(currentDate);
+        let tempDate = new Date(currentDate)
 
-    //     let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
-    //     let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
-    //     let fTime = fHours + ':' + fMinutes;
+        let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+        let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+        let fTime = fHours + ':' + fMinutes;
 
-    //     setEndText(fTime)
-    //     setEndTimeDb(fTime)
+        setEndText(" - " + fTime)
+        setEndTimeDb(fTime)
+        setEndTimeExist(true)
 
-    // }
+    }
 
     const showMode = (currentMode) => {
         setShow(true);
+        setMode(currentMode);
+    }
+
+    const showModeSec = (currentMode) => {
+        setShowSec(true);
         setMode(currentMode);
     }
 
@@ -92,16 +105,39 @@ function AdminEvents({ navigation }) {
 
         if (division && dateDb && timeDb) {
 
-            const eventKey = push(ref(database, EVENT_REF)).key
-            update(ref(database, EVENT_REF + eventKey), {
-                id: eventKey,
-                date: dateDb,
-                time: timeDb,
-                division: division,
-                description: desc,
-                isEvent: division === "Muut",
-                timestamp: date.valueOf()
+            console.log(date)
+            console.log(secDate)
+
+            if(endTimeExist == true) {
+                const eventKey = push(ref(database, EVENT_REF)).key
+                update(ref(database, EVENT_REF + eventKey), {
+                    id: eventKey,
+                    date: dateDb,
+                    time: timeDb,
+                    endTime: endTimeDb,
+                    division: division,
+                    description: desc,
+                    isEvent: division === "Muut",
+                    timestamp: date.valueOf(),
+                    endTimestamp: secDate.valueOf(),
             }).then(showModal);
+
+            } else {
+                const eventKey = push(ref(database, EVENT_REF)).key
+                update(ref(database, EVENT_REF + eventKey), {
+                    id: eventKey,
+                    date: dateDb,
+                    time: timeDb,
+                    endTime: "",
+                    division: division,
+                    description: desc,
+                    isEvent: division === "Muut",
+                    timestamp: date.valueOf(),
+                    endTimestamp: "",
+            }).then(showModal);
+            }
+
+            
 
         } else {
             Alert.alert("Muista valita sarja sekä tapahtuman päivänmäärä!")
@@ -117,6 +153,10 @@ function AdminEvents({ navigation }) {
         setDesc('');
         setShouldShow(false);
         setText('Tyhjä');
+        setEndText('')
+        setEndTimeDb('')
+        setEndTimeExist(false)
+        setShowing(false)
       }
 
 
@@ -189,7 +229,7 @@ function AdminEvents({ navigation }) {
 
                             <Pressable onPress={() => showItems()} style={[style.search, style.adminBox]}> 
                             <Text style={style.adminText}>Tapahtumapäivä</Text>
-                            <Text style={style.adminText}>{text} - {endText}</Text>
+                            <Text style={style.adminText}>{text}{endText}</Text>
                             </Pressable>
                             {shouldShow && Platform.OS === 'ios' ? 
                             (
@@ -197,29 +237,46 @@ function AdminEvents({ navigation }) {
                                 <DateTimePicker
                                     testID='dateTimePicker'
                                     style={{marginBottom: "5%"}}
+                                    minimumDate={new Date}
                                     value={date}
-                                    mode={'date'}
+                                    mode={'datetime'}
                                     is24Hour={true}
                                     display='default'
                                     onChange={onChange} />
 
-                                <DateTimePicker
-                                    testID='dateTimePicker'
-                                    style={{marginBottom: "5%"}}
-                                    value={date}
-                                    mode={'time'}
-                                    is24Hour={true}
-                                    display='default'
-                                    onChange={onChange} />
+                                <View style={{flexDirection: 'row'}}>
+                                <Pressable onPress={() => showItemsSec()}
+                                    style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.button, style.adminShowing]}>
+                                    <Text style={style.buttonText}>Lopetusajankohta </Text> 
+                                    {showing == true ? <Icon.ArrowUp style={style.adminArrow}/> : <Icon.ArrowDown style={style.adminArrow}/>}
+                                </Pressable>
+                                </View>
 
-                                {/* <DateTimePicker
+                                <View style={style.adminEndTime}>
+
+                                    {showing == true ? 
+                                    (
+                                        <DateTimePicker 
+                                            testID='dateTimePicker'
+                                            value={secDate}
+                                            minimumDate={date}
+                                            onChange={onChangeSec}
+                                            mode={'time'}
+                                            is24Hour={true}
+                                        />
+                                    ): null}
+
+                                </View>
+
+                                        
+
+                                {/* <DateTimePicker 
                                     testID='dateTimePicker'
-                                    style={{marginBottom: "5%"}}
                                     value={secDate}
-                                    mode={'time'}
+                                    mode={'datetime'}
                                     is24Hour={true}
-                                    display='default'
-                                    onChange={onChangeSec} /> */}
+                                /> */}
+
 
                              
 
@@ -228,7 +285,9 @@ function AdminEvents({ navigation }) {
                                 <View style={style.adminButtonAlign}>
                                     <Pressable style={style.adminDateButton} onPress={() => showMode("date")}><Text style={style.buttonText}>Valitse päivä</Text></Pressable>
                                     <Pressable style={style.adminDateButton} onPress={() => showMode("time")}><Text style={style.buttonText}>Valitse kellonaika</Text></Pressable>
-                                    {show && (
+                                    <Pressable style={style.adminDateButton} onPress={() => showModeSec("time")}><Text style={style.buttonText}>Valitse lopetusajankohta</Text></Pressable>
+                                    {show == true ? 
+                                    (
                                         <DateTimePicker
                                             testID='dateTimePicker'
                                             value={date}
@@ -237,7 +296,16 @@ function AdminEvents({ navigation }) {
                                             display="default"
                                             onChange={onChange}
                                         />
-                                    )}
+                                    ): showSec == true ? (
+                                        <DateTimePicker
+                                            testID='dateTimePicker'
+                                            value={secDate}
+                                            mode={mode}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChangeSec}
+                                        />
+                                    ): null}
                                 
                                 </View>
                             ): null}

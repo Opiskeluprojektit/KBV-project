@@ -940,5 +940,22 @@ export const style = StyleSheet.create({
         alignSelf: 'flex-start',
         marginLeft: "17%",
         marginTop: "3%"
+    },
+
+    adminArrow: {
+        color: Colors.brandColor,
+        position: 'absolute',
+        right: 0,
+    },
+
+    adminShowing: {
+        padding: 10,
+        paddingRight: 30,
+        borderRadius:15
+    },
+
+    adminEndTime: {
+        marginBottom: 10,
+        marginTop: 10
     }
 })
