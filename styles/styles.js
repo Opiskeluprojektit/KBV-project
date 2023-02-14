@@ -117,10 +117,10 @@ export const style = StyleSheet.create({
     // List and search background
     search: {
         backgroundColor: Colors.primaryVariant,
-        height: 50,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
-        marginBottom: 10
+        marginBottom: 10,
+
     },
     
     eachGame:{

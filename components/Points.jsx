@@ -103,7 +103,7 @@ function Points({ navigation }) {
   
   // Collects placement information from firebase database
   const pullExistingPlacements = () => {
-    const placement = ref(database, placement_ref + chosenGame.id);
+    const placement = ref(database, placement_ref + "/" + new Date().getFullYear() + "/" + chosenGame.id);
     onValue(placement, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const placementItems = { ...data };
@@ -282,7 +282,7 @@ function Points({ navigation }) {
         "playerName": player.name
       }
       const updates = {};
-      updates[placement_ref + "/" +  chosenGame.id + "/" + placementKey] = newPlacement;
+      updates[placement_ref + "/" + new Date().getFullYear() + "/" + chosenGame.id + "/" + placementKey] = newPlacement;
       update(ref(database), updates).then(() => {
         setShowSnackbar(true);
       })
