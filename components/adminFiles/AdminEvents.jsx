@@ -51,12 +51,15 @@ function AdminEvents({ navigation }) {
 
     const onChange = (event, selectedDate) => {
 
-        if (Platform.OS === 'android' && selectedDate.valueOf() > today.valueOf()) {
+        if (Platform.OS === 'android') {
+
 
             const currentDate = selectedDate || date;
             setShow(Platform.OS === 'ios');
-            setDate(currentDate);
             
+            if (currentDate.valueOf() > (new Date().valueOf() - 3600000)) {
+                
+            setDate(currentDate);
             let tempDate = new Date(currentDate);
     
     
@@ -71,6 +74,9 @@ function AdminEvents({ navigation }) {
             setText(fDate + ', ' + fTime)
             setTimeDb(fTime)
             setDateDb(fDate)
+            } else {
+                Alert.alert("Tapahtuman ajankohta ei voi olla menneisyydessä")
+            }
 
         } else if (Platform.OS === 'ios') {
 
@@ -92,30 +98,34 @@ function AdminEvents({ navigation }) {
             setText(fDate + ', ' + fTime)
             setTimeDb(fTime)
             setDateDb(fDate)
-        } else {
-            Alert.alert("Tapahtuman ajankohta ei voi olla menneisyydessä")
-        }
-        
+        } 
         
     }
 
     const onChangeSec = (event, selectedDate) => {
 
-        if (Platform.OS === 'android' && selectedDate.valueOf() > today.valueOf()) {
+        if (Platform.OS === 'android') {
 
             const currentDate = selectedDate || date
-            setShow(Platform.OS === 'ios');
-            setSecDate(currentDate)
+            setShowSec(Platform.OS === 'ios');
 
-            let tempDate = new Date(currentDate)
+            if (currentDate.valueOf() >= (date.valueOf() - 600000)) {
 
-            let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
-            let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
-            let fTime = fHours + ':' + fMinutes;
+                setSecDate(currentDate)
+    
+                let tempDate = new Date(currentDate)
+    
+                let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+                let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+                let fTime = fHours + ':' + fMinutes;
+    
+                setEndText(" - " + fTime)
+                setEndTimeDb(fTime)
+                setEndTimeExist(true)
+            } else {
+                Alert.alert("Lopetusajankohta ei voi olla ennen alkamisajankohtaa")
+            }
 
-            setEndText(" - " + fTime)
-            setEndTimeDb(fTime)
-            setEndTimeExist(true)
 
         } else if (Platform.OS === 'ios') {
 
@@ -132,9 +142,7 @@ function AdminEvents({ navigation }) {
             setEndText(" - " + fTime)
             setEndTimeDb(fTime)
             setEndTimeExist(true)
-        } else {
-            Alert.alert("Tapahtuman ajankohta ei voi olla menneisyydessä")
-        }
+        } 
 
     }
 
@@ -339,7 +347,7 @@ function AdminEvents({ navigation }) {
                                     <Pressable style={style.adminDateButton} onPress={() => showMode("date")}><Text style={style.buttonText}>Valitse päivä</Text></Pressable>
                                     <Pressable style={style.adminDateButton} onPress={() => showMode("time")}><Text style={style.buttonText}>Valitse kellonaika</Text></Pressable>
                                     <Pressable style={style.adminDateButton} onPress={() => showModeSec("time")}><Text style={style.buttonText}>Valitse lopetusajankohta</Text></Pressable>
-                                    {show == true ? 
+                                    {show && 
                                     (
                                         <DateTimePicker
                                             testID='dateTimePicker'
@@ -349,7 +357,9 @@ function AdminEvents({ navigation }) {
                                             display="default"
                                             onChange={onChange}
                                         />
-                                    ): showSec == true ? (
+                                    )} 
+                                    
+                                    {showSec &&  (
                                         <DateTimePicker
                                             testID='dateTimePicker'
                                             value={secDate}
@@ -358,7 +368,7 @@ function AdminEvents({ navigation }) {
                                             display="default"
                                             onChange={onChangeSec}
                                         />
-                                    ): null}
+                                    )}
                                 
                                 </View>
                             ): null}
