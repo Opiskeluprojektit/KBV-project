@@ -100,12 +100,12 @@ function AdminEvents({ navigation }) {
     }
 
     const onChangeSec = (event, selectedDate) => {
+        if (Platform.OS === 'android') {
+            setShowSec(false)
+        }
 
-        if (Platform.OS === 'android' && selectedDate.valueOf() > today.valueOf()) {
-
-            const currentDate = selectedDate || date
-            setShowSec(Platform.OS === 'ios');
-            setSecDate(currentDate)
+        const currentDate = selectedDate || date
+        setSecDate(currentDate)
 
             let tempDate = new Date(currentDate)
 
