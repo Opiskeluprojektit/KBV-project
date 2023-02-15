@@ -27,9 +27,15 @@ function AdminEditEvents({ navigation }) {
     const [filterExpand, setFilterExpand] = useState(false)
     const [timeStamp, setTimeStamp] = useState()
     const [convertTime, setConvertTime] = useState(new Date)
+    const [endTime, setEndTime] = useState(new Date)
+    const [endStr, setEndStr] = useState('')
+    const [endTimeExist, setEndTimeExist] = useState(false)
+    const [endHours, setEndHours] = useState('')
 
     const [show, setShow] = useState(false);
     const [mode, setMode] = useState('date');
+
+    const [showEnd, setShowEnd] = useState(false);
 
 
 
@@ -56,7 +62,7 @@ function AdminEditEvents({ navigation }) {
         let data = events
 
         if (filterDiv !== 'Kaikki') {
-            data = data.filter((div) => div.division == filterDiv).map(({ID, date, time, description, division, timestamp}) => ({ID, date, time, description, division, timestamp}));
+            data = data.filter((div) => div.division == filterDiv).map(({ID, date, time, description, division, timestamp, endTimestamp, endTime}) => ({ID, date, time, description, division, timestamp, endTimestamp, endTime}));
         }
 
         return data;
@@ -67,12 +73,12 @@ function AdminEditEvents({ navigation }) {
     return (
         <View key={item.ID} style={style.adminEventList}>
             <Text style={style.adminEventTitle}>{item.division} {item.date}</Text>
-            <Pressable onPress={() => showModal(item.division, item.date, item.time, item.description, item.ID, item.timestamp)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminEventButton]}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+            <Pressable onPress={() => showModal(item.division, item.date, item.time, item.description, item.ID, item.timestamp, item.endTimestamp, item.endTime)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminEventButton]}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
         </View>
     );
    })
 
-   const showModal = (div, dd, hh, dsc, id, stm) => {
+   const showModal = (div, dd, hh, dsc, id, stm, endstm, endhh) => {
     setVisible(true)
     setDivision(div)
     setDate(dd)
@@ -83,12 +89,53 @@ function AdminEditEvents({ navigation }) {
     if (stm) {
         setConvertTime(new Date(stm))
     }
+
+    if (endstm) {
+        setEndTime(new Date(endstm))
+        setEndTimeExist(true)
+    } else {
+        setEndTimeExist(false)
+    }
+
+    if (endhh !== "") {
+        setEndStr(endhh)
+    }
    }; 
 
    const onChange = (event, selectedDate) => {
-    const changedDate = selectedDate || convertTime;
-    setConvertTime(changedDate)
 
+    if (Platform.OS === 'android') {
+        
+        const changedDate = selectedDate || convertTime;
+        setShow(Platform.OS === 'ios');
+
+        if (changedDate.valueOf() > (new Date().valueOf() - 3600000)) {
+
+            setConvertTime(changedDate)
+        
+                let tempDate = new Date(changedDate)
+        
+                let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+                let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+                let fTime = fHours + ':' + fMinutes;
+        
+                let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
+                let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
+                let fDate = day + '.' + month + '.' + tempDate.getFullYear(); 
+        
+                
+                setTime(fTime)
+                setDate(fDate)
+        } else {
+            Alert.alert("Tapahtuman ajankohta ei voi olla menneisyydessä")
+        }
+    } else if (Platform.OS === 'ios') {
+         
+        const changedDate = selectedDate || convertTime;
+        setShow(Platform.OS === 'ios');
+
+        setConvertTime(changedDate)
+        
         let tempDate = new Date(changedDate)
 
         let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
@@ -102,23 +149,59 @@ function AdminEditEvents({ navigation }) {
         
         setTime(fTime)
         setDate(fDate)
+    }
    }
 
-//    const handleTime = () => {
-//     let unixTime = timeStamp
-//     const date = new Date(unixTime)
+   const onChangeSec = (event, selectedDate) => {
 
-//     const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-//     const month = Number(date.getMonth() + 1) < 10 ? '0' + Number(date.getMonth() + 1) : Number(date.getMonth() + 1);
-//     const year = date.getFullYear()
+        if (Platform.OS === 'android') {
 
-//     const hours = date.getHours()
-//     const minutes = "0" + date.getMinutes()
+            const changedDate = selectedDate || convertTime;
+            setShowEnd(Platform.OS === 'ios');
+    
+            if (changedDate.valueOf() > (convertTime.valueOf() - 600000)) {
+    
+                setEndTime(changedDate)
+            
+                    let tempDate = new Date(changedDate)
+            
+                    let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+                    let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+                    let fTime = fHours + ':' + fMinutes;
+            
+                    let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
+                    let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
+                    let fDate = day + '.' + month + '.' + tempDate.getFullYear(); 
+            
+                    
+                    setEndHours(fTime)
+            } else {
+                Alert.alert("Lopetusajankohta ei voi olla ennen alkamisajankohtaa")
+            }
 
-//     const formatTime = hours + ":" + minutes.substring(-2) + " päivä: " + day + "." + month + "." + year
+        } else if (Platform.OS === 'ios') {
 
-//     console.log(formatTime)
-//    }
+            const changedDate = selectedDate || convertTime;
+            setShowEnd(Platform.OS === 'ios');
+
+            setEndTime(changedDate)
+            
+                    let tempDate = new Date(changedDate)
+            
+                    let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
+                    let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
+                    let fTime = fHours + ':' + fMinutes;
+            
+                    let month = Number(tempDate.getMonth() + 1) < 10 ? '0' + Number(tempDate.getMonth() + 1) : Number(tempDate.getMonth() + 1);
+                    let day = tempDate.getDate() < 10 ? '0' + tempDate.getDate() : tempDate.getDate();
+                    let fDate = day + '.' + month + '.' + tempDate.getFullYear(); 
+            
+                    
+                    setEndHours(fTime)
+        }
+
+
+   }
 
    const hideModal = () => {
     setVisible(false);
@@ -146,7 +229,9 @@ function AdminEditEvents({ navigation }) {
                     division: division,
                     description: desc,
                     isEvent: division === "Muut",
-                    timestamp: convertTime.valueOf()
+                    timestamp: convertTime.valueOf(),
+                    endTimestamp: endTimeExist == true ? endTime.valueOf() : "",
+                    endTime: endTimeExist == true ? endHours.valueOf() : ""
                 }).then(hideModal())
             } else {
                 Alert.alert("Muista valita sarja, tapahtuman päivänmäärä ja kellonaika!")
@@ -190,6 +275,10 @@ function AdminEditEvents({ navigation }) {
         console.log('show', show);
         setShow(true);
         setMode(currentMode);
+    }
+
+    const showModeEnd = () => {
+        setShowEnd(true);
     }
 
    
@@ -287,7 +376,14 @@ function AdminEditEvents({ navigation }) {
                             <Modal visible={visible} contentContainerStyle={style.modalContainer}
                             style={ !divisionExpand ? {marginTop: "-60%"} : { marginTop: 0 } }
                             >
-                            <Text style={[style.modalTitle, {marginBottom: 10}]}>Muokkaa tapahtumaa</Text>
+
+                            <View> 
+                                <Text style={[style.modalTitle, {marginBottom: 25, marginTop: 25}]}>Muokkaa tapahtumaa</Text>
+                                <Pressable onPress={() => hideModal()} style={style.adminModalExit}>
+                                <Icon.X style={style.adminExitIcon}/>
+                                </Pressable>
+                            </View>
+
 
                             <View style={style.adminModalView}>
                                 <List.Accordion
@@ -356,8 +452,7 @@ function AdminEditEvents({ navigation }) {
                                                     mode={mode}
                                                     is24Hour={true}
                                                     display='default'
-                                                    onChange={onChange} 
-                                                    onTouchCancel={setShow(false)}/>
+                                                    onChange={onChange} />
                                                 )}
 
 
@@ -369,16 +464,6 @@ function AdminEditEvents({ navigation }) {
 
                                 <View>
                                     <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
-                                        {/* <TextInput
-                                            style={style.modalTextInput}
-                                            value={time}
-                                            keyboardType={'numbers-and-punctuation'}
-                                            maxLength={5}
-                                            onChangeText={setTime}
-                                            label={"Kellonaika"}
-                                            returnKeyType={'done'}
-                                            onFocus={hide}
-                                        /> */}
 
                                         {Platform.OS === 'ios' ? 
                                         (
@@ -404,14 +489,51 @@ function AdminEditEvents({ navigation }) {
                                                     mode={mode}
                                                     is24Hour={true}
                                                     display='default'
-                                                    onChange={onChange}
-                                                    onTouchCancel={setShow(false)} />
+                                                    onChange={onChange} />
                                                 )}
 
 
                                             </View>
                                         ): null}
                                 </View>
+
+                                {endTimeExist && 
+                                (
+                                    <View>
+                                        <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
+                                       
+                                        {Platform.OS === 'ios' ? 
+                                        (
+                                            <DateTimePicker
+                                            testID='dateTimePicker'
+                                            minimumDate={convertTime}
+                                            style={style.adminEditTime}
+                                            value={endTime}
+                                            mode={'time'}
+                                            is24Hour={true}
+                                            display='default'
+                                            onChange={onChangeSec} />
+                                        ): Platform.OS === 'android' ? 
+                                        (
+                                            <View style={style.adminButtonAlign}>
+                                        <Pressable style={style.adminDateButton} onPress={() => showModeEnd("time")}><Text style={style.buttonText}>Valitse lopetusajankohta: {endStr}</Text></Pressable>
+                                                {showEnd && (
+                                                    <DateTimePicker
+                                                    testID='dateTimePicker'
+                                                    minimumDate={convertTime}
+                                                    style={style.adminEditAndroid}
+                                                    value={endTime}
+                                                    mode={'time'}
+                                                    is24Hour={true}
+                                                    display='default'
+                                                    onChange={onChangeSec} />
+                                                )}
+
+
+                                            </View>
+                                        ): null}
+                                    </View>
+                                )}
 
                                
                                 
