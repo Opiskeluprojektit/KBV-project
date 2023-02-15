@@ -53,7 +53,7 @@ function Ranking({navigation}) {
         (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
       });
       parseKeys = parseKeys.map((e) => {
-        e.ranking = {2023: e.ranking}
+        e.ranking = e.ranking[2023] ? e.ranking : {2023: e.ranking};
         return e;
       })
       setPlayer(parseKeys);
@@ -65,6 +65,7 @@ function Ranking({navigation}) {
   }, [player, year])
 
   const updatePlayersToShow = (selection, selectedList) => {
+    setDivisionsExpanded(false);
     setDivision(selection)
     if (selectedList.length > 0 ) setPlayersToShow(selectedList) 
     else {
@@ -78,14 +79,15 @@ function Ranking({navigation}) {
     }
   }
 
-  const updateSelection = (selection, value) => {
-    if (selection == "Miehet") setMiehet(value) 
-      else if (selection == "Naiset") setNaiset(value)
-      else if (selection == "Tytöt") setTytöt(value)
-      else setPojat(value)
+  const updateSelection = (selection, newList) => {
+    if (selection == "Miehet") setMiehet(newList) 
+      else if (selection == "Naiset") setNaiset(newList)
+      else if (selection == "Tytöt") setTytöt(newList)
+      else setPojat(newList)
   }
 
   const PlayerRow = ({item}) => {
+    console.log("item.ranking[year]", item.ranking[year], item.id);
     return (
       <DataTable.Row>
         <DataTable.Cell>{item.rankingNumber}</DataTable.Cell>
@@ -168,6 +170,7 @@ function Ranking({navigation}) {
               <DataTable.Title style={{flex: 4}}>Pelaaja</DataTable.Title>
               <DataTable.Title numeric style={{flex: 2, justifyContent: 'center'}}>Sijoituspisteet</DataTable.Title>
             </DataTable.Header>
+            {console.log("ennen flatlistia", playersToShow)}
             <FlatList
               data={playersToShow}
               renderItem={PlayerRow}

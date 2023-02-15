@@ -80,12 +80,10 @@ function Code({navigation}) {
             navigation.navigate('Home')
           })
           .catch((err) => {
-            console.log('Kirjautuminen epäonnistui.', err);
             Alert.alert('Kirjautuminen epäonnistui. ', err.toString());
           }) 
          
       } catch (err) {
-          console.log('Kirjautuminen epäonnistui.', err);
           Alert.alert('Kirjautuminen epäonnistui. ', err.toString());
         }
       }
