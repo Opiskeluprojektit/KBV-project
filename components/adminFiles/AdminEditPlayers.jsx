@@ -207,7 +207,12 @@ function AdminEditPlayers({ navigation }) {
                     <Modal visible={visible} contentContainerStyle={style.modalContainer}
                             style={ !divisionExpand ? {marginTop: "-60%"} : { marginTop: 0 } }
                             >
-                        <Text style={[style.modalTitle, {marginBottom: 10}]}>Muokkaa pelaajaa</Text>
+                        <View> 
+                                <Text style={[style.modalTitle, {marginBottom: 25, marginTop: 25}]}>Muokkaa Pelaajaa</Text>
+                                <Pressable onPress={() => hideModal()} style={style.adminModalExit}>
+                                <Icon.X style={style.adminExitIcon}/>
+                                </Pressable>
+                            </View>
 
                             <View style={style.adminModalView}>
 
