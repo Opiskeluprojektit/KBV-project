@@ -309,7 +309,7 @@ function AdminEvents({ navigation }) {
                                 <Pressable onPress={() => showItemsSec()}
                                     style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.button, style.adminShowing]}>
                                     <Text style={style.buttonText}>Lopetusajankohta </Text> 
-                                    {showing == true ? <Icon.ArrowUp style={style.adminArrow}/> : <Icon.ArrowDown style={style.adminArrow}/>}
+                                    {showing == true ? <Icon.ChevronUp style={style.adminArrow}/> : <Icon.ChevronDown style={style.adminArrow}/>}
                                 </Pressable>
                                 </View>
 

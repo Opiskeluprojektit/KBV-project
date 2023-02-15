@@ -924,7 +924,7 @@ export const style = StyleSheet.create({
     adminEditDay: {
         marginBottom: "5%",
         alignSelf: 'flex-start',
-        marginLeft: "12%",
+        marginLeft: "17%",
         marginTop: "3%"
     },
 
@@ -957,5 +957,18 @@ export const style = StyleSheet.create({
     adminEndTime: {
         marginBottom: 10,
         marginTop: 10
+    },
+
+    adminModalExit: {
+        position: 'absolute',
+        right: 25,
+        top: 20,
+        backgroundColor: Colors.primary,
+        borderRadius: 1000,
+        padding: 7
+    },
+
+    adminExitIcon: {
+        color: Colors.buttonText
     }
 })
