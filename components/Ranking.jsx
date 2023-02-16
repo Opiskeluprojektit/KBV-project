@@ -87,7 +87,6 @@ function Ranking({navigation}) {
   }
 
   const PlayerRow = ({item}) => {
-    console.log("item.ranking[year]", item.ranking[year], item.id);
     return (
       <DataTable.Row>
         <DataTable.Cell>{item.rankingNumber}</DataTable.Cell>
@@ -170,7 +169,6 @@ function Ranking({navigation}) {
               <DataTable.Title style={{flex: 4}}>Pelaaja</DataTable.Title>
               <DataTable.Title numeric style={{flex: 2, justifyContent: 'center'}}>Sijoituspisteet</DataTable.Title>
             </DataTable.Header>
-            {console.log("ennen flatlistia", playersToShow)}
             <FlatList
               data={playersToShow}
               renderItem={PlayerRow}

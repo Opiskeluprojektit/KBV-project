@@ -759,7 +759,7 @@ export const style = StyleSheet.create({
     },
 
     adminEditRanking: {
-        alignSelf: 'left',
+        //alignSelf: 'left',
         height: 40,
         width: "15%",
         backgroundColor: Colors.primaryVariant,
@@ -768,7 +768,7 @@ export const style = StyleSheet.create({
     }, 
 
     adminSetRanking: {
-        alignSelf: 'left',
+        //alignSelf: 'left',
         height: 50,
         width: "30%",
         backgroundColor: Colors.primaryVariant,
