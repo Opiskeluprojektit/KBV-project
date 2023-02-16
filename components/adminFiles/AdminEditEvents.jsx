@@ -67,6 +67,7 @@ function AdminEditEvents({ navigation }) {
         }
 
         data.sort((a, b) => a.timestamp - b.timestamp)
+        data.filter((i) => i.timestamp >= new Date().valueOf())
 
         return data;
     }
@@ -500,7 +501,7 @@ function AdminEditEvents({ navigation }) {
                                         ): null}
                                 </View>
 
-                                {endTimeExist && 
+                                {endTimeExist == true ? 
                                 (
                                     <View>
                                         <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
@@ -536,7 +537,15 @@ function AdminEditEvents({ navigation }) {
                                             </View>
                                         ): null}
                                     </View>
-                                )}
+                                ): 
+                                <View>
+                                    <Pressable>
+                                        <Text>
+                                            Lisää tapahtuman lopetusaika
+                                        </Text>
+                                    </Pressable>
+                                </View>
+                                }
 
 
                         <View>
