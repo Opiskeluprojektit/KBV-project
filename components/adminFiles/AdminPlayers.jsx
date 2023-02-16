@@ -83,6 +83,7 @@ function AdminPlayers({ navigation }) {
                             maxLength={50}
                             value={player}
                             onChangeText={setPlayer}
+                            autoCapitalize='words'
                             />
 
                     </View>
@@ -99,6 +100,7 @@ function AdminPlayers({ navigation }) {
                         maxLength={3}
                         value={ranking}
                         onChangeText={setRanking}
+                        autoCapitalize='words'
                         />
                     </View>
 
