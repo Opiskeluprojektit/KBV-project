@@ -36,13 +36,14 @@ function Points({ navigation }) {
 
   // Collects game information from firebase database
   useEffect(() => {
-    const games = query(ref(database, "game/"), orderByChild("isEvent"), equalTo(null));
+    const games = query(ref(database, "game/"), orderByChild("isEvent"), equalTo(false));
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = { ...data };
       const parse = JSON.parse(JSON.stringify(gameItems));
       const keys = Object.keys(parse);
       let parseKeys = Object.values(parse);
+      console.log("parseKeys", parseKeys);
       parseKeys.forEach((element, i) => {
         (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
       });
@@ -140,18 +141,6 @@ function Points({ navigation }) {
   useEffect(() => {
     groupPlayers();
   }, [enrolledPlayers]);
-
-  useEffect(() => {
-    enrolledPlayers && orderEnrolledPlayers();
-  }, [groups])
-
-  const orderEnrolledPlayers = () => {
-    let newEnrolledPlayers = enrolledPlayers.sort((a, b) => {
-      if (a.orderNumber) return b.orderNumber - a.orderNumber
-            else return b.ranking[year] - a.ranking[year]
-    })
-    setEnrolledPlayers(newEnrolledPlayers)
-  }
 
   const selectDivision = (div) => {
     setDivisionsExpanded(!divisionsExpanded);
@@ -348,12 +337,33 @@ function Points({ navigation }) {
     return newGroups;
   };
 
+  //this makes sure that the order of the players in the groups doesn't change when rankings change after the games have been played.
+  const orderPlayers = () => {
+    console.log("enrolledPlayers", enrolledPlayers);
+    let newPlayers = enrolledPlayers.length > 0 ? enrolledPlayers.reduce((players, player, i) => {
+      const previousPlacement = dbPlacement.find(e => {
+        return e.player_id === player.id;
+      })
+      console.log("players,", players, " player", player);
+      player.orderNumber = previousPlacement ? previousPlacement.orderNumber : i;
+      players.push(player)
+      return players
+    }, [])
+    .sort((a, b) => {
+      console.log("a.orderNumber", a.orderNumber, "b.orderNumber", b.orderNumber);
+      if (a.orderNumber != null) {return (a.orderNumber - b.orderNumber)}
+            else return 0
+    })
+    : enrolledPlayers;
+    console.log("SORTED PLAYERS", newPlayers);
+    return newPlayers;
+  }
   
   //divides the players in to groups of 4. Uncomment the commented console logs to see what this does.
   const groupPlayers = () => {
     //console.log(enrolledPlayers);
     const newGroups = enrolledPlayers
-    ? enrolledPlayers.reduce((groups, player, i) => {
+    ? orderPlayers().reduce((groups, player, i) => {
       let j = Math.floor(i / 4);
       groups[j] = groups[j] || [];
       player = addScoringVariablesToPlayer(player, i, j);
@@ -371,12 +381,11 @@ function Points({ navigation }) {
     const previousPlacement = dbPlacement.find(e => {
       return e.player_id === player.id;
     })
+    player.orderNumber = previousPlacement ? previousPlacement.orderNumber : i;
     player.scores = previousPlacement ? previousPlacement.scores : [];
     player.sum = previousPlacement ? previousPlacement.sum : null;
     player.resultRanking = previousPlacement ? previousPlacement.resultRanking : null;
-    player.ord
     //These last two are given to make the nested FlatList management easier.
-    player.orderNumber = previousPlacement ? previousPlacement.orderNumber : i;
     player.group = previousPlacement ? previousPlacement.group : j;
     return player;
 
