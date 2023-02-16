@@ -62,8 +62,12 @@ function AdminEditEvents({ navigation }) {
         let data = events
 
         if (filterDiv !== 'Kaikki') {
-            data = data.filter((div) => div.division == filterDiv).map(({ID, date, time, description, division, timestamp, endTimestamp, endTime}) => ({ID, date, time, description, division, timestamp, endTimestamp, endTime}));
+            data = data.filter((div) => div.division == filterDiv).map(({ID, date, time, description, division, timestamp, endTimestamp, endTime}) => 
+            ({ID, date, time, description, division, timestamp, endTimestamp, endTime}));
         }
+
+        data.sort((a, b) => a.timestamp - b.timestamp)
+        data.filter((i) => i.timestamp >= new Date().valueOf())
 
         return data;
     }
@@ -379,7 +383,7 @@ function AdminEditEvents({ navigation }) {
 
                             <View> 
                                 <Text style={[style.modalTitle, {marginBottom: 25, marginTop: 25}]}>Muokkaa tapahtumaa</Text>
-                                <Pressable onPress={() => hideModal()} style={style.adminModalExit}>
+                                <Pressable onPress={() => hideModal()} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,}, style.adminModalExit]}>
                                 <Icon.X style={style.adminExitIcon}/>
                                 </Pressable>
                             </View>
@@ -497,7 +501,7 @@ function AdminEditEvents({ navigation }) {
                                         ): null}
                                 </View>
 
-                                {endTimeExist && 
+                                {endTimeExist == true ? 
                                 (
                                     <View>
                                         <View style={[style.adminIconsEllipse, style.adminEllipse]}><Icon.Clock style={style.adminIcons}/></View>
@@ -533,33 +537,16 @@ function AdminEditEvents({ navigation }) {
                                             </View>
                                         ): null}
                                     </View>
-                                )}
+                                ): 
+                                <View>
+                                    <Pressable>
+                                        <Text>
+                                            Lisää tapahtuman lopetusaika
+                                        </Text>
+                                    </Pressable>
+                                </View>
+                                }
 
-                               
-                                
-
-                                    {/* Vaihtoehtosesti voidaan käyttää datetimepickeriä, mutta se vaatii muutoksia tapahtuman luontiin yms. */}
-
-                                    {/* {Platform.OS === 'ios' ? 
-                                    (
-                                        <View style={style.adminDatePicker}>
-                                            <DateTimePicker
-                                                testID='dateTimePicker'
-                                                style={{marginBottom: "5%"}}
-                                                value={date}
-                                                mode={'date'}
-                                                is24Hour={true}
-                                                display='default' />
-
-                                            <DateTimePicker
-                                                testID='dateTimePicker'
-                                                style={{marginBottom: "5%"}}
-                                                value={date}
-                                                mode={'time'}
-                                                is24Hour={true}
-                                                display='default' />
-                                        </View>
-                                    ): null} */}
 
                         <View>
                             <TextInput 

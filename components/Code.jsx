@@ -158,6 +158,7 @@ function Code({navigation}) {
                             value={userPw}
                             onChangeText={(userPw) => setUserPw(userPw)}
                             maxLength={50}
+                            secureTextEntry={true}
                            />
                         </View>
 

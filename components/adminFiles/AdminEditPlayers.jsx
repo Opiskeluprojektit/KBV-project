@@ -3,7 +3,7 @@ import { View, ImageBackground, SafeAreaView, Pressable, Text, FlatList, ScrollV
 import { TextInput, List, Provider, Portal, Modal } from 'react-native-paper';
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
-import { onValue, ref, set, remove } from 'firebase/database';
+import { onValue, ref, set, remove, update } from 'firebase/database';
 import { PLAYER_REF, database } from '../../firebase/Config';
 
 
@@ -49,6 +49,8 @@ function AdminEditPlayers({ navigation }) {
             data = data.filter((div) => div.division == filterDiv).map(({ID, name, division}) => ({ID, name, division}));
         }
 
+        data.sort((a, b) => a.name - b.name)
+
         return data;
     }
 
@@ -86,7 +88,7 @@ function AdminEditPlayers({ navigation }) {
 
             if (name && division && ranking) {
                 setRanking(Number(ranking))
-                set(ref(database, PLAYER_REF + dbId), {
+                update(ref(database, PLAYER_REF + dbId), {
                     name: name,
                     division: division,
                     ranking: ranking
@@ -112,7 +114,7 @@ function AdminEditPlayers({ navigation }) {
 
     const executeDelete = (ans) => {
         if (ans === true) {
-            remove(ref(database, PLAYER_REF + dbId)).then(hideModal(), Alert.alert("Tapahtuma poistettu"))
+            remove(ref(database, PLAYER_REF + dbId)).then(hideModal(), Alert.alert("Pelaaja poistettu"))
         } else {
             console.log("ei poistettu")
         }
@@ -209,7 +211,7 @@ function AdminEditPlayers({ navigation }) {
                             >
                         <View> 
                                 <Text style={[style.modalTitle, {marginBottom: 25, marginTop: 25}]}>Muokkaa Pelaajaa</Text>
-                                <Pressable onPress={() => hideModal()} style={style.adminModalExit}>
+                                <Pressable onPress={() => hideModal()} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminModalExit]}>
                                 <Icon.X style={style.adminExitIcon}/>
                                 </Pressable>
                             </View>
