@@ -8,7 +8,6 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { database, EVENT_REF } from '../../firebase/Config';
 import {onValue, ref, update, child, push} from 'firebase/database';
 
-
 const backgroundImage = require('../../assets/Volleyball50.png');
 
 function AdminEvents({ navigation }) {
@@ -32,7 +31,6 @@ function AdminEvents({ navigation }) {
 
     const [endText, setEndText] = useState()
 
-    
     const [shouldShow, setShouldShow] = useState(false);
 
     const [visible, setVisible] = React.useState(false);
@@ -48,12 +46,8 @@ function AdminEvents({ navigation }) {
         setShowing(!showing)
     }
 
-
     const onChange = (event, selectedDate) => {
-
         if (Platform.OS === 'android') {
-
-
             const currentDate = selectedDate || date;
             setShow(Platform.OS === 'ios');
             
@@ -61,7 +55,6 @@ function AdminEvents({ navigation }) {
                 
             setDate(currentDate);
             let tempDate = new Date(currentDate);
-    
     
             let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
             let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
@@ -77,9 +70,7 @@ function AdminEvents({ navigation }) {
             } else {
                 Alert.alert("Tapahtuman ajankohta ei voi olla menneisyydessä")
             }
-
         } else if (Platform.OS === 'ios') {
-
             const currentDate = selectedDate || date;
             setShow(Platform.OS === 'ios');
             setDate(currentDate);
@@ -99,34 +90,24 @@ function AdminEvents({ navigation }) {
             setTimeDb(fTime)
             setDateDb(fDate)
         } 
-        
     }
 
     const onChangeSec = (event, selectedDate) => {
-
         if (Platform.OS === 'android') {
-
             const currentDate = selectedDate || date
             setShowSec(Platform.OS === 'ios');
-
             if (currentDate.valueOf() >= (date.valueOf() - 600000)) {
-
                 setSecDate(currentDate)
-    
                 let tempDate = new Date(currentDate)
-    
                 let fHours = Number(tempDate.getHours()) < 10 ? '0' + Number(tempDate.getHours()) : Number(tempDate.getHours());
                 let fMinutes = Number(tempDate.getMinutes()) < 10 ? '0' + Number(tempDate.getMinutes()) : Number(tempDate.getMinutes());
                 let fTime = fHours + ':' + fMinutes;
-    
                 setEndText(" - " + fTime)
                 setEndTimeDb(fTime)
                 setEndTimeExist(true)
             } else {
                 Alert.alert("Lopetusajankohta ei voi olla ennen alkamisajankohtaa")
             }
-
-
         } else if (Platform.OS === 'ios') {
 
             const currentDate = selectedDate || date
@@ -143,7 +124,6 @@ function AdminEvents({ navigation }) {
             setEndTimeDb(fTime)
             setEndTimeExist(true)
         } 
-
     }
 
     const showMode = (currentMode) => {
@@ -162,13 +142,9 @@ function AdminEvents({ navigation }) {
       };
 
     function addEvent() {
-
-
         if (division && dateDb && timeDb) {
-
             console.log(date)
             console.log(secDate)
-
             if(endTimeExist == true) {
                 const eventKey = push(ref(database, EVENT_REF)).key
                 update(ref(database, EVENT_REF + eventKey), {
@@ -182,7 +158,6 @@ function AdminEvents({ navigation }) {
                     timestamp: date.valueOf(),
                     endTimestamp: secDate.valueOf(),
             }).then(showModal);
-
             } else {
                 const eventKey = push(ref(database, EVENT_REF)).key
                 update(ref(database, EVENT_REF + eventKey), {
@@ -197,9 +172,6 @@ function AdminEvents({ navigation }) {
                     endTimestamp: "",
             }).then(showModal);
             }
-
-            
-
         } else {
             Alert.alert("Muista valita sarja sekä tapahtuman päivänmäärä!")
         }
@@ -220,34 +192,25 @@ function AdminEvents({ navigation }) {
         setShowing(false)
       }
 
-
     return (
         <>
         <ImageBackground source={backgroundImage} style={{ flex: 1 }}>
             <SafeAreaView>
-
                 {/* Header: Go back button and Menu */}
                 <View style={style.header}>
                     <Pressable onPress={() => navigation.navigate('AdminNav')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
                     <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
                 </View>
-
-
-
                 <View style={style.viewContainer}>
                     <View style={style.contentOnLightBG}>
                         <Text style={[style.h4Style, style.adminHeader]}>Luo tapahtuma</Text>
                     </View>
 
-
                     {/* Creating an event */}
-
-                    
 
                     {/* Select division for the event */}
 
                     <List.Accordion
-
                         title={division ? division : "Sarjavalikko"}
                         style={[style.search, style.adminBox]}
                         theme={{
@@ -256,7 +219,6 @@ function AdminEvents({ navigation }) {
                         expanded={divisionExpand}
                         onPress={() => setDivisionsExpand(!divisionExpand)}
                         > 
-
                         <List.Item
                         style={[style.adminSelect, style.adminShadow]}
                         title="Naiset"
@@ -287,7 +249,6 @@ function AdminEvents({ navigation }) {
                     {/* Date and time picker */}
 
                         <View>
-
                             <Pressable onPress={() => showItems()} style={[style.search, style.adminBox]}> 
                             <Text style={style.adminText}>Tapahtumapäivä</Text>
                             <Text style={style.adminText}>{text}{endText}</Text>
@@ -304,7 +265,6 @@ function AdminEvents({ navigation }) {
                                     is24Hour={true}
                                     display='default'
                                     onChange={onChange} />
-
                                 <View style={{flexDirection: 'row'}}>
                                 <Pressable onPress={() => showItemsSec()}
                                     style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.button, style.adminShowing]}>
@@ -312,9 +272,7 @@ function AdminEvents({ navigation }) {
                                     {showing == true ? <Icon.ChevronUp style={style.adminArrow}/> : <Icon.ChevronDown style={style.adminArrow}/>}
                                 </Pressable>
                                 </View>
-
                                 <View style={style.adminEndTime}>
-
                                     {showing == true ? 
                                     (
                                         <DateTimePicker 
@@ -326,21 +284,14 @@ function AdminEvents({ navigation }) {
                                             is24Hour={true}
                                         />
                                     ): null}
-
                                 </View>
-
-                                        
-
                                 {/* <DateTimePicker 
                                     testID='dateTimePicker'
                                     value={secDate}
                                     mode={'datetime'}
                                     is24Hour={true}
                                 /> */}
-
-
-                             
-
+                                
                                 </View>
                             ) : shouldShow ? (
                                 <View style={style.adminButtonAlign}>
@@ -386,18 +337,14 @@ function AdminEvents({ navigation }) {
                             maxLength={100}
                             numberOfLines={2}
                             onChangeText={setDesc}
-                            >
-
-                            </TextInput>
+                            />
                         </View>
-
                         <View>
                         <Pressable onPress={addEvent} 
                             style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.enrolButton, style.button, style.adminButton]}>
                             <Text style={style.buttonText}>Luo tapahtuma</Text> 
                          </Pressable>
                         </View>
-
 
                         {/* <View style={{flexDirection: 'row'}}>
                             <Pressable onPress={calc('minus')} style={{margin: 10, backgroundColor: 'grey', padding: 10}}><Text>-</Text></Pressable>
@@ -413,24 +360,19 @@ function AdminEvents({ navigation }) {
                     <Portal>
                         <Modal visible={visible} contentContainerStyle={style.modalContainer}>
                             <Text style={style.modalTitle}>Tapahtuma luotu</Text>
-
                             <View style={[style.buttonSummaryStyles, style.adminModal]}>
                                 <Pressable onPress={() => navigation.navigate('AdminNav')} 
                                     style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                     <Text style={style.buttonText}>Sulje</Text>
                                 </Pressable>
-
                                 <Pressable onPress={hideModal} 
                                 style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                 <Text style={style.buttonText}>Lisää uusi tapahtuma</Text>
                                 </Pressable>
                             </View>
-
                         </Modal>
                     </Portal>
                 </Provider>
-
-
             </SafeAreaView>
         </ImageBackground>
         </>

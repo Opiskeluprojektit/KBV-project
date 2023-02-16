@@ -32,6 +32,8 @@ function Points({ navigation }) {
   const [player, setPlayer] = useState([]);
   const [enrolment, setEnrolment] = useState();
 
+  const year = new Date().getFullYear();
+
   // Collects game information from firebase database
   useEffect(() => {
     const games = query(ref(database, "game/"), orderByChild("isEvent"), equalTo(null));
@@ -67,6 +69,10 @@ function Points({ navigation }) {
       parseKeys.forEach((element, i) => {
         (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
       });
+      parseKeys = parseKeys.map((e) => {
+        e.ranking = e.ranking[2023] ? e.ranking : {2023: e.ranking};
+        return e;
+      })
       setPlayer(parseKeys);
     });
   }, []);
@@ -135,6 +141,18 @@ function Points({ navigation }) {
     groupPlayers();
   }, [enrolledPlayers]);
 
+  useEffect(() => {
+    enrolledPlayers && orderEnrolledPlayers();
+  }, [groups])
+
+  const orderEnrolledPlayers = () => {
+    let newEnrolledPlayers = enrolledPlayers.sort((a, b) => {
+      if (a.orderNumber) return b.orderNumber - a.orderNumber
+            else return b.ranking[year] - a.ranking[year]
+    })
+    setEnrolledPlayers(newEnrolledPlayers)
+  }
+
   const selectDivision = (div) => {
     setDivisionsExpanded(!divisionsExpanded);
     setDivision(div);
@@ -194,7 +212,12 @@ function Points({ navigation }) {
           .filter((i) =>
             enrolmentsToChosenGame.find((j) => j.player_id == i.id)
           )
-          .sort((a, b) => b.ranking - a.ranking))
+          .sort((a, b) => {
+            console.log('a.orderNumber', a.orderNumber);
+            if (a.orderNumber) return b.orderNumber - a.orderNumber
+            else return b.ranking[year] - a.ranking[year]
+          })
+        )
       : null;
     //newEnrolledPlayers ? console.log("newEnrolledPlayers:", newEnrolledPlayers) : null
     newEnrolledPlayers ? setEnrolledPlayers(newEnrolledPlayers) : null;
@@ -274,7 +297,7 @@ function Points({ navigation }) {
         "id": placementKey,
         "game_id": chosenGame.id,
         "sum": player.sum,
-        "ranking": player.ranking,
+        "ranking": player.resultRanking,
         "player_id": player.id,
         "group": groupNumber,
         "scores": player.scores,
@@ -301,12 +324,12 @@ function Points({ navigation }) {
     temp[groupNumber] = temp[groupNumber].sort((a, b) => b.sum - a.sum);
     temp[groupNumber].reduce((group, player, i) => {
       //base points first:
-      player.ranking = 15.5 + 0.5 * (1 - (i + 1)) - (groupNumber + 1) / 2;
+      player.resultRanking = 15.5 + 0.5 * (1 - (i + 1)) - (groupNumber + 1) / 2;
       //bonus points:
-      player.ranking +=
+      player.resultRanking +=
         ((player.sum + 63) / 252) *
         (50 - (groupNumber + 1) - 1 * bonusMultiplier);
-      player.ranking = Math.round(player.ranking * 100) / 100;
+      player.resultRanking = Math.round(player.resultRanking * 100) / 100;
       group.push(player);
       return group;
     }, []);
@@ -315,7 +338,7 @@ function Points({ navigation }) {
     let newGroups = groups.concat();
 
     newGroups[groupNumber] = groups[groupNumber].reduce((group, player) => {
-      player.ranking = temp[groupNumber].find(
+      player.resultRanking = temp[groupNumber].find(
         (e) => player.name === e.name
       ).ranking;
       group.push(player);
@@ -339,22 +362,24 @@ function Points({ navigation }) {
     }, [])
     : null;
     console.log("newGroups: ", newGroups);
-    
     setGroups(newGroups);
   };
   
   const addScoringVariablesToPlayer = (player, i, j) => {
     //Gives the player objects, scores, sum and ranking keys, for calculating and submitting competition results.
+    console.log("preieri:", player);
     const previousPlacement = dbPlacement.find(e => {
       return e.player_id === player.id;
     })
     player.scores = previousPlacement ? previousPlacement.scores : [];
     player.sum = previousPlacement ? previousPlacement.sum : null;
-    player.ranking = previousPlacement ? previousPlacement.ranking : null;
+    player.resultRanking = previousPlacement ? previousPlacement.resultRanking : null;
+    player.ord
     //These last two are given to make the nested FlatList management easier.
-    player.orderNumber = i;
-    player.group = j;
+    player.orderNumber = previousPlacement ? previousPlacement.orderNumber : i;
+    player.group = previousPlacement ? previousPlacement.group : j;
     return player;
+
   };
 
   const checkScoreInput = (value) => {

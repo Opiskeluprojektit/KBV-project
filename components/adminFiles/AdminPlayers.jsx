@@ -6,9 +6,6 @@ import * as Icon from "react-native-feather";
 import { database, PLAYER_REF } from '../../firebase/Config';
 import {ref, push, update} from 'firebase/database';
 
-
-
-
 function AdminPlayers({ navigation }) {
    const backgroundImage = require('../../assets/Volleyball50.png'); 
 
@@ -20,7 +17,6 @@ function AdminPlayers({ navigation }) {
    const [ranking, setRanking] = useState('');
 
    const [visibleFirst, setVisibleFirst] = useState(false);
-
 
    const selectDivision = (div) => {
     setDivisionsExpand(!divisionExpand);
@@ -41,7 +37,6 @@ function AdminPlayers({ navigation }) {
     }
   }
 
-
   const showModal = () => setVisibleFirst(true);
 
   const hideModal = () => {
@@ -51,25 +46,19 @@ function AdminPlayers({ navigation }) {
     setRanking('');
   }
 
-
     return (
         <>
         <ImageBackground source={backgroundImage}>
             <SafeAreaView>
-
                 {/* Header: Go back button and Menu */}
                 <View style={style.header}>
                     <Pressable onPress={() => navigation.navigate('AdminNav')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
                     <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
                 </View>
-
-
-
                 <View style={style.viewContainer}>
                     <View style={style.contentOnLightBG}>
                         <Text style={[style.h4Style, style.adminHeader]}>Lisää pelaaja</Text>
                     </View>
-
 
                     {/* Insert player name and division */}
 
@@ -86,9 +75,7 @@ function AdminPlayers({ navigation }) {
                             />
 
                     </View>
-
                     <View>
-
                         <TextInput
                         style={style.adminSetRanking}
                         label="Ranking"
@@ -105,7 +92,6 @@ function AdminPlayers({ navigation }) {
                     {/* Select division */}
 
                     <List.Accordion
-
                         title={division ? division : "Sarjavalikko"}
                         style={[style.search, style.adminCheck, style.adminShadow]}
                         theme={{
@@ -114,7 +100,6 @@ function AdminPlayers({ navigation }) {
                         expanded={divisionExpand}
                         onPress={() => setDivisionsExpand(!divisionExpand)}
                         > 
-
                         <List.Item
                         style={[style.adminSelect, style.adminShadow, {marginLeft: "15%"}]}
                         title="Naiset"
@@ -136,49 +121,33 @@ function AdminPlayers({ navigation }) {
                         onPress={() => selectDivision("Pojat")}
                         />
                     </List.Accordion>
-
-                    
-
-                    
-
-
                     <View>
                         <Pressable onPress={addPlayer} 
                             style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.enrolButton, style.button, style.adminButton]}>
                             <Text style={style.buttonText}>Lisää pelaaja</Text> 
                          </Pressable>
                     </View>
-
                 </View>
 
-
-
                 {/* First modal */}
-
-                
+            
                 <Provider>
                     <Portal>
                         <Modal visible={visibleFirst} contentContainerStyle={style.modalContainer}>
                             <Text style={style.modalTitle}>Pelaaja lisätty</Text>
-
                             <View style={[style.buttonSummaryStyles, style.adminModal]}>
-
                                 <Pressable onPress={hideModal} 
                                 style={[style.summaryButton]}>
                                 <Text style={style.buttonText}>Sulje</Text>
                                 </Pressable>
                             </View>
-
                         </Modal>
                     </Portal>
                 </Provider>
-
-
             </SafeAreaView>
         </ImageBackground>
         </>
     );
-
 }
 
 export default AdminPlayers
