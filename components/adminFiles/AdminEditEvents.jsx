@@ -92,6 +92,7 @@ function AdminEditEvents({ navigation }) {
     
     if (stm) {
         setConvertTime(new Date(stm))
+        console.log("eka " + stm)
     }
 
     if (endstm) {
@@ -283,6 +284,11 @@ function AdminEditEvents({ navigation }) {
 
     const showModeEnd = () => {
         setShowEnd(true);
+    }
+
+    const addEndTime = () => {
+        setEndTimeExist(true)
+        setEndTime(new Date(convertTime))
     }
 
    
@@ -539,11 +545,11 @@ function AdminEditEvents({ navigation }) {
                                     </View>
                                 ): 
                                 <View>
-                                    <Pressable>
-                                        <Text>
-                                            Lisää tapahtuman lopetusaika
-                                        </Text>
-                                    </Pressable>
+                                     <Pressable onPress={() => addEndTime()}
+                                    style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.button, style.adminShowing, {marginBottom: 10}]}>
+                                    <Text style={style.buttonText}>Lisää tapahtumalle lopetusajankohta </Text> 
+                                    <Icon.ArrowRight style={style.adminArrow}/>
+                                </Pressable>
                                 </View>
                                 }
 
