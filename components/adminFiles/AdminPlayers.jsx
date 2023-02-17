@@ -18,19 +18,21 @@ function AdminPlayers({ navigation }) {
 
    const [visibleFirst, setVisibleFirst] = useState(false);
 
+   const [year, setYear] = useState(new Date().getFullYear())
+
    const selectDivision = (div) => {
     setDivisionsExpand(!divisionExpand);
     setDivision(div);
   };
 
   const addPlayer = () => {
-    if (division && player) {
+      if (division && player) {
         const playerKey = push(ref(database, PLAYER_REF)).key
         update(ref(database, PLAYER_REF + playerKey), {
             id: playerKey,
             division: division,
             name: player,
-            ranking: ranking
+            ranking: {[year]: Number(ranking)}
         }).then(showModal);
     } else {
         Alert.alert("Muista täyttää pelaajan nimi ja sarja!")
@@ -84,7 +86,7 @@ function AdminPlayers({ navigation }) {
                         keyboardType='number-pad'
                         underlineColor={'#1B1B1B'}
                         activeUnderlineColor={'#005C70'}
-                        maxLength={3}
+                        maxLength={5}
                         value={ranking}
                         onChangeText={setRanking}
                         autoCapitalize='words'

@@ -6,9 +6,6 @@ import * as Icon from "react-native-feather";
 import { onValue, ref, set, remove, update } from 'firebase/database';
 import { PLAYER_REF, database } from '../../firebase/Config';
 
-
-
-
 function AdminEditPlayers({ navigation }) {
     const backgroundImage = require('../../assets/Volleyball50.png'); 
 
@@ -20,10 +17,10 @@ function AdminEditPlayers({ navigation }) {
     const [name, setName] = useState('');
     const [division, setDivision] = useState('');
     const [ranking, setRanking] = useState();
+    const [year, setYear] = useState(new Date().getFullYear())
 
     const [filterDiv, setFilterDiv] = useState('Kaikki');
     const [filterExpand, setFilterExpand] = useState();
-
 
     useEffect(() => {
         const events = ref(database, PLAYER_REF);
@@ -32,6 +29,7 @@ function AdminEditPlayers({ navigation }) {
         const playerItems = {...data};
         const keys = Object.keys(playerItems);
         let parseKeys = keys.map((key) => {
+            playerItems[key].ranking = playerItems[key].ranking[2023] ? playerItems[key].ranking : {2023: playerItems[key].ranking};
             return { ...playerItems[key], ID: key };
         })
         setPlayers(parseKeys);
@@ -44,13 +42,10 @@ function AdminEditPlayers({ navigation }) {
     
     const createFilter = () => {
         let data = players
-
         if (filterDiv !== 'Kaikki') {
             data = data.filter((div) => div.division == filterDiv).map(({ID, name, division}) => ({ID, name, division}));
         }
-
         data.sort((a, b) => a.name - b.name)
-
         return data;
     }
 
@@ -68,7 +63,8 @@ function AdminEditPlayers({ navigation }) {
         setDbId(id)
         setName(name)
         setDivision(div)
-        setRanking(rank)
+        console.log("ranking", rank[year]);
+        setRanking(rank[year].toString())
        };
 
     const hideModal = () => {
@@ -85,19 +81,16 @@ function AdminEditPlayers({ navigation }) {
             confirmDelete()
         } 
         if (check === "submit") {
-
             if (name && division && ranking) {
                 setRanking(Number(ranking))
                 update(ref(database, PLAYER_REF + dbId), {
                     name: name,
                     division: division,
-                    ranking: ranking
+                    ranking: {[year]: Number(ranking)}
                 }).then(hideModal())
             } else {
                 Alert.alert("Huom!", "Muista täyttää pelaajan nimi, sarja sekä ranking")
             }
-
-
         }
     }
 
@@ -110,7 +103,6 @@ function AdminEditPlayers({ navigation }) {
                 },
                 {text: 'Kyllä', onPress: () => executeDelete(true)},
         ]);
-
 
     const executeDelete = (ans) => {
         if (ans === true) {
@@ -131,23 +123,17 @@ function AdminEditPlayers({ navigation }) {
         <>
         <ImageBackground source={backgroundImage}>
             <SafeAreaView>
-
                 {/* Header: Go back button and Menu */}
                 <View style={style.header}>
                     <Pressable onPress={() => navigation.navigate('AdminNav')}><View style={style.iconsEllipse}><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
                     <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
                 </View>
-
-
-
                 <View style={style.viewContainer}>
                     <View style={style.contentOnLightBG}>
                         <Text style={[style.h4Style, style.adminHeader, {marginBottom: 15}]}>Muokkaa pelaajia</Text>
                     </View>
-
                     <View>
                         <List.Accordion
-
                             title={filterDiv ? filterDiv : "Filtteröi Pelaajia"}
                             style={[style.search, style.adminBox]}
                             theme={{
@@ -156,7 +142,6 @@ function AdminEditPlayers({ navigation }) {
                             expanded={filterExpand}
                             onPress={() => setFilterExpand(!filterExpand)}
                             > 
-
                             <List.Item
                                 style={[style.adminSelect, style.adminShadow, {width: "80%", marginBottom: 6}]}
                                 title="Kaikki"
@@ -182,127 +167,95 @@ function AdminEditPlayers({ navigation }) {
                                 title="Pojat"
                                 onPress={() => selectFilter("Pojat")}
                             />
-                            
                         </List.Accordion>
                     </View>
-
-
-
                     <ScrollView style={style.adminScroll}>
-
                         {allPlayers}
-
                         {/* <View style={style.adminEventList}>
                             <Text style={style.adminEventTitle}>Pelaaja esimerkki</Text>
                             <Pressable style={style.adminEventButton}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
                         </View> */}
-
-                        
-
                     </ScrollView>
-
                 </View>
-
-
             <Provider>
                 <Portal>
                     <Modal visible={visible} contentContainerStyle={style.modalContainer}
                             style={ !divisionExpand ? {marginTop: "-60%"} : { marginTop: 0 } }
                             >
                         <View> 
-                                <Text style={[style.modalTitle, {marginBottom: 25, marginTop: 25}]}>Muokkaa Pelaajaa</Text>
-                                <Pressable onPress={() => hideModal()} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminModalExit]}>
-                                <Icon.X style={style.adminExitIcon}/>
-                                </Pressable>
-                            </View>
-
-                            <View style={style.adminModalView}>
-
-                            <Text style={[style.adminModalText, {marginBottom: 0, marginLeft: "4%"}]}>Pelaajan nimi:</Text>
-
-
-                                <TextInput 
-                                label="Pelaajan nimi"
-                                style={style.adminEditPlayer}
-                                returnKeyType="next"
-                                underlineColor={'#1B1B1B'}
-                                activeUnderlineColor={'#005C70'}
-                                maxLength={50}
-                                value={name}
-                                onChangeText={setName}
+                            <Text style={[style.modalTitle, {marginBottom: 25, marginTop: 25}]}>Muokkaa Pelaajaa</Text>
+                            <Pressable onPress={() => hideModal()} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminModalExit]}>
+                            <Icon.X style={style.adminExitIcon}/>
+                            </Pressable>
+                        </View>
+                        <View style={style.adminModalView}>
+                        <Text style={[style.adminModalText, {marginBottom: 0, marginLeft: "4%"}]}>Pelaajan nimi:</Text>
+                            <TextInput 
+                            label="Pelaajan nimi"
+                            style={style.adminEditPlayer}
+                            returnKeyType="next"
+                            underlineColor={'#1B1B1B'}
+                            activeUnderlineColor={'#005C70'}
+                            maxLength={50}
+                            value={name}
+                            onChangeText={setName}
+                            />
+                            <Text style={[style.adminModalText, {marginBottom: 5, marginLeft: "4%"}]}>Sarjavalikko:</Text>
+                            <List.Accordion
+                                title={division ? division : "Sarjavalikko"}
+                                style={[style.search, style.adminBox, {marginTop: 5}]}
+                                theme={{
+                                colors: { background: "#F9F9F9", primary: "#005C70" },
+                                }}
+                                expanded={divisionExpand}
+                                onPress={() => setDivisionsExpand(!divisionExpand)}
+                                > 
+                                <List.Item
+                                style={[style.adminSelect, style.adminShadow]}
+                                title="Naiset"
+                                onPress={() => selectDivision("Naiset")}
                                 />
-
-                                <Text style={[style.adminModalText, {marginBottom: 5, marginLeft: "4%"}]}>Sarjavalikko:</Text>
-
-                                <List.Accordion
-
-                                    title={division ? division : "Sarjavalikko"}
-                                    style={[style.search, style.adminBox, {marginTop: 5}]}
-                                    theme={{
-                                    colors: { background: "#F9F9F9", primary: "#005C70" },
-                                    }}
-                                    expanded={divisionExpand}
-                                    onPress={() => setDivisionsExpand(!divisionExpand)}
-                                    > 
-
-                                    <List.Item
-                                    style={[style.adminSelect, style.adminShadow]}
-                                    title="Naiset"
-                                    onPress={() => selectDivision("Naiset")}
-                                    />
-                                    <List.Item
-                                    style={[style.adminSelect, style.adminShadow]}
-                                    title="Miehet"
-                                    onPress={() => selectDivision("Miehet")}
-                                    />
-                                    <List.Item
-                                    style={[style.adminSelect, style.adminShadow]}
-                                    title="Tytöt"
-                                    onPress={() => selectDivision("Tytöt")}
-                                    />
-                                    <List.Item
-                                    style={[style.adminSelect, style.adminShadow]}
-                                    title="Pojat"
-                                    onPress={() => selectDivision("Pojat")}
-                                    />
-                                    
-                                </List.Accordion>
-
-
-                                <Text style={[style.adminModalText, {marginBottom: 5, marginLeft: "4%"}]}>Ranking:</Text>
-
-                                <TextInput
+                                <List.Item
+                                style={[style.adminSelect, style.adminShadow]}
+                                title="Miehet"
+                                onPress={() => selectDivision("Miehet")}
+                                />
+                                <List.Item
+                                style={[style.adminSelect, style.adminShadow]}
+                                title="Tytöt"
+                                onPress={() => selectDivision("Tytöt")}
+                                />
+                                <List.Item
+                                style={[style.adminSelect, style.adminShadow]}
+                                title="Pojat"
+                                onPress={() => selectDivision("Pojat")}
+                                />
+                            </List.Accordion>
+                            <Text style={[style.adminModalText, {marginBottom: 5, marginLeft: "4%"}]}>Ranking:</Text>
+                            <TextInput
                                 style={style.adminEditRanking}
-                                
                                 returnKeyType="done"
                                 keyboardType='number-pad'
                                 underlineColor={'#1B1B1B'}
                                 activeUnderlineColor={'#005C70'}
-                                maxLength={3}
+                                maxLength={5}
                                 value={ranking}
                                 onChangeText={setRanking}
-                                />
-
-                            </View>
-
-
-
+                            />
+                        </View>
                             <View style={[style.buttonSummaryStyles, style.adminModalButtons]}>
                                 <Pressable onPress={() => submitModal("delete")} 
                                     style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                     <Text style={style.adminDeleteButton}>Poista</Text>
                                 </Pressable>
-
                                 <Pressable onPress={() => submitModal("submit")} 
                                 style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
                                 <Text style={style.buttonText}>Tallenna</Text>
                                 </Pressable>
                             </View>
-
                     </Modal>
                 </Portal>
             </Provider>
-
             </SafeAreaView>
         </ImageBackground>
         </>

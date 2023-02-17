@@ -638,7 +638,6 @@ export const style = StyleSheet.create({
 
     adminCheck: {
         backgroundColor: Colors.primaryVariant,
-        height: 50,
         width: "75%",
         alignSelf: 'center',
         marginTop: 10
@@ -749,7 +748,7 @@ export const style = StyleSheet.create({
         fontWeight: '500',
         textAlign: 'left',
         marginTop: 10,
-        marginLeft: "5%"
+        marginLeft: "5%",
     },
 
     adminTextShow: {
@@ -759,16 +758,13 @@ export const style = StyleSheet.create({
     },
 
     adminEditRanking: {
-        //alignSelf: 'left',
-        height: 40,
-        width: "15%",
+        width: 70,
         backgroundColor: Colors.primaryVariant,
         marginBottom: 10,
         marginLeft: "5%"
     }, 
 
     adminSetRanking: {
-        //alignSelf: 'left',
         height: 50,
         width: "30%",
         backgroundColor: Colors.primaryVariant,
