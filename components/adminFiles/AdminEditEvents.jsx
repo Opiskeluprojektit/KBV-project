@@ -50,6 +50,7 @@ function AdminEditEvents({ navigation }) {
                 return { ...eventItems[key], ID: key };
             })
             setEvents(parseKeys);
+            console.log(parseKeys)
         })
     }, [])
 

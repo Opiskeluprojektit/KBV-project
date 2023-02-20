@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Text, View, SafeAreaView, Pressable, Linking, ImageBackground, Alert } from 'react-native';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
-import { checkLoginStatus } from './adminFiles/CheckLogin';
+import { checkLoginStatus, checkUserStatus } from './adminFiles/CheckLogin';
 
 export default function Home({navigation}) {
 
   const backgroundImage = require('../assets/Volleyball50.png');
   const logo = require('../assets/Logo2.png');
+  const [loginStatus, setLoginStatus] = useState(false)
 
 
+  const test = async () => {
+    console.log("status: " + check())
+    if (check() == true) {
+      console.log("tosi")
+    } else {
+      console.log("epätosi")
+    }
+  }
+
+  const checkStatus = async () => {
+    if (await checkUserStatus() == true) {
+      setLoginStatus(true)
+    } else {
+      setLoginStatus(false)
+    }
+  }
 
 
   return (
@@ -17,7 +34,7 @@ export default function Home({navigation}) {
       <SafeAreaView style={style.container}>
 
 
-          {checkLoginStatus() == true ? 
+          {checkStatus() && loginStatus === true ? 
           (
             <View style={[style.header, {flexDirection: 'row', paddingBottom: 20}]}>
               <View style={style.adminBoxLeft}>
@@ -31,6 +48,12 @@ export default function Home({navigation}) {
                     Admin
                   </Text>
                 </View>
+
+                {/* <Pressable style={{padding: 10, backgroundColor: 'grey'}} onPress={() => check()}>
+                  <Text>
+                    testi
+                  </Text>
+                </Pressable> */}
 
                 {/* <Pressable  onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.adminPanelButton]}>
                   <Text style={[style.bigButtonText, {marginLeft: 12, fontSize: 16}]}>Admin Paneeli</Text>
@@ -81,7 +104,7 @@ export default function Home({navigation}) {
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
             </Pressable>
 
-            {checkLoginStatus() == true ?
+            {checkStatus() && loginStatus === true ?
             (
               <Pressable onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.adminPanelPressable]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Settings style={style.icons}/></View>

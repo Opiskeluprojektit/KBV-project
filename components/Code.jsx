@@ -6,6 +6,7 @@ import CodeInput from 'react-native-code-textinput';
 import {database} from '../firebase/Config';
 import {onValue, ref} from 'firebase/database';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { storeData } from './adminFiles/CheckLogin';
 /** Password will be retrieved from firebase */
 
 
@@ -74,9 +75,9 @@ function Code({navigation}) {
           const auth = getAuth();
           signInWithEmailAndPassword(auth, email, userPw)
           .then((userCredential) => {
-            const user = userCredential.user;
             setCode(0)
             hideModal()
+            storeData(userCredential)
             navigation.navigate('Home')
           })
           .catch((err) => {

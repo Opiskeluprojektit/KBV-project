@@ -3,12 +3,14 @@ import React from 'react'
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { getAuth } from 'firebase/auth';
+import { removeData } from './adminFiles/CheckLogin';
 
 function CustomMenu({navigation, navigation: { goBack } }) {
 
   async function logout() {
     try {
         await getAuth().signOut();
+        removeData()
         navigation.navigate('Code')
     } catch (err) {
         return Alert.alert("Logout error. ", err.message);
