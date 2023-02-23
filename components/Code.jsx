@@ -6,7 +6,7 @@ import CodeInput from 'react-native-code-textinput';
 import {database} from '../firebase/Config';
 import {onValue, ref} from 'firebase/database';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { storeData } from './adminFiles/CheckLogin';
+import { getData, removeData, storeData } from './adminFiles/CheckLogin';
 /** Password will be retrieved from firebase */
 
 
@@ -21,6 +21,9 @@ function Code({navigation}) {
   const [email, setEmail] = useState('testi@testi.fi')
   const [userPw, setUserPw] = useState('testi123')
 
+  const [userEmail, setUserEmail] = useState('user@kbv.fi')
+  const [userPassword, setUserPassword] = useState()
+
   const [visible, setVisible] = useState(false);
 
 
@@ -31,6 +34,19 @@ function Code({navigation}) {
     setEmail('');
     setUserPw('');
   }
+
+  useEffect(() => {
+    const statusCheck = async () => {
+      let status = await getData()
+
+      if (status) {
+        navigation.navigate('Home')
+      }
+    }
+
+    statusCheck()
+  }, [])
+  
 
   
       // Collects code from firebase database
@@ -49,21 +65,38 @@ function Code({navigation}) {
 
       //Uncomment to automatically take you to homescreen after code input
       useEffect(() => {
-        if (code.length === 4) {
+        if (code.length === 6) {
           checkCode();
         }
       }, [code]);
 
     function checkCode() {                        //checks if input matches password
-      if (code == password) {
-        setCode(0)
-        navigation.navigate('Home')
-      } else if (code == userPw) {
+      if (code == userPw) {
         showModal()
-      } else {
-        Alert.alert (
-          "Koodi väärin, syötä uusi koodi."
-        )
+      }  else {
+        setUserPassword(code)
+        loginUser()
+      }
+    }
+
+    const loginUser = async () => {
+      console.log("user kirjautuminen")
+      try {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, userEmail, userPassword)
+        .then((userCredential) => {
+          setCode(0)
+          removeData()
+          .then(() => {
+            storeData(userCredential)
+            navigation.navigate('Home')
+          })
+        })
+        .catch((err) => {
+          Alert.alert('Kirjautuminen epäonnistui. ', err.toString());
+        }) 
+      } catch (err) {
+        Alert.alert('Kirjautuminen epäonnistui. ', err.toString());
       }
     }
 
@@ -77,8 +110,11 @@ function Code({navigation}) {
           .then((userCredential) => {
             setCode(0)
             hideModal()
-            storeData(userCredential)
-            navigation.navigate('Home')
+            removeData()
+            .then(() => {
+              storeData(userCredential)
+              navigation.navigate('Home')
+            })
           })
           .catch((err) => {
             Alert.alert('Kirjautuminen epäonnistui. ', err.toString());
@@ -115,7 +151,7 @@ function Code({navigation}) {
             
             <View style={style.codeInputField}>
               <CodeInput 
-                codeSize={4} 
+                codeSize={6} 
                 value={code}
                 onValueChange={setCode}
                 inputStyle={style.codeInputBox}>

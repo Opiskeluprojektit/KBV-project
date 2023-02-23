@@ -22,10 +22,6 @@ function AdminNav({ navigation }) {
                     <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.iconsEllipse]} onPress={() => navigation.navigate('Home')}><View><Icon.ChevronLeft style={[style.icons]}/></View></Pressable>
                     <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
                 </View>
-
-
-                {checkLoginStatus() == true ? 
-                (
                     <View style={style.viewContainer}>
                     <View style={style.contentOnLightBG}>
                         <Text style={[style.h4Style, style.adminHeader]}>Admin navigaatio</Text>
@@ -59,12 +55,7 @@ function AdminNav({ navigation }) {
                     </View>
 
                 </View>
-                ): <View style={style.viewContainer}>
-                <View style={style.contentOnLightBG}>
-                    <Text style={[style.h4Style, style.adminHeader]}>Et ole kirjautunut adminina!</Text>
-                </View>
-                </View>
-                }
+                
 
                 
 

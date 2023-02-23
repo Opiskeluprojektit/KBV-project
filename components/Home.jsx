@@ -1,32 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, Text, View, SafeAreaView, Pressable, Linking, ImageBackground, Alert } from 'react-native';
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
-import { checkLoginStatus, checkUserStatus } from './adminFiles/CheckLogin';
+import { onValue, ref } from 'firebase/database';
+import { getData } from './adminFiles/CheckLogin';
+import { database, USER_REF } from '../firebase/Config';
 
 export default function Home({navigation}) {
 
   const backgroundImage = require('../assets/Volleyball50.png');
   const logo = require('../assets/Logo2.png');
   const [loginStatus, setLoginStatus] = useState(false)
+  const [role, setRole] = useState()
 
 
-  const test = async () => {
-    console.log("status: " + check())
-    if (check() == true) {
-      console.log("tosi")
+  const handleUserCheck = async () => {
+    const userCred = await getData()
+  
+    if (userCred) {
+      
+      onValue(ref(database, USER_REF + userCred), (snapshot) => {
+        const data = snapshot.val() ? snapshot.val() : {};
+        const dataItems = {...data};
+        const parse = JSON.parse(JSON.stringify(dataItems))
+        const result = parse.role
+        console.log('result', result);
+        setRole(result)
+      })
+  
+      if (role === 'admin') {
+        setLoginStatus(true)
+      } else {
+        setLoginStatus(false)
+      }
     } else {
-      console.log("epätosi")
+      return false
     }
   }
+  
+  useEffect(() => {
+    handleUserCheck()
+  }, [role])
+  
+  // useEffect(() => {
+  //   const test = async () => {
+  //     let status = await handleUserCheck()
+  //     console.log("status", status);
+  
+  //     if (status === true) {
+  //       setLoginStatus(true)
+  //     } else if (status === false) {
+  //       setLoginStatus(false)
+  //     } else {
+  //       test()
+  //     }
+  //   }
 
-  const checkStatus = async () => {
-    if (await checkUserStatus() == true) {
+  //   test()
+  // }, [])
+  
+  
+  
+/*   const test = async () => {
+    let status = await handleUserCheck()
+    console.log("status", status);
+
+    if (status === true) {
       setLoginStatus(true)
     } else {
       setLoginStatus(false)
     }
-  }
+  } */
 
 
   return (
@@ -34,14 +78,14 @@ export default function Home({navigation}) {
       <SafeAreaView style={style.container}>
 
 
-          {checkStatus() && loginStatus === true ? 
+          {loginStatus === true ? 
           (
             <View style={[style.header, {flexDirection: 'row', paddingBottom: 20}]}>
               <View style={style.adminBoxLeft}>
                 <Image source={logo} style={style.adminHomeScreenLogo}></Image>
               </View>
 
-              <View style={style.adminBoxCenter}>
+              <View style={style.adminBoxCenter}> 
 
                 <View style={style.adminPanelButton}>
                   <Text style={[style.bigButtonText, {textAlign: 'center', fontSize: 20}]}>
@@ -49,11 +93,6 @@ export default function Home({navigation}) {
                   </Text>
                 </View>
 
-                {/* <Pressable style={{padding: 10, backgroundColor: 'grey'}} onPress={() => check()}>
-                  <Text>
-                    testi
-                  </Text>
-                </Pressable> */}
 
                 {/* <Pressable  onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.adminPanelButton]}>
                   <Text style={[style.bigButtonText, {marginLeft: 12, fontSize: 16}]}>Admin Paneeli</Text>
@@ -71,6 +110,12 @@ export default function Home({navigation}) {
               <Pressable onPress={() => navigation.navigate('Menu')}><View><Icon.Menu style={style.menuButton} width={42} height={40} /></View></Pressable>
             </View>
           )}
+
+                {/* <Pressable style={{padding: 10, backgroundColor: 'grey'}} onPress={() => test()}>
+                  <Text>
+                    testi
+                  </Text>
+                </Pressable> */}
 
           {/* <View style={style.header}>
           <Image source={logo} style={style.HomeScreenLogo}></Image>
@@ -104,7 +149,7 @@ export default function Home({navigation}) {
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.BookOpen style={style.icons}/></View>
             </Pressable>
 
-            {checkStatus() && loginStatus === true ?
+            {loginStatus == true ?
             (
               <Pressable onPress={() => navigation.navigate('AdminNav')} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.homeButtons, style.adminPanelPressable]}>
               <View style={[style.iconsEllipse, style.homeEllipse]}><Icon.Settings style={style.icons}/></View>

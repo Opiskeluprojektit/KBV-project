@@ -140,16 +140,16 @@ export const style = StyleSheet.create({
 
     codeInputField: {
         //alignSelf: 'center',
-        marginLeft: 50,
-        marginRight: 50,
+        marginLeft: 25,
+        marginRight: 25,
         marginBottom: 30
     },
 
     codeInputBox: {
         backgroundColor: Colors.primaryVariant,
         color: Colors.bodyText,
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
         borderRadius: 1000,
         shadowOffset: {
             width: 0,
