@@ -36,6 +36,7 @@ function Enrolment({ navigation }) {
   const [enrolment, setEnrolment] = useState([]);
   const [description, setDescription] = useState('');
   const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState("");
 
   // Collects game information from firebase database
   useEffect(() => {
@@ -95,10 +96,11 @@ function Enrolment({ navigation }) {
   }, [chosenGame])
   
   // The component for closing the game day dropdown and setting the chosen game date
-  const selectGame = (i, time, description) => {
+  const selectGame = (i, time, endTime, description) => {
     setGamesExpanded(!gamesExpanded);
     setChosenGame(i);  
     setStartTime(time);
+    setEndTime(endTime);
     setDescription(description);
   }
   
@@ -144,7 +146,7 @@ function Enrolment({ navigation }) {
   //THIS IS FOR THE EVENT DESCRIPTION
   const getGameDate = (i) => {
     i.date = new Date(i.date)
-    return i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear() + "\n" + "Alkaa kello: " + startTime + "\n" + description;
+    return i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear() + "\n" + "Alkaa kello: " + startTime + "\n" + "Päättyy kello: " + endTime + "\n" + description;
   }
 
   // Maps the game date list
@@ -255,7 +257,6 @@ function Enrolment({ navigation }) {
                      <Pressable style={style.playerSearch}
                      onPress={() => selectPlayer(item)}>
                        <Item name={item.name} />
-                     
                      </Pressable>}
                    key={item => item.id}
                  /></>
