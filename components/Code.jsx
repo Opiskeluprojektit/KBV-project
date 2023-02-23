@@ -86,6 +86,7 @@ function Code({navigation}) {
         signInWithEmailAndPassword(auth, userEmail, userPassword)
         .then((userCredential) => {
           setCode(0)
+          setCode('')
           removeData()
           .then(() => {
             storeData(userCredential)
@@ -109,6 +110,7 @@ function Code({navigation}) {
           signInWithEmailAndPassword(auth, email, userPw)
           .then((userCredential) => {
             setCode(0)
+            setCode('')
             hideModal()
             removeData()
             .then(() => {
