@@ -103,13 +103,33 @@ export const style = StyleSheet.create({
             height: 4
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4
+        shadowRadius: 4,
+    },
+    yearIcons: {
+        backgroundColor: Colors.secondary,
+        width: 60,
+        height: 60,
+        marginLeft: "4%",
+        borderRadius: 1000,
+        shadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+        elevation: 3, //androidilla "nostaa" buttonia ja luo varjon
     },
 
     // Feather icons
     icons: {
         color: Colors.bodyText,
         top: 12,
+        alignSelf: 'center'
+    },
+
+    yearIconsText: {
+        color: Colors.bodyText,
+        top: 20,
         alignSelf: 'center'
     },
 
@@ -122,7 +142,7 @@ export const style = StyleSheet.create({
         marginBottom: 10,
 
     },
-    
+
     eachGame:{
         backgroundColor: Colors.primaryVariant,
         marginTop: 3,
@@ -493,7 +513,8 @@ export const style = StyleSheet.create({
         fontSize: 30,
         marginBottom: 20,
         marginLeft: 24,
-        marginRight: 24
+        marginRight: 24,
+        alignSelf:"flex-start",
     },
 
     // Admin screen
@@ -770,6 +791,15 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.primaryVariant,
         marginTop: 10,
         marginLeft: "10%"
+    },
+
+    filterButtons:{
+        padding: 8,
+        borderRadius: 5,
+        marginTop: 10,
+        borderColor: 'black',
+        borderWidth: 0.5,
+        alignSelf:"flex-start",
     },
 
     codeStyling: {

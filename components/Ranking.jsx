@@ -96,6 +96,20 @@ function Ranking({navigation}) {
     )
   }
 
+  // Changes filtering between alphabetical order or via ranking
+  const sortPlayers = (sortMethod) => {
+    const sortedPlayers = [...playersToShow];
+    if (sortMethod === "alphabetical") {
+      sortedPlayers.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortMethod === "ranking") {
+      sortedPlayers.sort((a, b) => b.ranking[year] - a.ranking[year]);
+    }
+    else if (sortMethod === "lowestRanking") {
+      sortedPlayers.sort((a, b) => a.ranking[year] - b.ranking[year]);
+    }
+    setPlayersToShow(sortedPlayers);
+  };
+
   let yearList = years.map(e => {
     return (
       <List.Item
@@ -122,11 +136,12 @@ function Ranking({navigation}) {
       <View style={[style.viewContainer, {flex:1}]}>
         <View style={[style.contentOnLightBG, {flex:1}]}>
           <Text style={style.h4Style}>Ranking-listat</Text>
-          <List.Section style={{flexDirection: 'column'}}>
+          <View style={{flexDirection:"row"}}>
+          <List.Section style={{flexDirection:"row"}}>
             {/* Division selection */}
             <List.Accordion
               title={division ? division : "Sarjavalikko"}
-              style={[style.search]}
+              style={[style.search, {marginRight: "15%", width: "110%", alignSelf:"flex-start"}]}
               theme={{
                 colors: { background: "#F9F9F9", primary: "#005C70" },
               }}
@@ -153,7 +168,7 @@ function Ranking({navigation}) {
             {/* Game selection */}
             <List.Accordion
               title={year ? year : "Kaudet"}
-              style={[style.search]}
+              style={[style.search, {width: "90%", marginLeft: "25%"}]}
               theme={{
                 colors: { background: "#F9F9F9", primary: "#005C70" },
               }}
@@ -163,12 +178,22 @@ function Ranking({navigation}) {
               <ScrollView style={{ maxHeight: "75%" }}>{yearList}</ScrollView>
             </List.Accordion>
           </List.Section>
+          </View>
           <DataTable style={{flex:1}}>
             <DataTable.Header>
               <DataTable.Title>#</DataTable.Title>
               <DataTable.Title style={{flex: 4}}>Pelaaja</DataTable.Title>
               <DataTable.Title numeric style={{flex: 2, justifyContent: 'center'}}>Sijoituspisteet</DataTable.Title>
             </DataTable.Header>
+              <Pressable style={style.filterButtons} onPress={() => sortPlayers("alphabetical")}>
+                <Text>Aakkosjärjestys A-Ö</Text>
+              </Pressable>
+              <Pressable style={style.filterButtons} onPress={() => sortPlayers("ranking")}>
+                <Text>Sijoitus: suurin</Text>
+              </Pressable>
+              <Pressable style={style.filterButtons} onPress={() => sortPlayers("lowestRanking")}>
+                <Text>Sijoitus: pienin</Text>
+              </Pressable>
             <FlatList
               data={playersToShow}
               renderItem={PlayerRow}
