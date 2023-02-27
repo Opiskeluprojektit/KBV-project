@@ -116,9 +116,7 @@ function AdminEditPlayers({ navigation }) {
         setFilterDiv(fil)
         setFilterExpand(!filterExpand)
     }
-
-
-
+    
     return (
         <>
         <ImageBackground source={backgroundImage}>

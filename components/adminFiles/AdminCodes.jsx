@@ -22,21 +22,25 @@ function AdminCodes({ navigation }) {
     const [changed, setChanged] = useState(false);
 
     useEffect(() => {
-        const codes = ref(database, ADMIN_REF + "0");
+        const codes = ref(database, ADMIN_REF + "codes");
         onValue(codes, (snapshot) => {
             const data = snapshot.val() ? snapshot.val() : {};
             const codeItems = {...data};
             const parse = JSON.parse(JSON.stringify(codeItems))
             setCode(parse.koodi)
             setAdminCode(parse.adminKoodi)
-            setBonus(parse.bonuskerroin)
             setTempCode(parse.koodi.toString())
             setTempAdminCode(parse.adminKoodi.toString())
+        });
+        const variables = ref(database, ADMIN_REF + "variables");
+        onValue(variables, (snapshot) => {
+            const data = snapshot.val() ? snapshot.val() : {};
+            const codeItems = {...data};
+            const parse = JSON.parse(JSON.stringify(codeItems))
+            setBonus(parse.bonuskerroin)
             setTempBonus(parse.bonuskerroin.toString())
         });
-        
     }, [])
-
 
     // const submit = () => {
     //     setCode(Number(tempCode))
@@ -53,7 +57,7 @@ function AdminCodes({ navigation }) {
         if (code !== tcode) {
             setCode(Number(tempCode))
             setChanged(true)
-            update(ref(database, ADMIN_REF + "0"), {
+            update(ref(database, ADMIN_REF + "codes"), {
                 koodi: tcode
             })
         } 
@@ -61,7 +65,7 @@ function AdminCodes({ navigation }) {
         if (adminCode !== tadcode) {
             setAdminCode(Number(tempAdminCode))
             setChanged(true)
-            update(ref(database, ADMIN_REF + "0"), {
+            update(ref(database, ADMIN_REF + "codes"), {
                 adminKoodi: tadcode
             })
         } 
@@ -69,7 +73,7 @@ function AdminCodes({ navigation }) {
         if (bonus !== tbonus) {
             setBonus(Number(tempBonus))
             setChanged(true)
-            update(ref(database, ADMIN_REF + "0"), {
+            update(ref(database, ADMIN_REF + "variables"), {
                 bonuskerroin: tbonus
             })
         }

@@ -6,8 +6,10 @@ import { List, TextInput, HelperText } from "react-native-paper";
 
 import { formatDMYtoYMD } from "../scripts/myDate";
 
-import { database, placement_ref, PLAYER_REF } from "../firebase/Config";
-import { onValue, ref, update, child, push, query, equalTo, orderByChild } from "firebase/database";
+import { database, placement_ref, PLAYER_REF, VARIABLE_REF, enrolment_ref } from "../firebase/Config";
+import { onValue, ref, update, child, push, query, equalTo, orderByChild, get } from "firebase/database";
+import { getAuth } from "firebase/auth";
+
 import { ScrollView } from "react-native-gesture-handler";
 
 import PointsSnackbar from "./pointsComponents/PointsSnackbar";
@@ -36,6 +38,16 @@ function Points({ navigation }) {
 
   // Collects game information from firebase database
   useEffect(() => {
+    const auth = getAuth();
+
+    auth.onAuthStateChanged(function(user) {
+      if (user) {
+        console.log('authenticated: ', user);
+      } else {
+        console.log('authenticated: ', user);
+      }
+    });
+
     const games = query(ref(database, "game/"), orderByChild("isEvent"), equalTo(false));
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
@@ -80,7 +92,7 @@ function Points({ navigation }) {
   
   // Collects enrolment information from firebase database
   useEffect(() => {
-    const enrolment = ref(database, "enrolment/");
+    const enrolment = ref(database, enrolment_ref);
     onValue(enrolment, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const enrolmentItems = { ...data };
@@ -99,12 +111,15 @@ function Points({ navigation }) {
 
   // Fetches the bonus multiplier from the database.
   useEffect(() => {
-    const administration = ref(database, "administration/0");
+    console.log("joo tää tapahtuu ");
+    const administration = ref(database, VARIABLE_REF);
     onValue(administration, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};
       const adminItems = { ...data };
       const parse = JSON.parse(JSON.stringify(adminItems));
+      console.log('parse', parse);
       setBonusMultiplier(parse.bonuskerroin);
+      console.log('bonuskerroin', parse.bonuskerroin);
     });
   }, []);
   
@@ -185,6 +200,7 @@ function Points({ navigation }) {
 
   let gameList = gamesToShow ? mapGames() : null;
 
+  //Get enrolled players for the chosenGame and set them in original order if the game has already been played.
   const filterEnrolments = () => {
     let enrolmentsToChosenGame;
     console.log("chosenGame: ", chosenGame);
@@ -239,7 +255,7 @@ function Points({ navigation }) {
     let newGroups = groups.concat();
 
     //Check if user has typed in an entire number instead of "." or "-";
-    if (Number(points) && !checkScoreInput(points)) {
+    if (Number(points) != null && !checkScoreInput(points)) {
       newGroups[group] = newGroups[group].reduce(
         (newGroup, player, playerNumber) => {
           // Player 1 and their pair gets points and the opposing players get points in negative.
@@ -256,9 +272,7 @@ function Points({ navigation }) {
           }, 0);
           newGroup.push(player);
           return newGroup;
-        },
-        []
-      );
+        },[]);
       //console.log("newGrouops:", newGroups);
       //newGroups[group].scores ? console.log("newGroups[group].scores.length", newGroups[group].scores.length) : null;
       if (newGroups[group][0].scores
@@ -436,7 +450,7 @@ function Points({ navigation }) {
               style={style.numInput}
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
-              value={item.scores[0] ? item.scores[0].toString() : ""}
+              value={item.scores[0] != null ? item.scores[0].toString() : ""}
               error={checkScoreInput(item.scores[0] ? item.scores[0].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 0, item.group)}
@@ -446,7 +460,7 @@ function Points({ navigation }) {
               style={style.numInput}
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
-              value={item.scores[1] ? item.scores[1].toString() : ""}
+              value={item.scores[1] != null ? item.scores[1].toString() : ""}
               error={checkScoreInput(item.scores[1] ? item.scores[1].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 1, item.group)}
@@ -456,7 +470,7 @@ function Points({ navigation }) {
               style={style.numInput}
               underlineColor={"#1B1B1B"}
               activeUnderlineColor={"#005C70"}
-              value={item.scores[2] ? item.scores[2].toString() : ""}
+              value={item.scores[2] != null ? item.scores[2].toString() : ""}
               error={checkScoreInput(item.scores[2] ? item.scores[2].toString() : "")}
               keyboardType={"number-pad"}
               onChangeText={(value) => handleScoreChange(value, 2, item.group)}
@@ -538,7 +552,7 @@ function Points({ navigation }) {
               </List.Accordion>
             </List.Section>
 
-            {/* LOHKOT JA PISTEIDEN SYÖTTÖ*/}
+            {/* Groups and point inputs*/}
             {groups ? (
               <View style={{ flex: 1 }}>
                 <FlatList
