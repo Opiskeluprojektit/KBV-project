@@ -337,6 +337,7 @@ function AdminEvents({ navigation }) {
                             maxLength={100}
                             numberOfLines={2}
                             onChangeText={setDesc}
+                            onFocus={() => setShouldShow(false)}
                             />
                         </View>
                         <View>
