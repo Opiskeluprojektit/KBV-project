@@ -23,7 +23,6 @@ export default function Home({navigation}) {
   const [loginStatus, setLoginStatus] = useState(false)
   const [role, setRole] = useState()
 
-
   const handleUserCheck = async () => {
     const userCred = await getData() 
     console.log('userCred', userCred);
