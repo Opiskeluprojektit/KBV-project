@@ -65,11 +65,11 @@ function Code({navigation}) {
       
 
       //Uncomment to automatically take you to homescreen after code input
-      useEffect(() => {
-        if (code.length === 6) {
-          checkCode();
-        }
-      }, [code]);
+      // useEffect(() => {
+      //   if (code.length === 6) {
+      //     checkCode();
+      //   }
+      // }, [code]);
 
     function checkCode() {                        //checks if input matches password
       if (code == codePassword) {
@@ -86,7 +86,6 @@ function Code({navigation}) {
         const auth = getAuth();
         signInWithEmailAndPassword(auth, userEmail, userPassword)
         .then((userCredential) => {
-          setCode(0)
           setCode('')
           removeData()
           .then(() => {
@@ -151,6 +150,8 @@ function Code({navigation}) {
             
             <Image source={logo} style={style.bigLogo}></Image>
             
+            {/* Tämä View pois commentista kun automatic login käyttöön */}
+            {/* <View style={style.codeContainer}> */}
             <View style={style.codeInputField}>
               <CodeInput 
                 codeSize={6} 
@@ -159,7 +160,8 @@ function Code({navigation}) {
                 inputStyle={style.codeInputBox}>
               </CodeInput>
             </View>
-            <View style={style.codeContainer}>
+            {/* </View> */}
+            <View style={style.codeContainer}> 
               <Pressable onPress={() => checkCode()}>
                 <Text style={style.titles}>Kirjaudu sisään</Text>
               </Pressable>

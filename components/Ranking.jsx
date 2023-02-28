@@ -22,6 +22,11 @@ function Ranking({navigation}) {
   const [naiset, setNaiset] = useState([])
   const [divisionsExpanded, setDivisionsExpanded] = useState(false);
   const [yearExpanded, setYearExpanded] = useState(false);
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
+  const [filter, setFilter] = useState("Filtteröinti");
+  const [alphabetical, setAlphabetical] = useState();
+  const [rankingHigh, setRrankingHigh] = useState();
+  const [rankingLow, setLrankingLow] = useState();
 
   // Collects placement information from firebase database
   useEffect(() => {
@@ -97,17 +102,25 @@ function Ranking({navigation}) {
 
   // Changes filtering between alphabetical order or via ranking
   const sortPlayers = (sortMethod) => {
+    setFiltersExpanded(false);
+    setFilter(sortMethod)
     const sortedPlayers = [...playersToShow];
-    if (sortMethod === "alphabetical") {
+    if (sortMethod === "Aakkosjärjestys A-Ö") {
+      setAlphabetical();
       sortedPlayers.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortMethod === "ranking") {
+    } else if (sortMethod === "Sijoitus: suurin") {
+      setRrankingHigh();
       sortedPlayers.sort((a, b) => b.ranking[year] - a.ranking[year]);
-    }
-    else if (sortMethod === "lowestRanking") {
+    } else if (sortMethod === "Sijoitus: pienin") {
+      setLrankingLow();
       sortedPlayers.sort((a, b) => a.ranking[year] - b.ranking[year]);
     }
     setPlayersToShow(sortedPlayers);
   };
+
+  useEffect(() => { //keeps the chosen filter setting when changing division
+    sortPlayers(filter)
+  }, [division])
 
   let yearList = years.map(e => {
     return (
@@ -140,7 +153,7 @@ function Ranking({navigation}) {
             {/* Division selection */}
             <List.Accordion
               title={division ? division : "Sarjavalikko"}
-              style={[style.search, {marginRight: "15%", width: "110%", alignSelf:"flex-start"}]}
+              style={[style.search, {marginRight: "20%", width: "110%", alignSelf:"flex-start"}]}
               theme={{
                 colors: { background: "#F9F9F9", primary: "#005C70" },
               }}
@@ -167,7 +180,7 @@ function Ranking({navigation}) {
             {/* Game selection */}
             <List.Accordion
               title={year ? year : "Kaudet"}
-              style={[style.search, {width: "90%", marginLeft: "25%"}]}
+              style={[style.search, {width: "120%", marginLeft: "15%"}]}
               theme={{
                 colors: { background: "#F9F9F9", primary: "#005C70" },
               }}
@@ -184,7 +197,30 @@ function Ranking({navigation}) {
               <DataTable.Title style={{flex: 4}}>Pelaaja</DataTable.Title>
               <DataTable.Title numeric style={{flex: 2, justifyContent: 'center'}}>Sijoituspisteet</DataTable.Title>
             </DataTable.Header>
-              <Pressable style={style.filterButtons} onPress={() => sortPlayers("alphabetical")}>
+            <List.Accordion
+              title={filter ? filter : "Filtteröinti"}
+              style={[style.filterButtons, {marginRight: "15%", width: "100%", alignSelf:"flex-start"}]}
+              theme={{
+                colors: { background: "#F9F9F9", primary: "#005C70" },
+              }}
+              expanded={filtersExpanded}
+              onPress={() => setFiltersExpanded(!filtersExpanded)}
+              >
+              <List.Item
+                title="Aakkosjärjestys A-Ö"
+                onPress={() => sortPlayers("Aakkosjärjestys A-Ö", alphabetical)}
+              />
+              <List.Item
+                title="Sijoitus: suurin"
+                onPress={() => sortPlayers("Sijoitus: suurin", rankingHigh)}
+              />
+              <List.Item
+              style={{borderColor: 'lightgrey', borderBottomWidth: 0.5,}}
+                title="Sijoitus: pienin"
+                onPress={() => sortPlayers("Sijoitus: pienin", rankingLow)}
+              />
+            </List.Accordion>
+              {/* <Pressable style={style.filterButtons} onPress={() => sortPlayers("alphabetical")}>
                 <Text>Aakkosjärjestys A-Ö</Text>
               </Pressable>
               <Pressable style={style.filterButtons} onPress={() => sortPlayers("ranking")}>
@@ -192,7 +228,7 @@ function Ranking({navigation}) {
               </Pressable>
               <Pressable style={style.filterButtons} onPress={() => sortPlayers("lowestRanking")}>
                 <Text>Sijoitus: pienin</Text>
-              </Pressable>
+              </Pressable> */}
             <FlatList
               data={playersToShow}
               renderItem={PlayerRow}
