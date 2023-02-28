@@ -16,7 +16,6 @@ function Code({navigation}) {
   const logo = require('../assets/Logo2.png');
   
   const [code, setCode] = useState('');   //stores input, hardwired for testing purposes
-  const [password, setPassword] = useState()
 
   const [email, setEmail] = useState('testi@testi.fi')
   const [userPw, setUserPw] = useState('')
