@@ -7,14 +7,14 @@ import { getAuth } from 'firebase/auth';
 import { getData } from './adminFiles/CheckLogin';
 import { database, USER_REF } from '../firebase/Config';
 
-const auth = getAuth();
-auth.onAuthStateChanged(function(user) {
-  if (user) {
-    console.log('authenticated: ', user);
-  } else {
-    console.log('authenticated: ', user);
-  }
-});
+// const auth = getAuth();
+// auth.onAuthStateChanged(function(user) {
+//   if (user) {
+//     console.log('authenticated: ', user);
+//   } else {
+//     console.log('authenticated: ', user);
+//   }
+// });
 
 export default function Home({navigation}) {
 
@@ -33,12 +33,12 @@ export default function Home({navigation}) {
         const data = snapshot.val() ? snapshot.val() : {};
         const dataItems = {...data};
         const parse = JSON.parse(JSON.stringify(dataItems))
-        const result = parse.role
+        const result = parse.isAdmin
         console.log('result', result);
         setRole(result)
       })
   
-      if (role === 'admin') {
+      if (role === true) {
         setLoginStatus(true)
       } else {
         setLoginStatus(false)

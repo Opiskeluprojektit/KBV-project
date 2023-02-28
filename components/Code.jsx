@@ -65,11 +65,11 @@ function Code({navigation}) {
       
 
       //Uncomment to automatically take you to homescreen after code input
-      // useEffect(() => {
-      //   if (code.length === 6) {
-      //     checkCode();
-      //   }
-      // }, [code]);
+      useEffect(() => {
+        if (code.length === 6) {
+          checkCode();
+        }
+      }, [code]);
 
     function checkCode() {                        //checks if input matches password
       if (code == codePassword) {
