@@ -998,5 +998,37 @@ export const style = StyleSheet.create({
 
     adminExitIcon: {
         color: Colors.buttonText
+    },
+
+    adminPlayerButton: {
+        marginLeft: 40,
+        position: 'absolute',
+        right: 0,
+        marginRight: "5%",
+        paddingTop: 5,
+        paddingBottom: 5,
+        backgroundColor: Colors.primary,
+        alignSelf: 'center',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 10
+    },
+
+    adminModalPlayers: {
+        backgroundColor: Colors.background,
+        maxHeight: "60%"
+    },
+
+    playerScroll: {
+        backgroundColor: "grey",
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        borderRadius: 15,
+        paddingBottom: 10,
+        paddingTop: 10,
+        maxHeight: "90%"
     }
 })

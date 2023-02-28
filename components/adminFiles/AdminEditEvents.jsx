@@ -16,7 +16,8 @@ function AdminEditEvents({ navigation }) {
 
     const [events, setEvents] = useState([]);
 
-    const [visible, setVisible] = React.useState(false);
+    const [visible, setVisible] = useState(false);
+    const [visiblePlayers, setVisiblePlayers] = useState(false);
     const [dbId, setDbId] = useState('')
     const [date, setDate] = useState('');
     const [time, setTime] =useState('');
@@ -107,6 +108,16 @@ function AdminEditEvents({ navigation }) {
         setEndStr(endhh)
     }
    }; 
+
+   const showPlayersModal = () => {
+    setVisible(false)
+    setVisiblePlayers(true)
+   }
+
+   const hidePlayersModal = () => {
+    setVisible(true)
+    setVisiblePlayers(false)
+   }
 
    const onChange = (event, selectedDate) => {
 
@@ -568,6 +579,13 @@ function AdminEditEvents({ navigation }) {
                             </TextInput>
                         </View>
 
+                        <View>
+                            <Pressable onPress={() => showPlayersModal()} style={({pressed})=>[{opacity: pressed ? 0.9 : 1,}, style.button, style.adminShowing, {marginBottom: 10}]}>
+                                <Text style={style.buttonText}>Näytä ilmoittautumiset</Text>
+                                <Icon.ChevronRight style={style.adminArrow}/>
+                            </Pressable>
+                        </View>
+
                     </View>
 
 
@@ -585,6 +603,77 @@ function AdminEditEvents({ navigation }) {
                             </View>
 
                             
+
+                        </Modal>
+                    </Portal>
+                </Provider>
+
+
+                <Provider>
+                    <Portal>
+                        <Modal visible={visiblePlayers} contentContainerStyle={[style.modalContainer, {maxHeight: "50%"}]} style={{marginTop: "-60%"}}>
+
+                                    <View> 
+                                        <Text style={[style.modalTitle, {marginBottom: 25, marginTop: 25}]}>Ilmoittautumiset</Text>
+                                    </View>
+
+                                    <View style={style.adminModalPlayers}>
+                                        
+                                        <ScrollView style={style.playerScroll}>
+
+                                            <View style={style.adminEventList}>
+                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
+                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+                                            </View>
+
+                                            <View style={style.adminEventList}>
+                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
+                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+                                            </View>
+
+                                            <View style={style.adminEventList}>
+                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
+                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+                                            </View>
+
+                                            <View style={style.adminEventList}>
+                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
+                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+                                            </View>
+
+                                            <View style={style.adminEventList}>
+                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
+                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+                                            </View>
+
+                                            <View style={style.adminEventList}>
+                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
+                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+                                            </View>
+
+                                            <View style={style.adminEventList}>
+                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
+                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+                                            </View>
+
+                                            <View style={style.adminEventList}>
+                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
+                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+                                            </View>
+
+                                        </ScrollView>
+
+                                            
+                                    </View>
+
+                                    <View style={[style.buttonSummaryStyles, style.adminModalButtons]}>
+
+                                        <Pressable onPress={() => hidePlayersModal()}
+                                        style={({pressed})=>[{opacity: pressed ? 0.9 : 1,},style.summaryButton]}>
+                                        <Text style={style.buttonText}>Sulje</Text>
+                                        </Pressable>
+
+                                    </View>
 
                         </Modal>
                     </Portal>
