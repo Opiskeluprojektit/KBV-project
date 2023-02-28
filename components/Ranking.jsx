@@ -23,8 +23,6 @@ function Ranking({navigation}) {
   const [divisionsExpanded, setDivisionsExpanded] = useState(false);
   const [yearExpanded, setYearExpanded] = useState(false);
 
-
-
   // Collects placement information from firebase database
   useEffect(() => {
     const placement = ref(database, placement_ref);
@@ -74,6 +72,7 @@ function Ranking({navigation}) {
         .map((e, i) => {
           e.rankingNumber = i + 1
           return e})
+      console.log('newList', newList);
       updateSelection(selection, newList);
       setPlayersToShow(newList)
     }

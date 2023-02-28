@@ -38,16 +38,6 @@ function Points({ navigation }) {
 
   // Collects game information from firebase database
   useEffect(() => {
-    const auth = getAuth();
-
-    auth.onAuthStateChanged(function(user) {
-      if (user) {
-        console.log('authenticated: ', user);
-      } else {
-        console.log('authenticated: ', user);
-      }
-    });
-
     const games = query(ref(database, "game/"), orderByChild("isEvent"), equalTo(false));
     onValue(games, (snapshot) => {
       const data = snapshot.val() ? snapshot.val() : {};

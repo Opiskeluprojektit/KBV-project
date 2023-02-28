@@ -3,8 +3,18 @@ import { Image, Text, View, SafeAreaView, Pressable, Linking, ImageBackground, A
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { onValue, ref } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
 import { getData } from './adminFiles/CheckLogin';
 import { database, USER_REF } from '../firebase/Config';
+
+const auth = getAuth();
+auth.onAuthStateChanged(function(user) {
+  if (user) {
+    console.log('authenticated: ', user);
+  } else {
+    console.log('authenticated: ', user);
+  }
+});
 
 export default function Home({navigation}) {
 
