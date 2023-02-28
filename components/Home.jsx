@@ -3,18 +3,18 @@ import { Image, Text, View, SafeAreaView, Pressable, Linking, ImageBackground, A
 import { style } from '../styles/styles';
 import * as Icon from "react-native-feather";
 import { onValue, ref } from 'firebase/database';
-import { getAuth } from 'firebase/auth';
+//import { getAuth } from 'firebase/auth';
 import { getData } from './adminFiles/CheckLogin';
-import { database, USER_REF } from '../firebase/Config';
+import { database, USER_REF, auth } from '../firebase/Config';
 
-const auth = getAuth();
+/* const auth = getAuth();
 auth.onAuthStateChanged(function(user) {
   if (user) {
     console.log('authenticated: ', user);
   } else {
     console.log('authenticated: ', user);
   }
-});
+}); */
 
 export default function Home({navigation}) {
 
@@ -26,8 +26,10 @@ export default function Home({navigation}) {
 
   const handleUserCheck = async () => {
     const userCred = await getData() 
+    console.log('userCred', userCred);
   
     if (userCred) {
+      console.log('Ennen onValuee');
       
       onValue(ref(database, USER_REF + userCred), (snapshot) => {
         const data = snapshot.val() ? snapshot.val() : {};
