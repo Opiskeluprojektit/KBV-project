@@ -157,11 +157,11 @@ export const style = StyleSheet.create({
         marginBottom: 50,
         alignSelf: 'center'
     },
-
     codeInputField: {
         //alignSelf: 'center',
-        marginLeft: 25,
-        marginRight: 25,
+        marginLeft: 25, // testataan 50% kun automatic login tehään
+        marginRight: 25, // testataan 45% kun automatic login tehään
+        width: '10%',
         marginBottom: 30
     },
 
@@ -176,11 +176,12 @@ export const style = StyleSheet.create({
             height: 4
         },
         shadowOpacity: 0.5,
-        shadowRadius: 4
+        shadowRadius: 4,
+        elevation: 4,
     },
 
     codeContainer: {
-        height: "55%",
+        height: "60%", //ennen 55%
         alignSelf: 'center'
     },
 
@@ -263,7 +264,7 @@ export const style = StyleSheet.create({
     flatList: {
         flex: 1,
         marginBottom: 10,
-        paddingBottom: '50%',
+        paddingBottom: '45%',
         position: 'relative',
     },
 
@@ -794,12 +795,13 @@ export const style = StyleSheet.create({
     },
 
     filterButtons:{
-        padding: 8,
+        padding: 2,
         borderRadius: 5,
         marginTop: 10,
         borderColor: 'black',
         borderWidth: 0.5,
         alignSelf:"flex-start",
+        
     },
 
     codeStyling: {

@@ -36,7 +36,7 @@ function Enrolment({ navigation }) {
   const [enrolment, setEnrolment] = useState([]);
   const [description, setDescription] = useState('');
   const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState("");
+  const [endingTime, setEndingTime] = useState("");
 
   // Collects game information from firebase database
   useEffect(() => {
@@ -100,7 +100,7 @@ function Enrolment({ navigation }) {
     setGamesExpanded(!gamesExpanded);
     setChosenGame(i);  
     setStartTime(time);
-    setEndTime(endTime);
+    setEndingTime(endTime);
     setDescription(description);
   }
   
@@ -146,11 +146,11 @@ function Enrolment({ navigation }) {
   //THIS IS FOR THE EVENT DESCRIPTION
   const getGameDate = (i) => {
     i.date = new Date(i.date)
-    return i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear() + "\n" + "Alkaa kello: " + startTime + "\n" + "Päättyy kello: " + endTime + "\n" + description;
+    return i.date.getDate() + "." + (i.date.getMonth() + 1) + "." + i.date.getFullYear() + "\n" + "Alkaa kello: " + startTime + "\n" + "Päättyy kello: " + endingTime + "\n" + description;
   }
 
   // Maps the game date list
-   const gameList =  gamesToShow.map(i => <List.Item style={style.eachGame} key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i, i.time, i.description)} />);
+   const gameList =  gamesToShow.map(i => <List.Item style={style.eachGame} key={i.id} title={getGameTitle(i)} onPress={() => selectGame(i, i.time, i.endTime, i.description)} />);
 
   // Showing and hiding the summary modal
   const showModal = () => setVisible(true);
@@ -232,7 +232,6 @@ function Enrolment({ navigation }) {
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
                     <ScrollView style={{maxHeight: "65%"}}>{gameList}</ScrollView>
-                  {/* {gameList} */}
                 </List.Accordion>
                 {chosenGame ? <Text style={style.gameDescription}>{getGameDate(chosenGame)}</Text> : null}
               </List.Section>
@@ -260,7 +259,7 @@ function Enrolment({ navigation }) {
                      </Pressable>}
                    key={item => item.id}
                  /></>
-              : null}         
+              : null}
               
               {/* HIDDEN, not in use: Button for adding new player to enrol 
               pressing enrol button:
