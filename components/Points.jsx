@@ -74,14 +74,7 @@ function Points({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const enrolmentItems = { ...data };
       const parse = JSON.parse(JSON.stringify(enrolmentItems));
-      const keys = Object.keys(parse)
       let parseKeys = Object.values(parse)
-      /* parseKeys.forEach((element, i) => {
-        delete Object.assign(parseKeys, {[keys[i]]: parseKeys[i] });
-      }); */
-      parseKeys.forEach((element, i) => {
-        element.id = keys[i];
-      });
       setEnrolment(parseKeys);
     });
   }, []);
@@ -94,9 +87,7 @@ function Points({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const adminItems = { ...data };
       const parse = JSON.parse(JSON.stringify(adminItems));
-      console.log('parse', parse);
       setBonusMultiplier(parse.bonuskerroin);
-      console.log('bonuskerroin', parse.bonuskerroin);
     });
   }, []);
   
@@ -113,7 +104,6 @@ function Points({ navigation }) {
   }
 
   useEffect(() => {
-    console.log("dbPlacement", dbPlacement, " enrolledPlayers", enrolledPlayers);
     dbPlacement !== [] ? groupPlayers() : null;
   }, [dbPlacement])
   

@@ -165,11 +165,8 @@ function Enrolment({ navigation }) {
 
   const handleEnrollment = () => {
     if (checkModal()) {
-
-      // Making a running id number for enrolments, making a enrolment item and enrolment key
-      let enrolmentLength = enrolment.length + 1;
-      const newEnrolment = {id: enrolmentLength, game_id: chosenGame.id, player_id: playersToEnroll.id};
       const newEnrolmentKey = push(child(ref(database), enrolment_ref)).key;
+      const newEnrolment = {id: newEnrolmentKey, game_id: chosenGame.id, player_id: playersToEnroll.id};
 
       // Push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
       newDbEnrolments.push(newEnrolment)
