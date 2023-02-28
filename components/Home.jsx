@@ -5,6 +5,7 @@ import * as Icon from "react-native-feather";
 import { onValue, ref } from 'firebase/database';
 import { getData } from './adminFiles/CheckLogin';
 import { database, USER_REF } from '../firebase/Config';
+import { getAuth } from 'firebase/auth';
 
 export default function Home({navigation}) {
 
@@ -15,7 +16,7 @@ export default function Home({navigation}) {
 
 
   const handleUserCheck = async () => {
-    const userCred = await getData()
+    const userCred = await getData() 
   
     if (userCred) {
       

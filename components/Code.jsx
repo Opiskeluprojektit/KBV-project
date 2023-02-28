@@ -19,7 +19,8 @@ function Code({navigation}) {
   const [password, setPassword] = useState()
 
   const [email, setEmail] = useState('testi@testi.fi')
-  const [userPw, setUserPw] = useState('testi123')
+  const [userPw, setUserPw] = useState('')
+  const [codePassword, setCodePassword] = useState('')
 
   const [userEmail, setUserEmail] = useState('user@kbv.fi')
   const [userPassword, setUserPassword] = useState()
@@ -51,13 +52,13 @@ function Code({navigation}) {
   
       // Collects code from firebase database
       useEffect(() => {
-        const administration = ref(database,"administration/0");
+        const administration = ref(database,"administration/codes");
         onValue(administration, (snapshot) => {
           const data = snapshot.val() ? snapshot.val() : {};
           const adminItems = {...data};
           const parse = JSON.parse(JSON.stringify(adminItems))
-          setPassword(parse.koodi);
-          setUserPw(parse.adminKoodi);
+          console.log("parse", parse)
+          setCodePassword(parse.adminKoodi);
         });
       },[]);
 
@@ -71,7 +72,7 @@ function Code({navigation}) {
       }, [code]);
 
     function checkCode() {                        //checks if input matches password
-      if (code == userPw) {
+      if (code == codePassword) {
         showModal()
       }  else {
         setUserPassword(code)
@@ -109,7 +110,6 @@ function Code({navigation}) {
           const auth = getAuth();
           signInWithEmailAndPassword(auth, email, userPw)
           .then((userCredential) => {
-            setCode(0)
             setCode('')
             hideModal()
             removeData()
