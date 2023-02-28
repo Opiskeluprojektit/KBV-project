@@ -38,6 +38,8 @@ function Enrolment({ navigation }) {
   const [startTime, setStartTime] = useState('');
   const [endingTime, setEndingTime] = useState("");
 
+  const year = new Date().getFullYear();
+
   // Collects game information from firebase database
   useEffect(() => {
     const games = ref(database,"game/");
@@ -45,10 +47,8 @@ function Enrolment({ navigation }) {
       const data = snapshot.val() ? snapshot.val() : {};
       const gameItems = {...data};
       const parse = JSON.parse(JSON.stringify(gameItems))
-      const keys = Object.keys(parse)
-      let parseKeys = Object.values(parse).map((element, i) => {
+      let parseKeys = Object.values(parse).map((element) => {
         element.date = new Date(formatDMYtoYMD(element.date));
-        element.id = keys[i];
         return element;
       })
       .filter((i) => i.date >= new Date ())
@@ -65,6 +65,7 @@ function Enrolment({ navigation }) {
       const playerItems = {...data};
       const parse = JSON.parse(JSON.stringify(playerItems))
       let parseKeys = Object.values(parse)
+      const keys = Object.keys(parse)
       setPlayer(parseKeys);
     });
   },[]);
@@ -307,7 +308,7 @@ function Enrolment({ navigation }) {
                       <View style={style.summaryDetails}>
                         <Icon.User style={style.summaryIcons}/>
                         {playersToEnroll ? <Text style={style.text}>{playersToEnroll.name} 
-                          {"\n"}Ranking: {playersToEnroll.ranking}</Text> : null}
+                          {"\n"}Ranking: {playersToEnroll.ranking[year]}</Text> : null}
                       </View>
 
                       {/* Predicted ranking for the chosen game */}
