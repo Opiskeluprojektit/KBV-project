@@ -6,7 +6,6 @@ import { onValue, ref } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 import { getData } from './adminFiles/CheckLogin';
 import { database, USER_REF } from '../firebase/Config';
-import { getAuth } from 'firebase/auth';
 
 const auth = getAuth();
 auth.onAuthStateChanged(function(user) {
