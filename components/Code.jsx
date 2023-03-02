@@ -7,6 +7,7 @@ import {database} from '../firebase/Config';
 import {onValue, ref} from 'firebase/database';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getData, removeData, storeData } from './adminFiles/CheckLogin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 /** Password will be retrieved from firebase */
 
 
@@ -64,11 +65,11 @@ function Code({navigation}) {
       
 
       //Uncomment to automatically take you to homescreen after code input
-      // useEffect(() => {
-      //   if (code.length === 6) {
-      //     checkCode();
-      //   }
-      // }, [code]);
+      useEffect(() => {
+        if (code.length === 6) {
+          checkCode();
+        }
+      }, [code]);
 
     function checkCode() {                        //checks if input matches password
       if (code == codePassword) {
@@ -81,6 +82,7 @@ function Code({navigation}) {
 
     const loginUser = async () => {
       console.log("user kirjautuminen")
+      if(code === userPassword){
       try {
         const auth = getAuth();
         signInWithEmailAndPassword(auth, userEmail, userPassword)
@@ -93,11 +95,13 @@ function Code({navigation}) {
           })
         })
         .catch((err) => {
+          setCode('') //Täällä ei anna kirjautua takasin kun logouttaa
           Alert.alert('Kirjautuminen epäonnistui. ', err.toString());
         }) 
       } catch (err) {
         Alert.alert('Kirjautuminen epäonnistui. ', err.toString());
       }
+    }
     }
 
 
@@ -141,7 +145,7 @@ function Code({navigation}) {
   
       return true;
     }
-
+    
 
       return (
         <ImageBackground source={backgroundImage} imageStyle={{height: '100%', width: 800}}>
@@ -165,8 +169,6 @@ function Code({navigation}) {
                 <Text style={style.titles}>Kirjaudu sisään</Text>
               </Pressable>
             </View>     
-
-
 
 
             {/* Modal */}

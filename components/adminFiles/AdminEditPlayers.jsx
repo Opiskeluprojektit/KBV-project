@@ -52,8 +52,11 @@ function AdminEditPlayers({ navigation }) {
     const allPlayers = createFilter().map((item) => {
         return (
             <View key={item.ID} style={style.adminEventList}>
-                <Text style={style.adminEventTitle}>{item.name} / {item.division}</Text>
-                <Pressable onPress={() => showModal(item.ID, item.name, item.division, item.ranking)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminEventButton]}><Text style={style.adminTextBg}>Muuta</Text></Pressable>
+                <Text style={style.adminEventTitle}>{item.name} {"\n"} {item.division}</Text>
+                <Pressable onPress={() => showModal(item.ID, item.name, item.division, item.ranking)} 
+                            style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminEventButton]}>
+                    <Text style={style.adminTextBg}>Muuta</Text>
+                </Pressable>
             </View>
         );
     })
