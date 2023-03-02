@@ -158,18 +158,15 @@ function Enrolment({ navigation }) {
   
   const hideModal = () => {
     setVisible(false);
-    //setChosenGame(); //uncomment this to refresh selected game after pressing "Lisää uusi pelaaja" -button
+    //setChosenGame(); //uncomment this if you rather refresh selected game after pressing "Lisää uusi pelaaja" -button
     setPlayersToEnroll();
     setSearch();
   }
 
   const handleEnrollment = () => {
     if (checkModal()) {
-
-      // Making a running id number for enrolments, making a enrolment item and enrolment key
-      let enrolmentLength = enrolment.length + 1;
-      const newEnrolment = {id: enrolmentLength, game_id: chosenGame.id, player_id: playersToEnroll.id};
       const newEnrolmentKey = push(child(ref(database), enrolment_ref)).key;
+      const newEnrolment = {id: newEnrolmentKey, game_id: chosenGame.id, player_id: playersToEnroll.id};
 
       // Push a new enrolment to the enrolments list. Which will later be filtered by the filterEnrolments() to get the enrolled player to show on the modal.
       newDbEnrolments.push(newEnrolment)
@@ -221,7 +218,7 @@ function Enrolment({ navigation }) {
           <View style={style.viewContainer}>
 
             <View style={style.contentOnLightBG}>
-              <Text style={style.h4Style}>Ilmoittautuminen viikkokisaan</Text>
+              <Text style={style.h4Style}>Ilmoittautuminen</Text>
   
               {/* Dropdown for choosing gaming day */}
               
@@ -232,7 +229,7 @@ function Enrolment({ navigation }) {
                   theme={{colors: {background: '#F9F9F9', primary: '#005C70'}}}
                   expanded={gamesExpanded}
                   onPress={() => setGamesExpanded(!gamesExpanded)} >
-                    <ScrollView style={{maxHeight: "65%"}}>{gameList}</ScrollView>
+                    <ScrollView style={{maxHeight: "70%"}}>{gameList}</ScrollView>
                 </List.Accordion>
                 {chosenGame ? <Text style={style.gameDescription}>{getGameDate(chosenGame)}</Text> : null}
               </List.Section>
@@ -260,7 +257,7 @@ function Enrolment({ navigation }) {
                      </Pressable>}
                    key={item => item.id}
                  /></>
-              : null}
+              : null}         
               
               {/* HIDDEN, not in use: Button for adding new player to enrol 
               pressing enrol button:
