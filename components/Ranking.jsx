@@ -50,15 +50,7 @@ function Ranking({navigation}) {
       const data = snapshot.val() ? snapshot.val() : {};
       const playerItems = { ...data };
       const parse = JSON.parse(JSON.stringify(playerItems));
-      const keys = Object.keys(parse)
       let parseKeys = Object.values(parse)
-      parseKeys.forEach((element, i) => {
-        (!Number.isInteger(element.id)) ? element.id = keys[i] : null;
-      });
-      parseKeys = parseKeys.map((e) => {
-        e.ranking = e.ranking[2023] ? e.ranking : {2023: e.ranking};
-        return e;
-      })
       setPlayer(parseKeys);
     });
   }, []);

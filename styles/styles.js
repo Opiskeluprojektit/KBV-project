@@ -1021,7 +1021,6 @@ export const style = StyleSheet.create({
     },
 
     playerScroll: {
-        backgroundColor: "grey",
         marginTop: 10,
         marginBottom: 10,
         marginLeft: 5,
@@ -1030,5 +1029,5 @@ export const style = StyleSheet.create({
         paddingBottom: 10,
         paddingTop: 10,
         maxHeight: "90%"
-    }
+    },
 })

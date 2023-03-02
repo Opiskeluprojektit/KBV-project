@@ -4,12 +4,9 @@ import { List, TextInput, Modal, Portal, Provider } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { style } from '../../styles/styles';
 import * as Icon from "react-native-feather";
-import { onValue, ref, update, set, remove } from 'firebase/database';
-import { database, EVENT_REF } from '../../firebase/Config';
+import { onValue, ref, update, set, remove, query, orderByChild, equalTo, orderByValue, orderByKey } from 'firebase/database';
+import { database, enrolment_ref, EVENT_REF, PLAYER_REF } from '../../firebase/Config';
 import { object } from 'prop-types';
-
-
-
 
 function AdminEditEvents({ navigation }) {
     const backgroundImage = require('../../assets/Volleyball50.png'); 
@@ -20,7 +17,7 @@ function AdminEditEvents({ navigation }) {
     const [visiblePlayers, setVisiblePlayers] = useState(false);
     const [dbId, setDbId] = useState('')
     const [date, setDate] = useState('');
-    const [time, setTime] =useState('');
+    const [time, setTime] = useState('');
     const [desc, setDesc] = useState('');
     const [division, setDivision] = useState();
     const [divisionExpand, setDivisionsExpand] = useState(false)
@@ -32,14 +29,17 @@ function AdminEditEvents({ navigation }) {
     const [endStr, setEndStr] = useState('')
     const [endTimeExist, setEndTimeExist] = useState(false)
     const [endHours, setEndHours] = useState('')
+    const [enrolmentsToShow, setEnrolmentsToShow] = useState([])
 
     const [show, setShow] = useState(false);
     const [mode, setMode] = useState('date');
 
     const [showEnd, setShowEnd] = useState(false);
 
+    const [players, setPlayers] = useState([])
+    const [enrolments, setEnrolments] = useState()
 
-
+    let enrol = []
 
     useEffect(() => {
         const events = ref(database, EVENT_REF);
@@ -51,14 +51,70 @@ function AdminEditEvents({ navigation }) {
                 return { ...eventItems[key], ID: key };
             })
             setEvents(parseKeys);
-            console.log(parseKeys)
         })
     }, [])
 
-    const test = () => {
-    console.log("Tässä taulu")
-    console.log(events)
+    useEffect(() => { 
+        const enrols = query(ref(database, enrolment_ref));
+        onValue(enrols, (snapshot) => {
+            const data = snapshot.val() ? snapshot.val() : {};
+            const enrolledPlayers = {...data}
+            const keys = Object.keys(enrolledPlayers)
+            let mappedKeys = keys.map((key) => {
+                return {...enrolledPlayers[key], id: key };
+            })
+
+            setEnrolments(mappedKeys)
+
+      })
+
+    }, [])
+
+    useEffect(() => {
+        dbId ? filterPlayers() : null
+      }, [enrolments])
+
+    useEffect(() => {
+        const players = ref(database, PLAYER_REF);
+        onValue(players, (snapshot) => {
+        const data = snapshot.val() ? snapshot.val() : {};
+        const playerItems = {...data};
+        const parse = JSON.parse(JSON.stringify(playerItems))
+        let parseKeys = Object.values(parse)
+        setPlayers(parseKeys)
+        console.log("players: ", parseKeys)
+        });
+
+    }, [])
+
+    useEffect(() => {
+        dbId ? filterPlayers() : null
+    }, [dbId])
+    
+
+    const filterPlayers = () => {
+        let enrolmentsInChosenGame = enrolments.filter((e) => e.game_id === dbId)
+        let newEnrolmentsToShow = enrolmentsInChosenGame.map((e) => {
+            let newEnrolments = {
+                enrolmentID: null,
+                playerName: null,
+            };
+            newEnrolments.enrolmentID = e.id;
+            let enrolledPlayer;
+            players.forEach((i) => {
+                if (i.id == e.player_id) {
+                    enrolledPlayer = i
+                }
+            })
+            newEnrolments.playerName = enrolledPlayer ? enrolledPlayer.name : null; 
+            return newEnrolments
+        });
+
+        console.log("newEnrolmentsToShow", newEnrolmentsToShow)
+        setEnrolmentsToShow(newEnrolmentsToShow)
     }
+    
+    
 
     const createFilter = () => {
         let data = events
@@ -84,6 +140,19 @@ function AdminEditEvents({ navigation }) {
     );
    })
 
+   
+
+   const enrolledPlayers = enrolmentsToShow.map((item) => {   
+
+        return (
+            <View key={item.enrolmentID} style={style.adminEventList}>
+                <Text style={style.adminEventTitle}>{item.playerName}</Text>
+                <Pressable onPress={() => confirmEnrolmentDelete(item.enrolmentID)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+            </View>
+        );  
+        
+   })
+
    const showModal = (div, dd, hh, dsc, id, stm, endstm, endhh) => {
     setVisible(true)
     setDivision(div)
@@ -94,7 +163,6 @@ function AdminEditEvents({ navigation }) {
     
     if (stm) {
         setConvertTime(new Date(stm))
-        console.log("eka " + stm)
     }
 
     if (endstm) {
@@ -118,6 +186,25 @@ function AdminEditEvents({ navigation }) {
     setVisible(true)
     setVisiblePlayers(false)
    }
+
+   const confirmEnrolmentDelete = (key) => {
+    Alert.alert("Huomio!", "Haluatko varmasti poistaa ilmoittautumisen?", [
+        {
+            text: 'Peruuta',
+            onPress: () => executeEnrolmentDelete(false, key),
+            style: 'cancel'
+        },
+        {text: 'Kyllä', onPress: () => executeEnrolmentDelete(true, key)},
+    ])
+   }
+
+   const executeEnrolmentDelete = (ans, key) => {
+    if (ans === true) {
+        remove(ref(database, enrolment_ref + key)).then(Alert.alert("Ilmoittautuminen poistettu!"))
+    } else {
+        console.log("ei poistettu")
+    }
+}
 
    const onChange = (event, selectedDate) => {
 
@@ -237,7 +324,6 @@ function AdminEditEvents({ navigation }) {
             // const newEvent = {date: date, description: desc, time: time, division: division}
             // const updates = {};
             // updates[EVENT_REF + dbId] = newEvent
-            console.log(dbId)
 
             if (division && date && time) {
                 update(ref(database, EVENT_REF + dbId), {
@@ -268,7 +354,7 @@ function AdminEditEvents({ navigation }) {
 
 
     const confirmDelete = () =>
-        Alert.alert('Huomio!', 'Haluatko varmasti poistaa tapahtuman', [
+        Alert.alert('Huomio!', 'Haluatko varmasti poistaa tapahtuman?', [
             {
                 text: 'Peruuta',
                 onPress: () => executeDelete(false),
@@ -289,7 +375,6 @@ function AdminEditEvents({ navigation }) {
     }
 
     const showMode = (currentMode) => {
-        console.log('show', show);
         setShow(true);
         setMode(currentMode);
     }
@@ -621,45 +706,8 @@ function AdminEditEvents({ navigation }) {
                                         
                                         <ScrollView style={style.playerScroll}>
 
-                                            <View style={style.adminEventList}>
-                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
-                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-                                            </View>
-
-                                            <View style={style.adminEventList}>
-                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
-                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-                                            </View>
-
-                                            <View style={style.adminEventList}>
-                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
-                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-                                            </View>
-
-                                            <View style={style.adminEventList}>
-                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
-                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-                                            </View>
-
-                                            <View style={style.adminEventList}>
-                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
-                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-                                            </View>
-
-                                            <View style={style.adminEventList}>
-                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
-                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-                                            </View>
-
-                                            <View style={style.adminEventList}>
-                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
-                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-                                            </View>
-
-                                            <View style={style.adminEventList}>
-                                                <Text style={style.adminEventTitle}>Pelaajaesimerkki</Text>
-                                                <Pressable style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-                                            </View>
+                                            {enrolledPlayers}
+                                            
 
                                         </ScrollView>
 
