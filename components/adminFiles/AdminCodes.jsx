@@ -13,25 +13,11 @@ function AdminCodes({ navigation }) {
    const backgroundImage = require('../../assets/Volleyball50.png'); 
 
 
-    const [code, setCode] = useState();
-    const [adminCode, setAdminCode] = useState();
-    const [tempCode, setTempCode] = useState();
-    const [tempAdminCode, setTempAdminCode] = useState();
     const [bonus, setBonus] = useState(5);
     const [tempBonus, setTempBonus] = useState();
     const [changed, setChanged] = useState(false);
 
     useEffect(() => {
-        const codes = ref(database, ADMIN_REF + "codes");
-        onValue(codes, (snapshot) => {
-            const data = snapshot.val() ? snapshot.val() : {};
-            const codeItems = {...data};
-            const parse = JSON.parse(JSON.stringify(codeItems))
-            setCode(parse.koodi)
-            setAdminCode(parse.adminKoodi)
-            setTempCode(parse.koodi.toString())
-            setTempAdminCode(parse.adminKoodi.toString())
-        });
         const variables = ref(database, ADMIN_REF + "variables");
         onValue(variables, (snapshot) => {
             const data = snapshot.val() ? snapshot.val() : {};
@@ -50,25 +36,7 @@ function AdminCodes({ navigation }) {
     // }
 
     const pushDb = () => {
-        let tcode = Number(tempCode)
-        let tadcode = Number(tempAdminCode)
         let tbonus = Number(tempBonus)
-
-        if (code !== tcode) {
-            setCode(Number(tempCode))
-            setChanged(true)
-            update(ref(database, ADMIN_REF + "codes"), {
-                koodi: tcode
-            })
-        } 
-        
-        if (adminCode !== tadcode) {
-            setAdminCode(Number(tempAdminCode))
-            setChanged(true)
-            update(ref(database, ADMIN_REF + "codes"), {
-                adminKoodi: tadcode
-            })
-        } 
         
         if (bonus !== tbonus) {
             setBonus(Number(tempBonus))
@@ -78,7 +46,7 @@ function AdminCodes({ navigation }) {
             })
         }
 
-        if (code !== tcode || adminCode !== tadcode || bonus !== tbonus) {
+        if (bonus !== tbonus) {
             Alert.alert("Tiedot tallennettu!")
         } else {
             Alert.alert("Tietoja ei ole muutettu!")
@@ -110,44 +78,14 @@ function AdminCodes({ navigation }) {
 
                 <View style={style.viewContainer}>
                     <View style={style.contentOnLightBG}>
-                        <Text style={[style.h4Style, style.adminHeader]}>Muokkaa koodeja</Text>
+                        <Text style={[style.h4Style, style.adminHeader]}>Muokkaa bonuskerrointa</Text>
                     </View>
 
-                   
 
-                    <View style={style.adminAddView}>
-
-
-                    <TextInput 
-                            label='Yleiskoodi'
-                            style={style.adminEditCode}
-                            keyboardType='number-pad'
-                            returnKeyType="done"
-                            underlineColor={'#1B1B1B'}
-                            activeUnderlineColor={'#005C70'}
-                            maxLength={4}
-                            value={tempCode}
-                            onChangeText={setTempCode}
-                            />
-
-                    <TextInput 
-                            label="Adminkoodi"
-                            style={style.adminEditCode}
-                            keyboardType='number-pad'
-                            returnKeyType="done"
-                            underlineColor={'#1B1B1B'}
-                            activeUnderlineColor={'#005C70'}
-                            maxLength={4}
-                            value={tempAdminCode}
-                            onChangeText={setTempAdminCode}
-                            />
-
-                    </View> 
-
-                    <View>
+                    <View style={{alignItems: 'center'}}>
                     <TextInput 
                             label="Bonuskerroin"
-                            style={[style.adminEditCode, {width: "30%"}]}
+                            style={style.adminEditCode}
                             keyboardType='number-pad'
                             returnKeyType="done"
                             underlineColor={'#1B1B1B'}
@@ -165,6 +103,13 @@ function AdminCodes({ navigation }) {
                          </Pressable>
                      </View>
 
+                     <View style={style.infoText}>
+                        <Text style={[{fontSize: 20, textAlign: 'center'}]}>
+                            Sisäänkirjautumiskoodit tulee muokata tietokannan kautta!
+                        </Text>
+                     </View>
+
+                
                 </View>
 
 

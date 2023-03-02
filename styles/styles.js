@@ -683,8 +683,7 @@ export const style = StyleSheet.create({
 
     adminEditCode: {
         height: 50,
-        width: "35%",
-        marginLeft: "10%",
+        width: "40%",
         marginTop: 15,
         backgroundColor: Colors.primaryVariant
     },
@@ -1031,4 +1030,11 @@ export const style = StyleSheet.create({
         paddingTop: 10,
         maxHeight: "90%"
     },
+
+    infoText: {
+        alignItems: 'center',
+        marginTop: 40,
+        marginLeft: 20,
+        marginRight: 20
+    }
 })
