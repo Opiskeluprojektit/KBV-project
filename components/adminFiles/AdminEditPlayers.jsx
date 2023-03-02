@@ -29,7 +29,6 @@ function AdminEditPlayers({ navigation }) {
         const playerItems = {...data};
         const keys = Object.keys(playerItems);
         let parseKeys = keys.map((key) => {
-            playerItems[key].ranking = playerItems[key].ranking[2023] ? playerItems[key].ranking : {2023: playerItems[key].ranking};
             return { ...playerItems[key], ID: key };
         })
         setPlayers(parseKeys);
