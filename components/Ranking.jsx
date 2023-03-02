@@ -25,6 +25,7 @@ function Ranking({navigation}) {
   const [filtersExpanded, setFiltersExpanded] = useState(false);
   const [filter, setFilter] = useState("Filtteröinti");
   const [alphabetical, setAlphabetical] = useState();
+  const [alphabeticalReverse, setAlphabeticalReverse] = useState();
   const [rankingHigh, setRrankingHigh] = useState();
   const [rankingLow, setLrankingLow] = useState();
 
@@ -86,8 +87,8 @@ function Ranking({navigation}) {
     return (
       <DataTable.Row>
         <DataTable.Cell>{item.rankingNumber}</DataTable.Cell>
-        <DataTable.Cell style={{flex: 4}}>{item.name}</DataTable.Cell>
-        <DataTable.Cell numeric style={{flex: 2, justifyContent: 'center'}}>{item.ranking[year]}</DataTable.Cell>
+        <DataTable.Cell style={{flex: 5}}>{item.name}</DataTable.Cell>
+        <DataTable.Cell numeric style={{flex: 1, justifyContent: 'center'}}>{item.ranking[year]}</DataTable.Cell>
       </DataTable.Row>
     )
   }
@@ -100,6 +101,9 @@ function Ranking({navigation}) {
     if (sortMethod === "Aakkosjärjestys A-Ö") {
       setAlphabetical();
       sortedPlayers.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortMethod === "Aakkosjärjestys Ö-A") {
+      setAlphabeticalReverse();
+      sortedPlayers.sort((a, b) => b.name.localeCompare(a.name));
     } else if (sortMethod === "Sijoitus: suurin") {
       setRrankingHigh();
       sortedPlayers.sort((a, b) => b.ranking[year] - a.ranking[year]);
@@ -195,32 +199,32 @@ function Ranking({navigation}) {
               theme={{
                 colors: { background: "#F9F9F9", primary: "#005C70" },
               }}
+              titleStyle={{ fontSize: 15 }}
               expanded={filtersExpanded}
               onPress={() => setFiltersExpanded(!filtersExpanded)}
               >
               <List.Item
+                titleStyle={{ fontSize: 15 }}
                 title="Aakkosjärjestys A-Ö"
                 onPress={() => sortPlayers("Aakkosjärjestys A-Ö", alphabetical)}
               />
               <List.Item
+                titleStyle={{ fontSize: 15 }}
+                title="Aakkosjärjestys Ö-A"
+                onPress={() => sortPlayers("Aakkosjärjestys Ö-A", alphabeticalReverse)}
+              />
+              <List.Item
+                titleStyle={{ fontSize: 15 }}
                 title="Sijoitus: suurin"
                 onPress={() => sortPlayers("Sijoitus: suurin", rankingHigh)}
               />
               <List.Item
               style={{borderColor: 'lightgrey', borderBottomWidth: 0.5,}}
+                titleStyle={{ fontSize: 15 }}
                 title="Sijoitus: pienin"
                 onPress={() => sortPlayers("Sijoitus: pienin", rankingLow)}
               />
             </List.Accordion>
-              {/* <Pressable style={style.filterButtons} onPress={() => sortPlayers("alphabetical")}>
-                <Text>Aakkosjärjestys A-Ö</Text>
-              </Pressable>
-              <Pressable style={style.filterButtons} onPress={() => sortPlayers("ranking")}>
-                <Text>Sijoitus: suurin</Text>
-              </Pressable>
-              <Pressable style={style.filterButtons} onPress={() => sortPlayers("lowestRanking")}>
-                <Text>Sijoitus: pienin</Text>
-              </Pressable> */}
             <FlatList
               data={playersToShow}
               renderItem={PlayerRow}

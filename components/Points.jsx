@@ -116,7 +116,7 @@ function Points({ navigation }) {
   }, [division]);
 
   useEffect(() => {
-    filterEnrolments();
+    chosenGame ? filterEnrolments() : null;
     chosenGame ? pullExistingPlacements() : null;
   }, [chosenGame]);
 
@@ -175,14 +175,14 @@ function Points({ navigation }) {
     chosenGame
       ? (enrolmentsToChosenGame = enrolment
           .concat()
-          .filter((i) => i.game_id == chosenGame.id))
+          .filter((e) => e.game_id == chosenGame.id))
       : null;
     let newEnrolledPlayers;
     enrolmentsToChosenGame
       ? (newEnrolledPlayers = player
           .concat()
-          .filter((i) =>
-            enrolmentsToChosenGame.find((j) => j.player_id == i.id)
+          .filter((e) =>
+            enrolmentsToChosenGame.find((j) => j.player_id == e.id)
           )
           .sort((a, b) => {
             console.log('a.orderNumber', a.orderNumber);

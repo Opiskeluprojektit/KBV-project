@@ -1,6 +1,6 @@
 import { StyleSheet} from 'react-native';
 import { color } from 'react-native-reanimated';
-import AdminEvents from '../components/adminFiles/AdminEvents';
+//import AdminEvents from '../components/adminFiles/AdminEvents';
 import Colors from './colors';
 
 export const style = StyleSheet.create({
@@ -480,8 +480,6 @@ export const style = StyleSheet.create({
         color: Colors.darkText,
     },
 
-// RankingScreen styles
-    // Screen hasn't been built yet.
 
 // Menu styles
 
@@ -571,6 +569,7 @@ export const style = StyleSheet.create({
         marginTop: 30,
     },
 
+    //Player and event editing styles
     adminEventList: {
         flexDirection: 'row',
         backgroundColor: Colors.primaryVariant,
@@ -578,14 +577,14 @@ export const style = StyleSheet.create({
         marginLeft: "5%",        
         height: 50,
         marginBottom: 10,
-        borderRadius: 5
+        borderRadius: 5,
     },
 
     adminEventTitle: {
         marginLeft: 5,
         marginRight: 5,
         fontSize: 20,
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
 
     adminEventButton: {
@@ -630,6 +629,7 @@ export const style = StyleSheet.create({
         borderRadius: 15
     },
 
+    //Admin add player styles
     adminAddPlayer: {
         alignSelf: 'center',
         height: 50,
@@ -756,6 +756,7 @@ export const style = StyleSheet.create({
     },
 
     adminEditPlayer: {
+        flexDirection: 'row',
         alignSelf: 'center',
         height: 60,
         width: "90%",
@@ -998,5 +999,36 @@ export const style = StyleSheet.create({
 
     adminExitIcon: {
         color: Colors.buttonText
-    }
+    },
+
+    adminPlayerButton: {
+        marginLeft: 40,
+        position: 'absolute',
+        right: 0,
+        marginRight: "5%",
+        paddingTop: 5,
+        paddingBottom: 5,
+        backgroundColor: Colors.primary,
+        alignSelf: 'center',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 10
+    },
+
+    adminModalPlayers: {
+        backgroundColor: Colors.background,
+        maxHeight: "60%"
+    },
+
+    playerScroll: {
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        borderRadius: 15,
+        paddingBottom: 10,
+        paddingTop: 10,
+        maxHeight: "90%"
+    },
 })

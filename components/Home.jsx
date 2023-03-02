@@ -34,12 +34,12 @@ export default function Home({navigation}) {
         const data = snapshot.val() ? snapshot.val() : {};
         const dataItems = {...data};
         const parse = JSON.parse(JSON.stringify(dataItems))
-        const result = parse.role
+        const result = parse.isAdmin
         console.log('result', result);
         setRole(result)
       })
   
-      if (role === 'admin') {
+      if (role === true) {
         setLoginStatus(true)
       } else {
         setLoginStatus(false)
