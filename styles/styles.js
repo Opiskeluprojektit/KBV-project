@@ -441,9 +441,9 @@ export const style = StyleSheet.create({
 
     numInput: {
         backgroundColor: Colors.primaryVariant,
-        width: '26%',
+        width: '24%',
         height: 50,
-        marginRight: 10,
+        marginRight: 12,
         marginTop: 5,
         marginBottom: 30
     },
@@ -575,7 +575,7 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.primaryVariant,
         marginRight: "5%",
         marginLeft: "5%",        
-        height: 50,
+        height: 60,
         marginBottom: 10,
         borderRadius: 5,
     },
@@ -994,7 +994,7 @@ export const style = StyleSheet.create({
         top: 20,
         backgroundColor: Colors.primary,
         borderRadius: 1000,
-        padding: 7
+        padding: 7,
     },
 
     adminExitIcon: {
