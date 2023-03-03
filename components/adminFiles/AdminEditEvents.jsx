@@ -33,6 +33,7 @@ function AdminEditEvents({ navigation }) {
 
     const [show, setShow] = useState(false);
     const [mode, setMode] = useState('date');
+    const [checked, setChecked] = useState(false)
 
     const [showEnd, setShowEnd] = useState(false);
 
@@ -118,14 +119,19 @@ function AdminEditEvents({ navigation }) {
 
     const createFilter = () => {
         let data = events
+        const currentDate = new Date()
 
         if (filterDiv !== 'Kaikki') {
             data = data.filter((div) => div.division == filterDiv).map(({ID, date, time, description, division, timestamp, endTimestamp, endTime}) => 
             ({ID, date, time, description, division, timestamp, endTimestamp, endTime}));
         }
 
+        if (checked == false) {
+            data.filter((i) => i.timestamp >= currentDate.valueOf())
+        }
+
+
         data.sort((a, b) => a.timestamp - b.timestamp)
-        data.filter((i) => i.timestamp >= new Date().valueOf())
 
         return data;
     }
@@ -144,12 +150,12 @@ function AdminEditEvents({ navigation }) {
 
    const enrolledPlayers = enrolmentsToShow.map((item) => {   
 
-        return (
-            <View key={item.enrolmentID} style={style.adminEventList}>
-                <Text style={style.adminEventTitle}>{item.playerName}</Text>
-                <Pressable onPress={() => confirmEnrolmentDelete(item.enrolmentID)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
-            </View>
-        );  
+    return (
+        <View key={item.enrolmentID} style={style.adminEventList}>
+            <Text style={style.adminEventTitle}>{item.playerName}</Text>
+            <Pressable onPress={() => confirmEnrolmentDelete(item.enrolmentID)} style={({pressed})=>[{opacity: pressed ? 0.6 : 1,},style.adminPlayerButton]}><Text style={style.adminTextBg}>Poista</Text></Pressable>
+        </View>
+    );
         
    })
 
