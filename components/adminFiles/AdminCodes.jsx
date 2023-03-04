@@ -17,6 +17,8 @@ function AdminCodes({ navigation }) {
     const [tempBonus, setTempBonus] = useState();
     const [changed, setChanged] = useState(false);
 
+    // Fetching admin code for admin login
+
     useEffect(() => {
         const variables = ref(database, ADMIN_REF + "variables");
         onValue(variables, (snapshot) => {
@@ -28,12 +30,7 @@ function AdminCodes({ navigation }) {
         });
     }, [])
 
-    // const submit = () => {
-    //     setCode(Number(tempCode))
-    //     setAdminCode(Number(tempAdminCode))
-    //     setBonus(Number(tempBonus))
-    //     pushDb()
-    // }
+    // Pushing Changed data to database
 
     const pushDb = () => {
         let tbonus = Number(tempBonus)
@@ -52,15 +49,7 @@ function AdminCodes({ navigation }) {
             Alert.alert("Tietoja ei ole muutettu!")
         }
 
-        
 
-        // if (changed == true) {
-        //     set(ref(database, ADMIN_REF + "0"), {
-        //         koodi: code,
-        //         adminKoodi: adminCode,
-        //         bonuskerroin: bonus
-        //     }).then(Alert.alert("Tiedot tallennettu!"))
-        // }
     }
 
     return (

@@ -42,6 +42,8 @@ function AdminEditEvents({ navigation }) {
 
     let enrol = []
 
+    // Fetch all events from database
+
     useEffect(() => {
         const events = ref(database, EVENT_REF);
         onValue(events, (snapshot) => {
@@ -54,6 +56,8 @@ function AdminEditEvents({ navigation }) {
             setEvents(parseKeys);
         })
     }, [])
+
+    // fetch all enrolments for events
 
     useEffect(() => { 
         const enrols = query(ref(database, enrolment_ref));
@@ -71,9 +75,13 @@ function AdminEditEvents({ navigation }) {
 
     }, [])
 
+    // Update filtering events and enrolments when enrolments have changed
+
     useEffect(() => {
         dbId ? filterPlayers() : null
       }, [enrolments])
+
+      // fetch all players
 
     useEffect(() => {
         const players = ref(database, PLAYER_REF);
@@ -88,10 +96,13 @@ function AdminEditEvents({ navigation }) {
 
     }, [])
 
+    // execute player filtering function when new event has selected
+
     useEffect(() => {
         dbId ? filterPlayers() : null
     }, [dbId])
-    
+
+    // Filtering players and creating state to list all enrolled players    
 
     const filterPlayers = () => {
         let enrolmentsInChosenGame = enrolments.filter((e) => e.game_id === dbId)
@@ -115,7 +126,7 @@ function AdminEditEvents({ navigation }) {
         setEnrolmentsToShow(newEnrolmentsToShow)
     }
     
-    
+    // Create filter for event list by selected division    
 
     const createFilter = () => {
         let data = events
@@ -136,6 +147,7 @@ function AdminEditEvents({ navigation }) {
         return data;
     }
 
+    // Map all events in to a list
 
    const allEvents = createFilter().map((item) => {
     return (
@@ -147,6 +159,7 @@ function AdminEditEvents({ navigation }) {
    })
 
    
+   // Map all enrolled players in to selected game
 
    const enrolledPlayers = enrolmentsToShow.map((item) => {   
 
@@ -158,6 +171,8 @@ function AdminEditEvents({ navigation }) {
     );
         
    })
+
+   // Function to show modal for editing events
 
    const showModal = (div, dd, hh, dsc, id, stm, endstm, endhh) => {
     setVisible(true)
@@ -183,15 +198,21 @@ function AdminEditEvents({ navigation }) {
     }
    }; 
 
+   // Function to show modal where players are listed
+
    const showPlayersModal = () => {
     setVisible(false)
     setVisiblePlayers(true)
    }
 
+   // Function to hide modal where players are listed
+
    const hidePlayersModal = () => {
     setVisible(true)
     setVisiblePlayers(false)
    }
+
+   // Function to show aler for admin to confirm before deleting enrolment
 
    const confirmEnrolmentDelete = (key) => {
     Alert.alert("Huomio!", "Haluatko varmasti poistaa ilmoittautumisen?", [
@@ -204,6 +225,8 @@ function AdminEditEvents({ navigation }) {
     ])
    }
 
+   // Function to execute enrolment delete
+
    const executeEnrolmentDelete = (ans, key) => {
     if (ans === true) {
         remove(ref(database, enrolment_ref + key)).then(Alert.alert("Ilmoittautuminen poistettu!"))
@@ -211,6 +234,8 @@ function AdminEditEvents({ navigation }) {
         console.log("ei poistettu")
     }
 }
+
+    // function to manage changes on datetimepicker
 
    const onChange = (event, selectedDate) => {
 
@@ -261,6 +286,8 @@ function AdminEditEvents({ navigation }) {
         setDate(fDate)
     }
    }
+
+   // function to manage changes on datetimepicker for event ending time
 
    const onChangeSec = (event, selectedDate) => {
 
@@ -313,14 +340,20 @@ function AdminEditEvents({ navigation }) {
 
    }
 
+   // function to hide event editing modal
+
    const hideModal = () => {
     setVisible(false);
   }
+
+  // function to set selected division
 
     const selectDivision = (div) => {
         setDivisionsExpand(!divisionExpand);
         setDivision(div);
     };
+
+    // function to execute either deleting event or hiding event editing modal
 
     const submitModal = (check) => {
         if (check === "delete") {
@@ -350,6 +383,9 @@ function AdminEditEvents({ navigation }) {
         }
     }
 
+
+    // execute event delete
+
     const executeDelete = (ans) => {
         if (ans === true) {
             remove(ref(database, EVENT_REF + dbId)).then(hideModal(), Alert.alert("Tapahtuma poistettu"))
@@ -358,6 +394,7 @@ function AdminEditEvents({ navigation }) {
         }
     }
 
+    // confirm event delete
 
     const confirmDelete = () =>
         Alert.alert('Huomio!', 'Haluatko varmasti poistaa tapahtuman?', [
@@ -370,24 +407,33 @@ function AdminEditEvents({ navigation }) {
     ]);
 
 
+    // function to hide division selection picker
+
     const hide = () => {
         setDivisionsExpand(false)
     }
 
+    // function to set division filter for events
     
     const selectFilter = (fil) => {
         setFilterDiv(fil)
         setFilterExpand(!filterExpand)
     }
 
+    // function to show datetimepicker on android
+
     const showMode = (currentMode) => {
         setShow(true);
         setMode(currentMode);
     }
 
+    // function to show datetimepicker for ending time
+
     const showModeEnd = () => {
         setShowEnd(true);
     }
+
+    // function to show datetimepicker if admin wants to add endtime for event
 
     const addEndTime = () => {
         setEndTimeExist(true)
@@ -698,6 +744,8 @@ function AdminEditEvents({ navigation }) {
                         </Modal>
                     </Portal>
                 </Provider>
+
+                {/* modal for showing enrolments */}
 
 
                 <Provider>

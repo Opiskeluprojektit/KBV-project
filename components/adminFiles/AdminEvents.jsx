@@ -37,14 +37,21 @@ function AdminEvents({ navigation }) {
     const [showing, setShowing] = useState(false)
 
 
+
+    // function to show datetimepickers
+
     function showItems() {
         setShouldShow(!shouldShow)
         onChange()
     }
 
+    // function to show ending time datetimepicker
+
     function showItemsSec() {
         setShowing(!showing)
     }
+
+    // function to handle datetimepicker changes
 
     const onChange = (event, selectedDate) => {
         if (Platform.OS === 'android') {
@@ -92,6 +99,8 @@ function AdminEvents({ navigation }) {
         } 
     }
 
+    // function to handle changes on datetimepicker for ending time
+
     const onChangeSec = (event, selectedDate) => {
         if (Platform.OS === 'android') {
             const currentDate = selectedDate || date
@@ -126,20 +135,28 @@ function AdminEvents({ navigation }) {
         } 
     }
 
+    // function to show datetimepicker on android
+
     const showMode = (currentMode) => {
         setShow(true);
         setMode(currentMode);
     }
+
+    // function to show datetimepicker for ending time on android
 
     const showModeSec = (currentMode) => {
         setShowSec(true);
         setMode(currentMode);
     }
 
+    // function to set selected division
+
     const selectDivision = (div) => {
         setDivisionsExpand(!divisionExpand);
         setDivision(div);
       };
+
+    // function to push events to database
 
     function addEvent() {
         if (division && dateDb && timeDb) {
@@ -177,7 +194,11 @@ function AdminEvents({ navigation }) {
         }
     }
 
+    // function to show confirmation modal
+
     const showModal = () => setVisible(true);
+
+    // function to hide modal and reset states
 
     const hideModal = () => {
         setVisible(false);

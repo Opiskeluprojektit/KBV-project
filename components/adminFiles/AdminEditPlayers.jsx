@@ -22,6 +22,8 @@ function AdminEditPlayers({ navigation }) {
     const [filterDiv, setFilterDiv] = useState('Kaikki');
     const [filterExpand, setFilterExpand] = useState();
 
+    // fetch all players
+
     useEffect(() => {
         const events = ref(database, PLAYER_REF);
         onValue(events, (snapshot) => {
@@ -38,6 +40,8 @@ function AdminEditPlayers({ navigation }) {
     useEffect(() => {
         console.log(ranking)
     }, [ranking])
+
+    // function to create filter for players by division
     
     const createFilter = () => {
         let data = players
@@ -47,6 +51,8 @@ function AdminEditPlayers({ navigation }) {
         data.sort((a, b) => a.name - b.name)
         return data;
     }
+
+    // function to map all players in to list
 
     const allPlayers = createFilter().map((item) => {
         return (
@@ -60,6 +66,8 @@ function AdminEditPlayers({ navigation }) {
         );
     })
 
+    // function to show player editing modal
+
     const showModal = (id, name, div, rank) => {
         setVisible(true)
         setDbId(id)
@@ -69,14 +77,20 @@ function AdminEditPlayers({ navigation }) {
         setRanking(rank[year].toString())
        };
 
+    // function to hide modal
+
     const hideModal = () => {
     setVisible(false);
     }
+
+    // function to set selected division for filter
 
     const selectDivision = (div) => {
         setDivisionsExpand(!divisionExpand);
         setDivision(div);
     };
+
+    // function to either execute deleting a player or saving changes to database
 
     const submitModal = (check) => {
         if (check === "delete") {
@@ -96,6 +110,8 @@ function AdminEditPlayers({ navigation }) {
         }
     }
 
+    // function to confirm player delete
+
     const confirmDelete = () =>
             Alert.alert('Huomio!', 'Haluatko varmasti poistaa pelaajan', [
                 {
@@ -106,6 +122,8 @@ function AdminEditPlayers({ navigation }) {
                 {text: 'Kyllä', onPress: () => executeDelete(true)},
         ]);
 
+    // function to execute player deletion
+
     const executeDelete = (ans) => {
         if (ans === true) {
             remove(ref(database, PLAYER_REF + dbId)).then(hideModal(), Alert.alert("Pelaaja poistettu"))
@@ -113,6 +131,8 @@ function AdminEditPlayers({ navigation }) {
             console.log("ei poistettu")
         }
     }
+
+    // function to set selected filter
     
     const selectFilter = (fil) => {
         setFilterDiv(fil)

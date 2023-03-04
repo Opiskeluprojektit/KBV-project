@@ -20,10 +20,15 @@ function AdminPlayers({ navigation }) {
 
    const [year, setYear] = useState(new Date().getFullYear())
 
+
+   // function to select division
+
    const selectDivision = (div) => {
     setDivisionsExpand(!divisionExpand);
     setDivision(div);
   };
+
+    // function to push new player to database
 
   const addPlayer = () => {
       if (division && player) {
@@ -39,7 +44,11 @@ function AdminPlayers({ navigation }) {
     }
   }
 
+  // function to show confirmation modal
+
   const showModal = () => setVisibleFirst(true);
+
+  // function to hide modal and reset states
 
   const hideModal = () => {
     setVisibleFirst(false);

@@ -1,6 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+
+// function to store data to asyncstorage
+
 export const storeData = async (value) => {
     try {
       await AsyncStorage.setItem('@adminInfo', value.user.uid);
@@ -9,6 +12,8 @@ export const storeData = async (value) => {
       Alert.alert("virhe!", error.toString())
     }
   };
+
+// function to retrieve data from async storage
 
 export const getData = async () => {
   try {
@@ -20,6 +25,8 @@ export const getData = async () => {
     console.log(e)
   }
 }
+
+// function to remove data from asyncstorage
 
 export const removeData = async () => {
   try {

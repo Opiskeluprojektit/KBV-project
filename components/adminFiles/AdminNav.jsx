@@ -7,6 +7,7 @@ import { database, ADMIN_REF } from '../../firebase/Config';
 import { checkLoginStatus } from './CheckLogin';
 
 
+// admin navigation
 
 
 function AdminNav({ navigation }) {
